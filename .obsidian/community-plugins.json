@@ -38,5 +38,6 @@
   "templater-obsidian",
   "obsidian-tracker",
   "translate",
-  "widgets"
+  "widgets",
+  "github-sync"
 ]

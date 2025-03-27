@@ -16,7 +16,7 @@ tags:
 ---
 ## HOMEWORK:
 
-![[ДЗ.pdf]]
+![[C2.pdf]]
 
 ## Theory:
 
