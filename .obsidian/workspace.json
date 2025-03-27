@@ -55,8 +55,7 @@
               "title": "README"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -108,6 +107,16 @@
               },
               "icon": "lucide-search",
               "title": "Search"
+            }
+          },
+          {
+            "id": "f9d1ef0bae19e167",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
             }
           }
         ]
@@ -179,13 +188,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of README"
+              "title": "Outline of 0-HOME"
             }
           },
           {
@@ -194,12 +203,55 @@
             "state": {
               "type": "timer-view",
               "state": {},
-              "icon": "timer",
-              "title": "Timer"
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
             "id": "fc8e57289f09796b",
+            "type": "leaf",
+            "state": {
+              "type": "tasks_timeline_view",
+              "state": {},
+              "icon": "calendar-clock",
+              "title": "Tasks Timeline"
+            }
+          },
+          {
+            "id": "bafbb92dc2ead047",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "0-HOME.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 0-HOME"
+            }
+          },
+          {
+            "id": "03a87dd4b4413d3f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "ee34526ac76e7da8",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -253,21 +305,21 @@
       "pexels-banner:🚩 Pixel Banner Menu": false,
       "dashboard-navigator:Open dashboard navigator": false,
       "homepage:Open homepage": false,
+      "obsidian-memos:Memos": false,
+      "periodic-notes:Open today": false,
       "templater-obsidian:Templater": false,
       "translate:Open translation view": false,
       "widgets:Add widget": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false,
       "github-sync:Sync with Remote": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "64367c6d449fc0af",
   "lastOpenFiles": [
-    "imgs/Pasted image 20240527171719.png",
-    "imgs/Pasted image 20240527171808.png",
-    "0-HOME.md",
     "README.md",
     "1-TASKS.md",
+    "0-HOME.md",
+    "imgs/Pasted image 20240527171719.png",
+    "imgs/Pasted image 20240527171808.png",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
     "Teamplates/Aula.md",
@@ -308,7 +360,6 @@
     "imgs/Pasted image 20241120164316.png",
     "imgs/Pasted image 20250326210559.png",
     "imgs/Pasted image 20250326210555.png",
-    "imgs/Pasted image 20250326210552.png",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",

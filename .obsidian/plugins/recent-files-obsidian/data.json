@@ -1,8 +1,16 @@
 {
   "recentFiles": [
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "README",
       "path": "README.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
     },
     {
       "basename": "header",
@@ -17,10 +25,6 @@
       "path": "Education/Math/Lesson_1/Lesson.md"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
-    },
-    {
       "basename": "Daily note",
       "path": "Teamplates/Daily note.md"
     },
@@ -31,10 +35,6 @@
     {
       "basename": "128",
       "path": "imgs/128.png"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "badges_python",
