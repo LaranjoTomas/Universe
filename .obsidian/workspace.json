@@ -10,22 +10,6 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0-HOME.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "0-HOME"
-            }
-          },
-          {
-            "id": "ef763d36d421324a",
-            "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
@@ -36,9 +20,36 @@
               "icon": "lucide-file",
               "title": "README"
             }
+          },
+          {
+            "id": "804451143677c5ba",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-TASKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1-TASKS"
+            }
+          },
+          {
+            "id": "64367c6d449fc0af",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "3-BOOKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3-BOOKS"
+            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -50,7 +61,7 @@
       {
         "id": "4cdeba3478db6085",
         "type": "tabs",
-        "dimension": 60.07751937984496,
+        "dimension": 60.077519379844965,
         "children": [
           {
             "id": "ed15b78cf26db7db",
@@ -104,16 +115,6 @@
               },
               "icon": "lucide-archive",
               "title": "All properties"
-            }
-          },
-          {
-            "id": "27eedba3e9afab38",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
             }
           }
         ]
@@ -226,12 +227,12 @@
             "state": {
               "type": "timer-view",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "timer",
+              "title": "Timer"
             }
           },
           {
-            "id": "918e6d3ebeccd71f",
+            "id": "04141d8cae91ac84",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -266,15 +267,19 @@
       "pexels-banner:🚩 Pixel Banner Menu": false,
       "dashboard-navigator:Open dashboard navigator": false,
       "homepage:Open homepage": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false,
       "templater-obsidian:Templater": false,
       "translate:Open translation view": false,
-      "widgets:Add widget": false
+      "widgets:Add widget": false,
+      "obsidian-memos:Memos": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "ef763d36d421324a",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "1-TASKS.md",
+    "README.md",
+    "0-HOME.md",
+    "3-BOOKS.md",
     "header.png",
     "Olympics/Высший пилотаж 2025 НСК/Высший пилотаж (Новосибирск).md",
     "Olympics/Высший пилотаж 2025 НСК/IPSA_DOCUMENT.md",
@@ -285,11 +290,9 @@
     "Education/Math/Lesson_1/Lesson.md",
     "Education/Biology/Закон Харди-Вайнберга/Частоты аллелей.md",
     "Education/Biology/Закон Харди-Вайнберга/Закон Харди-Вайнберга.md",
-    "1-TASKS.md",
     "Teamplates/Daily note.md",
     "Dev/Python/NumPy/NumPy.md",
     "imgs/128.png",
-    "0-HOME.md",
     "imgs/badges_python.png",
     "imgs/badges_cpp.png",
     "Teamplates/Book.md",
@@ -303,7 +306,6 @@
     "Dev/C/Memory management/Basic functions for memory management.md",
     "Dev/Logo ideas.md",
     "Dev/Структуры данных в программировании.md",
-    "Dev/Алгоритмы/Поиск в ширину ( граф ).md",
     "Dev/SQLAlchemy",
     "Pasted image 20250326214109.png",
     "Books",
@@ -319,7 +321,6 @@
     "Teamplates/Project.md~",
     "0-TASKS.md~",
     "imgs/mist_forest_2 1.png",
-    "imgs/badges_typescript.png",
     "Ideas",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
