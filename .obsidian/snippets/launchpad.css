@@ -1,0 +1,310 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playpen+Sans:wght@100..800&family=Playwrite+CU:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Neonderthaw&family=Warnes&family=WindSong:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nova+Mono&family=Rubik+Glitch&family=Tsukimi+Rounded&display=swap");
+
+.external-link {
+  display: none;
+}
+
+.books .inline-title {
+  display: none;
+}
+
+.books .metadata-properties-heading {
+  display: none;
+}
+
+.books .metadata-content {
+  display: none;
+}
+
+.launchpad .inline-title {
+  display: none;
+}
+
+.launchpad .metadata-properties-heading {
+  display: none;
+}
+
+.launchpad .metadata-content {
+  display: none;
+}
+
+.tasks .inline-title {
+  display: none;
+}
+
+.tasks .metadata-properties-heading {
+  display: none;
+}
+
+.tasks .metadata-content {
+  display: none;
+}
+
+.projects .inline-title {
+  display: none;
+}
+
+.projects .metadata-properties-heading {
+  display: none;
+}
+
+.projects .metadata-content {
+  display: none;
+}
+
+.launchpad .main_header_2 {
+  text-align: center;
+  font-size: 35px;
+  font-family: "Nova Mono", system-ui;
+  color: var(--text-accent);
+}
+
+.tasks .callout {
+  display: block;
+  margin: auto auto;
+  background-color: var(--background-primary-alt);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.tasks .callout-title * {
+  text-align: center;
+  font-size: x-large;
+  font-family: "Nova Mono", system-ui;
+  color: var(--text-accent);
+}
+
+.tasks .contains-task-list .task-list-item {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.tasks .note_2 {
+  display: block;
+  margin: auto auto;
+  background-color: var(--background-primary-alt);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.tasks .note_2 .note {
+  align-content: left;
+  text-align: left;
+  font-size: xx-large;
+  font-family: "Nova Mono", monospace;
+  color: var(--text-accent);
+}
+
+.tasks .note_2 .author {
+  align-content: right;
+  text-align: right;
+  font-size: medium;
+  font-family: "Nova Mono", monospace;
+  color: var(--text-normal);
+}
+
+a.tag {
+  font-family: "Formular", var(--font-text);
+  display: flex;
+  padding: 7px 7px 7px 7px;
+  margin: -5px 10px -5px 10px;
+  justify-content: space-between;
+}
+
+.launchpad .callout {
+  align-items: center;
+  align-content: center;
+  background-color: var(--background-primary-alt);
+  border: none;
+  width: 100%;
+}
+
+.launchpad .callout-title {
+  display: none;
+}
+
+.launchpad .callout-content {
+  padding: 10px 10px 10px 10px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.view-content {
+  z-index: 0;
+}
+
+.launchpad .inline-title {
+  display: none;
+  height: 0px;
+}
+
+.launchpad .view-header {
+  display: none;
+}
+
+.launchpad .block-language-dataviewjs {
+  width: auto;
+  height: auto;
+  padding: 20px;
+  overflow: hidden;
+  background-color: var(--font-text);
+}
+
+.launchpad .widget {
+  height: 50px;
+  background-color: var(--background-secondary-alt);
+  color: var(--text-normal);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.launchpad .widget h1 {
+  font-size: medium;
+}
+
+.launchpad .columnParent .block-language-col-md .block-language-dataviewjs {
+  padding: 4px;
+  margin: 0px;
+}
+
+.launchpad .columnParent {
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+  gap: 0px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.block-language-col .columnParent {
+  gap: 10px;
+}
+
+.launchpad .columnParent .columnChild {
+  width: 100%;
+  max-width: 400px;
+  min-width: 300px;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+}
+
+.projects .columnParent {
+  width: 100%;
+  display: flex;
+  flex-direction: start;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.projects .columnParent img {
+  width: 200px;
+  aspect-ratio: 1/1;
+}
+
+
+.projects .columnParent .columnChild {
+  display: flex;
+  flex-direction: start;
+  width: 100%;
+  max-width: 250px;
+  min-width: 100px;
+}
+
+.launchpad img {
+  border-radius: 20px;
+}
+
+.launchpad a.tag {
+  width: auto;
+  padding: auto;
+  height: 35px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  font-size: small;
+  background-color: var(--background-secondary-alt);
+  color: var(--text-normal);
+  transition: all 0.5s ease-in-out;
+}
+
+.launchpad a.tag:hover {
+  color: var(--text-error);
+  background-color: var(--background-secondary);
+}
+
+.projects img {
+  border-radius: 30%;
+  border: none;
+  max-width: 200px;
+}
+
+.projects a.tag {
+  width: auto;
+  padding: auto;
+  height: 35px;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  font-size: small;
+  color: var(--text-normal);
+  background-color: var(--background-primary-alt);
+  transition: all 0.5s ease-in-out;
+}
+
+.projects a.tag:hover {
+  color: var(--text-error);
+  background-color: var(--background-secondary);
+}
+
+
+.styled-date {
+  height: 60px;
+  width: auto;
+  background-color: var(--background-primary-alt);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.books .table-view-thead {
+  display: none;
+  border: none;
+}
+
+.books .table-view-tbody tr td span {
+  width: 100%;
+}
+
+.books .dataview table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.books .dataview * {
+  outline: none;
+  text-decoration: none;
+  color: var(--text-normal);
+  font-size: medium;
+}
+
+.books .dataview th, .dataview td {
+  padding: 10px;
+  text-align: left;
+}
+

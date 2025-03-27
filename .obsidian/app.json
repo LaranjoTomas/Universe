@@ -1,0 +1,20 @@
+{
+  "readableLineLength": false,
+  "vimMode": false,
+  "alwaysUpdateLinks": true,
+  "strictLineBreaks": false,
+  "showLineNumber": false,
+  "foldIndent": true,
+  "foldHeading": true,
+  "spellcheck": false,
+  "promptDelete": false,
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "userIgnoreFilters": [
+    "Teamplates/"
+  ]
+}

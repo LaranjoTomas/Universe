@@ -1,0 +1,10 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "date": "text",
+    "is_readed": "checkbox",
+    "sd": "number"
+  }
+}
