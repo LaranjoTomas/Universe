@@ -39,5 +39,7 @@
   "obsidian-tracker",
   "translate",
   "widgets",
-  "github-sync"
+  "github-sync",
+  "obsidian-excalidraw-plugin",
+  "image-converter"
 ]

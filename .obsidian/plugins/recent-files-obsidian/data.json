@@ -1,8 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "Pasted image 20250328092716",
+      "path": "imgs/Pasted image 20250328092716.png"
+    },
+    {
+      "basename": "Roadmap",
+      "path": "imgs/Roadmap.svg"
+    },
+    {
+      "basename": "primery-resheniya-proizvodnyh-01",
+      "path": "imgs/primery-resheniya-proizvodnyh-01.webp"
+    },
+    {
+      "basename": "Pasted image 20240527171316",
+      "path": "imgs/Pasted image 20240527171316.png"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Pasted image 20250328092510",
+      "path": "imgs/Pasted image 20250328092510.png"
+    },
+    {
       "basename": "Ad-Hoc Networks",
       "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
+      "basename": "Vehicular Networks",
+      "path": "Education/RSA/Vehicular Networks.md"
     },
     {
       "basename": "Main C Vulnerabilities",
@@ -11,10 +43,6 @@
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
     },
     {
       "basename": "0-HOME",
@@ -171,34 +199,6 @@
     {
       "basename": "Frequently Asked Questions",
       "path": "Frequently Asked Questions.md"
-    },
-    {
-      "basename": "00. References",
-      "path": "40 - Obsidian/Homepages/00. References.md"
-    },
-    {
-      "basename": "2022-07-18",
-      "path": "00 - DailyNotes/DailyNote/2022-07-18.md"
-    },
-    {
-      "basename": "2022-07-16",
-      "path": "00 - DailyNotes/DailyNote/2022-07-16.md"
-    },
-    {
-      "basename": "00. Files",
-      "path": "40 - Obsidian/Homepages/00. Files.md"
-    },
-    {
-      "basename": "Anarch",
-      "path": "50 - Zettelkasten/Anarch.md"
-    },
-    {
-      "basename": "algae",
-      "path": "50 - Zettelkasten/algae.md"
-    },
-    {
-      "basename": "address operator",
-      "path": "50 - Zettelkasten/address operator.md"
     }
   ],
   "omittedPaths": [],

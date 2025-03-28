@@ -1,3 +1,5 @@
 ---
 tags:
+  - "#AD-Hoc"
+  - "#Networks"
 ---
