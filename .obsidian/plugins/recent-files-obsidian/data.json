@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "Ad-Hoc Networks",
+      "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
+      "basename": "Main C Vulnerabilities",
+      "path": "Dev/C/Main C Vulnerabilities.md"
+    },
+    {
+      "basename": "Project",
+      "path": "Education/SRC/Project.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -9,8 +25,16 @@
       "path": "README.md"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
+      "basename": "Копирование объектов",
+      "path": "Dev/Python/Modules/Копирование объектов.md"
+    },
+    {
+      "basename": "3-BOOKS",
+      "path": "3-BOOKS.md"
+    },
+    {
+      "basename": "2-PROJECTS",
+      "path": "2-PROJECTS.md"
     },
     {
       "basename": "header",
@@ -71,10 +95,6 @@
     {
       "basename": "Raspberry Pi server",
       "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
-    },
-    {
-      "basename": "Main C Vulnerabilities",
-      "path": "Dev/C/Main C Vulnerabilities.md"
     },
     {
       "basename": "Basic functions for memory management",
@@ -179,18 +199,6 @@
     {
       "basename": "address operator",
       "path": "50 - Zettelkasten/address operator.md"
-    },
-    {
-      "basename": "New Weekly template",
-      "path": "40 - Obsidian/Templates/New Weekly template.md"
-    },
-    {
-      "basename": "New Daily template",
-      "path": "40 - Obsidian/Templates/New Daily template.md"
-    },
-    {
-      "basename": "New Code template",
-      "path": "40 - Obsidian/Templates/New Code template.md"
     }
   ],
   "omittedPaths": [],
