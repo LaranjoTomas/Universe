@@ -8,55 +8,16 @@
         "type": "tabs",
         "children": [
           {
-            "id": "64367c6d449fc0af",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0-HOME.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "0-HOME"
-            }
-          },
-          {
-            "id": "804451143677c5ba",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "1-TASKS.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "1-TASKS"
-            }
-          },
-          {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
-            "pinned": true,
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "README"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -109,8 +70,19 @@
               "icon": "lucide-search",
               "title": "Search"
             }
+          },
+          {
+            "id": "091741322f9c461a",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "33993677f81e3933",
@@ -150,12 +122,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from README"
+              "title": "Outgoing links"
             }
           },
           {
@@ -199,7 +170,40 @@
             }
           },
           {
-            "id": "fc8e57289f09796b",
+            "id": "9611a60f8835832d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for README"
+            }
+          },
+          {
+            "id": "41e4a7d8520273e1",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "2b2909086952367e",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -209,7 +213,7 @@
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -256,17 +260,17 @@
       "templater-obsidian:Templater": false,
       "translate:Open translation view": false,
       "widgets:Add widget": false,
+      "github-sync:Sync with Remote": false,
       "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false,
-      "github-sync:Sync with Remote": false
+      "periodic-notes:Open today": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "2b2909086952367e",
   "lastOpenFiles": [
+    "README.md",
+    "0-HOME.md",
     "imgs/Pasted image 20240527171719.png",
     "imgs/Pasted image 20240527171808.png",
-    "0-HOME.md",
-    "README.md",
     "1-TASKS.md",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
@@ -308,7 +312,6 @@
     "imgs/Pasted image 20241120164316.png",
     "imgs/Pasted image 20250326210559.png",
     "imgs/Pasted image 20250326210555.png",
-    "imgs/Pasted image 20250326210552.png",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
