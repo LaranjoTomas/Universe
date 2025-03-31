@@ -43,5 +43,14 @@
       ],
       "key": "T"
     }
+  ],
+  "templater-obsidian:Templates/Image Template.md": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "V"
+    }
   ]
 }

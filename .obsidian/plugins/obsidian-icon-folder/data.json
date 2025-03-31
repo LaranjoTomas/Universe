@@ -36,7 +36,6 @@
   "Education/Math/Lesson_1/Lesson.md": "LiBookMarked",
   "imgs": "LiImage",
   "Projects": "LiGithub",
-  "Teamplates": "LiDownloadCloud",
   "Education": "LiBook",
   "Education/ComputerScience": "LiPickaxe",
   "Education/Math": "LiCalculator",
@@ -60,5 +59,6 @@
   "Projects/OWL/Backend": "FasCodeBranch",
   "Dev/LeetCode": "LiCheck",
   "Projects/IPSA": "LiAtom",
-  "DOCUMENTS/C2.pdf": "LiBookMarked"
+  "DOCUMENTS/C2.pdf": "LiBookMarked",
+  "Templates": "LiDownloadCloud"
 }

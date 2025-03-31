@@ -5,24 +5,52 @@
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
-    },
-    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "CDN_Infrastruct",
-      "path": "Ideas/CDN_Infrastruct.png"
+      "basename": "gnutella_structureless",
+      "path": "imgs/gnutella_structureless.png"
+    },
+    {
+      "basename": "header",
+      "path": "header.png"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "badges_cpp",
+      "path": "imgs/badges_cpp.png"
+    },
+    {
+      "basename": "gnutella_example",
+      "path": "imgs/gnutella_example.png"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Image Template",
+      "path": "Templates/Image Template.md"
+    },
+    {
+      "basename": "Daily note",
+      "path": "Templates/Daily note.md"
+    },
+    {
+      "basename": "rendezvous_peers",
+      "path": "imgs/rendezvous_peers.png"
     },
     {
       "basename": "Self-organized systems",
       "path": "Education/RSA/Self-organized systems.md"
     },
     {
-      "basename": "Drawing 2025-03-31 17.22.27.excalidraw",
-      "path": "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md"
+      "basename": "CDN_Infrastruct",
+      "path": "Ideas/CDN_Infrastruct.png"
     },
     {
       "basename": "CDN_Architecture",
@@ -53,14 +81,6 @@
       "path": "3-BOOKS.md"
     },
     {
-      "basename": "README",
-      "path": "README.md"
-    },
-    {
-      "basename": "header",
-      "path": "header.png"
-    },
-    {
       "basename": "Basic functions for memory management",
       "path": "Dev/C/Memory management/Basic functions for memory management.md"
     },
@@ -73,16 +93,12 @@
       "path": "Education/ASE/ADCs.md"
     },
     {
-      "basename": "Daily note",
-      "path": "Teamplates/Daily note.md"
-    },
-    {
       "basename": "Book",
-      "path": "Teamplates/Book.md"
+      "path": "Templates/Book.md"
     },
     {
       "basename": "Aula",
-      "path": "Teamplates/Aula.md"
+      "path": "Templates/Aula.md"
     },
     {
       "basename": "Pasted image 20250331094249",
@@ -115,10 +131,6 @@
     {
       "basename": "badges_python",
       "path": "imgs/badges_python.png"
-    },
-    {
-      "basename": "badges_cpp",
-      "path": "imgs/badges_cpp.png"
     },
     {
       "basename": "Utils",
@@ -179,22 +191,6 @@
     {
       "basename": "Father",
       "path": "10 - People/Family/Father.md"
-    },
-    {
-      "basename": "Daughter",
-      "path": "10 - People/Family/Daughter.md"
-    },
-    {
-      "basename": "00. People",
-      "path": "10 - People/Family/00. People.md"
-    },
-    {
-      "basename": "One",
-      "path": "10 - People/Colleagues/One.md"
-    },
-    {
-      "basename": "Two",
-      "path": "10 - People/Colleagues/Two.md"
     }
   ],
   "omittedPaths": [],
