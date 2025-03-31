@@ -5,8 +5,32 @@
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
     {
+      "basename": "Drawing 2025-03-31 19.34.19.excalidraw",
+      "path": "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md"
+    },
+    {
+      "basename": "BitTorrent",
+      "path": "imgs/BitTorrent.png"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "How to Build and Sign an Electron JS Application for All Platforms",
+      "path": "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "OpenNAP",
+      "path": "imgs/OpenNAP.png"
+    },
+    {
+      "basename": "FastTrack",
+      "path": "imgs/FastTrack.png"
     },
     {
       "basename": "gnutella_structureless",
@@ -27,10 +51,6 @@
     {
       "basename": "gnutella_example",
       "path": "imgs/gnutella_example.png"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
     },
     {
       "basename": "Image Template",
@@ -175,22 +195,6 @@
     {
       "basename": "00. Cardbox",
       "path": "50 - Zettelkasten/00. Cardbox.md"
-    },
-    {
-      "basename": "The Odyssey",
-      "path": "Books/The Odyssey.md"
-    },
-    {
-      "basename": "Qin",
-      "path": "10 - People/Family/Qin.md"
-    },
-    {
-      "basename": "Mother",
-      "path": "10 - People/Family/Mother.md"
-    },
-    {
-      "basename": "Father",
-      "path": "10 - People/Family/Father.md"
     }
   ],
   "omittedPaths": [],

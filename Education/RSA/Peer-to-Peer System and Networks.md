@@ -179,10 +179,45 @@ To reduce network traffic and improve efficiency, Gnutella introduced search opt
 - **OpenNAP** is an extension that allows linking multiple servers.
 - **Network Architecture**: **Hybrid Unstructured**.
 - **Algorithm**: **Centralized Directory Model (CDM)**.
-
+<img src="OpenNAP.png" style="display: block; margin: auto;" />
 ### FastTrack / KaZaA
 - An **extension of the Gnutella protocol** with added **super-nodes** for improved scalability (similar to **Gnutella v.2**).
 - A **powerful peer** with a **fast connection** automatically becomes a **super-node**, acting as a **temporary indexing server** for slower peers.
 - Super-nodes **communicate with each other** to process search requests efficiently.
 - **Network Architecture**: **Hybrid Unstructured**.
 - **Algorithm**: **Flooded Requests Model (FRM)**.
+<img src="FastTrack.png" style="display: block; margin: auto;" />
+
+
+### BitTorrent
+
+- BitTorrent **offloads file tracking** to a central **tracker** server.
+- Uses a principle called **tit-for-tat**:
+  - To **receive** files, you must **share** files.
+  - **Prevents leeching** and encourages fair sharing.
+- Enables **fast downloading** of large files while using **minimal bandwidth**.
+- **Network Architecture**: Hybrid Unstructured.
+- **Algorithm**: Centralized Directory Model (CDM).
+#### **Key Terminology**
+- **`.torrent` file**: A **pointer file** that directs the computer to the file it wants to download.
+- **Swarm**: A group of computers **simultaneously downloading** or **uploading** the same file.
+- **Tracker**: A **server** that manages the BitTorrent file transfer process.
+#### How BitTorrent works
+1. **BitTorrent client** software communicates with a **tracker** to find:
+   - **Seeders**: Computers with the **complete file**.
+   - **Peers (Leechers)**: Computers currently **downloading** the file.
+2. The **tracker identifies the swarm** and helps the client **trade pieces** of the file with other computers.
+3. The computer **receives multiple pieces of the file simultaneously** from different peers.
+4. If the user **keeps the BitTorrent client running after download**, others can download the file from them.
+   - These users are **ranked higher** in the **tit-for-tat** system.
+#### BitTorrent Trackers
+- **Trackers monitor** the number of **seeds/peers** and help **downloaders find each other**.
+- A **downloader sends status info** to the tracker, which responds with a list of peers **downloading the same file**.
+- **Web servers do not store file content**, only **metadata files** describing:
+  - **File length, name, etc.**
+  - **Tracker URL** associated with the file.
+#### Trackerless Torrents & DHT
+- Instead of a **central tracker**, some torrents use a **trackerless system**.
+- This is achieved through **DHT (Distributed Hash Tables)**, also known as the **"distributed database"**.
+
+<img src="BitTorrent.png" style="display: block; margin: auto;" />
