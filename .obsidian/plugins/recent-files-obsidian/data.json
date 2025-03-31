@@ -1,8 +1,56 @@
 {
   "recentFiles": [
     {
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Daily note",
+      "path": "Teamplates/Daily note.md"
+    },
+    {
+      "basename": "Book",
+      "path": "Teamplates/Book.md"
+    },
+    {
+      "basename": "Aula",
+      "path": "Teamplates/Aula.md"
+    },
+    {
       "basename": "README",
       "path": "README.md"
+    },
+    {
+      "basename": "Pasted image 20250331094249",
+      "path": "imgs/Pasted image 20250331094249.png"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "Ad-Hoc Networks",
+      "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
+      "basename": "2-PROJECTS",
+      "path": "2-PROJECTS.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "Vehicular Networks",
+      "path": "Education/RSA/Vehicular Networks.md"
+    },
+    {
+      "basename": "image",
+      "path": "imgs/image.png"
     },
     {
       "basename": "header",
@@ -17,14 +65,6 @@
       "path": "Education/Math/Lesson_1/Lesson.md"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
-    },
-    {
-      "basename": "Daily note",
-      "path": "Teamplates/Daily note.md"
-    },
-    {
       "basename": "NumPy",
       "path": "Dev/Python/NumPy/NumPy.md"
     },
@@ -33,20 +73,12 @@
       "path": "imgs/128.png"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
       "basename": "badges_python",
       "path": "imgs/badges_python.png"
     },
     {
       "basename": "badges_cpp",
       "path": "imgs/badges_cpp.png"
-    },
-    {
-      "basename": "Book",
-      "path": "Teamplates/Book.md"
     },
     {
       "basename": "Utils",
@@ -167,30 +199,6 @@
     {
       "basename": "00. Files",
       "path": "40 - Obsidian/Homepages/00. Files.md"
-    },
-    {
-      "basename": "Anarch",
-      "path": "50 - Zettelkasten/Anarch.md"
-    },
-    {
-      "basename": "algae",
-      "path": "50 - Zettelkasten/algae.md"
-    },
-    {
-      "basename": "address operator",
-      "path": "50 - Zettelkasten/address operator.md"
-    },
-    {
-      "basename": "New Weekly template",
-      "path": "40 - Obsidian/Templates/New Weekly template.md"
-    },
-    {
-      "basename": "New Daily template",
-      "path": "40 - Obsidian/Templates/New Daily template.md"
-    },
-    {
-      "basename": "New Code template",
-      "path": "40 - Obsidian/Templates/New Code template.md"
     }
   ],
   "omittedPaths": [],
