@@ -5,20 +5,28 @@
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
     {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "CDN_Architecture",
-      "path": "imgs/CDN_Architecture.png"
+      "basename": "CDN_Infrastruct",
+      "path": "Ideas/CDN_Infrastruct.png"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "Drawing 2025-03-31 17.22.27.excalidraw",
+      "path": "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md"
+    },
+    {
+      "basename": "CDN_Architecture",
+      "path": "imgs/CDN_Architecture.png"
     },
     {
       "basename": "Ad-Hoc Networks",
@@ -187,18 +195,6 @@
     {
       "basename": "Two",
       "path": "10 - People/Colleagues/Two.md"
-    },
-    {
-      "basename": "00. Work",
-      "path": "20 - Work & Study/Work/00. Work.md"
-    },
-    {
-      "basename": "00. Study",
-      "path": "20 - Work & Study/Study/00. Study.md"
-    },
-    {
-      "basename": "User Showcases",
-      "path": "User Showcases.md"
     }
   ],
   "omittedPaths": [],

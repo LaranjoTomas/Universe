@@ -17,5 +17,15 @@ The primary goal of a CDN is to replicate content across the internet, ensuring 
 
 <img src="CDN_Architecture.png" style="display: block; margin: auto;" />
 
-#### CDN Components
+#### CDN Infrastructure
+
+- **Content Delivery Infrastructure**: Delivers content to clients from surrogate servers.  
+- **Request Routing Infrastructure**: Directs client requests to the most suitable surrogate.  
+#### CDN Components:  
+- **Distribution Infrastructure**: Moves or replicates content from the origin server to surrogates, using methods like DNS redirection and anycast.  
+- **Accounting Infrastructure**: Logs and reports distribution and delivery activities.  
+
+<img src="CDN_Infrastruct.png" style="display: block; margin: auto;" />
+
+### Peer-to-Peer networks
 
