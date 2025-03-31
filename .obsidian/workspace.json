@@ -40,23 +40,35 @@
             }
           },
           {
-            "id": "08e3b4a17f0c962b",
+            "id": "beab67e6154191f0",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "Education/RSA/Self-organized systems.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "ADCs"
+              "title": "Self-organized systems"
+            }
+          },
+          {
+            "id": "accf3295a4e4aec1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Peer-to-Peer System and Networks"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -116,6 +128,16 @@
             "state": {
               "type": "recent-files",
               "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
+            }
+          },
+          {
+            "id": "10caca3879736eb5",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
               "icon": "clock",
               "title": "Recent Files"
             }
@@ -143,7 +165,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 303.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -188,13 +210,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ADCs"
+              "title": "Outline of Peer-to-Peer System and Networks"
             }
           },
           {
@@ -249,6 +271,16 @@
               "icon": "calendar-clock",
               "title": "Tasks Timeline"
             }
+          },
+          {
+            "id": "b72f512067e6fbbf",
+            "type": "leaf",
+            "state": {
+              "type": "tasks_timeline_view",
+              "state": {},
+              "icon": "calendar-clock",
+              "title": "Tasks Timeline"
+            }
           }
         ],
         "currentTab": 3
@@ -295,37 +327,42 @@
       "pexels-banner:🚩 Pixel Banner Menu": false,
       "dashboard-navigator:Open dashboard navigator": false,
       "homepage:Open homepage": false,
+      "obsidian-memos:Memos": false,
+      "periodic-notes:Open today": false,
       "templater-obsidian:Templater": false,
       "translate:Open translation view": false,
       "widgets:Add widget": false,
-      "github-sync:Sync with Remote": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false
+      "github-sync:Sync with Remote": false
     }
   },
-  "active": "08e3b4a17f0c962b",
+  "active": "accf3295a4e4aec1",
   "lastOpenFiles": [
+    "Education/RSA/Self-organized systems.md",
+    "0-HOME.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
+    "imgs/CDN_Architecture.png",
     "1-TASKS.md",
+    "Education/RSA/Ad-Hoc Networks.md",
+    "Education/RSA/Vehicular Networks.md",
+    "imgs/de-centralized.png",
+    "imgs/federated.png",
+    "imgs/centralized_learning.png",
+    "3-BOOKS.md",
+    "README.md",
+    "header.png",
+    "imgs/image 1.png",
+    "Dev/C/Memory management/Basic functions for memory management.md",
+    "Ideas/RaspberryPi server/Raspberry Pi server.md",
     "Education/ASE/ADCs.md",
     "Teamplates/Daily note.md",
     "Teamplates/Book.md",
     "Teamplates/Aula.md",
-    "README.md",
     "Pasted image 20250331094123.png",
     "imgs/Pasted image 20250331094249.png",
-    "Education/RSA/Self-organized systems.md",
-    "Education/RSA/Ad-Hoc Networks.md",
     "2-PROJECTS.md",
-    "0-HOME.md",
-    "Education/RSA/Vehicular Networks.md",
     "imgs/image.png",
-    "Untitled.md",
-    "header.png",
     "imgs/Pasted image 20250328092716.png",
-    "imgs/Pasted image 20250328092510.png",
     "Education/SRC/Project.md",
-    "imgs/Pasted image 20240527171719.png",
-    "imgs/Pasted image 20240527171808.png",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
     "Education/Math/Lesson_1/Lesson.md",
@@ -343,13 +380,8 @@
     "DOCUMENTS/SRC",
     "DOCUMENTS/SD/Aula.md",
     "DOCUMENTS/SD",
-    "DOCUMENTS/RSA/Project.md",
     "DOCUMENTS/RSA",
-    "DOCUMENTS/CLE/Aula.md",
     "DOCUMENTS/CLE",
-    "Dev/Client - Server apps/Creating a backend in python.md",
-    "imgs/128.png",
-    "imgs/badges_python.png",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",

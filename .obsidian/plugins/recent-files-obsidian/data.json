@@ -1,12 +1,68 @@
 {
   "recentFiles": [
     {
-      "basename": "ADCs",
-      "path": "Education/ASE/ADCs.md"
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "CDN_Architecture",
+      "path": "imgs/CDN_Architecture.png"
     },
     {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Ad-Hoc Networks",
+      "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
+      "basename": "Vehicular Networks",
+      "path": "Education/RSA/Vehicular Networks.md"
+    },
+    {
+      "basename": "de-centralized",
+      "path": "imgs/de-centralized.png"
+    },
+    {
+      "basename": "federated",
+      "path": "imgs/federated.png"
+    },
+    {
+      "basename": "centralized_learning",
+      "path": "imgs/centralized_learning.png"
+    },
+    {
+      "basename": "3-BOOKS",
+      "path": "3-BOOKS.md"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "header",
+      "path": "header.png"
+    },
+    {
+      "basename": "Basic functions for memory management",
+      "path": "Dev/C/Memory management/Basic functions for memory management.md"
+    },
+    {
+      "basename": "Raspberry Pi server",
+      "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
+    },
+    {
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
     },
     {
       "basename": "Daily note",
@@ -21,40 +77,16 @@
       "path": "Teamplates/Aula.md"
     },
     {
-      "basename": "README",
-      "path": "README.md"
-    },
-    {
       "basename": "Pasted image 20250331094249",
       "path": "imgs/Pasted image 20250331094249.png"
-    },
-    {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
-    },
-    {
-      "basename": "Ad-Hoc Networks",
-      "path": "Education/RSA/Ad-Hoc Networks.md"
     },
     {
       "basename": "2-PROJECTS",
       "path": "2-PROJECTS.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
-      "basename": "Vehicular Networks",
-      "path": "Education/RSA/Vehicular Networks.md"
-    },
-    {
       "basename": "image",
       "path": "imgs/image.png"
-    },
-    {
-      "basename": "header",
-      "path": "header.png"
     },
     {
       "basename": "Trigonometry",
@@ -101,16 +133,8 @@
       "path": "Projects/IPSA/bugs/YFinance.md"
     },
     {
-      "basename": "Raspberry Pi server",
-      "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
-    },
-    {
       "basename": "Main C Vulnerabilities",
       "path": "Dev/C/Main C Vulnerabilities.md"
-    },
-    {
-      "basename": "Basic functions for memory management",
-      "path": "Dev/C/Memory management/Basic functions for memory management.md"
     },
     {
       "basename": "Logo ideas",
@@ -175,30 +199,6 @@
     {
       "basename": "User Showcases",
       "path": "User Showcases.md"
-    },
-    {
-      "basename": "Updates and Bug Fixes",
-      "path": "Updates and Bug Fixes.md"
-    },
-    {
-      "basename": "Frequently Asked Questions",
-      "path": "Frequently Asked Questions.md"
-    },
-    {
-      "basename": "00. References",
-      "path": "40 - Obsidian/Homepages/00. References.md"
-    },
-    {
-      "basename": "2022-07-18",
-      "path": "00 - DailyNotes/DailyNote/2022-07-18.md"
-    },
-    {
-      "basename": "2022-07-16",
-      "path": "00 - DailyNotes/DailyNote/2022-07-16.md"
-    },
-    {
-      "basename": "00. Files",
-      "path": "40 - Obsidian/Homepages/00. Files.md"
     }
   ],
   "omittedPaths": [],
