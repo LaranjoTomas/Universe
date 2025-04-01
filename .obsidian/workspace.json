@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "d0549b248762c560",
+            "id": "53845c1b91300af0",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -38,9 +38,25 @@
               "icon": "lucide-file",
               "title": "1-TASKS"
             }
+          },
+          {
+            "id": "a49a6d62c29d9751",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Peer-to-Peer System and Networks"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -136,7 +152,7 @@
       {
         "id": "a36ea1a514a5c682",
         "type": "tabs",
-        "dimension": 61.029411764705884,
+        "dimension": 61.03395061728395,
         "children": [
           {
             "id": "37dcb43a808c036b",
@@ -173,13 +189,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1-TASKS.md",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1-TASKS"
+              "title": "Outline of Peer-to-Peer System and Networks"
             }
           },
           {
@@ -226,7 +242,7 @@
             }
           },
           {
-            "id": "a8375c8fa69ba214",
+            "id": "b8f33b427bdb80bc",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -236,12 +252,12 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       },
       {
         "id": "41cea9e5fec7dd3b",
         "type": "tabs",
-        "dimension": 38.970588235294116,
+        "dimension": 38.96604938271605,
         "children": [
           {
             "id": "9c56d6c26076e49f",
@@ -289,26 +305,29 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "d0549b248762c560",
+  "active": "a49a6d62c29d9751",
   "lastOpenFiles": [
-    "Excalidraw/ASE-Schematic.md",
-    "0-HOME.md",
+    "imgs/DHT_Structured.png",
     "Education/RSA/Peer-to-Peer System and Networks.md",
+    "imgs/RAFT_algo.png",
+    "1-TASKS.md",
+    "imgs/Bitswap.png",
+    "header.png",
+    "imgs/CDN_Infrastruct.png",
+    "Dev/C/Main C Vulnerabilities.md",
+    "Education/Math/Trigonometry/Trigonometry.md",
+    "Education/Math/Lesson_1/Lesson.md",
+    "Untitled.md",
+    "0-HOME.md",
+    "Excalidraw/ASE-Schematic.md",
     "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
     "Education/RSA/Self-organized systems.md",
-    "1-TASKS.md",
-    "Untitled.md",
     "imgs/rendezvous_peers.png",
     "imgs/image.png",
     "imgs/image 1.png",
     "imgs/gnutella_structureless.png",
     "imgs/gnutella_response_example.png",
-    "imgs/gnutella_example.png",
-    "imgs/gnutella.png",
-    "imgs/federated.png",
-    "imgs/de-centralized.png",
-    "imgs/centralized_learning.png",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
@@ -318,7 +337,6 @@
     "Excalidraw",
     "Education/ASE/ADCs.md",
     "Education/ASE",
-    "Dev/C/Main C Vulnerabilities.md",
     "Education/SRC/Project.md",
     "README.md",
     "Dev/Python/Modules/Копирование объектов.md",
@@ -327,9 +345,6 @@
     "Education/CLE/Aula.md",
     "Untitled 1.md",
     "Teamplates/Aula.md",
-    "Teamplates/Book.md",
-    "Teamplates/Daily note.md",
-    "Education/Math/Lesson_1/Lesson.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",

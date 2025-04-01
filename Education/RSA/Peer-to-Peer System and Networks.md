@@ -221,3 +221,180 @@ To reduce network traffic and improve efficiency, Gnutella introduced search opt
 - This is achieved through **DHT (Distributed Hash Tables)**, also known as the **"distributed database"**.
 
 <img src="BitTorrent.png" style="display: block; margin: auto;" />
+
+### InterPlantetary File System (IPFS)
+
+A **Global distributed file system** focused on **decentralization** and **content distriution**. The files are in **distributed storages**, with **Distributed Hash Tables** that use hash of files as  the krey to return the location of the file. Once the location is determined, the transfer takes place **peer-to-peer** as a **decentralized transfer**.
+
+#### **Key Features**
+
+- **Content-based identification**
+  - Uses a **secure hash** of file contents instead of location-based addressing.
+- **Decentralized Storage & Retrival**
+  - **Distributed hash Table (DHT)** is used to resolve file locations.
+- **Efficient Block Exchange**  
+  - Uses **BitTorrent**-like peer-to-peer file distribution.  
+- **Incentivized Block Exchange**  
+  - Utilizes the **Bitswap protocol** for fair sharing of data.  
+
+- **Versioned File Organization**  
+  - **Merkle DAG (Directed Acyclic Graph)** structure, similar to **Git version control**.  
+- **Security**  
+  - **Self-certifying storage nodes** ensure data integrity and authenticity.  
+
+#### Block Exchange Mechanism
+
+**Bitswap Protocol** incentivizes peer nodes to exchange data blocks. Each peer node maintains:
+- **want_list**: Blocks it wants.
+- **have_list**: Blocks it possesses.
+Any **imbalance** is noted in the form of a **BitSwap credit & Debt**. The nodes in the network must **provide value** by sharing blocks, if a node **sends a block**, it earns an **IPFS token** that can be used later to  **request a block**.
+Any issue that may arise is managed by the **Bitswap Protocol**, such as:
+- **Freeloading nodes** (taking but not giving),
+- **Nodes with nothing to request**,
+- **Nodes with no blocks to offer**.
+
+#### Bitswap Calculation
+
+##### **Debt Ration & Probability of Seding Blocks**
+
+**Debt Ratio (r)** determines how much a peer owes. 
+$$ r = \frac{\text{bytes\_sent}}{\text{bytes\_recv} + 1} $$
+
+The probability of sending a block to a **debtor node** drops **quickly** once its **debt ratio exceeds twice** the established credit.  
+$$ P(send \mid r) = 1 - \frac{1}{1 + exp(6 - 3r)} $$
+
+##### **BitSwap Ledger System**
+
+Nodes maintain **ledgers** that track exchanges with other nodes. When a **connections is activated**, nodes **exchange ledger information**. If the **ledger mismatches**, it is **reset**, causing the node to **lose its accumulated credit or debt**.
+
+##### **Sketch of a Peer Connection Lifecycle**
+
+1. **Open** – Peers exchange ledgers until they agree.  
+2. **Sending** – Peers exchange **want_lists** and **blocks**.  
+3. **Close** – Peers deactivate the connection.  
+4. **Ignored** – A peer is ignored (timed out) if a node's debt is too high. 
+
+```c
+// Protocol interface:
+interface Peer {
+	open (nodeid : NodeId, ledger :Ledger);
+	send_want_list (want_list :WantList);
+	send_block (block :Block) -> (complete :Bool);
+	close (final :Bool);
+}
+```
+
+##### Example
+
+1. **Requesting a Block**  
+   - A peer **broadcasts a "Want"** message to all **connected peers**.  
+
+2. **Fallback to DHT**  
+   - If **no peers respond**, the peer queries the **DHT** to find out **who has the root CID**.  
+
+3. **Session-Based Requests**  
+   - Peers that **respond** are **added to a session**.  
+   - Subsequent **requests** are sent **only to peers in the session**, improving efficiency.  
+<img src="Bitswap.png" width="1200" style="display: block; margin: auto;" />
+
+#### IPFS: Split Factor
+
+When a local node **receives a block**, it **broadcasts a cancel message** for that **CID** to all connected peers. However, **delays in processing the cancel message** can cause **duplicate block transmission**. 
+The local node **tracks the ratio** of **duplicate blocks** to **received blocks**. The **Split factor** determines how many peers receive the same CID request. 
+If the **duplicate ratio > 4**, the split factor **increases** -> fewer peers receibe the same CID request. 
+If the **duplicate ratio < 2**, the split factor **decreases** -> more peers receibe the same CID request.
+
+#### IPFS: Cluster
+
+**Faciliates content replication** across multiple nodes. All cluster peers must share the **same cluster secret** to join, each cluster peer has a **unique ID**, when **new data is added and pinned**  to one peer, **all other peers receive the data**.  The **peer that initiates the cluster** generates the **cluster secret** and becomes the **cluster leader**. Any peer in the cluster can **modify, add, or remove data** and the cluster remains functional even if **peers are added or removed**. If the **leader node goes down**, a new eader is elected using the **RAFT consensus algorithm**.
+
+#### RAFT Consensus Algorithm
+
+1. **Leader Election Process**  
+   - A server **becomes a candidate** if it receives no communication from the leader within the **election timeout** (≈ 300ms).  
+   - The candidate **increases its term counter, votes for itself, and requests votes** from other servers.  
+   - A server **votes only once per term** (first-come-first-served).  
+   - If a candidate **receives a majority of votes**, it **becomes the new leader**.  
+   - If another server sends a **higher term number**, the candidate **recognizes it as the new leader** and becomes a follower.  
+
+2. **Handling Election Failures**  
+   - If no leader is elected (e.g., due to a split vote), a **new election term begins**.  
+
+This **ensures high availability and decentralized coordination** within the **IPFS cluster**.
+
+
+<img src="RAFT_algo.png" style="display: block; margin: auto;" />
+
+#### IPFS: Locating Nodes & Objects
+
+##### **Locating Nodes**
+Nodes are identifies by **cryptographic hashes** of their **public keys**. They **store objects** that make up the files being exchanged, while each **object is identifies by a secure hash**, and objects can contain **sub-objects**, the **root hash** is generated using the **hashes of sub-objects**.
+##### **Locating Objects**  
+- IPFS uses **content-based identification** instead of location-based addressing (like HTTP).  
+- Resources are identified by **hashes of their content**.  
+- **Resolving object location:**
+  - A request is sent across the network **searching for peers** that hold the resource with the specific hash.  
+  - The **DHT (Distributed Hash Table)** in IPFS is used for **node discovery** and **file location resolution**.  
+  - The DHT holds:
+    - **Key:** Hash of the object.  
+    - **Value:** Location(s) of the object.  
+  - The key **directly maps to the location** where the file is stored.  
+
+#### IPFS: Objects 
+
+##### **Object pinning**
+Nodes can **pin objects** to ensure their **long term availability**. Pinned objects are stored **permantly in the node's local storage**.
+##### **Object Publishing**
+- IPFS allows **pin distributed publising** via **DHT and content-hash addressing**. 
+- Any user can **publish an object** by:
+  - Adding its **hash key** to the DHT,
+  - Adding themselves as a **peer storing the object**,
+  - Sharing the **object path** with other users.
+- **Versioning:**
+  - **New versions** of files generate **new hashes**, making them **new objects**,
+  - **Tracking versions** requires additional **versioning objects**.
+
+This ensures **decentralized, efficient, and resilient file storage and retrieveal**.
+
+
+### Distributed Hash Tables (DHTs)
+
+#### Searching in DHTs (structured)
+
+- **Exact filename required** for search.  
+- **Keys (filenames) map to node IDs** in the network.  
+- **Changing a filename** results in a **new hash** → **searching in a different node**.  
+<img src="DHT_Structured.png" style="display: block; margin: auto;" />
+
+#### **CHORD: DHT Algorithm**  
+
+##### **Overview**  
+- **Every file or data item** in the network has a **unique identifier**.  
+- This identifier is **hashed** to generate a **key** for the resource.  
+- If a node needs a file, it:  
+  - **Hashes** the filename.  
+  - **Sends a request** using this key.  
+
+##### **Node Organization in CHORD**  
+- All **nodes (peers) also hash their IP addresses**.  
+- Nodes **form a ring** in **ascending order** of their hashed IP values.  
+
+##### **Key Lookup & Storage**  
+- **Successor Node of a Key (k):**  
+  - The **first node whose ID is ≥ k** (or follows k in the ring).  
+  - **Denoted as:** `successor(k)`.  
+- **Every key (file hash) is assigned to its successor node**.  
+- **Looking up a key k = Querying successor(k)**.  
+
+##### **File Sharing in CHORD**  
+- A node **wants to share a file**:  
+  1. **Hashes** the file identifier → generates key `k`.  
+  2. **Sends file identifier + its IP** to `successor(k)`.  
+  3. `successor(k)` **stores the information** in the DHT.  
+
+##### **DHT Indexing & Redundancy**  
+- **All resources are indexed** across the **entire DHT**.  
+- **If multiple nodes hold the same file**, their keys **map to the same DHT entry**.  
+- The requesting node can:  
+  - Choose **which node to download from**.  
+  - Request the file from **multiple nodes for redundancy & speed**.  

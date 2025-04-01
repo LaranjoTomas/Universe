@@ -1,20 +1,44 @@
 {
   "recentFiles": [
     {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
     },
     {
-      "basename": "ASE-Schematic",
-      "path": "Excalidraw/ASE-Schematic.md"
+      "basename": "Bitswap",
+      "path": "imgs/Bitswap.png"
+    },
+    {
+      "basename": "header",
+      "path": "header.png"
+    },
+    {
+      "basename": "CDN_Infrastruct",
+      "path": "imgs/CDN_Infrastruct.png"
+    },
+    {
+      "basename": "Main C Vulnerabilities",
+      "path": "Dev/C/Main C Vulnerabilities.md"
+    },
+    {
+      "basename": "Trigonometry",
+      "path": "Education/Math/Trigonometry/Trigonometry.md"
+    },
+    {
+      "basename": "Lesson",
+      "path": "Education/Math/Lesson_1/Lesson.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "Peer-to-Peer System and Networks",
-      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
     },
     {
       "basename": "Ad-Hoc Networks",
@@ -49,10 +73,6 @@
       "path": "imgs/Pasted image 20250328092510.png"
     },
     {
-      "basename": "Main C Vulnerabilities",
-      "path": "Dev/C/Main C Vulnerabilities.md"
-    },
-    {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
     },
@@ -71,18 +91,6 @@
     {
       "basename": "2-PROJECTS",
       "path": "2-PROJECTS.md"
-    },
-    {
-      "basename": "header",
-      "path": "header.png"
-    },
-    {
-      "basename": "Trigonometry",
-      "path": "Education/Math/Trigonometry/Trigonometry.md"
-    },
-    {
-      "basename": "Lesson",
-      "path": "Education/Math/Lesson_1/Lesson.md"
     },
     {
       "basename": "NumPy",
@@ -187,18 +195,6 @@
     {
       "basename": "00. Study",
       "path": "20 - Work & Study/Study/00. Study.md"
-    },
-    {
-      "basename": "User Showcases",
-      "path": "User Showcases.md"
-    },
-    {
-      "basename": "Updates and Bug Fixes",
-      "path": "Updates and Bug Fixes.md"
-    },
-    {
-      "basename": "Frequently Asked Questions",
-      "path": "Frequently Asked Questions.md"
     }
   ],
   "omittedPaths": [],
