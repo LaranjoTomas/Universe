@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
-    },
-    {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
     },
     {
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
     {
       "basename": "Ad-Hoc Networks",
@@ -19,6 +23,10 @@
     {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
     },
     {
       "basename": "Pasted image 20250328092716",

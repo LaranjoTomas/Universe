@@ -10,14 +10,37 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "0-HOME.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "0-HOME"
+            }
+          },
+          {
+            "id": "d0549b248762c560",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-TASKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "1-TASKS"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -150,12 +173,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "1-TASKS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of 1-TASKS"
             }
           },
           {
@@ -202,7 +226,7 @@
             }
           },
           {
-            "id": "7f1079def9a55cff",
+            "id": "a8375c8fa69ba214",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -212,7 +236,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -265,8 +289,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "4ee0bab142e134ff",
+  "active": "d0549b248762c560",
   "lastOpenFiles": [
+    "Excalidraw/ASE-Schematic.md",
+    "0-HOME.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
+    "Education/RSA/Ad-Hoc Networks.md",
+    "Education/RSA/Vehicular Networks.md",
+    "Education/RSA/Self-organized systems.md",
+    "1-TASKS.md",
     "Untitled.md",
     "imgs/rendezvous_peers.png",
     "imgs/image.png",
@@ -285,14 +316,8 @@
     "Templates",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "Excalidraw",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/ASE/ADCs.md",
     "Education/ASE",
-    "Education/RSA/Self-organized systems.md",
-    "1-TASKS.md",
-    "0-HOME.md",
-    "Education/RSA/Ad-Hoc Networks.md",
-    "Education/RSA/Vehicular Networks.md",
     "Dev/C/Main C Vulnerabilities.md",
     "Education/SRC/Project.md",
     "README.md",
@@ -305,7 +330,6 @@
     "Teamplates/Book.md",
     "Teamplates/Daily note.md",
     "Education/Math/Lesson_1/Lesson.md",
-    "Education/SRC/Aula.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
