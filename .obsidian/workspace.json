@@ -42,7 +42,6 @@
           {
             "id": "a49a6d62c29d9751",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -50,7 +49,6 @@
                 "mode": "preview",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Peer-to-Peer System and Networks"
             }
