@@ -77,10 +77,6 @@
       "path": "Education/Math/Lesson_1/Lesson.md"
     },
     {
-      "basename": "Daily note",
-      "path": "Teamplates/Daily note.md"
-    },
-    {
       "basename": "NumPy",
       "path": "Dev/Python/NumPy/NumPy.md"
     },
@@ -95,10 +91,6 @@
     {
       "basename": "badges_cpp",
       "path": "imgs/badges_cpp.png"
-    },
-    {
-      "basename": "Book",
-      "path": "Teamplates/Book.md"
     },
     {
       "basename": "Utils",
