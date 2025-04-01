@@ -2,6 +2,8 @@
 tags:
   - "#Networks"
   - "#RSA"
+  - "#CyberSecurity"
+  - "#Security"
 ---
 ### Content Distribution Networks (CDN)
 
@@ -258,10 +260,10 @@ Any issue that may arise is managed by the **Bitswap Protocol**, such as:
 ##### **Debt Ration & Probability of Seding Blocks**
 
 **Debt Ratio (r)** determines how much a peer owes. 
-$$ r = \frac{\text{bytes\_sent}}{\text{bytes\_recv} + 1} $$
+$$\Large r = \frac{\text{bytes\_sent}}{\text{bytes\_recv} + 1} $$
 
 The probability of sending a block to a **debtor node** drops **quickly** once its **debt ratio exceeds twice** the established credit.  
-$$ P(send \mid r) = 1 - \frac{1}{1 + exp(6 - 3r)} $$
+$$\Large P(send \mid r) = 1 - \frac{1}{1 + exp(6 - 3r)} $$
 
 ##### **BitSwap Ledger System**
 
@@ -378,7 +380,7 @@ This ensures **decentralized, efficient, and resilient file storage and retrieve
 ##### **Node Organization in CHORD**  
 - All **nodes (peers) also hash their IP addresses**.  
 - Nodes **form a ring** in **ascending order** of their hashed IP values.  
-
+- <img src="CHORD.png" style="display: block; margin: auto;" />
 ##### **Key Lookup & Storage**  
 - **Successor Node of a Key (k):**  
   - The **first node whose ID is ≥ k** (or follows k in the ring).  
@@ -398,3 +400,93 @@ This ensures **decentralized, efficient, and resilient file storage and retrieve
 - The requesting node can:  
   - Choose **which node to download from**.  
   - Request the file from **multiple nodes for redundancy & speed**.  
+
+#### DHT: Search Information 
+##### **Overview**
+In a Distributed Hash Table (DHT), nodes store and retrieve data using a **hashing mechanism**. Each node in the network is responsible for a subset of keys. When a node wants to find content:
+1. It **hashes the data identifier** and sends a request to `successor(k)`.
+2. The system returns the **IP address of the node** that holds the actual data.
+3. However, a node might not know the IP of `successor(k)`, only its key.
+
+To solve this problem, **each node maintains a Finger Table**, which enables efficient lookups.
+##### **Finger Table Structure**
+Every node stores a **Finger Table**, which helps it **route queries faster**. Instead of storing all node addresses, it **stores an exponential sequence of node addresses**.
+
+- Each node holds **entries for nodes that are at distances of powers of 2** from itself.
+- **Entry i of node k’s Finger Table holds the successor node at `k + 2^i`**.
+
+###### **Example Finger Table**
+For a **node N8**, the finger table might look like this:
+
+| Index (i) | Node + `2^i` | Successor Node |
+| --------- | ------------ | -------------- |
+| 1         | 8 + 1 = 9    | **N14**        |
+| 2         | 8 + 2 = 10   | **N14**        |
+| 3         | 8 + 4 = 12   | **N14**        |
+| 4         | 8 + 8 = 16   | **N21**        |
+| 5         | 8 + 16 = 24  | **N32**        |
+| 6         | 8 + 32 = 40  | **N42**        |
+
+Nodes in the table **act as shortcuts**, allowing efficient routing.
+<img src="Finger_table.png" style="display: block; margin: auto;" />
+#### File Search: Flooding vs. DHTs 
+
+##### **Flooding-Based Search**
+- **Pros:**
+  - Can quickly discover **popular files**.
+  - Handles **arbitrary single-site logic** well.
+- **Cons:**
+  - **Inefficient for rare items**—may not find them at all.
+  - **Consumes a lot of bandwidth (BW)** due to network-wide message propagation.
+
+##### **DHT-Based Search**
+- **Pros:**
+  - **Guaranteed retrieval** (should never miss a file if it exists).
+  - Efficient for **structured queries** (equijoins, selections, aggregates).
+- **Cons:**
+  - **Cannot perform wildcard searches easily**.
+  - **Expensive to publish documents** with many keywords.
+  - **Expensive for long intersection queries** (e.g., searching multiple rare terms).
+
+####  **Hybrid Solution: Best of Both Worlds**
+A **hybrid search** combines **Flooding** and **DHTs** to leverage their strengths:
+- **Popular files** → Searched using a **flood-based** approach.
+- **Rare files** → Searched using a **DHT-based** approach.
+- The **system intelligently decides** which method to use based on query type and expected results.
+<img src="Hybrid_Search.png" style="display: block; margin: auto;" />
+The image illustrates how **Hybrid Search** works by using **both Flood-based and DHT-based searches**:
+1. **Flood-Based Network (Left Cloud)**
+   - Used to **search for popular items**.
+   - Returns **more results quickly**.
+   - Uses a **flood query** mechanism.
+
+1. **DHT Network (Right Cloud)**
+   - Used to **search for rare items**.
+   - May return **very few results**.
+   - Uses a **DHT query** mechanism.
+
+3. **Computer (Bottom Center)**
+   - Sends either a **Flood Query** (for popular files) or a **DHT Query** (for rare files).
+   - The goal is to **balance efficiency and search accuracy**.
+
+### Security
+
+#### Security Measures
+
+Most attacks can be mitigated through **careful network design** and **encryption**. However, no system is completely secure if a **majority of peers are malicious**.
+##### Anonymity
+Some P2P networks (e.g., **Freenet**) hide user identities by **passing traffic through intermediate nodes**.
+
+##### Encryption
+- Encrypts **peer-to-peer traffic flows** to:
+  - **Prevent ISPs from detecting** and throttling/blocking P2P usage.
+  - **Hide file contents** from eavesdroppers.
+  - **Complicate law enforcement & censorship** of certain materials.
+  - **Authenticate users** and prevent "man-in-the-middle" attacks.
+  - **Maintain anonymity** for users.
+##### How to Mitigate These Attacks?
+- **Use encryption** (e.g., **end-to-end encryption, VPNs, Tor routing**).
+- **Verify file integrity** (e.g., **hash checking, reputation-based downloads**).
+- **Avoid suspicious software** (e.g., **use open-source clients**).
+- **Implement authentication** to **prevent identity spoofing**.
+- **Monitor network activity** for unusual behavior.

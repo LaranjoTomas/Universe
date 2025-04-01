@@ -47,7 +47,7 @@
               "type": "markdown",
               "state": {
                 "file": "Education/RSA/Peer-to-Peer System and Networks.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "pinned": true,
@@ -305,10 +305,13 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "a49a6d62c29d9751",
+  "active": "ed15b78cf26db7db",
   "lastOpenFiles": [
-    "imgs/DHT_Structured.png",
+    "imgs/Hybrid_Search.png",
+    "imgs/Finger_table.png",
     "Education/RSA/Peer-to-Peer System and Networks.md",
+    "imgs/CHORD.png",
+    "imgs/DHT_Structured.png",
     "imgs/RAFT_algo.png",
     "1-TASKS.md",
     "imgs/Bitswap.png",
@@ -326,8 +329,6 @@
     "imgs/rendezvous_peers.png",
     "imgs/image.png",
     "imgs/image 1.png",
-    "imgs/gnutella_structureless.png",
-    "imgs/gnutella_response_example.png",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
