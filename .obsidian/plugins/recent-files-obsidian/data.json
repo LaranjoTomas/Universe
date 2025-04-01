@@ -5,6 +5,14 @@
       "path": "Education/RSA/Self-organized systems.md"
     },
     {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Ad-Hoc Networks",
       "path": "Education/RSA/Ad-Hoc Networks.md"
     },
@@ -29,10 +37,6 @@
       "path": "imgs/Pasted image 20240527171316.png"
     },
     {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
-    },
-    {
       "basename": "Pasted image 20250328092510",
       "path": "imgs/Pasted image 20250328092510.png"
     },
@@ -43,10 +47,6 @@
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "README",

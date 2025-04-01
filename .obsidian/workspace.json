@@ -8,6 +8,38 @@
         "type": "tabs",
         "children": [
           {
+            "id": "223387926e561564",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "0-HOME.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "0-HOME"
+            }
+          },
+          {
+            "id": "5ebba1a61ab2bf3c",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-TASKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "1-TASKS"
+            }
+          },
+          {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
             "state": {
@@ -21,7 +53,8 @@
               "title": "Self-organized systems"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -272,6 +305,8 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "1-TASKS.md",
+    "0-HOME.md",
     "Education/RSA/Self-organized systems.md",
     "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
@@ -279,13 +314,11 @@
     "imgs/Roadmap.svg",
     "imgs/primery-resheniya-proizvodnyh-01.webp",
     "imgs/Pasted image 20240527171316.png",
-    "1-TASKS.md",
     "Pasted image 20250328092833.png",
     "imgs/Pasted image 20250328092510.png",
     "Dev/C/Main C Vulnerabilities.md",
     "image.png",
     "Education/SRC/Project.md",
-    "0-HOME.md",
     "README.md",
     "Dev/Python/Modules/Копирование объектов.md",
     "3-BOOKS.md",
