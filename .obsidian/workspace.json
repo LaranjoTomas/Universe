@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5ea6108863ce031e",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "1dd656ab8c0b6b40",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -24,19 +24,17 @@
             }
           },
           {
-            "id": "1527dcc22075fa11",
+            "id": "dd1fbfd48fd724fe",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-TASKS.md",
-                "mode": "source",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
+                "mode": "preview",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "1-TASKS"
+              "title": "Peer-to-Peer System and Networks"
             }
           }
         ],
@@ -100,8 +98,8 @@
             "state": {
               "type": "recent-files",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "clock",
+              "title": "Recent Files"
             }
           },
           {
@@ -182,13 +180,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1-TASKS.md",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1-TASKS"
+              "title": "Outline of Peer-to-Peer System and Networks"
             }
           },
           {
@@ -235,17 +233,7 @@
             }
           },
           {
-            "id": "2b2909086952367e",
-            "type": "leaf",
-            "state": {
-              "type": "tasks_timeline_view",
-              "state": {},
-              "icon": "calendar-clock",
-              "title": "Tasks Timeline"
-            }
-          },
-          {
-            "id": "b72f512067e6fbbf",
+            "id": "5566b20613f74e5e",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -255,7 +243,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -299,17 +287,18 @@
       "pexels-banner:🚩 Pixel Banner Menu": false,
       "dashboard-navigator:Open dashboard navigator": false,
       "homepage:Open homepage": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false,
       "templater-obsidian:Templater": false,
       "translate:Open translation view": false,
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
-      "obsidian-excalidraw-plugin:New drawing": false
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-memos:Memos": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "1527dcc22075fa11",
+  "active": "dd1fbfd48fd724fe",
   "lastOpenFiles": [
+    "Education/RSA/Self-organized systems.md",
     "0-HOME.md",
     "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
@@ -331,7 +320,6 @@
     "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
-    "Education/RSA/Self-organized systems.md",
     "Excalidraw",
     "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
