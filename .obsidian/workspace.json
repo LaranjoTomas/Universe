@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "f47e2d80e86d17ca",
+            "id": "1527dcc22075fa11",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -38,25 +38,9 @@
               "icon": "lucide-file",
               "title": "1-TASKS"
             }
-          },
-          {
-            "id": "6478ab5563395a48",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Peer-to-Peer System and Networks"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -198,13 +182,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
+                "file": "1-TASKS.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Peer-to-Peer System and Networks"
+              "title": "Outline of 1-TASKS"
             }
           },
           {
@@ -324,15 +308,15 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "6478ab5563395a48",
+  "active": "1527dcc22075fa11",
   "lastOpenFiles": [
+    "0-HOME.md",
+    "1-TASKS.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "Pasted Image 20250331193446_744.png",
     "imgs/BitTorrent.png",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
-    "0-HOME.md",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
-    "1-TASKS.md",
     "imgs/OpenNAP.png",
     "imgs/FastTrack.png",
     "imgs/gnutella.png",

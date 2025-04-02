@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Peer-to-Peer System and Networks",
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
@@ -13,16 +21,8 @@
       "path": "imgs/BitTorrent.png"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
       "basename": "How to Build and Sign an Electron JS Application for All Platforms",
       "path": "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
     },
     {
       "basename": "OpenNAP",
