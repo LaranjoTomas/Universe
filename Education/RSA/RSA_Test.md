@@ -73,4 +73,26 @@ Distinguem-se estes dois tipos de Nodes pois um faz parte da data stream e o out
 No protocologo P2P estruturado é usado DHT para a pesquisa de rare files. A diferença na pesquisa entre as duas raridades de conteúdos está na eficiência e na probabilidade de encontrar o conteúdo rapidamente. Isto deve-se à forma como o conteúdo é armazenado e como se localizam os dados na rede. Se o conteúdo tiver muitas réplicas ele pode estar armazenando em vários nós diferentes o que aumenta a probabilidade de encontrá-lo rápidamente. Se o conteúdo for raro e a rede estiver bem organizada ele estará em poucos nós da rede o que torna a sua pesquisa mais dificil, graças ao mapeamento do DHT a sua busdca ainda pode ser eficiente e só poderá acontecer algum problema se os poucos nós que conttêm este conteúdos estiveres offline ou falharem.
 A eficiência da DHT minimiza esse problema, desde que os nós que armazenam o conteúdo estejam disponiveís.
 
-# 
+# No protocolo de distribuição de conteúdos peer-to-peer IPFS, como é que este consegue incentivar os peer nodes a participar na rede e partilhar os conteúdos?
+
+In IPFS P2P **Bitswap Protocol** incentiva peer nodes a trocar blocos. Cada peer node possui um **want_list** e uma **have_list** . Qualquer desbalanceamento é anotado na forma de credito e débito. Cada nó na rede precisa de oferecer valor através de partilhar blocos, se um nó enviar um bloco ele ganha uim **IPFS token** que pode ser usado mais tarde para pedir um bloco. Qualquer outro problema que possa aparecer será tratado pelo **protocologo do BitSwap**
+
+# Numa rede de veículos numa cidade, com percursos semelhantes, por diferentes locais utilizaria um protocolo de encaminhamento AODV ou Batman? Justifique.
+
+Numa rede de veículos numa cidade com percursos semelhantes os protocologos do tipo proativos seriam melhores para a situação. Neste caso como o BATMAN não teria de descartar rotas anteriormente calculadas e só tem de as atualizar a partir dos veículos que estão a percorrer sempre o mesmo percurso vai levar a um menor overhead. BATMAN é mais eficiente que AODV nestes cenários com garantias de conectividade estável devido ao movimento dos veículos, enquanto AODV poderá construir rotas que ficam obsoletas rapidamente.
+
+# De que forma o OLSR consegue obter informação dos Multipoint relays atualizada? Justifique
+
+O OLSR consegue obeter informação atualizada dos multipoint relays através do envio periódico de mensagens Hello, que permitem a descoberta e monitorização dos vizinhos. Isto permite anunciar-se aos seus vizinhos, determinar quem mais está lá e selecionar alguns sustemas para atuar com os multipoint relays.
+
+# Nos mecanismos de aprendizagem, em que situações e cenários faz sentido ter um modelo centralizado? Justifique.
+
+As situações ou cenários em que faz sentido ter um modelo centralizado podem ser:
+- **Disponibilidade e Acesso Total aos Dados**: Quando todos os dados necessários estão recolhidos localmente ou podem ser facilmente centralizados usar o modelo centralizado é uma boa ideia.
+- **Computação Elevada**: Se existe infraestrutura com elevada capacidade de processamento o treino de modelos complexos e de grandes dimensões torna-se viávEL
+- **Baixa Latência**: Para serviços tipo automação em que é necessário latênia baixa, ter o modelo centralizado seria benéfico.
+
+# Num mecanismo de federated learning, qual a influência dos algoritmos de agregação dos modelos? Justifique.
+
+Em Federated Learning os parametros do modelo em treino são enviados ao servidor para serem agregados ao modelo global que depois irá devolver o modelo agregado aos clientes. 
+O modelo começa no device do user e é treinado com a informação local, depois é enviado ao servidor com o global model para ser agregado. Isto é essencial para criar global model mais generalizados. Estes algoritmos determinam como os parâmetros dos modelos locais são combinados para formar o modelo global generalizado.
