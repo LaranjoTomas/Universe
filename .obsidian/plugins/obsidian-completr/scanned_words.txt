@@ -2734,6 +2734,7 @@ trata
 todos
 tamanho
 tentativa
+ter
 Statistic
 SlRvb
 Story
@@ -8076,6 +8077,8 @@ man
 mecanismos
 mecanismo
 mas
+mesma
+manuten
 Root
 Rectangular
 Relationships
@@ -13857,6 +13860,7 @@ consulta
 cada
 como
 consegue
+cont
 hide
 hosted
 heading
@@ -19197,6 +19201,9 @@ pesquisa
 pequeno
 primeiros
 participar
+principio
+poder
+pode
 ITS
 In
 Included
@@ -21827,6 +21834,7 @@ IDs
 Indexing
 Inefficient
 ISPs
+Isto
 Theme
 The
 Themes
@@ -30081,6 +30089,10 @@ follower
 filenames
 finger
 flood
+ficheiro
+feita
+fun
+fica
 Obsidian
 Other
 Outline
@@ -51456,6 +51468,7 @@ este
 enviar
 escolhe
 encontrar
+exemplo
 Allows
 Already
 Adjustments
@@ -59241,6 +59254,9 @@ lookups
 law
 ltimo
 limitado
+leeches
+localiza
+localizar
 and
 are
 across
@@ -62132,6 +62148,10 @@ alguns
 alto
 aonde
 aumentar
+aproveitarem
+atrav
+aplicado
+armazenada
 icon
 in
 if
@@ -64808,6 +64828,10 @@ illustrates
 identities
 intermediate
 incentivar
+inabilita
+informa
+incluir
+identificador
 used
 using
 upon
@@ -67537,6 +67561,9 @@ utilizadores
 usado
 unusual
 usados
+utilizador
+utilizando
+utilizado
 No
 Navigation
 NzZj
@@ -72493,6 +72520,7 @@ ntb
 nico
 noted
 numa
+nome
 download
 depending
 does
@@ -75470,6 +75498,7 @@ detecting
 downloads
 desvantagens
 distribui
+determinar
 snippets
 spans
 smaller
@@ -78529,6 +78558,7 @@ subset
 selections
 suspicious
 spoofing
+seu
 vault
 vn
 vY
@@ -84012,6 +84042,8 @@ route
 reputation
 raro
 raio
+receber
+resultar
 work
 with
 within
@@ -89092,6 +89124,7 @@ Exact
 Expensive
 Encryption
 Encrypts
+Este
 Kanban
 KD
 KuTyw
@@ -127514,6 +127547,7 @@ quais
 quantos
 que
 quando
+qual
 jQ
 jB
 ja

@@ -420,12 +420,12 @@ For a **node N8**, the finger table might look like this:
 
 | Index (i) | Node + `2^i` | Successor Node |
 | --------- | ------------ | -------------- |
-| 1         | 8 + 1 = 9    | **N14**        |
-| 2         | 8 + 2 = 10   | **N14**        |
-| 3         | 8 + 4 = 12   | **N14**        |
-| 4         | 8 + 8 = 16   | **N21**        |
-| 5         | 8 + 16 = 24  | **N32**        |
-| 6         | 8 + 32 = 40  | **N42**        |
+| 0         | 8 + 1 = 9    | **N14**        |
+| 1         | 8 + 2 = 10   | **N14**        |
+| 2         | 8 + 4 = 12   | **N14**        |
+| 3         | 8 + 8 = 16   | **N21**        |
+| 4         | 8 + 16 = 24  | **N32**        |
+| 5         | 8 + 32 = 40  | **N42**        |
 
 Nodes in the table **act as shortcuts**, allowing efficient routing.
 <img src="Finger_table.png" style="display: block; margin: auto;" />

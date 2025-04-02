@@ -68,12 +68,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/RSA/RSA_Test_31March.md",
+                "file": "Education/RSA/RSA_Test.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RSA_Test_31March"
+              "title": "RSA_Test"
             }
           }
         ]
@@ -219,13 +219,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/RSA/RSA_Test_31March.md",
+                "file": "Education/RSA/RSA_Test.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of RSA_Test_31March"
+              "title": "Outline of RSA_Test"
             }
           },
           {
@@ -339,7 +339,7 @@
   "active": "c9a3954228504f8a",
   "lastOpenFiles": [
     "Education/RSA/Peer-to-Peer System and Networks.md",
-    "Education/RSA/RSA_Test_31March.md",
+    "Education/RSA/RSA_Test.md",
     "imgs/RAFT_algo.png",
     "imgs/Hybrid_Search.png",
     "imgs/Finger_table.png",
