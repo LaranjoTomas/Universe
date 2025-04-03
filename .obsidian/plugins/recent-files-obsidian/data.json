@@ -5,6 +5,10 @@
       "path": "Education/RSA/Ad-Hoc Networks.md"
     },
     {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
       "basename": "README",
       "path": "README.md"
     },
@@ -31,10 +35,6 @@
     {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
-    },
-    {
-      "basename": "Peer-to-Peer System and Networks",
-      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
     {
       "basename": "RSA_Test",

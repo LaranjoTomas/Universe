@@ -24,9 +24,8 @@
             }
           },
           {
-            "id": "3bd14b75b8380177",
+            "id": "d3351967d7f76375",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -34,7 +33,6 @@
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Ad-Hoc Networks"
             }
@@ -298,18 +296,18 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "3bd14b75b8380177",
+  "active": "d3351967d7f76375",
   "lastOpenFiles": [
+    "Education/RSA/Ad-Hoc Networks.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
     "README.md",
     "Untitled.md",
-    "Education/RSA/Ad-Hoc Networks.md",
     "Dev/Python/Modules/itertools.md",
     "0-HOME.md",
     "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/ASE-Schematic.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
     "Education/RSA/Self-organized systems.md",
     "imgs/RAFT_algo.png",
