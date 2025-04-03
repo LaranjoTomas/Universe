@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "a15cfce39bdcd277",
+            "id": "4ca22af74f0bc91e",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -38,9 +38,21 @@
               "icon": "lucide-file",
               "title": "1-TASKS"
             }
+          },
+          {
+            "id": "d3ebd8f67c26632e",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SD_SCHEMA.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SD_SCHEMA"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -137,8 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.5,
-    "collapsed": true
+    "width": 303.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -183,13 +194,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1-TASKS.md",
+                "file": "Excalidraw/SD_SCHEMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1-TASKS"
+              "title": "Outline of SD_SCHEMA"
             }
           },
           {
@@ -236,7 +247,7 @@
             }
           },
           {
-            "id": "8fd55e68f9bbbac8",
+            "id": "50b6c489a687f440",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -300,8 +311,11 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "a15cfce39bdcd277",
+  "active": "d3ebd8f67c26632e",
   "lastOpenFiles": [
+    "0-HOME.md",
+    "Excalidraw/SD_SCHEMA.md",
+    "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
     "Education/RSA/Self-organized systems.md",
@@ -313,8 +327,6 @@
     "imgs/CDN_Infrastruct.png",
     "imgs/Bitswap.png",
     "Excalidraw/ASE-Schematic.md",
-    "1-TASKS.md",
-    "0-HOME.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "Pasted Image 20250331193446_744.png",
     "imgs/BitTorrent.png",
