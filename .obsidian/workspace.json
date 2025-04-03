@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/RSA/Ad-Hoc Networks.md",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ad-Hoc Networks"
+              "title": "Peer-to-Peer System and Networks"
             }
           }
         ],
@@ -135,7 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.5
+    "width": 275.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -180,13 +180,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/RSA/Ad-Hoc Networks.md",
+                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Ad-Hoc Networks"
+              "title": "Outline of Peer-to-Peer System and Networks"
             }
           },
           {
@@ -299,10 +299,10 @@
   },
   "active": "d3351967d7f76375",
   "lastOpenFiles": [
-    "Education/RSA/Self-organized systems.md",
+    "Education/RSA/RSA_Test.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/Ad-Hoc Networks.md",
-    "Education/RSA/RSA_Test.md",
+    "Education/RSA/Self-organized systems.md",
     "README.md",
     "Untitled.md",
     "Dev/Python/Modules/itertools.md",
