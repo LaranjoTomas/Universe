@@ -157,3 +157,54 @@ Ad-hoc networks introduce additional challenges beyond traditional networking
 - **Dynamic Topology:**
   - As nodes move, the **topological relationships and routes change**.
   - The shape and composition of the MPR backbone **evolve** with the network.
+### B.A.T.M.A.N
+#### Overview
+- **Traditional Routing:**  
+  - Nodes exchange control packets containing link state information (e.g., utilization, bandwidth).
+  - Each node must have near-exhaustive knowledge of the network.
+- **BATMAN Approach:**  
+  - Instead of detailed link state data, BATMAN uses the **presence or absence** of control packets (OGMs) to indicate link and path quality.
+  - This enables nodes to determine the best next-hop without full network knowledge.
+#### BATMAN Operation
+##### Originator Messages (OGMs)
+- **Periodic Transmission:**  
+  - Every node sends an OGM periodically, which includes a **sequence number**.
+- **Multiple Paths:**  
+  - For instance, if Node A has two neighbors (B and C) and receives Node D's OGMs via both, it can choose either as the next hop.
+- **Link Failure Impact:**  
+  - If a link (e.g., between A and C) goes down, OGMs from D will only be received via B, making B the preferred next hop for reaching D (and even for reaching C).
+##### Sliding Window Mechanism
+- **Purpose:**  
+  - To track the reception of OGMs over a set of sequence numbers (e.g., WINDOW_SIZE = 8).
+- **Operation:**  
+  - A sliding window indicates which sequence numbers have been received.
+  - When an out-of-range sequence (e.g., seq# 17) is received, the window shifts accordingly, updating the count of in-range sequences.
+##### Routing Table & Next-Hop Determination
+- Each node maintains a **sliding window for every originator** (other node) for each neighbor.
+- BATMAN infers **link and path quality** from the successful (or missing) retransmission of OGMs.
+- **Collective Intelligence:**  
+  - The retransmission behavior indicates which neighbor provides the best link quality.
+- **Routing Information:**  
+  - Nodes only need to know the **next hop** to a destination, derived from the OGMs, rather than full network topology.
+#### Transmission Quality (TQ) Metrics
+##### BATMAN v.4: Basic TQ Calculation
+- **Formula:**  
+  - `TQ = TQ_incoming * TQ_local`
+- **Process:**  
+  - A node broadcasts an OGM with maximum TQ.
+  - The receiving node applies the TQ calculation and rebroadcasts it.
+  - Subsequent nodes can infer the quality of the link toward the originator.
+##### BATMAN v.5: Enhanced Throughput-Based Metrics
+- **Why Throughput?**  
+  - Packet loss alone is insufficient, especially with many modern devices and low-loss links.
+- **Automatic Throughput Estimation:**  
+  - **Wireless:** Modern WiFi drivers provide estimated throughput per neighbor.
+  - **Wired:** Devices can export theoretical throughput via APIs like `ethtool`.
+  - If direct querying fails, BATMAN V initiates periodic throughput tests.
+- **Path Throughput:**  
+  - Calculated as the **minimum throughput** across all links in the path between two nodes.
+#### Summary
+- **BATMAN minimizes control overhead** by using OGMs and sliding windows instead of exhaustive link state information.
+- **Link quality is inferred** from the presence, absence, and sequence continuity of OGMs.
+- **Routing decisions are made locally** based on the best next-hop as determined by OGM propagation.
+- **Enhanced metrics (throughput)** in BATMAN v.5 further refine route quality estimation to support dynamic and heterogeneous networks.

@@ -30,7 +30,7 @@
               "type": "markdown",
               "state": {
                 "file": "Education/RSA/Ad-Hoc Networks.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -266,7 +266,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -298,8 +299,10 @@
   },
   "active": "d3351967d7f76375",
   "lastOpenFiles": [
-    "Education/RSA/Ad-Hoc Networks.md",
+    "Education/RSA/Self-organized systems.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
+    "Education/RSA/Ad-Hoc Networks.md",
+    "Education/RSA/RSA_Test.md",
     "README.md",
     "Untitled.md",
     "Dev/Python/Modules/itertools.md",
@@ -308,8 +311,6 @@
     "Excalidraw/ASE-Schematic.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
-    "Education/RSA/RSA_Test.md",
-    "Education/RSA/Self-organized systems.md",
     "imgs/RAFT_algo.png",
     "imgs/Hybrid_Search.png",
     "imgs/Finger_table.png",
