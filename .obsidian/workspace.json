@@ -24,15 +24,19 @@
             }
           },
           {
-            "id": "42cfc61a6bc4ae14",
+            "id": "3bd14b75b8380177",
             "type": "leaf",
+            "pinned": true,
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/ASE-Schematic.md"
+                "file": "Education/RSA/Ad-Hoc Networks.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "ASE-Schematic"
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Ad-Hoc Networks"
             }
           }
         ],
@@ -79,7 +83,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#DailyNote",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -178,13 +182,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/ASE-Schematic.md",
+                "file": "Education/RSA/Ad-Hoc Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ASE-Schematic"
+              "title": "Outline of Ad-Hoc Networks"
             }
           },
           {
@@ -231,7 +235,7 @@
             }
           },
           {
-            "id": "8ab38f4611934d15",
+            "id": "c650c5e5b13acd95",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -241,7 +245,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 3
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -294,10 +298,16 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "42cfc61a6bc4ae14",
+  "active": "3bd14b75b8380177",
   "lastOpenFiles": [
-    "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
+    "README.md",
+    "Untitled.md",
+    "Education/RSA/Ad-Hoc Networks.md",
+    "Dev/Python/Modules/itertools.md",
     "0-HOME.md",
+    "Excalidraw/SD_SCHEMA.md",
+    "Excalidraw/ASE-Schematic.md",
+    "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
@@ -309,19 +319,16 @@
     "imgs/CHORD.png",
     "imgs/CDN_Infrastruct.png",
     "imgs/Bitswap.png",
-    "Excalidraw/ASE-Schematic.md",
     "Pasted Image 20250331193446_744.png",
     "imgs/BitTorrent.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
     "imgs/OpenNAP.png",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
-    "README.md",
     "gnutella_example.png.md",
     "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Excalidraw",
-    "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
     "3-BOOKS.md",
     "Dev/C/Memory management/Basic functions for memory management.md",
@@ -330,8 +337,6 @@
     "Templates/Book.md",
     "Templates/Aula.md",
     "2-PROJECTS.md",
-    "Education/SRC/Project.md",
-    "Education/CLE/Aula.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
