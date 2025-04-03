@@ -24,19 +24,15 @@
             }
           },
           {
-            "id": "a15cfce39bdcd277",
+            "id": "42cfc61a6bc4ae14",
             "type": "leaf",
-            "pinned": true,
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "1-TASKS.md",
-                "mode": "source",
-                "source": false
+                "file": "Excalidraw/ASE-Schematic.md"
               },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "1-TASKS"
+              "icon": "excalidraw-icon",
+              "title": "ASE-Schematic"
             }
           }
         ],
@@ -114,8 +110,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "33993677f81e3933",
@@ -138,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.5,
-    "collapsed": true
+    "width": 303.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -184,13 +178,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "1-TASKS.md",
+                "file": "Excalidraw/ASE-Schematic.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 1-TASKS"
+              "title": "Outline of ASE-Schematic"
             }
           },
           {
@@ -237,7 +231,7 @@
             }
           },
           {
-            "id": "8fd55e68f9bbbac8",
+            "id": "8ab38f4611934d15",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -270,8 +264,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
-    "collapsed": true
+    "width": 294.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -296,11 +289,16 @@
       "translate:Open translation view": false,
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
-      "obsidian-excalidraw-plugin:New drawing": false
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-memos:Memos": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "091741322f9c461a",
+  "active": "42cfc61a6bc4ae14",
   "lastOpenFiles": [
+    "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
+    "0-HOME.md",
+    "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
     "Education/RSA/Self-organized systems.md",
@@ -312,9 +310,6 @@
     "imgs/CDN_Infrastruct.png",
     "imgs/Bitswap.png",
     "Excalidraw/ASE-Schematic.md",
-    "1-TASKS.md",
-    "0-HOME.md",
-    "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "Pasted Image 20250331193446_744.png",
     "imgs/BitTorrent.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
