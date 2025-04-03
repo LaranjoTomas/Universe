@@ -114,7 +114,8 @@
               "title": "Recent Files"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "33993677f81e3933",
@@ -295,12 +296,10 @@
       "translate:Open translation view": false,
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "a15cfce39bdcd277",
+  "active": "091741322f9c461a",
   "lastOpenFiles": [
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
