@@ -1,18 +1,6 @@
 {
   "recentFiles": [
     {
-      "basename": "SD_SCHEMA",
-      "path": "Excalidraw/SD_SCHEMA.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
-    },
-    {
       "basename": "Peer-to-Peer System and Networks",
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
@@ -21,12 +9,40 @@
       "path": "Education/RSA/RSA_Test.md"
     },
     {
+      "basename": "Ad-Hoc Networks",
+      "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
       "basename": "Self-organized systems",
       "path": "Education/RSA/Self-organized systems.md"
     },
     {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "itertools",
+      "path": "Dev/Python/Modules/itertools.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "SD_SCHEMA",
+      "path": "Excalidraw/SD_SCHEMA.md"
+    },
+    {
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
+    },
+    {
       "basename": "Drawing 2025-03-31 19.34.19.excalidraw",
       "path": "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
     },
     {
       "basename": "BitTorrent",
@@ -53,10 +69,6 @@
       "path": "header.png"
     },
     {
-      "basename": "README",
-      "path": "README.md"
-    },
-    {
       "basename": "badges_cpp",
       "path": "imgs/badges_cpp.png"
     },
@@ -79,10 +91,6 @@
     {
       "basename": "CDN_Architecture",
       "path": "imgs/CDN_Architecture.png"
-    },
-    {
-      "basename": "Ad-Hoc Networks",
-      "path": "Education/RSA/Ad-Hoc Networks.md"
     },
     {
       "basename": "Vehicular Networks",
@@ -187,18 +195,6 @@
     {
       "basename": "00. Homepage",
       "path": "40 - Obsidian/Homepages/00. Homepage.md"
-    },
-    {
-      "basename": "00. Dashboard",
-      "path": "40 - Obsidian/Homepages/00. Dashboard.md"
-    },
-    {
-      "basename": "00. Library",
-      "path": "30 - Reading/00. Library.md"
-    },
-    {
-      "basename": "00. Cardbox",
-      "path": "50 - Zettelkasten/00. Cardbox.md"
     }
   ],
   "omittedPaths": [],
