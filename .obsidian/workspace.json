@@ -10,35 +10,36 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0-HOME.md",
+                "file": "Education/ASE/ADCs.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "0-HOME"
-            }
-          },
-          {
-            "id": "d3351967d7f76375",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Peer-to-Peer System and Networks"
+              "title": "ADCs"
             }
           }
-        ],
-        "currentTab": 1
+        ]
+      },
+      {
+        "id": "c007170cd4174f1c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "abf0e0c45022eb90",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/ASE-Schematic.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "ASE-Schematic"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -81,7 +82,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#DailyNote",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -135,7 +136,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 275.5
+    "width": 303.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -180,13 +181,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/RSA/Peer-to-Peer System and Networks.md",
+                "file": "Excalidraw/ASE-Schematic.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Peer-to-Peer System and Networks"
+              "title": "Outline of ASE-Schematic"
             }
           },
           {
@@ -233,7 +234,7 @@
             }
           },
           {
-            "id": "c650c5e5b13acd95",
+            "id": "df5cb9fc24c9a483",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -243,7 +244,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -266,8 +267,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
-    "collapsed": true
+    "width": 294.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -297,20 +297,18 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "d3351967d7f76375",
+  "active": "abf0e0c45022eb90",
   "lastOpenFiles": [
-    "Education/RSA/RSA_Test.md",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
-    "Education/RSA/Ad-Hoc Networks.md",
-    "Education/RSA/Self-organized systems.md",
-    "README.md",
-    "Untitled.md",
-    "Dev/Python/Modules/itertools.md",
-    "0-HOME.md",
-    "Excalidraw/SD_SCHEMA.md",
+    "Education/ASE/ADCs.md",
+    "image.png",
     "Excalidraw/ASE-Schematic.md",
+    "0-HOME.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
+    "Excalidraw/SD_SCHEMA.md",
     "1-TASKS.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
+    "Education/RSA/RSA_Test.md",
+    "Education/RSA/Self-organized systems.md",
     "imgs/RAFT_algo.png",
     "imgs/Hybrid_Search.png",
     "imgs/Finger_table.png",
@@ -321,21 +319,22 @@
     "Pasted Image 20250331193446_744.png",
     "imgs/BitTorrent.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
-    "imgs/OpenNAP.png",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
+    "README.md",
     "gnutella_example.png.md",
     "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Excalidraw",
+    "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
     "3-BOOKS.md",
     "Dev/C/Memory management/Basic functions for memory management.md",
     "Ideas/RaspberryPi server/Raspberry Pi server.md",
-    "Education/ASE/ADCs.md",
     "Templates/Book.md",
     "Templates/Aula.md",
     "2-PROJECTS.md",
+    "Education/SRC/Project.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",

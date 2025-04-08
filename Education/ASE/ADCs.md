@@ -55,3 +55,20 @@ A **Successive Approximation Register (SAR) ADC** converts an analog signal into
 3. If the DAC output is **higher** than the input voltage, the bit is cleared to **0**, otherwise, it remains **1**,
 4. The process repeats for the **next lower bit** until all bits are determined.
 This method is **fast and power-efficient**, making SAR ADCs popular in microcontrollers and precision measurement applications.
+
+
+
+
+# Potentiometer Calculations
+
+![[image.png]]
+
+with a typical use of 1mA for the LM335 and with a constant flow of 3.3V.
+
+At 25ºC outputs a average typical voltage needed of 2.98V
+
+3.3V - 2.98V = 0.32V
+
+$$
+R = \frac{V}{I} \iff R = \frac{0.32 \, \text{V}}{1 \, \text{mA}} = \frac{0.32 \, \text{V}}{1 \times 10^{-3} \, \text{A}} = 320 \, \Omega
+$$
