@@ -1,6 +1,22 @@
 {
   "recentFiles": [
     {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "image 2",
+      "path": "imgs/image 2.png"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.md"
+    },
+    {
       "basename": "Peer-to-Peer System and Networks",
       "path": "Education/RSA/Peer-to-Peer System and Networks.md"
     },
@@ -25,20 +41,12 @@
       "path": "Dev/Python/Modules/itertools.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
       "basename": "SD_SCHEMA",
       "path": "Excalidraw/SD_SCHEMA.md"
     },
     {
       "basename": "ASE-Schematic",
       "path": "Excalidraw/ASE-Schematic.md"
-    },
-    {
-      "basename": "Drawing 2025-03-31 19.34.19.excalidraw",
-      "path": "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md"
     },
     {
       "basename": "1-TASKS",
@@ -191,10 +199,6 @@
     {
       "basename": "Logo ideas",
       "path": "Dev/Logo ideas.md"
-    },
-    {
-      "basename": "00. Homepage",
-      "path": "40 - Obsidian/Homepages/00. Homepage.md"
     }
   ],
   "omittedPaths": [],
