@@ -10,6 +10,7 @@ banner-display: cover
 </div>
 
 > [!todo] TODO
-> - [x] Table of projects ^2uv8
+> - [ ] Table of projects ^2uv8
 > - [ ] Finish ADCs (ASE) note 🛫 
+> - [ ] Study for RSA ⏫ 
 

@@ -22,8 +22,19 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "8b3bea5cd34a02d2",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -155,13 +166,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 0-HOME"
+              "title": "Outline"
             }
           },
           {
@@ -270,8 +280,27 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "ed15b78cf26db7db",
+  "active": "8b3bea5cd34a02d2",
   "lastOpenFiles": [
+    "0-HOME.md",
+    "Templates/Image Template.md",
+    "Templates/Daily note.md",
+    "Templates/Book.md",
+    "Templates/Aula.md",
+    "Templates",
+    "Excalidraw/SD_SCHEMA.md",
+    "Excalidraw/RSA.md",
+    "Excalidraw/ASE-Schematic.md",
+    "Excalidraw",
+    "imgs/rendezvous_peers.png",
+    "imgs/image 2.png",
+    "imgs/image 1.png",
+    "imgs/gnutella_structureless.png",
+    "imgs/gnutella_response_example.png",
+    "imgs/gnutella_example.png",
+    "imgs/gnutella.png",
+    "imgs/federated.png",
+    "imgs/de-centralized.png",
     "Education/ASE/ADCs.md",
     "1-TASKS.md",
     "Teamplates/Daily note.md",
@@ -279,20 +308,12 @@
     "Teamplates/Aula.md",
     "README.md",
     "Pasted image 20250331094123.png",
-    "imgs/Pasted image 20250331094249.png",
     "Education/RSA/Self-organized systems.md",
     "Education/RSA/Ad-Hoc Networks.md",
     "2-PROJECTS.md",
-    "0-HOME.md",
     "Education/RSA/Vehicular Networks.md",
-    "imgs/image.png",
     "Untitled.md",
-    "header.png",
-    "imgs/Pasted image 20250328092716.png",
-    "imgs/Pasted image 20250328092510.png",
     "Education/SRC/Project.md",
-    "imgs/Pasted image 20240527171719.png",
-    "imgs/Pasted image 20240527171808.png",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
     "Education/Math/Lesson_1/Lesson.md",
@@ -305,18 +326,8 @@
     "Education/CLE",
     "Education/ASE",
     "DOCUMENTS/C2.pdf",
-    "DOCUMENTS/ASE/Aula.md",
-    "DOCUMENTS/SRC/Aula.md",
     "DOCUMENTS/SRC",
-    "DOCUMENTS/SD/Aula.md",
     "DOCUMENTS/SD",
-    "DOCUMENTS/RSA/Project.md",
-    "DOCUMENTS/RSA",
-    "DOCUMENTS/CLE/Aula.md",
-    "DOCUMENTS/CLE",
-    "Dev/Client - Server apps/Creating a backend in python.md",
-    "imgs/128.png",
-    "imgs/badges_python.png",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
