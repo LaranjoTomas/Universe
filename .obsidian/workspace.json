@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "5ea6108863ce031e",
+        "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
           {
-            "id": "1dd656ab8c0b6b40",
+            "id": "e7a7b303c61786dc",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -22,41 +22,8 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
-          },
-          {
-            "id": "7c1f3a3ab427d173",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "1-TASKS.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "1-TASKS"
-            }
-          },
-          {
-            "id": "08e3b4a17f0c962b",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/ASE/ADCs.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "ADCs"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -188,13 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ADCs"
+              "title": "Outline of 0-HOME"
             }
           },
           {
@@ -241,7 +208,7 @@
             }
           },
           {
-            "id": "2b2909086952367e",
+            "id": "6a3194145be2a58d",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -251,7 +218,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -303,10 +270,10 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "08e3b4a17f0c962b",
+  "active": "ed15b78cf26db7db",
   "lastOpenFiles": [
-    "1-TASKS.md",
     "Education/ASE/ADCs.md",
+    "1-TASKS.md",
     "Teamplates/Daily note.md",
     "Teamplates/Book.md",
     "Teamplates/Aula.md",

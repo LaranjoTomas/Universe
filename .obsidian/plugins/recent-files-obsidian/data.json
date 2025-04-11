@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "ADCs",
       "path": "Education/ASE/ADCs.md"
     },
@@ -39,10 +43,6 @@
     {
       "basename": "2-PROJECTS",
       "path": "2-PROJECTS.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Vehicular Networks",

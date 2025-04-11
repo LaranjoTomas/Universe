@@ -5273,6 +5273,8 @@ SZr
 SHL
 Siz
 Sampling
+Sets
+Successive
 moc
 modified
 my
@@ -7913,6 +7915,8 @@ motor
 measuring
 measured
 mapping
+measurable
+measurement
 Root
 Rectangular
 Relationships
@@ -10525,6 +10529,7 @@ RgN
 RYY
 Reconstruction
 Resolution
+Reference
 created
 cssclasses
 customize
@@ -13546,6 +13551,10 @@ continuous
 captures
 closest
 closely
+captured
+conversions
+comparator
+cleared
 hide
 hosted
 heading
@@ -16019,6 +16028,7 @@ hQw
 highest
 hold
 hertz
+half
 properties
 png
 page
@@ -29428,6 +29438,7 @@ fIR
 fwe
 fCC
 finer
+frequencies
 Obsidian
 Other
 Outline
@@ -34523,6 +34534,8 @@ VHt
 Vkim
 VUUy
 VaUZ
+Voltage
+Vref
 Guide
 Graph
 Gee
@@ -53006,6 +53019,9 @@ AwE
 AyL
 Analog
 ADCs
+According
+Aliasing
+Approximation
 you
 your
 yt
@@ -58046,6 +58062,7 @@ lnr
 lnid
 lGE
 lnM
+leading
 and
 are
 across
@@ -60869,6 +60886,8 @@ audio
 aliasing
 artifacts
 approximate
+accurately
+anti
 icon
 in
 if
@@ -63489,6 +63508,7 @@ iRx
 infinite
 intervals
 introduces
+improves
 used
 using
 upon
@@ -71055,6 +71075,7 @@ nVn
 nRY
 nRg
 nnZB
+noise
 download
 depending
 does
@@ -79525,6 +79546,7 @@ vpj
 vFpn
 varying
 voltage
+voltages
 re
 right
 rdf
