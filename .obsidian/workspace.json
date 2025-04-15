@@ -10,36 +10,33 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "0-HOME.md",
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "ADCs"
+              "title": "0-HOME"
             }
-          }
-        ]
-      },
-      {
-        "id": "c007170cd4174f1c",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "abf0e0c45022eb90",
+            "id": "6b890ebca3596590",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/ASE-Schematic.md"
+                "file": "Excalidraw/SD_SCHEMA.md"
               },
               "icon": "excalidraw-icon",
-              "title": "ASE-Schematic"
+              "title": "SD_SCHEMA"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -136,7 +133,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.5
+    "width": 303.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -181,13 +179,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/ASE-Schematic.md",
+                "file": "Excalidraw/SD_SCHEMA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ASE-Schematic"
+              "title": "Outline of SD_SCHEMA"
             }
           },
           {
@@ -234,7 +232,7 @@
             }
           },
           {
-            "id": "df5cb9fc24c9a483",
+            "id": "a9334baea83150d3",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -267,7 +265,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -297,12 +296,16 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "abf0e0c45022eb90",
+  "active": "6b890ebca3596590",
   "lastOpenFiles": [
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
+    "Excalidraw/Scripts/Downloaded",
+    "Excalidraw/Scripts",
+    "0-HOME.md",
+    "Excalidraw/ASE-Schematic.md",
     "Education/ASE/ADCs.md",
     "image.png",
-    "Excalidraw/ASE-Schematic.md",
-    "0-HOME.md",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "Excalidraw/SD_SCHEMA.md",
     "1-TASKS.md",
@@ -334,7 +337,6 @@
     "Templates/Book.md",
     "Templates/Aula.md",
     "2-PROJECTS.md",
-    "Education/SRC/Project.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
@@ -342,8 +344,6 @@
     "Education/ASE",
     "DOCUMENTS/C2.pdf",
     "DOCUMENTS/SRC",
-    "DOCUMENTS/SD",
-    "DOCUMENTS/RSA",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
