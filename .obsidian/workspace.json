@@ -24,13 +24,15 @@
             }
           },
           {
-            "id": "8b3bea5cd34a02d2",
+            "id": "eb46d8c798730e48",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/RSA.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "RSA"
             }
           }
         ],
@@ -49,7 +51,7 @@
         "dimension": 60.077519379844965,
         "children": [
           {
-            "id": "ed15b78cf26db7db",
+            "id": "aa857a2f2890e82c",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -166,12 +168,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "Excalidraw/RSA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of RSA"
             }
           },
           {
@@ -218,7 +221,7 @@
             }
           },
           {
-            "id": "6a3194145be2a58d",
+            "id": "6fd93475058aa581",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -255,6 +258,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-excalidraw-plugin:New drawing": false,
       "graph:Open graph view": false,
       "switcher:Open quick switcher": true,
       "canvas:Create new canvas": false,
@@ -280,16 +284,17 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "8b3bea5cd34a02d2",
+  "active": "eb46d8c798730e48",
   "lastOpenFiles": [
     "0-HOME.md",
+    "Untitled.md",
+    "Excalidraw/RSA.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
     "Templates/Aula.md",
     "Templates",
     "Excalidraw/SD_SCHEMA.md",
-    "Excalidraw/RSA.md",
     "Excalidraw/ASE-Schematic.md",
     "Excalidraw",
     "imgs/rendezvous_peers.png",
@@ -312,7 +317,6 @@
     "Education/RSA/Ad-Hoc Networks.md",
     "2-PROJECTS.md",
     "Education/RSA/Vehicular Networks.md",
-    "Untitled.md",
     "Education/SRC/Project.md",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
