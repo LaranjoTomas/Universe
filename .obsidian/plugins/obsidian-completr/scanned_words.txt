@@ -13964,6 +13964,10 @@ conversions
 comparator
 cleared
 cAjDy
+collaboration
+clipboard
+currentColor
+circle
 hide
 hosted
 heading
@@ -59538,6 +59542,8 @@ localmente
 lat
 lCb
 leading
+linecap
+linejoin
 and
 are
 across
@@ -62470,6 +62476,8 @@ agregado
 avtDrP
 accurately
 anti
+addIFrame
+addElementsToView
 icon
 in
 if
@@ -72868,6 +72876,7 @@ necess
 nsVdPuac
 noise
 nSPRIi
+navigator
 download
 depending
 does
@@ -78964,6 +78973,7 @@ sentido
 servi
 serem
 sklncc
+stroke
 vault
 vn
 vY
@@ -81581,6 +81591,7 @@ voting
 vXT
 vdIt
 voltages
+viewBox
 re
 right
 rdf
@@ -84477,6 +84488,7 @@ receiving
 relays
 recolhidos
 rio
+room
 work
 with
 within
@@ -86976,6 +86988,7 @@ wildcard
 wxvmAk
 wTO
 wlF
+writeText
 Embed
 Edges
 Embeded

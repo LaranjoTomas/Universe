@@ -24,15 +24,15 @@
             }
           },
           {
-            "id": "6b890ebca3596590",
+            "id": "3ccad16160cf61ad",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/SD_SCHEMA.md"
+                "file": "Excalidraw/ASE-Schematic.md"
               },
               "icon": "excalidraw-icon",
-              "title": "SD_SCHEMA"
+              "title": "ASE-Schematic"
             }
           }
         ],
@@ -133,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 303.5,
-    "collapsed": true
+    "width": 303.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -179,13 +178,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/SD_SCHEMA.md",
+                "file": "Excalidraw/ASE-Schematic.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SD_SCHEMA"
+              "title": "Outline of ASE-Schematic"
             }
           },
           {
@@ -232,7 +231,7 @@
             }
           },
           {
-            "id": "a9334baea83150d3",
+            "id": "48d2b48cad5f0109",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -265,8 +264,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
-    "collapsed": true
+    "width": 294.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -296,18 +294,18 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "6b890ebca3596590",
+  "active": "3ccad16160cf61ad",
   "lastOpenFiles": [
+    "0-HOME.md",
     "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
     "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
+    "Excalidraw/ASE-Schematic.md",
+    "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
-    "0-HOME.md",
-    "Excalidraw/ASE-Schematic.md",
     "Education/ASE/ADCs.md",
     "image.png",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
-    "Excalidraw/SD_SCHEMA.md",
     "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
@@ -320,7 +318,6 @@
     "imgs/CDN_Infrastruct.png",
     "imgs/Bitswap.png",
     "Pasted Image 20250331193446_744.png",
-    "imgs/BitTorrent.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
     "README.md",

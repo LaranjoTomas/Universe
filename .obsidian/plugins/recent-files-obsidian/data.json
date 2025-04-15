@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
-      "basename": "SD_SCHEMA",
-      "path": "Excalidraw/SD_SCHEMA.md"
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "ASE-Schematic",
-      "path": "Excalidraw/ASE-Schematic.md"
+      "basename": "Excalidraw Collaboration Frame",
+      "path": "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg"
+    },
+    {
+      "basename": "Excalidraw Collaboration Frame",
+      "path": "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md"
+    },
+    {
+      "basename": "SD_SCHEMA",
+      "path": "Excalidraw/SD_SCHEMA.md"
     },
     {
       "basename": "ADCs",
@@ -191,10 +199,6 @@
     {
       "basename": "00. Dashboard",
       "path": "40 - Obsidian/Homepages/00. Dashboard.md"
-    },
-    {
-      "basename": "00. Library",
-      "path": "30 - Reading/00. Library.md"
     }
   ],
   "omittedPaths": [],
