@@ -1,20 +1,40 @@
 {
   "recentFiles": [
     {
-      "basename": "RSA",
-      "path": "Excalidraw/RSA.md"
+      "basename": "SRC_1",
+      "path": "Excalidraw/SRC_1.md"
+    },
+    {
+      "basename": "Report",
+      "path": "Education/SRC/Report.md"
+    },
+    {
+      "basename": "Project",
+      "path": "Education/SRC/Project.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "ADCs",
-      "path": "Education/ASE/ADCs.md"
+      "basename": "Aula",
+      "path": "Education/SRC/Aula.md"
     },
     {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Raspberry Pi server",
+      "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
+    },
+    {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
+    },
+    {
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
     },
     {
       "basename": "README",
@@ -91,10 +111,6 @@
     {
       "basename": "YFinance",
       "path": "Projects/IPSA/bugs/YFinance.md"
-    },
-    {
-      "basename": "Raspberry Pi server",
-      "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
     },
     {
       "basename": "Main C Vulnerabilities",
@@ -183,14 +199,6 @@
     {
       "basename": "2022-07-18",
       "path": "00 - DailyNotes/DailyNote/2022-07-18.md"
-    },
-    {
-      "basename": "2022-07-16",
-      "path": "00 - DailyNotes/DailyNote/2022-07-16.md"
-    },
-    {
-      "basename": "00. Files",
-      "path": "40 - Obsidian/Homepages/00. Files.md"
     }
   ],
   "omittedPaths": [],
