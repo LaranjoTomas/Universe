@@ -5,16 +5,20 @@
       "path": "Excalidraw/SRC_1.md"
     },
     {
+      "basename": "Configs",
+      "path": "Education/SRC/Configs.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Report",
       "path": "Education/SRC/Report.md"
     },
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Aula",
@@ -195,10 +199,6 @@
     {
       "basename": "00. References",
       "path": "40 - Obsidian/Homepages/00. References.md"
-    },
-    {
-      "basename": "2022-07-18",
-      "path": "00 - DailyNotes/DailyNote/2022-07-18.md"
     }
   ],
   "omittedPaths": [],

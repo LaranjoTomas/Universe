@@ -6,6 +6,7 @@
       {
         "id": "4509724f8bf84da7",
         "type": "tabs",
+        "dimension": 38.89684813753582,
         "children": [
           {
             "id": "e7a7b303c61786dc",
@@ -43,12 +44,14 @@
             "id": "fb00639dd221cade",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/SRC_1.md"
+                "file": "Education/SRC/Configs.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "SRC_1"
+              "icon": "lucide-file",
+              "title": "Configs"
             }
           },
           {
@@ -81,6 +84,25 @@
           }
         ],
         "currentTab": 2
+      },
+      {
+        "id": "d312539672da1320",
+        "type": "tabs",
+        "dimension": 61.10315186246418,
+        "children": [
+          {
+            "id": "be472c8686c748d9",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SRC_1.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SRC_1"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -351,16 +373,16 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "fb00639dd221cade",
+  "active": "be472c8686c748d9",
   "lastOpenFiles": [
-    "Education/SRC/Report.md",
-    "Education/SRC/Project.md",
+    "Education/SRC/Configs.md",
     "Excalidraw/SRC_1.md",
     "0-HOME.md",
+    "Education/SRC/Report.md",
+    "Education/SRC/Project.md",
     "Education/SRC/Aula.md",
     "1-TASKS.md",
     "Ideas/RaspberryPi server/Raspberry Pi server.md",
-    "Untitled.md",
     "Excalidraw/RSA.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
