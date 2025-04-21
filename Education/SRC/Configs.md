@@ -7,7 +7,7 @@ ip address 192.168.1.3 255.255.255.0
 no shutdown
 exit
 
-interface FastEthernet 0/1
+interface FastEthernet 0/0
  description To-Stateless-FW1
  ip address 192.168.1.1 255.255.255.0
  no shutdown
@@ -17,9 +17,8 @@ interface FastEthernet 0/2
  description To-Stateless-FW2
  ip address 192.168.1.2 255.255.255.0
  no shutdown
-exi
+exit
 
-ip route 0.0.0.0 0.0.0.0 100.0.0.254
 ip route 200.0.0.0 255.255.255.0 192.168.1.2
 ip route 10.0.0.0 255.0.0.0 192.168.1.2
 exit
@@ -57,7 +56,6 @@ interface FastEthernet 0/1
  no shutdown
 exit
 
-ip route 0.0.0.0 0.0.0.0 100.0.0.254
 ip route 200.0.0.0 255.255.255.0 192.168.2.2
 ip route 10.0.0.0 255.0.0.0 192.168.2.2
 exit
@@ -81,14 +79,16 @@ reboot
 configure
  set system host-name SFW1
  ## Interfaces
- set interfaces ethernet eth0 address 192.168.1.2/24    # to router_e1
- set interfaces ethernet eth1 address 172.16.1.1/24     # to LB1 (choose your LB1‐upstream network)
- commit; exit
+set interfaces ethernet eth0 address 100.0.0.1/24    
+set interfaces ethernet eth1 address 192.168.1.2/24
+set interfaces ethernet eth2 address 192.168.2.2/24
+commit; exit
 ## Static routes
 configure
- set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
- set protocols static route 200.0.0.0/24 next-hop 172.16.1.2  # LB1 uplink IP
- set protocols static route 10.0.0.0/8    next-hop 172.16.1.2
+set protocols static route 0.0.0.0/0 next-hop 100.0.0.254
+set protocols static route 200.0.0.0/24 next-hop 100.0.0.254
+set protocols static route 10.0.0.0/8 next-hop 100.0.0.254
+
  commit; exit
  save
 
@@ -99,13 +99,14 @@ reboot
 
 configure
  set system host-name SFW2
- set interfaces ethernet eth0 address 192.168.2.2/24    # to router_e2
- set interfaces ethernet eth1 address 172.16.1.3/24    # to LB1 (second uplink)
+ set interfaces ethernet eth0 address 100.0.0.2/24    
+ set interfaces ethernet eth1 address 192.168.2.2/24   
+ set interfaces ethernet eth2 address 192.168.1.2/24
  commit; exit
 configure
- set protocols static route 0.0.0.0/0 next-hop 192.168.2.1
- set protocols static route 200.0.0.0/24 next-hop 172.16.1.2
- set protocols static route 10.0.0.0/8    next-hop 172.16.1.2
+ set protocols static route 0.0.0.0/0 next-hop 100.0.0.254
+set protocols static route 200.0.0.0/24 next-hop 100.0.0.254
+set protocols static route 10.0.0.0/8 next-hop 100.0.0.254
  commit; exit
  save
 
@@ -122,7 +123,7 @@ set interfaces ethernet eth2 address 192.168.1.2/24
 set interfaces ethernet eth2 description 'To-Router-E1'
 set interfaces ethernet eth3 address 192.168.2.2/24
 set interfaces ethernet eth3 description 'To-Router-E2'
-set interfaces ethernet eth3 description 'HA-Link'
+set interfaces ethernet eth4 description 'HA-Link'
 exit
 ### Load Balancing Configuration
 set load-balancing wan interface-health eth1 nexthop 192.168.10.2
@@ -157,14 +158,14 @@ set system host-name LB2
 exit
 ### Interfaces
 configure
-set interfaces ethernet eth0 address 192.168.2.2/24
-set interfaces ethernet eth0 description 'To-Router-E2'
+set interfaces ethernet eth0 address 192.168.31.1/24
+set interfaces ethernet eth0 description "To-FW1"
 set interfaces ethernet eth1 address 192.168.11.1/24
-set interfaces ethernet eth1 description 'To-FW1'
-set interfaces ethernet eth2 address 192.168.13.1/24
-set interfaces ethernet eth2 description 'To-FW2'
-set interfaces ethernet eth3 address 172.16.1.2/24
-set interfaces ethernet eth3 description 'HA-Link'
+set interfaces ethernet eth1 description "To-FW2"
+set interfaces ethernet eth2 address 192.168.30.1/24
+set interfaces ethernet eth2 description "To-SWL3‑C1"
+set interfaces ethernet eth3 address 192.168.31.1/24
+set interfaces ethernet eth3 description "To-SWL3‑C2"
 exit
 ### Load Balancing Configuration
 set load-balancing wan interface-health eth1 nexthop 192.168.11.2
@@ -200,10 +201,10 @@ configure
  set interfaces ethernet eth0 address 192.168.21.1/24
  set interfaces ethernet eth0 description 'To-FW1'
  set interfaces ethernet eth1 address 192.168.21.2/24
- set interfaces ethernet eth0 description 'To-FW2'
+ set interfaces ethernet eth1 description 'To-FW2'
  # To DMZ switch
  set interfaces ethernet eth2 address 200.0.0.1/24
- set interfaces ethernet eth0 description 'To-DMZ'
+ set interfaces ethernet eth2 description 'To-DMZ'
  commit; exit
 
 # FW1
@@ -427,6 +428,75 @@ set protocols static route 10.20.0.0/24 next-hop 192.168.30.2
 set protocols static route 10.100.0.0/16 next-hop 192.168.31.2
 exit
 
+# FW3
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
+configure
+set system host-name FW3
+
+## Interfaces
+set interfaces ethernet eth0 address 192.168.30.3/24
+set interfaces ethernet eth1 address 192.168.41.1/24
+
+## Security Zones
+set zone-policy zone CORE description 'LB/Dist Zone'
+set zone-policy zone CORE interface eth0
+set zone-policy zone ACCESS description 'Building A Zone'
+set zone-policy zone ACCESS interface eth1
+
+## Zone Policies
+set zone-policy zone CORE from ACCESS firewall name ACCESS-CORE
+set zone-policy zone ACCESS from CORE firewall name CORE-ACCESS
+
+## Rules
+set firewall name CORE-ACCESS rule 10 action accept
+set firewall name CORE-ACCESS rule 10 description "Allow core access to building A"
+set firewall name CORE-ACCESS rule 10 state established enable
+set firewall name CORE-ACCESS rule 10 state related enable
+set firewall name CORE-ACCESS rule 999 action drop
+
+set firewall name ACCESS-CORE rule 10 action accept
+set firewall name ACCESS-CORE rule 10 description "Allow building A to core (HTTP)"
+set firewall name ACCESS-CORE rule 10 protocol tcp
+set firewall name ACCESS-CORE rule 10 destination port 80,443
+set firewall name ACCESS-CORE rule 999 action drop
+
+commit; save; exit
+
+# FW4
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
+configure
+set system host-name FW4
+
+## Interfaces
+set interfaces ethernet eth0 address 192.168.31.3/24
+set interfaces ethernet eth1 address 192.168.42.1/24
+
+## Security Zones
+set zone-policy zone CORE description 'LB/Dist Zone'
+set zone-policy zone CORE interface eth0
+set zone-policy zone DATACENTER description 'DC Zone'
+set zone-policy zone DATACENTER interface eth1
+
+## Zone Policies
+set zone-policy zone CORE from DATACENTER firewall name DC-CORE
+set zone-policy zone DATACENTER from CORE firewall name CORE-DC
+
+## Rules
+set firewall name CORE-DC rule 10 action accept
+set firewall name CORE-DC rule 10 description "Allow core to datacenter"
+set firewall name CORE-DC rule 10 state established enable
+set firewall name CORE-DC rule 10 state related enable
+set firewall name CORE-DC rule 999 action drop
+
+set firewall name DC-CORE rule 10 action accept
+set firewall name DC-CORE rule 10 description "Allow DC to core (SSH, HTTPS)"
+set firewall name DC-CORE rule 10 protocol tcp
+set firewall name DC-CORE rule 10 destination port 22,443
+set firewall name DC-CORE rule 999 action drop
+
+commit; save; exit
 # SWL3 C1
 
 hostname SWL3-C1
@@ -440,30 +510,16 @@ vlan 1
 exit
 
 ### Interfaces
-interface FastEthernet 0/0
- description To-FW1
+interface FastEthernet 0/1
+ description To-LB2
  no switchport
  ip address 192.168.30.2 255.255.255.0
  no shutdown
 exit
-interface FastEthernet 0/1
- description To-FW2
+interface FastEthernet0/0
+ description To-FW3
  no switchport
- ip address 192.168.30.3 255.255.255.0
- no shutdown
-exit
-interface FastEthernet 0/2
- description To-SWL3-C2
- no switchport
- ip address 192.168.40.1 255.255.255.0
- no shutdown
-exit
-
-interface FastEthernet 0/3
- description To-Building-A-Switch
- switchport trunk encapsulation dot1q
- switchport mode trunk
- switchport trunk allowed vlan 10,20
+ ip address 192.168.32.1 255.255.255.0
  no shutdown
 exit
 interface FastEthernet 0/4
@@ -568,29 +624,16 @@ vlan 1
 exit
 configure terminal
 ### Interfaces
-interface FastEthernet 0/0
- description To-FW1
+interface FastEthernet 0/1
+ description To-LB2
  no switchport
  ip address 192.168.31.2 255.255.255.0
  no shutdown
 exit
-interface FastEthernet 0/1
- description To-FW2
+interface FastEthernet0/0
+ description To-FW4
  no switchport
- ip address 192.168.31.3 255.255.255.0
- no shutdown
-exit
-interface FastEthernet 0/2
- description To-SWL3-C1
- no switchport
- ip address 192.168.40.2 255.255.255.0
- no shutdown
-exit
-interface FastEthernet 0/3
- description To-Datacenter-Switch
- switchport trunk encapsulation dot1q
- switchport mode trunk
- switchport trunk allowed vlan 100
+ ip address 192.168.33.1 255.255.255.0
  no shutdown
 exit
 interface FastEthernet 0/4
@@ -599,64 +642,11 @@ interface FastEthernet 0/4
  switchport access vlan 1
  no shutdown
 exit
-### VLAN Interfaces
-interface Vlan10
- description VLAN10-Network
- ip address 10.10.0.2 255.255.255.0
- standby 10 ip 10.10.0.254
- standby 10 priority 100
- standby 10 preempt
- no shutdown
-exit
-interface Vlan20
- description VLAN20-Network
- ip address 10.20.0.2 255.255.255.0
- standby 20 ip 10.20.0.254
- standby 20 priority 100
- standby 20 preempt
- no shutdown
-exit
-interface Vlan100
- description Datacenter-Network
- ip address 10.100.0.2 255.255.0.0
- standby 100 ip 10.100.0.254
- standby 100 priority 100
- standby 100 preempt
- no shutdown
-exit
-interface Vlan1
- description Management-Network
- ip address 10.0.0.2 255.0.0.0
- standby 1 ip 10.0.0.254
- standby 1 priority 100
- standby 1 preempt
- no shutdown
-exit
 ### Routing
 ip routing
 ip route 0.0.0.0 0.0.0.0 192.168.31.1
 ip route 200.0.0.0 255.255.255.0 192.168.31.1
 exit
-### Inter-VLAN ACLs
-ip access-list extended VLAN10-TO-VLAN20
- permit udp 10.10.0.0 0.0.0.255 10.20.0.0 0.0.0.255 eq 5060
- deny ip 10.10.0.0 0.0.0.255 10.20.0.0 0.0.0.255
- permit ip any any
-exit
-ip access-list extended VLAN20-TO-VLAN10
- permit udp 10.20.0.0 0.0.0.255 10.10.0.0 0.0.0.255 eq 5060
- deny ip 10.20.0.0 0.0.0.255 10.10.0.0 0.0.0.255
- permit ip any any
-exit
-### Apply ACLs
-interface Vlan10
- ip access-group VLAN10-TO-VLAN20 out
-exit
-interface Vlan20
- ip access-group VLAN20-TO-VLAN10 out
-exit
-save
-
 # vlan10_vpc
 
 set pcname VLAN10-Client
@@ -681,3 +671,51 @@ save
 set pcname DC-vpc
 ip 10.100.0.10 255.255.255.0 10.100.0.1
 save
+
+# SWL3-1
+
+hostname SWL3-1
+configure terminal
+
+interface FastEthernet 0/0
+ description To-FW3
+ no switchport
+ ip address 192.168.41.2 255.255.255.0
+ no shutdown
+exit
+
+interface FastEthernet 0/1
+ description To-Building-A-Switch
+ switchport mode trunk
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20
+ no shutdown
+exit
+
+ip routing
+ip route 0.0.0.0 0.0.0.0 192.168.41.1
+exit
+
+# SWL3-2
+
+hostname SWL3-2
+configure terminal
+
+interface FastEthernet 0/0
+ description To-FW4
+ no switchport
+ ip address 192.168.42.2 255.255.255.0
+ no shutdown
+exit
+
+interface FastEthernet 0/1
+ description To-Datacenter-Switch
+ switchport mode trunk
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 100
+ no shutdown
+exit
+
+ip routing
+ip route 0.0.0.0 0.0.0.0 192.168.42.1
+exit
