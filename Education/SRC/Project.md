@@ -9,25 +9,22 @@ tags:
 > [!todo] TODO
 > - [x] Analyze project requirements from PDF files
 >- [x] Extract key network security concepts
->- [ ] Design network topology based on requirements
->- [ ] Identify required tools and equipment
->- [ ] Create security implementation plan
->- [ ] Generate visual network diagram
+>- [x] Design network topology based on requirements
+>- [x] Identify required tools and equipment
+>- [x] Create security implementation plan
+>- [x] Generate visual network diagram
 >- [ ] Compile comprehensive report
 >- [ ] Deliver final documentation
 
 ## Project Requirements Analysis
-- Network with redundant load-balancers and firewalls
-- Specific network addressing scheme
-- Security policies implementation
-- Firewall and load-balancer placement
-- Zone definition based on security policies
-- Testing in GNS3 environment
+- Redundant load-balancers and multi-tier firewalls
+- Specific IP addressing scheme for Internet, DMZ, VLANs and Datacenter
+- Enforcement of seven security policies (DDoS protection, access control, zone isolation)
+- GNS3 deployment and testing with accept‑all policies, then full policy implementation
 
 ## Policy
 Traffic incoming to building A need tunnels since only a firewall between those 2 right most layer 3s arent enough. The tunnel must force traffic to redirect packets from vlan 10 and vlan20 to go to throught the firewalls. place firewall between router processers.
 
---- 
 ## Network Security Concepts for Communications Network Project
 ### Network Segmentation and Zones
 Based on the project requirements, the following network zones need to be established:
@@ -38,7 +35,6 @@ Based on the project requirements, the following network zones need to be establ
 5. **VLAN 20** - 10.20.0.0/24 for specific internal clients
 6. **Internal Network** - 10.0.0.0/16 for internal connections
 #### Services and Required Ports
-
 The network must support the following services:
 #### DMZ Services (Public-Facing)
 - Web services (HTTPS UDP/TCP 443)
@@ -89,70 +85,103 @@ The following monitoring concepts are important:
 3. **Centralized Management** - Managing network devices from a central location
 
 ---
+
+---
 ## Network Topology Design
-### Overview
+### IP Addressing Scheme
+- **Internet (Zone 0)**: 100.0.0.0/24 (Test Internet services)
+- **DMZ (Zone 1)**: 200.0.0.0/24
+- **VLAN 10 (Building A VoIP)**: 10.10.0.0/24
+- **VLAN 20 (Building A Data)**: 10.20.0.0/24
+- **Internal Management VLAN 1**: 10.0.0.0/16
+- **Datacenter (Zone 2)**: 10.100.0.0/16
+### Device Tiers & Placement
 
-Based on the project requirements and security concepts, this document outlines the network topology design including the placement of firewalls, load balancers, and security zones.
+1. **Edge Routers (E1/E2)**
+   - Connect Internet cloud to Tier‑1 firewalls.
+1. **Tier‑1 Firewalls (Stateless)**
+   - FW1_stateless & FW2_stateless between E1/E2 and LB1.
+   - Simple pass‑through; no stateful inspection.
+1. **Tier‑1 Load Balancer (LB1)**
+   - Distributes incoming flows across Tier‑2 firewalls.
+   - Active/Active configuration for North‑South traffic.
+1. **Tier‑2 Firewalls (Stateful HA)**
+   - FW1_stateful & FW2_stateful in Active/Active VRRP + conn‑sync.
+   - Enforce all security policies for Internet→DMZ, Internet→Internal, and internal inter‑zone.
+1. **DMZ Load Balancer (LB2)**
+   - Receives traffic from Tier‑2 firewalls.
+   - Balances to DMZ switch for Web, Mail, DNS clusters.
+1. **DMZ Switch**
+   - Hosts multiple DMZ servers (HTTPS 443, SMTP 25, IMAP 993, DNS 53).
+1. **Internal Distribution Switches**
+   - **SWL3_C1 → FW3_stateless → SWL3_1** for Building A VLANs.
+     - SWL3_1 carries VLAN 10 & VLAN 20 and tunnels back to enforce path through FW3.
+   - **SWL3_C2 → FW4_stateful → SWL3_2** for Datacenter.
+     - SWL3_2 connects to Datacenter servers (10.100.x.x).
+### Security Zones & Firewall Roles
 
+| Zone                      | Device Pair              | Role                                      |
+|---------------------------|--------------------------|-------------------------------------------|
+| **Zone 0 – Internet**     | Routers (E1/E2)          | Internet gateway                          |
+| **Zone 0a – Tier‑1 FW**   | FW1_stateless, FW2_stateless | Stateless screening pre‑LB1          |
+| **Zone 1 – DMZ**          | FW1_stateful, FW2_stateful & LB2 | Public‑facing services enforcement  |
+| **Zone 2 – Building A**   | FW3_stateless            | Tunnel enforcement for VLAN10/20
+| **Zone 3 – Datacenter**   | FW4_stateful             | Enforce Datacenter access policies        |
+
+### Traffic Flow Summary
+1. **Internet → Tier‑1 FW → LB1 → Tier‑2 FW → LB2 → DMZ Servers**
+2. **Internal (Building A) → SWL3_1 → FW3 → SWL3_C1 → LB2 → Tier‑2 FW → LB1 → Internet**  _(HTTP/HTTPS only)_
+3. **VLAN 10 ↔ VLAN 20**  _(direct via SWL3_1 with UDP 5060 SIP tunnels)_
+4. **Building A Management (VLAN 1)**  → All FWs/LBs/Routers via SSH & ICMP
+5. **Building A → Datacenter**: VLAN 20 → SWL3_1 → SWL3_C1 → LB2 → Tier‑2 FW → FW4 → SWL3_2
 ### Network Addressing Scheme
-
 - **Internet Testing Network**: 100.0.0.0/24
 - **DMZ (Demilitarized Zone)**: 200.0.0.0/24
 - **Internal Datacenter**: 10.100.0.0/16
 - **VLAN 10**: 10.10.0.0/24
 - **VLAN 20**: 10.20.0.0/24
 - **Internal Connections**: 10.0.0.0/16
-
 ### Network Zones
-
 1. **Internet Zone** 
    - External untrusted network
    - Connected to the external routers (Router E1 and Router E2)
    - Represents the public internet
-
 1. **DMZ Zone**
    - Semi-trusted zone for public-facing services
    - Contains servers for Web (HTTPS), Email (IMAP/SMTP), and DNS services
    - Protected by redundant firewalls
    - Accessible from both Internet and internal networks
-
-3. **Datacenter Zone** - Highly secured zone for internal services
+1. **Datacenter Zone** - Highly secured zone for internal services
    - Contains servers for Intranet/Storage, internal DNS, and Databases
    - Accessible only by authorized internal networks (VLAN 10 and VLAN 20)
    - Database servers only accessible by VLAN 20
-
-4. **Internal Network Zone (Building A)** - Trusted internal network
+1. **Internal Network Zone (Building A)** - Trusted internal network
    - Contains VLAN 10 and VLAN 20
    - VLAN 10 can access Intranet/Storage and internal DNS
    - VLAN 20 can access Intranet/Storage, internal DNS, and Databases
    - Inter-VLAN communication limited to VoIP (SIP, UDP 5060)
    - Management device in VLAN 1 can access all network devices via PING and SSH
-
 ### Firewall Placement
-
 1. **Internet-DMZ Firewalls** (Redundant Pair)
    - Positioned between Internet routers (E1/E2) and DMZ switches
    - Configured in high-availability mode (Active-Active with state synchronization)
    - Implements security policies for Internet-to-DMZ traffic
    - Provides DDoS protection for incoming traffic
    - Allows access to DMZ services from Internet
-
-1. **DMZ-Internal Firewalls** (Redundant Pair)
+2. **DMZ-Internal Firewalls** (Redundant Pair)
    - Positioned between DMZ switches and internal network switches
    - Configured in high-availability mode (Active-Active with state synchronization)
    - Implements security policies for DMZ-to-Internal traffic
    - Controls access from internal networks to DMZ services
    - Prevents unauthorized access from DMZ to internal networks
-  
-2. **Internal-Datacenter Firewalls** (Redundant Pair)
+3. **Internal-Datacenter Firewalls** (Redundant Pair)
    - Positioned between internal network switches and datacenter switches
    - Configured in high-availability mode (Active-Active with state synchronization)
    - Implements security policies for Internal-to-Datacenter traffic
    - Controls access to Intranet/Storage, internal DNS, and Databases
    - Enforces VLAN-specific access restrictions
- 
-### Load Balancer Placement
 
+### Load Balancer Placement
 1. **DMZ Load Balancers** (Redundant Pair)
    - Positioned in front of DMZ servers
    - Distributes traffic to multiple instances of Web, Email, and DNS servers

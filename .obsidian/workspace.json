@@ -4,6 +4,24 @@
     "type": "split",
     "children": [
       {
+        "id": "7af19a1cbc008eaa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f45e89a470c641a4",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SRC_1.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SRC_1"
+            }
+          }
+        ]
+      },
+      {
         "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
@@ -24,15 +42,17 @@
             }
           },
           {
-            "id": "f45e89a470c641a4",
+            "id": "b03e8311f1e49150",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/SRC_1.md"
+                "file": "Education/SRC/Configs.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "SRC_1"
+              "icon": "lucide-file",
+              "title": "Configs"
             }
           }
         ],
@@ -133,7 +153,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -178,13 +199,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/SRC_1.md",
+                "file": "Education/SRC/Configs.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SRC_1"
+              "title": "Outline of Configs"
             }
           },
           {
@@ -264,7 +285,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -295,12 +317,12 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "aa857a2f2890e82c",
+  "active": "b03e8311f1e49150",
   "lastOpenFiles": [
-    "0-HOME.md",
-    "Education/SRC/Project.md",
-    "Education/SRC/Configs.md",
     "Excalidraw/SRC_1.md",
+    "Education/SRC/Configs.md",
+    "Education/SRC/Project.md",
+    "0-HOME.md",
     "Education/SRC/Report.md",
     "Education/SRC/Aula.md",
     "1-TASKS.md",

@@ -1,24 +1,29 @@
 # router_e1
 
 configure terminal
-interface FastEthernet 0/0
- description Internet
- ip address 100.0.0.1 255.255.255.0
- no shutdown 
+interface FastEthernet 0/1
+description To-LB1
+ip address 192.168.1.3 255.255.255.0
+no shutdown
 exit
 
 interface FastEthernet 0/1
- description To-LB1
+ description To-Stateless-FW1
  ip address 192.168.1.1 255.255.255.0
  no shutdown
 exit
+
+interface FastEthernet 0/2
+ description To-Stateless-FW2
+ ip address 192.168.1.2 255.255.255.0
+ no shutdown
+exi
 
 ip route 0.0.0.0 0.0.0.0 100.0.0.254
 ip route 200.0.0.0 255.255.255.0 192.168.1.2
 ip route 10.0.0.0 255.0.0.0 192.168.1.2
 exit
 ### Security ACLs
-
 ip access-list extended INTERNET-IN
  permit tcp any 200.0.0.0 0.0.0.255 eq 443
  permit tcp any 200.0.0.0 0.0.0.255 eq 25
@@ -34,16 +39,21 @@ write
 
 # router_e2
 
-configure terminal
 interface FastEthernet 0/0
- description Internet
- ip address 100.0.0.2 255.255.255.0
+ description To-Stateless-FW2
+ ip address 192.168.2.1 255.255.255.0
+ no shutdown
+exit
+
+interface FastEthernet 0/2
+ description To-Stateless-FW1
+ ip address 192.168.2.2 255.255.255.0
  no shutdown
 exit
 
 interface FastEthernet 0/1
- description To-LB2
- ip address 192.168.2.1 255.255.255.0
+ description To-LB1
+ ip address 192.168.2.3 255.255.255.0
  no shutdown
 exit
 
@@ -64,17 +74,54 @@ exit
 interface FastEthernet 0/0
  ip access-group INTERNET-IN in
 
+# Stateless Firewall 1
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
+
+configure
+ set system host-name SFW1
+ ## Interfaces
+ set interfaces ethernet eth0 address 192.168.1.2/24    # to router_e1
+ set interfaces ethernet eth1 address 172.16.1.1/24     # to LB1 (choose your LB1‐upstream network)
+ commit; exit
+## Static routes
+configure
+ set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
+ set protocols static route 200.0.0.0/24 next-hop 172.16.1.2  # LB1 uplink IP
+ set protocols static route 10.0.0.0/8    next-hop 172.16.1.2
+ commit; exit
+ save
+
+# Stateless Firewall 2
+
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
+
+configure
+ set system host-name SFW2
+ set interfaces ethernet eth0 address 192.168.2.2/24    # to router_e2
+ set interfaces ethernet eth1 address 172.16.1.3/24    # to LB1 (second uplink)
+ commit; exit
+configure
+ set protocols static route 0.0.0.0/0 next-hop 192.168.2.1
+ set protocols static route 200.0.0.0/24 next-hop 172.16.1.2
+ set protocols static route 10.0.0.0/8    next-hop 172.16.1.2
+ commit; exit
+ save
+
 # LB1
-set system host-name LB1
-exit
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
 ### Interfaces
-set interfaces ethernet eth0 address 192.168.1.2/24
-set interfaces ethernet eth0 description 'To-Router-E1'
-set interfaces ethernet eth1 address 192.168.10.1/24
-set interfaces ethernet eth1 description 'To-FW1'
-set interfaces ethernet eth2 address 192.168.12.1/24
-set interfaces ethernet eth2 description 'To-FW2'
-set interfaces ethernet eth3 address 172.16.1.1/24
+configure
+set interfaces ethernet eth0 address 172.16.1.2/24
+set interfaces ethernet eth0 description 'To-FW1'
+set interfaces ethernet eth1 address 172.16.1.3/24
+set interfaces ethernet eth1 description 'To-FW2'
+set interfaces ethernet eth2 address 192.168.1.2/24
+set interfaces ethernet eth2 description 'To-Router-E1'
+set interfaces ethernet eth3 address 192.168.2.2/24
+set interfaces ethernet eth3 description 'To-Router-E2'
 set interfaces ethernet eth3 description 'HA-Link'
 exit
 ### Load Balancing Configuration
@@ -104,9 +151,12 @@ set protocols static route 10.0.0.0/8 next-hop 192.168.10.2
 exit
 
 # LB2
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
 set system host-name LB2
 exit
 ### Interfaces
+configure
 set interfaces ethernet eth0 address 192.168.2.2/24
 set interfaces ethernet eth0 description 'To-Router-E2'
 set interfaces ethernet eth1 address 192.168.11.1/24
@@ -141,6 +191,20 @@ set protocols static route 0.0.0.0/0 next-hop 192.168.2.1
 set protocols static route 200.0.0.0/24 next-hop 192.168.11.2
 set protocols static route 10.0.0.0/8 next-hop 192.168.11.2
 exit
+# LB3
+sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
+reboot
+configure
+ set system host-name LB3
+ # From FW1 & FW2
+ set interfaces ethernet eth0 address 192.168.21.1/24
+ set interfaces ethernet eth0 description 'To-FW1'
+ set interfaces ethernet eth1 address 192.168.21.2/24
+ set interfaces ethernet eth0 description 'To-FW2'
+ # To DMZ switch
+ set interfaces ethernet eth2 address 200.0.0.1/24
+ set interfaces ethernet eth0 description 'To-DMZ'
+ commit; exit
 
 # FW1
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
@@ -150,16 +214,10 @@ configure
 ### Interfaces
 set interfaces ethernet eth0 address 192.168.10.2/24
 set interfaces ethernet eth0 description 'To-LB1'
-set interfaces ethernet eth1 address 192.168.11.2/24
+set interfaces ethernet eth1 address 192.168.12.2/24
 set interfaces ethernet eth1 description 'To-LB2'
-set interfaces ethernet eth2 address 192.168.20.1/24
-set interfaces ethernet eth2 description 'To-DMZ-Switch'
-set interfaces ethernet eth3 address 192.168.30.1/24
-set interfaces ethernet eth3 description 'To-SWL3-C1'
-set interfaces ethernet eth4 address 192.168.31.1/24
-set interfaces ethernet eth4 description 'To-SWL3-C2'
-set interfaces ethernet eth5 address 172.16.2.1/24
-set interfaces ethernet eth5 description 'HA-Link'
+set interfaces ethernet eth2 address 192.168.21.1/24
+set interfaces ethernet eth2 description 'To-LB3'
 commit
 exit
 ### Security Zones
@@ -275,14 +333,8 @@ set interfaces ethernet eth0 address 192.168.12.2/24
 set interfaces ethernet eth0 description 'To-LB1'
 set interfaces ethernet eth1 address 192.168.13.2/24
 set interfaces ethernet eth1 description 'To-LB2'
-set interfaces ethernet eth2 address 192.168.20.2/24
-set interfaces ethernet eth2 description 'To-DMZ-Switch'
-set interfaces ethernet eth3 address 192.168.30.2/24
-set interfaces ethernet eth3 description 'To-SWL3-C1'
-set interfaces ethernet eth4 address 192.168.31.2/24
-set interfaces ethernet eth4 description 'To-SWL3-C2'
-set interfaces ethernet eth5 address 172.16.2.2/24
-set interfaces ethernet eth5 description 'HA-Link'
+set interfaces ethernet eth2 address 192.168.21.2/24
+set interfaces ethernet eth2 description 'To-LB3'
 exit
 ### Security Zones
 set zone-policy zone OUTSIDE description 'Internet Zone'
