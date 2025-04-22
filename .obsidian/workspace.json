@@ -4,24 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "7af19a1cbc008eaa",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "f45e89a470c641a4",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/SRC_1.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "SRC_1"
-            }
-          }
-        ]
-      },
-      {
         "id": "4509724f8bf84da7",
         "type": "tabs",
         "children": [
@@ -33,30 +15,15 @@
               "type": "markdown",
               "state": {
                 "file": "0-HOME.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
               "title": "0-HOME"
             }
-          },
-          {
-            "id": "b03e8311f1e49150",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/SRC/Configs.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Configs"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -153,8 +120,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -199,13 +165,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SRC/Configs.md",
+                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Configs"
+              "title": "Outline of 0-HOME"
             }
           },
           {
@@ -252,7 +218,7 @@
             }
           },
           {
-            "id": "55bcf18f1c9c023c",
+            "id": "6395e0a5068d37f0",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -285,8 +251,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
-    "collapsed": true
+    "width": 294.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -317,10 +282,10 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "b03e8311f1e49150",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "Excalidraw/SRC_1.md",
     "Education/SRC/Configs.md",
+    "Excalidraw/SRC_1.md",
     "Education/SRC/Project.md",
     "0-HOME.md",
     "Education/SRC/Report.md",
