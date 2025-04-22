@@ -22,6 +22,53 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "8fbceb8418e2eb99",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/SRC/Project.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Project"
+            }
+          },
+          {
+            "id": "c245ccf37934c13d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/SRC/Configs.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Configs"
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "9e78625e61026e41",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "82af8f1b50a69244",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SRC_1.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SRC_1"
+            }
           }
         ]
       }
@@ -155,13 +202,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "0-HOME.md",
+                "file": "Education/SRC/Configs.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 0-HOME"
+              "title": "Outline of Configs"
             }
           },
           {
@@ -241,7 +288,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -271,13 +319,17 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "aa857a2f2890e82c",
+  "active": "c245ccf37934c13d",
   "lastOpenFiles": [
+    "Education/SRC/Aula.md",
+    "Education/SRC/Configs.md",
+    "Excalidraw/SRC_1.md",
+    "0-HOME.md",
     "Education/SRC/Project.md",
+    "Untitled.md",
+    "Education/SRC/Report.md",
     "Excalidraw/ASE-Schematic.md",
     "Excalidraw/RSA.md",
-    "0-HOME.md",
-    "Untitled.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
@@ -307,12 +359,8 @@
     "Education/RSA/Vehicular Networks.md",
     "Education/CLE/Aula.md",
     "Untitled 1.md",
-    "Education/Math/Lesson_1/Lesson.md",
-    "Education/SRC/Aula.md",
     "Education/SRC",
-    "Education/SD/Aula.md",
     "Education/SD",
-    "Education/RSA/Project.md",
     "Education/RSA",
     "Education/CLE",
     "Education/ASE",

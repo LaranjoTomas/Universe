@@ -1,12 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "Configs",
+      "path": "Education/SRC/Configs.md"
+    },
+    {
+      "basename": "Aula",
+      "path": "Education/SRC/Aula.md"
+    },
+    {
+      "basename": "SRC_1",
+      "path": "Excalidraw/SRC_1.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.md"
     },
     {
       "basename": "ASE-Schematic",
@@ -183,22 +199,6 @@
     {
       "basename": "Frequently Asked Questions",
       "path": "Frequently Asked Questions.md"
-    },
-    {
-      "basename": "00. References",
-      "path": "40 - Obsidian/Homepages/00. References.md"
-    },
-    {
-      "basename": "2022-07-18",
-      "path": "00 - DailyNotes/DailyNote/2022-07-18.md"
-    },
-    {
-      "basename": "2022-07-16",
-      "path": "00 - DailyNotes/DailyNote/2022-07-16.md"
-    },
-    {
-      "basename": "00. Files",
-      "path": "40 - Obsidian/Homepages/00. Files.md"
     }
   ],
   "omittedPaths": [],
