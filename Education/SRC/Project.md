@@ -1,11 +1,6 @@
 ![[obsidian-banner-2.png|902x129]]
 created: "2025-03-25 14:28"
 
-
-
-![[image 1.png|540x522]]
-
-
 # To-do
 
 Firewall between layer 3 connects

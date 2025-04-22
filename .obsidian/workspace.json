@@ -27,12 +27,14 @@
             "id": "eb46d8c798730e48",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/RSA.md"
+                "file": "Education/SRC/Project.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "RSA"
+              "icon": "lucide-file",
+              "title": "Project"
             }
           }
         ],
@@ -168,13 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/RSA.md",
+                "file": "Education/SRC/Project.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of RSA"
+              "title": "Outline of Project"
             }
           },
           {
@@ -286,16 +288,16 @@
   },
   "active": "eb46d8c798730e48",
   "lastOpenFiles": [
+    "Excalidraw/ASE-Schematic.md",
+    "Excalidraw/RSA.md",
     "0-HOME.md",
     "Untitled.md",
-    "Excalidraw/RSA.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
     "Templates/Aula.md",
     "Templates",
     "Excalidraw/SD_SCHEMA.md",
-    "Excalidraw/ASE-Schematic.md",
     "Excalidraw",
     "imgs/rendezvous_peers.png",
     "imgs/image 2.png",
