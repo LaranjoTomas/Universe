@@ -38,6 +38,18 @@
             }
           },
           {
+            "id": "82af8f1b50a69244",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SRC_1.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SRC_1"
+            }
+          },
+          {
             "id": "c245ccf37934c13d",
             "type": "leaf",
             "state": {
@@ -52,25 +64,7 @@
             }
           }
         ],
-        "currentTab": 2
-      },
-      {
-        "id": "9e78625e61026e41",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "82af8f1b50a69244",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/SRC_1.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "SRC_1"
-            }
-          }
-        ]
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -157,7 +151,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 290.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -321,9 +316,9 @@
   },
   "active": "c245ccf37934c13d",
   "lastOpenFiles": [
-    "Education/SRC/Aula.md",
-    "Education/SRC/Configs.md",
     "Excalidraw/SRC_1.md",
+    "Education/SRC/Configs.md",
+    "Education/SRC/Aula.md",
     "0-HOME.md",
     "Education/SRC/Project.md",
     "Untitled.md",

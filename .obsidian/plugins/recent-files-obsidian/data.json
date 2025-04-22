@@ -5,12 +5,12 @@
       "path": "Education/SRC/Configs.md"
     },
     {
-      "basename": "Aula",
-      "path": "Education/SRC/Aula.md"
-    },
-    {
       "basename": "SRC_1",
       "path": "Excalidraw/SRC_1.md"
+    },
+    {
+      "basename": "Aula",
+      "path": "Education/SRC/Aula.md"
     },
     {
       "basename": "0-HOME",

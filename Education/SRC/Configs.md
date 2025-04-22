@@ -9,13 +9,13 @@ exit
 
 interface FastEthernet 0/0
  description To-Stateless-FW1
- ip address 192.168.1.1 255.255.255.0
+ ip address 192.168.2.1 255.255.255.0
  no shutdown
 exit
 
-interface FastEthernet 0/2
+interface FastEthernet 1/0
  description To-Stateless-FW2
- ip address 192.168.1.2 255.255.255.0
+ ip address 192.168.3.2 255.255.255.0
  no shutdown
 exit
 
@@ -23,6 +23,7 @@ ip route 200.0.0.0 255.255.255.0 192.168.1.2
 ip route 10.0.0.0 255.0.0.0 192.168.1.2
 exit
 ### Security ACLs
+configure terminal
 ip access-list extended INTERNET-IN
  permit tcp any 200.0.0.0 0.0.0.255 eq 443
  permit tcp any 200.0.0.0 0.0.0.255 eq 25
@@ -40,11 +41,11 @@ write
 
 interface FastEthernet 0/0
  description To-Stateless-FW2
- ip address 192.168.2.1 255.255.255.0
+ ip address 192.168.4.1 255.255.255.0
  no shutdown
 exit
 
-interface FastEthernet 0/2
+interface FastEthernet 1/0
  description To-Stateless-FW1
  ip address 192.168.2.2 255.255.255.0
  no shutdown
@@ -71,7 +72,8 @@ exit
 
 interface FastEthernet 0/0
  ip access-group INTERNET-IN in
-
+end
+write
 # Stateless Firewall 1
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
@@ -197,12 +199,12 @@ sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
 configure
  set system host-name LB3
- # From FW1 & FW2
+ ## From FW1 & FW2
  set interfaces ethernet eth0 address 192.168.21.1/24
  set interfaces ethernet eth0 description 'To-FW1'
  set interfaces ethernet eth1 address 192.168.21.2/24
  set interfaces ethernet eth1 description 'To-FW2'
- # To DMZ switch
+ ## To DMZ switch
  set interfaces ethernet eth2 address 200.0.0.1/24
  set interfaces ethernet eth2 description 'To-DMZ'
  commit; exit
@@ -657,23 +659,21 @@ ip route 200.0.0.0 255.255.255.0 192.168.31.1
 exit
 # vlan10_vpc
 
-set pcname VLAN10-Client
+set pcname VLAN10-Cli
 ip 10.10.0.10 255.255.255.0 10.10.0.254
-
-ip route 0.0.0.0 0.0.0.0 10.10.0.254
 save
 
 # vlan20_vpc
-
-set pcname VLAN20-Client
+set pcname VLAN20-Cli
 ip 10.20.0.10 255.255.255.0 10.20.0.254
-
-ip route 0.0.0.0 0.0.0.0 10.20.0.254
 save
-
 # DMZ "server"
 set pcname DMZ-vpc
-ip 200.0.0.10 255.255.255.0 192.168.20.1
+ip 200.0.0.10 255.255.255.0 200.0.0.1
+save
+# Internet "server"
+set pcname Internet-VPC
+ip 100.0.0.10 255.255.255.0 100.0.0.254
 save
 # Datacenter "server"
 set pcname DC-vpc
@@ -746,20 +746,21 @@ hostname Router-BuildingA
 
 interface FastEthernet 0/0
  description Trunk to Building-A Switch
+ ip address 192.168.50.2 255.255.255.0
  no shutdown
 exit
 
 interface FastEthernet 0/1
- encapsulation dot1q 10
+ description VLAN10 clients
  ip address 10.10.0.254 255.255.255.0
 exit
 
 interface FastEthernet 1/0
- encapsulation dot1q 20
+ description VLAN20 clients
  ip address 10.20.0.254 255.255.255.0
 exit
 
 
 ip routing
 ip route 0.0.0.0 0.0.0.0 192.168.50.2
-exit
+exit 
