@@ -34685,6 +34685,7 @@ VLAN
 VoIP
 VRRP
 Vlan
+VPC
 Guide
 Graph
 Gee
@@ -39926,6 +39927,7 @@ Controls
 Conntrack
 Cluster
 CORE
+Cli
 out
 on
 of

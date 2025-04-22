@@ -104,12 +104,12 @@ configure
  set interfaces ethernet eth0 address 100.0.0.2/24    
  set interfaces ethernet eth1 address 192.168.2.2/24   
  set interfaces ethernet eth2 address 192.168.1.2/24
- commit; exit
+ commit
 configure
  set protocols static route 0.0.0.0/0 next-hop 100.0.0.254
 set protocols static route 200.0.0.0/24 next-hop 100.0.0.254
 set protocols static route 10.0.0.0/8 next-hop 100.0.0.254
- commit; exit
+ commit
  save
 
 # LB1
@@ -212,8 +212,9 @@ configure
 # FW1
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
-set system host-name FW1
+
 configure
+set system host-name FW1
 ### Interfaces
 set interfaces ethernet eth0 address 192.168.10.2/24
 set interfaces ethernet eth0 description 'To-LB1'
@@ -221,6 +222,7 @@ set interfaces ethernet eth1 address 192.168.12.2/24
 set interfaces ethernet eth1 description 'To-LB2'
 set interfaces ethernet eth2 address 192.168.21.1/24
 set interfaces ethernet eth2 description 'To-LB3'
+set interfaces ethernet eth5 address 172.16.2.1/24
 commit
 exit
 ### Security Zones
@@ -236,55 +238,55 @@ commit
 exit
 ### Firewall Rules - OUTSIDE to DMZ
 set firewall name OUTSIDE-DMZ rule 10 action accept
-set firewall name OUTSIDE-DMZ rule 10 description 'Allow HTTPS to DMZ'
+set firewall name OUTSIDE-DMZ rule 10 description "Allow HTTPS to DMZ"
 set firewall name OUTSIDE-DMZ rule 10 destination port 443
 set firewall name OUTSIDE-DMZ rule 10 protocol tcp
 set firewall name OUTSIDE-DMZ rule 20 action accept
-set firewall name OUTSIDE-DMZ rule 20 description 'Allow SMTP to DMZ'
+set firewall name OUTSIDE-DMZ rule 20 description "Allow SMTP to DMZ"
 set firewall name OUTSIDE-DMZ rule 20 destination port 25
 set firewall name OUTSIDE-DMZ rule 20 protocol tcp
 set firewall name OUTSIDE-DMZ rule 30 action accept
-set firewall name OUTSIDE-DMZ rule 30 description 'Allow IMAP to DMZ'
+set firewall name OUTSIDE-DMZ rule 30 description "Allow IMAP to DMZ"
 set firewall name OUTSIDE-DMZ rule 30 destination port 993
 set firewall name OUTSIDE-DMZ rule 30 protocol tcp
 set firewall name OUTSIDE-DMZ rule 40 action accept
-set firewall name OUTSIDE-DMZ rule 40 description 'Allow DNS to DMZ'
+set firewall name OUTSIDE-DMZ rule 40 description "Allow DNS to DMZ"
 set firewall name OUTSIDE-DMZ rule 40 destination port 53
 set firewall name OUTSIDE-DMZ rule 40 protocol udp
 set firewall name OUTSIDE-DMZ rule 999 action drop
-set firewall name OUTSIDE-DMZ rule 999 description 'Drop all other traffic'
+set firewall name OUTSIDE-DMZ rule 999 description "Drop all other traffic"
 commit
 exit
 ### Firewall Rules - DMZ to OUTSIDE
 set firewall name DMZ-OUTSIDE rule 10 action accept
-set firewall name DMZ-OUTSIDE rule 10 description 'Allow established connections'
+set firewall name DMZ-OUTSIDE rule 10 description "Allow established connections"
 set firewall name DMZ-OUTSIDE rule 10 state established enable
 set firewall name DMZ-OUTSIDE rule 10 state related enable
 set firewall name DMZ-OUTSIDE rule 999 action drop
-set firewall name DMZ-OUTSIDE rule 999 description 'Drop all other traffic'
+set firewall name DMZ-OUTSIDE rule 999 description "Drop all other traffic"
 commit
 exit
 ### Firewall Rules - INSIDE to DMZ
 set firewall name INSIDE-DMZ rule 10 action accept
-set firewall name INSIDE-DMZ rule 10 description 'Allow all from INSIDE to DMZ'
+set firewall name INSIDE-DMZ rule 10 description "Allow all from INSIDE to DMZ"
 commit
 exit
 ### Firewall Rules - DMZ to INSIDE
 set firewall name DMZ-INSIDE rule 10 action accept
-set firewall name DMZ-INSIDE rule 10 description 'Allow established connections'
+set firewall name DMZ-INSIDE rule 10 description "Allow established connections"
 set firewall name DMZ-INSIDE rule 10 state established enable
 set firewall name DMZ-INSIDE rule 10 state related enable
 set firewall name DMZ-INSIDE rule 999 action drop
-set firewall name DMZ-INSIDE rule 999 description 'Drop all other traffic'
+set firewall name DMZ-INSIDE rule 999 description "Drop all other traffic"
 commit
 exit
 ### Firewall Rules - INSIDE to OUTSIDE
 set firewall name INSIDE-OUTSIDE rule 10 action accept
-set firewall name INSIDE-OUTSIDE rule 10 description 'Allow HTTP/HTTPS to Internet'
+set firewall name INSIDE-OUTSIDE rule 10 description "Allow HTTP/HTTPS to Internet"
 set firewall name INSIDE-OUTSIDE rule 10 destination port 80,443
 set firewall name INSIDE-OUTSIDE rule 10 protocol tcp
 set firewall name INSIDE-OUTSIDE rule 999 action drop
-set firewall name INSIDE-OUTSIDE rule 999 description 'Drop all other traffic'
+set firewall name INSIDE-OUTSIDE rule 999 description "Drop all other traffic"
 commit
 exit
 ### Apply Zone Policies
@@ -762,5 +764,6 @@ exit
 
 
 ip routing
-ip route 0.0.0.0 0.0.0.0 192.168.50.2
-exit 
+ip route 0.0.0.0 0.0.0.0 192.168.50.1
+end
+write
