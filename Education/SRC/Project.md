@@ -10,9 +10,8 @@ tags:
 > - [x] Analyze project requirements from PDF files
 >- [x] Extract key network security concepts
 >- [x] Design network topology based on requirements
->- [x] Identify required tools and equipment
->- [x] Create security implementation plan
->- [x] Generate visual network diagram
+>- [x] Create schema
+>- [ ] Configure all of gns3 entities
 >- [ ] Compile comprehensive report
 >- [ ] Deliver final documentation
 
@@ -83,10 +82,6 @@ The following monitoring concepts are important:
 1. **Traffic Monitoring** - Using tools like Wireshark to analyze network traffic
 2. **Logging** - Recording security events and authentication attempts
 3. **Centralized Management** - Managing network devices from a central location
-
----
-
----
 ## Network Topology Design
 ### IP Addressing Scheme
 - **Internet (Zone 0)**: 100.0.0.0/24 (Test Internet services)
@@ -96,8 +91,6 @@ The following monitoring concepts are important:
 - **Internal Management VLAN 1**: 10.0.0.0/16
 - **Datacenter (Zone 2)**: 10.100.0.0/16
 ### Device Tiers & Placement
->>>>>>> 6e1b7be46150d6596ac0aac3a6bdc69b6212d51e
-
 1. **Edge Routers (E1/E2)**
    - Connect Internet cloud to Tier‑1 firewalls.
 1. **Tier‑1 Firewalls (Stateless)**
@@ -225,4 +218,3 @@ The following monitoring concepts are important:
    - Sticky connections for session persistence
    - Health monitoring for backend servers
 
----

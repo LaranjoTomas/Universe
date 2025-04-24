@@ -117,6 +117,7 @@ sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
 ### Interfaces
 configure
+set system host-name LB1
 set interfaces ethernet eth0 address 172.16.1.2/24
 set interfaces ethernet eth0 description 'To-FW1'
 set interfaces ethernet eth1 address 172.16.1.3/24
@@ -126,7 +127,7 @@ set interfaces ethernet eth2 description 'To-Router-E1'
 set interfaces ethernet eth3 address 192.168.2.2/24
 set interfaces ethernet eth3 description 'To-Router-E2'
 set interfaces ethernet eth4 description 'HA-Link'
-exit
+commit
 ### Load Balancing Configuration
 set load-balancing wan interface-health eth1 nexthop 192.168.10.2
 set load-balancing wan interface-health eth2 nexthop 192.168.12.2
@@ -134,32 +135,31 @@ set load-balancing wan rule 1 inbound-interface eth0
 set load-balancing wan rule 1 interface eth1 weight 1
 set load-balancing wan rule 1 interface eth2 weight 1
 set load-balancing wan sticky-connections inbound
-exit
+commit
 ### High Availability Configuration
 set high-availability vrrp group LB-Cluster vrid 10
 set high-availability vrrp group LB-Cluster interface eth0
 set high-availability vrrp group LB-Cluster virtual-address 192.168.1.10/24
 set high-availability vrrp group LB-Cluster priority 200
 set high-availability vrrp sync-group LB-Cluster member LB-Cluster
-exit
+commit
 ### NAT Configuration
 set nat source rule 100 outbound-interface eth0
 set nat source rule 100 source address 10.0.0.0/8
 set nat source rule 100 translation address masquerade
-exit
+commit
 ### Static Routes
 set protocols static route 0.0.0.0/0 next-hop 192.168.1.1
 set protocols static route 200.0.0.0/24 next-hop 192.168.10.2
 set protocols static route 10.0.0.0/8 next-hop 192.168.10.2
-exit
+commit;save;exit
 
 # LB2
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
-set system host-name LB2
-exit
 ### Interfaces
 configure
+set system host-name LB2
 set interfaces ethernet eth0 address 192.168.31.1/24
 set interfaces ethernet eth0 description "To-FW1"
 set interfaces ethernet eth1 address 192.168.11.1/24
@@ -168,7 +168,7 @@ set interfaces ethernet eth2 address 192.168.30.1/24
 set interfaces ethernet eth2 description "To-SWL3‑C1"
 set interfaces ethernet eth3 address 192.168.31.1/24
 set interfaces ethernet eth3 description "To-SWL3‑C2"
-exit
+commit
 ### Load Balancing Configuration
 set load-balancing wan interface-health eth1 nexthop 192.168.11.2
 set load-balancing wan interface-health eth2 nexthop 192.168.13.2
@@ -176,27 +176,28 @@ set load-balancing wan rule 1 inbound-interface eth0
 set load-balancing wan rule 1 interface eth1 weight 1
 set load-balancing wan rule 1 interface eth2 weight 1
 set load-balancing wan sticky-connections inbound
-exit
+commit
 ### High Availability Configuration
 set high-availability vrrp group LB-Cluster vrid 10
 set high-availability vrrp group LB-Cluster interface eth0
 set high-availability vrrp group LB-Cluster virtual-address 192.168.2.10/24
 set high-availability vrrp group LB-Cluster priority 100
 set high-availability vrrp sync-group LB-Cluster member LB-Cluster
-exit
+commit
 ### NAT Configuration
 set nat source rule 100 outbound-interface eth0
 set nat source rule 100 source address 10.0.0.0/8
 set nat source rule 100 translation address masquerade
-exit
+commit
 ### Static Routes
 set protocols static route 0.0.0.0/0 next-hop 192.168.2.1
 set protocols static route 200.0.0.0/24 next-hop 192.168.11.2
 set protocols static route 10.0.0.0/8 next-hop 192.168.11.2
-exit
+commit; save; exit
 # LB3
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
 reboot
+
 configure
  set system host-name LB3
  ## From FW1 & FW2
@@ -207,7 +208,7 @@ configure
  ## To DMZ switch
  set interfaces ethernet eth2 address 200.0.0.1/24
  set interfaces ethernet eth2 description 'To-DMZ'
- commit; exit
+ commit; save; exit
 
 # FW1
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
@@ -355,43 +356,43 @@ set zone-policy zone INSIDE interface eth4
 commit
 ### Firewall Rules - OUTSIDE to DMZ
 set firewall name OUTSIDE-DMZ rule 10 action accept
-set firewall name OUTSIDE-DMZ rule 10 description 'Allow HTTPS to DMZ'
+set firewall name OUTSIDE-DMZ rule 10 description "Allow HTTPS to DMZ"
 set firewall name OUTSIDE-DMZ rule 10 destination port 443
 set firewall name OUTSIDE-DMZ rule 10 protocol tcp
 set firewall name OUTSIDE-DMZ rule 20 action accept
-set firewall name OUTSIDE-DMZ rule 20 description 'Allow SMTP to DMZ'
+set firewall name OUTSIDE-DMZ rule 20 description "Allow SMTP to DMZ"
 set firewall name OUTSIDE-DMZ rule 20 destination port 25
 set firewall name OUTSIDE-DMZ rule 20 protocol tcp
 set firewall name OUTSIDE-DMZ rule 30 action accept
-set firewall name OUTSIDE-DMZ rule 30 description 'Allow IMAP to DMZ'
+set firewall name OUTSIDE-DMZ rule 30 description "Allow IMAP to DMZ"
 set firewall name OUTSIDE-DMZ rule 30 destination port 993
 set firewall name OUTSIDE-DMZ rule 30 protocol tcp
 set firewall name OUTSIDE-DMZ rule 40 action accept
-set firewall name OUTSIDE-DMZ rule 40 description 'Allow DNS to DMZ'
+set firewall name OUTSIDE-DMZ rule 40 description "Allow DNS to DMZ"
 set firewall name OUTSIDE-DMZ rule 40 destination port 53
 set firewall name OUTSIDE-DMZ rule 40 protocol udp
 set firewall name OUTSIDE-DMZ rule 999 action drop
-set firewall name OUTSIDE-DMZ rule 999 description 'Drop all other traffic'
+set firewall name OUTSIDE-DMZ rule 999 description "Drop all other traffic"
 commit
 ### Firewall Rules - DMZ to OUTSIDE
 set firewall name DMZ-OUTSIDE rule 10 action accept
-set firewall name DMZ-OUTSIDE rule 10 description 'Allow established connections'
+set firewall name DMZ-OUTSIDE rule 10 description "Allow established connections"
 set firewall name DMZ-OUTSIDE rule 10 state established enable
 set firewall name DMZ-OUTSIDE rule 10 state related enable
 set firewall name DMZ-OUTSIDE rule 999 action drop
-set firewall name DMZ-OUTSIDE rule 999 description 'Drop all other traffic'
+set firewall name DMZ-OUTSIDE rule 999 description "Drop all other traffic"
 commit
 ### Firewall Rules - INSIDE to DMZ
 set firewall name INSIDE-DMZ rule 10 action accept
-set firewall name INSIDE-DMZ rule 10 description 'Allow all from INSIDE to DMZ'
+set firewall name INSIDE-DMZ rule 10 description "Allow all from INSIDE to DMZ"
 commit
 ### Firewall Rules - DMZ to INSIDE
 set firewall name DMZ-INSIDE rule 10 action accept
-set firewall name DMZ-INSIDE rule 10 description 'Allow established connections'
+set firewall name DMZ-INSIDE rule 10 description "Allow established connections"
 set firewall name DMZ-INSIDE rule 10 state established enable
 set firewall name DMZ-INSIDE rule 10 state related enable
 set firewall name DMZ-INSIDE rule 999 action drop
-set firewall name DMZ-INSIDE rule 999 description 'Drop all other traffic'
+set firewall name DMZ-INSIDE rule 999 description "Drop all other traffic"
 commit
 ### Firewall Rules - INSIDE to OUTSIDE
 set firewall name INSIDE-OUTSIDE rule 10 action accept
@@ -433,7 +434,6 @@ set protocols static route 10.10.0.0/24 next-hop 192.168.30.2
 set protocols static route 10.20.0.0/24 next-hop 192.168.30.2
 set protocols static route 10.100.0.0/16 next-hop 192.168.31.2
 commit
-exit
 save
 # FW3
 sudo cp /opt/vyatta/etc/config.boot.default /config/config.boot
@@ -448,10 +448,10 @@ set interfaces ethernet eth1 address 192.168.40.1/24
 set interfaces ethernet eth1 description 'To-SWL3-1'
 
 ## Security Zones
-set zone-policy zone CORE description 'Core (LB2/SWL3-C1)'
+set zone-policy zone CORE description "Core (LB2/SWL3-C1)"
 set zone-policy zone CORE interface eth0
 
-set zone-policy zone ACCESS description 'Building A Zone'
+set zone-policy zone ACCESS description "Building A Zone"
 set zone-policy zone ACCESS interface eth1
 
 ## Zone Policies
@@ -488,9 +488,9 @@ set interfaces ethernet eth1 address 192.168.42.1/24
 set interfaces ethernet eth1 description 'To-SWL3-2'
 
 ## Security Zones
-set zone-policy zone CORE description 'LB/Dist Zone'
+set zone-policy zone CORE description "LB/Dist Zone"
 set zone-policy zone CORE interface eth0
-set zone-policy zone DATACENTER description 'DC Zone'
+set zone-policy zone DATACENTER description "DC Zone"
 set zone-policy zone DATACENTER interface eth1
 
 ## Zone Policies
