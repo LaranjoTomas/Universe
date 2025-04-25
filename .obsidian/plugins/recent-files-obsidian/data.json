@@ -5,24 +5,16 @@
       "path": "Education/SRC/Configs.md"
     },
     {
-      "basename": "Project",
-      "path": "Education/SRC/Project.md"
-    },
-    {
       "basename": "SRC_1",
       "path": "Excalidraw/SRC_1.md"
     },
     {
+      "basename": "Project",
+      "path": "Education/SRC/Project.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
-    },
-    {
-      "basename": "Report",
-      "path": "Education/SRC/Report.md"
-    },
-    {
-      "basename": "Aula",
-      "path": "Education/SRC/Aula.md"
     },
     {
       "basename": "1-TASKS",
