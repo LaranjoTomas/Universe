@@ -435,12 +435,15 @@ configure
 set system host-name FW3
 
 ## Interfaces
-set interfaces ethernet eth0 address 192.168.30.3/24
-set interfaces ethernet eth1 address 192.168.41.1/24
+set interfaces ethernet eth0 address 192.168.30.1/24
+set interfaces ethernet eth0 description 'To-SWL3-C1'
+set interfaces ethernet eth1 address 192.168.40.1/24
+set interfaces ethernet eth1 description 'To-SWL3-1'
 
 ## Security Zones
-set zone-policy zone CORE description 'LB/Dist Zone'
+set zone-policy zone CORE description 'Core (LB2/SWL3-C1)'
 set zone-policy zone CORE interface eth0
+
 set zone-policy zone ACCESS description 'Building A Zone'
 set zone-policy zone ACCESS interface eth1
 
@@ -454,12 +457,14 @@ set firewall name CORE-ACCESS rule 10 description "Allow core access to building
 set firewall name CORE-ACCESS rule 10 state established enable
 set firewall name CORE-ACCESS rule 10 state related enable
 set firewall name CORE-ACCESS rule 999 action drop
+set firewall name CORE-ACCESS rule 999 description "Default deny from CORE to ACCESS"
 
 set firewall name ACCESS-CORE rule 10 action accept
 set firewall name ACCESS-CORE rule 10 description "Allow building A to core (HTTP)"
 set firewall name ACCESS-CORE rule 10 protocol tcp
 set firewall name ACCESS-CORE rule 10 destination port 80,443
 set firewall name ACCESS-CORE rule 999 action drop
+set firewall name ACCESS-CORE rule 999 description "Default deny from ACCESS to CORE"
 
 commit; save; exit
 
@@ -471,7 +476,9 @@ set system host-name FW4
 
 ## Interfaces
 set interfaces ethernet eth0 address 192.168.31.3/24
+set interfaces ethernet eth0 description 'To-SWL3-C2'
 set interfaces ethernet eth1 address 192.168.42.1/24
+set interfaces ethernet eth1 description 'To-SWL3-2'
 
 ## Security Zones
 set zone-policy zone CORE description 'LB/Dist Zone'
@@ -510,13 +517,14 @@ vlan 1
 exit
 
 ### Interfaces
-interface FastEthernet 0/1
- description To-LB2
- no switchport
+interface FastEthernet 0/0
+ description To-switch
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
  ip address 192.168.30.2 255.255.255.0
  no shutdown
 exit
-interface FastEthernet0/0
+interface FastEthernet0/1
  description To-FW3
  no switchport
  ip address 192.168.32.1 255.255.255.0
@@ -676,19 +684,29 @@ save
 
 hostname SWL3-1
 configure terminal
+vlan database
+vlan 10
+vlan 20
 
-interface FastEthernet 0/0
+interface FastEthernet 0/1
  description To-FW3
  no switchport
  ip address 192.168.41.2 255.255.255.0
  no shutdown
 exit
 
-interface FastEthernet 0/1
+interface FastEthernet 0/0
  description To-Building-A-Switch
  switchport mode trunk
  switchport trunk encapsulation dot1q
  switchport trunk allowed vlan 10,20
+ no shutdown
+exit
+
+interface FastEthernet 1/0
+ description Management
+ switchport mode access
+ switchport access vlan 1
  no shutdown
 exit
 
@@ -701,14 +719,14 @@ exit
 hostname SWL3-2
 configure terminal
 
-interface FastEthernet 0/0
+interface FastEthernet 0/1
  description To-FW4
  no switchport
  ip address 192.168.42.2 255.255.255.0
  no shutdown
 exit
 
-interface FastEthernet 0/1
+interface FastEthernet 0/0
  description To-Datacenter-Switch
  switchport mode trunk
  switchport trunk encapsulation dot1q
@@ -718,4 +736,30 @@ exit
 
 ip routing
 ip route 0.0.0.0 0.0.0.0 192.168.42.1
+exit
+
+# BUilding A (Router)
+
+configure terminal
+
+hostname Router-BuildingA
+
+interface FastEthernet 0/0
+ description Trunk to Building-A Switch
+ no shutdown
+exit
+
+interface FastEthernet 0/1
+ encapsulation dot1q 10
+ ip address 10.10.0.254 255.255.255.0
+exit
+
+interface FastEthernet 1/0
+ encapsulation dot1q 20
+ ip address 10.20.0.254 255.255.255.0
+exit
+
+
+ip routing
+ip route 0.0.0.0 0.0.0.0 192.168.50.2
 exit

@@ -96,6 +96,7 @@ The following monitoring concepts are important:
 - **Internal Management VLAN 1**: 10.0.0.0/16
 - **Datacenter (Zone 2)**: 10.100.0.0/16
 ### Device Tiers & Placement
+>>>>>>> 6e1b7be46150d6596ac0aac3a6bdc69b6212d51e
 
 1. **Edge Routers (E1/E2)**
    - Connect Internet cloud to Tier‑1 firewalls.

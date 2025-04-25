@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Untitled 1",
+      "path": "Untitled 1.md"
+    },
+    {
       "basename": "Configs",
       "path": "Education/SRC/Configs.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Frequently Asked Questions",
       "path": "Frequently Asked Questions.md"
-    },
-    {
-      "basename": "00. References",
-      "path": "40 - Obsidian/Homepages/00. References.md"
     }
   ],
   "omittedPaths": [],
