@@ -64,7 +64,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -207,13 +207,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SRC/Project.md",
+                "file": "Education/SRC/Configs.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Project"
+              "title": "Outline of Configs"
             }
           },
           {
@@ -325,11 +325,11 @@
       "card-board:CardBoard": false
     }
   },
-  "active": "33ea04f1731f486a",
+  "active": "76ae5d7e85378a8c",
   "lastOpenFiles": [
+    "Education/SRC/Project.md",
     "Education/SRC/Configs.md",
     "Excalidraw/SRC_1.md",
-    "Education/SRC/Project.md",
     "0-HOME.md",
     "Untitled.md",
     "Untitled 2.md",
