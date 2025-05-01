@@ -22,23 +22,8 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
-          },
-          {
-            "id": "fe790e2befc288ec",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/SRC/Configs.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Configs"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -125,8 +110,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5,
-    "collapsed": true
+    "width": 290.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -171,13 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SRC/Configs.md",
+                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Configs"
+              "title": "Outline of 0-HOME"
             }
           },
           {
@@ -224,7 +208,7 @@
             }
           },
           {
-            "id": "5ed22d2690019b42",
+            "id": "8ee0002bfd6cf798",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -288,14 +272,14 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "fe790e2befc288ec",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "0-HOME.md",
     "Education/SRC/Configs.md",
+    "Untitled.md",
+    "0-HOME.md",
     "Education/SRC/Project.md",
     "Excalidraw/SRC_1.md",
     "Education/SRC/Aula.md",
-    "Untitled.md",
     "Education/SRC/Report.md",
     "Excalidraw/ASE-Schematic.md",
     "Excalidraw/RSA.md",
