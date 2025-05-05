@@ -254,6 +254,7 @@ set firewall name OUTSIDE-DMZ rule 40 action accept
 set firewall name OUTSIDE-DMZ rule 40 description "Allow DNS to DMZ"
 set firewall name OUTSIDE-DMZ rule 40 destination port 53
 set firewall name OUTSIDE-DMZ rule 40 protocol udp
+set firewall name OUTSIDE-DMZ rule 50 enable-statistics
 set firewall name OUTSIDE-DMZ rule 999 action drop
 set firewall name OUTSIDE-DMZ rule 999 description "Drop all other traffic"
 commit
@@ -751,22 +752,14 @@ exit
 interface FastEthernet 0/1
  description VLAN10 clients
  ip address 10.10.0.254 255.255.255.0
+ no shutdown
 exit
 
 interface FastEthernet 1/0
  description VLAN20 clients
  ip address 10.20.0.254 255.255.255.0
+ no shutdown
 exit
-
-interface FastEthernet 0/0.10
- encapsulation dot1Q 10
- ip address 10.10.0.254 255.255.255.0
- no shutdown
-
-interface FastEthernet 0/0.20
- encapsulation dot1Q 20
- ip address 10.20.0.254 255.255.255.0
- no shutdown
 
 ip routing
 ip route 0.0.0.0 0.0.0.0 192.168.50.1

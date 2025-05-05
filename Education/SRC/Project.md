@@ -11,9 +11,9 @@ tags:
 >- [x] Extract key network security concepts
 >- [x] Design network topology based on requirements
 >- [x] Create schema
->- [ ] Configure all of gns3 entities
->- [ ] Compile comprehensive report
->- [ ] Deliver final documentation
+>- [x] Configure all of gns3 entities
+>- [x] Compile comprehensive report
+>- [x] Deliver final documentation
 
 ## Project Requirements Analysis
 - Redundant load-balancers and multi-tier firewalls
