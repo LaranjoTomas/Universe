@@ -29,12 +29,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "Education/ASE/Project.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ADCs"
+              "title": "Project"
             }
           }
         ],
@@ -180,13 +180,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/ASE/ADCs.md",
+                "file": "Education/ASE/Project.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of ADCs"
+              "title": "Outline of Project"
             }
           },
           {
@@ -298,6 +298,8 @@
   },
   "active": "c42e475256b8123b",
   "lastOpenFiles": [
+    "Education/ASE/ADCs.md",
+    "Education/ASE/Project.md",
     "0-HOME.md",
     "Untitled 2.md",
     "Untitled 1.md",
@@ -312,7 +314,6 @@
     "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
-    "Education/ASE/ADCs.md",
     "image.png",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
@@ -336,7 +337,6 @@
     "Excalidraw",
     "Education/RSA/Ad-Hoc Networks.md",
     "Education/RSA/Vehicular Networks.md",
-    "3-BOOKS.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
