@@ -1,6 +1,10 @@
 {
   "recentFiles": [
     {
+      "basename": "Untitled 1",
+      "path": "Untitled 1.md"
+    },
+    {
       "basename": "ASE-Schematic",
       "path": "Excalidraw/ASE-Schematic.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "00. Homepage",
       "path": "40 - Obsidian/Homepages/00. Homepage.md"
-    },
-    {
-      "basename": "00. Dashboard",
-      "path": "40 - Obsidian/Homepages/00. Dashboard.md"
     }
   ],
   "omittedPaths": [],

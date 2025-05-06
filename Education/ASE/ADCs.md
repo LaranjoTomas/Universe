@@ -61,7 +61,7 @@ This method is **fast and power-efficient**, making SAR ADCs popular in microcon
 
 # Potentiometer Calculations
 
-![[image.png]]
+![[image 2.png]]
 
 with a typical use of 1mA for the LM335 and with a constant flow of 3.3V.
 
