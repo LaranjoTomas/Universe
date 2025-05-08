@@ -5,12 +5,12 @@
       "path": "Education/ASE/Project.md"
     },
     {
-      "basename": "ADCs",
-      "path": "Education/ASE/ADCs.md"
-    },
-    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
     },
     {
       "basename": "ASE-Schematic",

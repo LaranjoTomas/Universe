@@ -2752,6 +2752,10 @@ treinado
 trocar
 tzdKd
 tLzx
+texto
+tempo
+terreno
+tico
 Statistic
 SlRvb
 Story
@@ -5412,6 +5416,9 @@ SDO
 Schematic
 Sets
 Successive
+Sensores
+SPI
+SPIFFS
 moc
 modified
 my
@@ -8130,6 +8137,8 @@ metros
 measurable
 measurement
 mCstiE
+mem
+mostra
 Root
 Rectangular
 Relationships
@@ -13968,6 +13977,9 @@ collaboration
 clipboard
 currentColor
 circle
+climat
+coleta
+consumo
 hide
 hosted
 heading
@@ -19359,6 +19371,11 @@ parametros
 possui
 pjGweHyw
 pLQ
+possiveis
+placa
+posteriormente
+possivel
+pedir
 ITS
 In
 Included
@@ -24631,6 +24648,7 @@ Test
 Tracking
 Topologia
 Tamb
+TXT
 by
 better
 br
@@ -30273,6 +30291,8 @@ fico
 formar
 fyUKt
 frequencies
+flash
+formatados
 Obsidian
 Other
 Outline
@@ -32862,6 +32882,8 @@ OqVKdbD
 Oui
 OFPlhJ
 OmB
+Obter
+Opcionalmente
 Vault
 VB
 Vv
@@ -38089,6 +38111,7 @@ Gpqh
 GPIO
 GXNcaByS
 GND
+Gest
 Check
 Checkboxes
 Callouts
@@ -43267,6 +43290,7 @@ obsoletas
 obter
 obeter
 oJq
+outra
 Publish
 Pills
 Positions
@@ -46011,6 +46035,7 @@ PYzN
 Poll
 PdarDfAu
 Potentiometer
+Projeto
 Depreciated
 Download
 Dark
@@ -48673,6 +48698,7 @@ Distinguem
 Disponibilidade
 DmIM
 DfKeKzQ
+Descri
 experience
 enlarges
 either
@@ -51735,6 +51761,10 @@ enviado
 essencial
 eTdsy
 eBrd
+ent
+energetico
+energia
+energ
 Allows
 Already
 Adjustments
@@ -59545,6 +59575,7 @@ lCb
 leading
 linecap
 linejoin
+logger
 and
 are
 across
@@ -62479,6 +62510,13 @@ accurately
 anti
 addIFrame
 addElementsToView
+atualizados
+altera
+armazenar
+arquivos
+arquivo
+arquivados
+atuais
 icon
 in
 if
@@ -65173,6 +65211,9 @@ infraestrutura
 influ
 incentiva
 improves
+interna
+intervalo
+isso
 used
 using
 upon
@@ -72878,6 +72919,7 @@ nsVdPuac
 noise
 nSPRIi
 navigator
+nunca
 download
 depending
 does
@@ -75894,6 +75936,9 @@ dico
 dimens
 devolver
 determinam
+dulos
+diretamente
+desta
 snippets
 spans
 smaller
@@ -78975,6 +79020,10 @@ servi
 serem
 sklncc
 stroke
+sensores
+segunda
+sensor
+segundos
 vault
 vn
 vY
@@ -84490,6 +84539,10 @@ relays
 recolhidos
 rio
 room
+registo
+ricas
+ria
+recebe
 work
 with
 within
@@ -86990,6 +87043,7 @@ wxvmAk
 wTO
 wlF
 writeText
+wifi
 Embed
 Edges
 Embeded
@@ -89581,6 +89635,7 @@ Elevada
 Estes
 ELpMqiJL
 Element
+Esses
 Kanban
 KD
 KuTyw
@@ -94766,6 +94821,7 @@ Flood
 Freenet
 FvihwClw
 FpUu
+FREERTOS
 Light
 Larger
 Line
@@ -102506,6 +102562,8 @@ Utilizes
 UTdk
 UxgUUh
 UjlKjuEJ
+Utiliza
+Utilizar
 Metadata
 Move
 Main
@@ -110232,6 +110290,8 @@ Batman
 BATMAN
 Baixa
 Booth
+BME
+Buzzer
 Wider
 Wrapping
 WQQ
@@ -112770,6 +112830,7 @@ Want
 Worlds
 WFt
 WlmM
+WiFi
 Quotation
 Query
 Qss
@@ -125422,6 +125483,8 @@ generalizados
 generalizado
 gxyK
 gpIH
+guardar
+gravados
 qtt
 qa
 qY
@@ -128050,6 +128113,7 @@ quando
 qual
 qualidade
 quem
+queda
 jQ
 jB
 ja

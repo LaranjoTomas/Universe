@@ -29,3 +29,11 @@ Utilizar um data logger no caso de perda ou queda da rede WiFi. SPIFFS é um reg
 Um ESP32-C3 nunca terá problemas de consumo energetico. este seria o que recebe os dados via wifi e mostra-os em tempo real na interface.
 
 A outra esp32-c3 que está no terreno seria a que pode ter problemas com energia, por isso é necessário usar FREERTOS e Gestão do consumo energético no Software desta esp32.
+
+
+# Ideais
+
+Usar apps e clients ou ESPNOW para o WiFi API, espnow em principio fornece mais benefícios.
+
+
+Brokers, grafana (obter os outputs do esp32 e depois mandar para a grafana). 
