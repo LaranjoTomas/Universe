@@ -5436,6 +5436,12 @@ SNyY
 SXr
 SLiM
 SSC
+Simula
+Sinais
+Sistema
+Servidor
+Sinaliza
+Sem
 moc
 modified
 my
@@ -10861,6 +10867,8 @@ Raoo
 Road
 RFuE
 RSUs
+Rob
+RCYL
 created
 cssclasses
 customize
@@ -19440,6 +19448,8 @@ pxxH
 pYU
 pvfB
 planned
+pOnZWXdI
+proposto
 ITS
 In
 Included
@@ -22081,6 +22091,7 @@ IBd
 Includes
 IDATkX
 IFFFp
+Inteligente
 Theme
 The
 Themes
@@ -24724,6 +24735,8 @@ TXT
 TRB
 Tbee
 Topogoly
+TiemjiNX
+Teste
 by
 better
 br
@@ -30382,6 +30395,7 @@ fxM
 fdh
 fET
 fggy
+fego
 Obsidian
 Other
 Outline
@@ -32981,6 +32995,7 @@ OoJ
 Ouu
 OeM
 OKH
+OWaa
 Vault
 VB
 Vv
@@ -40966,6 +40981,9 @@ CdH
 CJA
 Coordinaton
 Cooperative
+Container
+Controlo
+Central
 out
 on
 of
@@ -51915,6 +51933,7 @@ eGq
 eMw
 eOS
 eTWW
+eebK
 Allows
 Already
 Adjustments
@@ -54598,6 +54617,11 @@ ABTL
 AkF
 AeD
 Awareness
+Ambiente
+Ajuste
+AvOVFAfg
+Arduino
+Arquitetura
 you
 your
 yt
@@ -62698,6 +62722,7 @@ aYe
 ajo
 affF
 angle
+abcXFwFk
 icon
 in
 if
@@ -65404,6 +65429,7 @@ intented
 ikkC
 iMC
 iTU
+intervalos
 used
 using
 upon
@@ -76143,6 +76169,7 @@ diretamente
 desta
 dqQ
 dkkK
+dulo
 snippets
 spans
 smaller
@@ -79236,6 +79263,7 @@ sYZZ
 sssJ
 sUIa
 staion
+shyYiibA
 vault
 vn
 vY
@@ -81860,6 +81888,7 @@ vbR
 vvvX
 vZvnfc
 vvtd
+valida
 re
 right
 rdf
@@ -95074,6 +95103,7 @@ FIi
 FgQ
 FXY
 FWXEUM
+Fluxo
 Light
 Larger
 Line
@@ -97648,6 +97678,9 @@ LZtY
 LdUB
 LmV
 Ljt
+Laptop
+LjnU
+LEDs
 Heading
 Horizontal
 Headings
@@ -100307,6 +100340,7 @@ Hxp
 HFk
 HPHLs
 HuK
+HPc
 Underline
 Ue
 Uy
@@ -102835,6 +102869,7 @@ UXR
 UQT
 URR
 URBkup
+Unidade
 Metadata
 Move
 Main
@@ -105338,6 +105373,8 @@ Mxu
 MAP
 MCM
 Manoeuvre
+Monitoriza
+Microcontrolador
 Zoom
 ZTz
 ZW
@@ -110595,6 +110632,7 @@ BYY
 BvU
 BDa
 Byp
+Bluetooth
 Wider
 Wrapping
 WQQ
@@ -125827,6 +125865,7 @@ gwQU
 gyjk
 gBL
 gmk
+gica
 qtt
 qa
 qY
@@ -135724,6 +135763,7 @@ zXYLz
 zME
 zfB
 zMLL
+zIYLHNYe
 Je
 Jt
 JgS

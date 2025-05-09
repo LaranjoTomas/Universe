@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
     },
@@ -9,16 +21,8 @@
       "path": "imgs/CAM.png"
     },
     {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
-    },
-    {
       "basename": "MCM",
       "path": "imgs/MCM.png"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "C2",
@@ -195,10 +199,6 @@
     {
       "basename": "IPSA Documentation",
       "path": "Projects/IPSA/IPSA Documentation.md"
-    },
-    {
-      "basename": "YFinance",
-      "path": "Projects/IPSA/bugs/YFinance.md"
     }
   ],
   "omittedPaths": [],

@@ -12,47 +12,16 @@
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "0-HOME.md",
-                "mode": "source",
-                "source": false
+                "file": "Excalidraw/RSA.md"
               },
               "pinned": true,
-              "icon": "lucide-file",
-              "title": "0-HOME"
-            }
-          },
-          {
-            "id": "4fed8dee9050e2e4",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/RSA/Vehicular Networks.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Vehicular Networks"
-            }
-          },
-          {
-            "id": "ac8da094cb524983",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "imgs/CAM.png"
-              },
-              "icon": "lucide-image",
-              "title": "CAM"
+              "icon": "excalidraw-icon",
+              "title": "RSA"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -194,13 +163,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/RSA/Vehicular Networks.md",
+                "file": "Excalidraw/RSA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Vehicular Networks"
+              "title": "Outline of RSA"
             }
           },
           {
@@ -247,7 +216,7 @@
             }
           },
           {
-            "id": "ee55eb820232f153",
+            "id": "60089295be4af513",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -280,7 +249,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -310,14 +280,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "4fed8dee9050e2e4",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Education/RSA/Self-organized systems.md",
+    "Excalidraw/RSA.md",
+    "0-HOME.md",
+    "Education/RSA/Vehicular Networks.md",
     "imgs/DENM.png",
     "imgs/CAM.png",
-    "Education/RSA/Vehicular Networks.md",
-    "Education/RSA/Self-organized systems.md",
     "imgs/MCM.png",
-    "0-HOME.md",
     "DOCUMENTS/C2.pdf",
     "Education/ASE/Project.md",
     "Education/ASE/ADCs.md",
@@ -328,7 +299,6 @@
     "Education/SRC/Configs.md",
     "imgs/image 2.png",
     "Excalidraw/ASE-Schematic.md",
-    "Excalidraw/RSA.md",
     "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
     "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
     "Excalidraw/SD_SCHEMA.md",
@@ -343,7 +313,6 @@
     "imgs/Finger_table.png",
     "imgs/DHT_Structured.png",
     "imgs/CHORD.png",
-    "imgs/CDN_Infrastruct.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
     "README.md",
