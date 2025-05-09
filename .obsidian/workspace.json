@@ -20,8 +20,25 @@
               "icon": "excalidraw-icon",
               "title": "RSA"
             }
+          },
+          {
+            "id": "1a1d2c7513337649",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/RSA/Project.md",
+                "mode": "preview",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Project"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -163,13 +180,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/RSA.md",
+                "file": "Education/RSA/Project.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of RSA"
+              "title": "Outline of Project"
             }
           },
           {
@@ -280,12 +297,17 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "1a1d2c7513337649",
   "lastOpenFiles": [
-    "Education/RSA/Self-organized systems.md",
-    "Excalidraw/RSA.md",
-    "0-HOME.md",
     "Education/RSA/Vehicular Networks.md",
+    "Education/RSA/Project.md",
+    "Education/RSA/Peer-to-Peer System and Networks.md",
+    "Excalidraw/RSA.md",
+    "imgs/RSA_project.png",
+    "0-HOME.md",
+    "Education/RSA/RSA_Test.md",
+    "!Rsa.png.md",
+    "Education/RSA/Self-organized systems.md",
     "imgs/DENM.png",
     "imgs/CAM.png",
     "imgs/MCM.png",
@@ -306,20 +328,15 @@
     "Excalidraw/Scripts",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
-    "Education/RSA/RSA_Test.md",
     "imgs/RAFT_algo.png",
     "imgs/Hybrid_Search.png",
     "imgs/Finger_table.png",
     "imgs/DHT_Structured.png",
-    "imgs/CHORD.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
     "README.md",
     "gnutella_example.png.md",
     "Excalidraw/Drawing 2025-03-31 17.22.27.excalidraw.md",
-    "Templates/Image Template.md",
-    "Templates/Daily note.md",
     "Excalidraw",
     "Education/SRC",
     "Education/SD",

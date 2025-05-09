@@ -1,20 +1,36 @@
 {
   "recentFiles": [
     {
-      "basename": "RSA",
-      "path": "Excalidraw/RSA.md"
+      "basename": "Project",
+      "path": "Education/RSA/Project.md"
     },
     {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
+      "basename": "Vehicular Networks",
+      "path": "Education/RSA/Vehicular Networks.md"
+    },
+    {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "Vehicular Networks",
-      "path": "Education/RSA/Vehicular Networks.md"
+      "basename": "RSA_Test",
+      "path": "Education/RSA/RSA_Test.md"
+    },
+    {
+      "basename": "!Rsa.png",
+      "path": "!Rsa.png.md"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
     },
     {
       "basename": "CAM",
@@ -55,14 +71,6 @@
     {
       "basename": "1-TASKS",
       "path": "1-TASKS.md"
-    },
-    {
-      "basename": "Peer-to-Peer System and Networks",
-      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
-    },
-    {
-      "basename": "RSA_Test",
-      "path": "Education/RSA/RSA_Test.md"
     },
     {
       "basename": "BitTorrent",
@@ -191,14 +199,6 @@
     {
       "basename": "Server DB",
       "path": "Projects/OWL/Backend/Server DB.md"
-    },
-    {
-      "basename": "Backend documentation",
-      "path": "Projects/OWL/Backend/Backend documentation.md"
-    },
-    {
-      "basename": "IPSA Documentation",
-      "path": "Projects/IPSA/IPSA Documentation.md"
     }
   ],
   "omittedPaths": [],
