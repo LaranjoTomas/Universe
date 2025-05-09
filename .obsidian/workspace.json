@@ -10,6 +10,7 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -17,11 +18,41 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "4fed8dee9050e2e4",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/RSA/Vehicular Networks.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Vehicular Networks"
+            }
+          },
+          {
+            "id": "ac8da094cb524983",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "imgs/CAM.png"
+              },
+              "icon": "lucide-image",
+              "title": "CAM"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -95,8 +126,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "33993677f81e3933",
@@ -164,13 +194,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "0-HOME.md",
+                "file": "Education/RSA/Vehicular Networks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 0-HOME"
+              "title": "Outline of Vehicular Networks"
             }
           },
           {
@@ -280,10 +310,16 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "ee55eb820232f153",
+  "active": "4fed8dee9050e2e4",
   "lastOpenFiles": [
-    "Education/ASE/Project.md",
+    "imgs/DENM.png",
+    "imgs/CAM.png",
+    "Education/RSA/Vehicular Networks.md",
+    "Education/RSA/Self-organized systems.md",
+    "imgs/MCM.png",
     "0-HOME.md",
+    "DOCUMENTS/C2.pdf",
+    "Education/ASE/Project.md",
     "Education/ASE/ADCs.md",
     "Untitled 2.md",
     "Untitled 1.md",
@@ -298,19 +334,16 @@
     "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
-    "image.png",
     "Excalidraw/Drawing 2025-03-31 19.34.19.excalidraw.md",
     "1-TASKS.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Education/RSA/RSA_Test.md",
-    "Education/RSA/Self-organized systems.md",
     "imgs/RAFT_algo.png",
     "imgs/Hybrid_Search.png",
     "imgs/Finger_table.png",
     "imgs/DHT_Structured.png",
     "imgs/CHORD.png",
     "imgs/CDN_Infrastruct.png",
-    "imgs/Bitswap.png",
     "Dev/JavaScript/Electron/How to Build and Sign an Electron JS Application for All Platforms.md",
     "Excalidraw/Drawing 2025-03-31 18.51.46.excalidraw.md",
     "README.md",
@@ -319,14 +352,11 @@
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Excalidraw",
-    "Education/RSA/Ad-Hoc Networks.md",
-    "Education/RSA/Vehicular Networks.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
     "Education/CLE",
     "Education/ASE",
-    "DOCUMENTS/C2.pdf",
     "DOCUMENTS/SRC",
     "Untitled 2.canvas",
     "Untitled 1.canvas",

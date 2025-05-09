@@ -1,8 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "Vehicular Networks",
+      "path": "Education/RSA/Vehicular Networks.md"
+    },
+    {
+      "basename": "CAM",
+      "path": "imgs/CAM.png"
+    },
+    {
+      "basename": "Self-organized systems",
+      "path": "Education/RSA/Self-organized systems.md"
+    },
+    {
+      "basename": "MCM",
+      "path": "imgs/MCM.png"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "C2",
+      "path": "DOCUMENTS/C2.pdf"
     },
     {
       "basename": "Project",
@@ -39,10 +59,6 @@
     {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
-    },
-    {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
     },
     {
       "basename": "BitTorrent",
@@ -99,10 +115,6 @@
     {
       "basename": "Ad-Hoc Networks",
       "path": "Education/RSA/Ad-Hoc Networks.md"
-    },
-    {
-      "basename": "Vehicular Networks",
-      "path": "Education/RSA/Vehicular Networks.md"
     },
     {
       "basename": "de-centralized",
@@ -187,14 +199,6 @@
     {
       "basename": "YFinance",
       "path": "Projects/IPSA/bugs/YFinance.md"
-    },
-    {
-      "basename": "Main C Vulnerabilities",
-      "path": "Dev/C/Main C Vulnerabilities.md"
-    },
-    {
-      "basename": "Logo ideas",
-      "path": "Dev/Logo ideas.md"
     }
   ],
   "omittedPaths": [],
