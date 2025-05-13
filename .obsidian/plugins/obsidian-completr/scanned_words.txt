@@ -14051,6 +14051,7 @@ cAb
 credito
 congestionamentos
 controller
+cruzamentos
 hide
 hosted
 heading
@@ -24759,6 +24760,7 @@ Topogoly
 TiemjiNX
 Teste
 Traffic
+Testar
 by
 better
 br
@@ -30423,6 +30425,7 @@ fggy
 fego
 fluxo
 fluidez
+feito
 Obsidian
 Other
 Outline
@@ -54663,6 +54666,7 @@ Arduino
 Arquitetura
 Aplica
 Ambulance
+Amanal
 you
 your
 yt
@@ -76229,6 +76233,7 @@ dkkK
 dulo
 desbalanceamento
 dinamicamente
+digo
 snippets
 spans
 smaller
@@ -79328,6 +79333,7 @@ simuladores
 simular
 simulando
 simula
+seguidos
 vault
 vn
 vY
@@ -105452,6 +105458,7 @@ MCM
 Manoeuvre
 Monitoriza
 Microcontrolador
+MAPEM
 Zoom
 ZTz
 ZW

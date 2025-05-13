@@ -12,19 +12,20 @@
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/RSA.md"
+                "file": "0-HOME.md",
+                "mode": "source",
+                "source": false
               },
               "pinned": true,
-              "icon": "excalidraw-icon",
-              "title": "RSA"
+              "icon": "lucide-file",
+              "title": "0-HOME"
             }
           },
           {
-            "id": "1a1d2c7513337649",
+            "id": "46c2216564738492",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -32,7 +33,6 @@
                 "mode": "preview",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Project"
             }
@@ -233,7 +233,7 @@
             }
           },
           {
-            "id": "60089295be4af513",
+            "id": "fce5efe7219f5645",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -266,8 +266,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5,
-    "collapsed": true
+    "width": 294.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -297,14 +296,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "1a1d2c7513337649",
+  "active": "46c2216564738492",
   "lastOpenFiles": [
-    "Education/RSA/Vehicular Networks.md",
+    "0-HOME.md",
+    "Education/ASE/Project.md",
     "Education/RSA/Project.md",
+    "Education/RSA/Vehicular Networks.md",
     "Education/RSA/Peer-to-Peer System and Networks.md",
     "Excalidraw/RSA.md",
     "imgs/RSA_project.png",
-    "0-HOME.md",
     "Education/RSA/RSA_Test.md",
     "!Rsa.png.md",
     "Education/RSA/Self-organized systems.md",
@@ -312,7 +312,6 @@
     "imgs/CAM.png",
     "imgs/MCM.png",
     "DOCUMENTS/C2.pdf",
-    "Education/ASE/Project.md",
     "Education/ASE/ADCs.md",
     "Untitled 2.md",
     "Untitled 1.md",
