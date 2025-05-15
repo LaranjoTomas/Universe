@@ -10,14 +10,33 @@
           {
             "id": "e7a7b303c61786dc",
             "type": "leaf",
+            "pinned": true,
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "0-HOME.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "0-HOME"
+            }
+          },
+          {
+            "id": "caeed2b75080e0f1",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SRC_1.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SRC_1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -81,8 +100,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "33993677f81e3933",
@@ -150,13 +168,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SRC/Configs.md",
+                "file": "Excalidraw/SRC_1.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Configs"
+              "title": "Outline of SRC_1"
             }
           },
           {
@@ -266,11 +284,13 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "392cda958212b459",
+  "active": "caeed2b75080e0f1",
   "lastOpenFiles": [
+    "0-HOME.md",
+    "Education/ASE/WIFI.md",
+    "Education/ASE/ADCs.md",
     "Education/SRC/Configs.md",
     "Untitled.md",
-    "0-HOME.md",
     "Education/SRC/Project.md",
     "Excalidraw/SRC_1.md",
     "Education/SRC/Aula.md",
@@ -293,7 +313,6 @@
     "imgs/gnutella.png",
     "imgs/federated.png",
     "imgs/de-centralized.png",
-    "Education/ASE/ADCs.md",
     "1-TASKS.md",
     "Teamplates/Daily note.md",
     "Teamplates/Book.md",
@@ -305,7 +324,6 @@
     "2-PROJECTS.md",
     "Education/RSA/Vehicular Networks.md",
     "Education/CLE/Aula.md",
-    "Untitled 1.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
