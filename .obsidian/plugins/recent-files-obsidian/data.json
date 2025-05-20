@@ -1,12 +1,40 @@
 {
   "recentFiles": [
     {
+      "basename": "Project_2",
+      "path": "Education/SRC/Project_2.md"
+    },
+    {
+      "basename": "!Rsa.png",
+      "path": "!Rsa.png.md"
+    },
+    {
+      "basename": "src_2_img1",
+      "path": "Ideas/src_2_img1.png"
+    },
+    {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
+      "basename": "Ad-Hoc Networks",
+      "path": "Education/RSA/Ad-Hoc Networks.md"
+    },
+    {
+      "basename": "Configs",
+      "path": "Education/SRC/Configs.md"
+    },
+    {
       "basename": "Project",
-      "path": "Education/RSA/Project.md"
+      "path": "Education/SRC/Project.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Project",
+      "path": "Education/RSA/Project.md"
     },
     {
       "basename": "Project",
@@ -17,20 +45,12 @@
       "path": "Education/RSA/Vehicular Networks.md"
     },
     {
-      "basename": "Peer-to-Peer System and Networks",
-      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
-    },
-    {
       "basename": "RSA",
       "path": "Excalidraw/RSA.md"
     },
     {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
-    },
-    {
-      "basename": "!Rsa.png",
-      "path": "!Rsa.png.md"
     },
     {
       "basename": "Self-organized systems",
@@ -125,10 +145,6 @@
       "path": "imgs/CDN_Architecture.png"
     },
     {
-      "basename": "Ad-Hoc Networks",
-      "path": "Education/RSA/Ad-Hoc Networks.md"
-    },
-    {
       "basename": "de-centralized",
       "path": "imgs/de-centralized.png"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "NumPy",
       "path": "Dev/Python/NumPy/NumPy.md"
-    },
-    {
-      "basename": "128",
-      "path": "imgs/128.png"
-    },
-    {
-      "basename": "badges_python",
-      "path": "imgs/badges_python.png"
-    },
-    {
-      "basename": "Utils",
-      "path": "Projects/OWL/Backend/Utils.md"
-    },
-    {
-      "basename": "Server DB",
-      "path": "Projects/OWL/Backend/Server DB.md"
     }
   ],
   "omittedPaths": [],
