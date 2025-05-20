@@ -14,25 +14,25 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0-HOME.md",
+                "file": "Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "0-HOME"
+              "title": "Untitled"
             }
           },
           {
-            "id": "caeed2b75080e0f1",
+            "id": "cedf849cb9f6c173",
             "type": "leaf",
             "state": {
               "type": "excalidraw",
               "state": {
-                "file": "Excalidraw/SRC_1.md"
+                "file": "Excalidraw/RSA.md"
               },
               "icon": "excalidraw-icon",
-              "title": "SRC_1"
+              "title": "RSA"
             }
           }
         ],
@@ -123,7 +123,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 290.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -168,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/SRC_1.md",
+                "file": "Excalidraw/RSA.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of SRC_1"
+              "title": "Outline of RSA"
             }
           },
           {
@@ -221,7 +222,7 @@
             }
           },
           {
-            "id": "392cda958212b459",
+            "id": "dd5dd3d3e86ec571",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -254,7 +255,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -284,19 +286,30 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "caeed2b75080e0f1",
+  "active": "cedf849cb9f6c173",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Excalidraw/RSA.md",
     "0-HOME.md",
+    "imgs/RSA_project.png",
+    "imgs/MCM.png",
+    "imgs/DENM.png",
+    "imgs/CAM.png",
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
+    "Excalidraw/Scripts/Downloaded",
+    "Excalidraw/Scripts",
+    "Education/RSA/Project.md",
+    "Education/ASE/Project.md",
+    "!Rsa.png.md",
+    "Excalidraw/SRC_1.md",
     "Education/ASE/WIFI.md",
     "Education/ASE/ADCs.md",
     "Education/SRC/Configs.md",
-    "Untitled.md",
     "Education/SRC/Project.md",
-    "Excalidraw/SRC_1.md",
     "Education/SRC/Aula.md",
     "Education/SRC/Report.md",
     "Excalidraw/ASE-Schematic.md",
-    "Excalidraw/RSA.md",
     "Templates/Image Template.md",
     "Templates/Daily note.md",
     "Templates/Book.md",
@@ -309,29 +322,17 @@
     "imgs/image 1.png",
     "imgs/gnutella_structureless.png",
     "imgs/gnutella_response_example.png",
-    "imgs/gnutella_example.png",
-    "imgs/gnutella.png",
-    "imgs/federated.png",
-    "imgs/de-centralized.png",
     "1-TASKS.md",
     "Teamplates/Daily note.md",
     "Teamplates/Book.md",
     "Teamplates/Aula.md",
     "README.md",
-    "Pasted image 20250331094123.png",
-    "Education/RSA/Self-organized systems.md",
-    "Education/RSA/Ad-Hoc Networks.md",
-    "2-PROJECTS.md",
-    "Education/RSA/Vehicular Networks.md",
-    "Education/CLE/Aula.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
     "Education/CLE",
     "Education/ASE",
     "DOCUMENTS/C2.pdf",
-    "DOCUMENTS/SRC",
-    "DOCUMENTS/SD",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
