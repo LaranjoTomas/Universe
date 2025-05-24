@@ -5,6 +5,22 @@
       "path": "Education/SRC/Project_2.md"
     },
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
+    },
+    {
+      "basename": "SD_SCHEMA",
+      "path": "Excalidraw/SD_SCHEMA.md"
+    },
+    {
+      "basename": "Aula",
+      "path": "Education/SD/Aula.md"
+    },
+    {
       "basename": "!Rsa.png",
       "path": "!Rsa.png.md"
     },
@@ -27,10 +43,6 @@
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Project",
@@ -73,20 +85,12 @@
       "path": "Education/ASE/ADCs.md"
     },
     {
-      "basename": "ASE-Schematic",
-      "path": "Excalidraw/ASE-Schematic.md"
-    },
-    {
       "basename": "Excalidraw Collaboration Frame",
       "path": "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg"
     },
     {
       "basename": "Excalidraw Collaboration Frame",
       "path": "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md"
-    },
-    {
-      "basename": "SD_SCHEMA",
-      "path": "Excalidraw/SD_SCHEMA.md"
     },
     {
       "basename": "1-TASKS",
@@ -195,10 +199,6 @@
     {
       "basename": "Lesson",
       "path": "Education/Math/Lesson_1/Lesson.md"
-    },
-    {
-      "basename": "NumPy",
-      "path": "Dev/Python/NumPy/NumPy.md"
     }
   ],
   "omittedPaths": [],

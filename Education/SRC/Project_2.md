@@ -95,3 +95,51 @@ $$ Ratio = Upload / Download $$
 | 192.168.102.64  | 397.879579         |
 | 192.168.102.96  | 393.409704         |
 | 192.168.102.194 | 240.555556         |
+
+
+# Project Todo List
+## Data Analysis
+
+- [ ] Analyze data2.parquet to identify private IPv4 network(s)
+
+- [ ] Identify internal server/services
+
+- [ ] Describe and quantify traffic exchanges from internal users with internal and external servers
+
+- [ ] Describe and quantify traffic exchanges from external users with corporation public servers
+
+  
+
+## SIEM Rules Definition
+
+- [ ] Define rules for detecting internal BotNet activities
+
+- [ ] Define rules for detecting data exfiltration using HTTPS and/or DNS
+
+- [ ] Define rules for detecting C&C activities using DNS
+
+- [ ] Define rules for detecting anomalous external destinations
+
+- [ ] Define rules for detecting anomalous usage of corporate public services by external users
+
+  
+
+## Testing and Identification
+
+- [ ] Test SIEM rules on test2.parquet
+
+- [ ] Test SIEM rules on servers2.parquet
+
+- [ ] Identify and list devices (IP addresses) with anomalous behaviors
+
+  
+
+## Report Preparation
+
+- [ ] Compile analysis of non-anomalous behaviors
+
+- [ ] Document SIEM rules with justifications
+
+- [ ] Document test results and identified anomalous devices
+
+- [ ] Format and finalize report
