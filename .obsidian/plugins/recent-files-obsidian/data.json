@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "RSA",
       "path": "Excalidraw/RSA.md"
     },
     {
       "basename": "Untitled",
       "path": "Untitled.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "SRC_1",
@@ -195,10 +199,6 @@
     {
       "basename": "Updates and Bug Fixes",
       "path": "Updates and Bug Fixes.md"
-    },
-    {
-      "basename": "Frequently Asked Questions",
-      "path": "Frequently Asked Questions.md"
     }
   ],
   "omittedPaths": [],

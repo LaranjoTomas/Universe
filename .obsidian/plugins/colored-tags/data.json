@@ -170,7 +170,9 @@
     "wifi": 146,
     "wireless": 147,
     "RSU": 148,
-    "Vanetza": 149
+    "Vanetza": 149,
+    "Summary": 150,
+    "SD": 151
   },
   "_version": 3
 }
