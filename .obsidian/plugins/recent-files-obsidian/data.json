@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Summary",
-      "path": "Education/SD/Summary.md"
+      "basename": "Written Examination",
+      "path": "Education/CLE/Written Examination.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
     },
     {
       "basename": "RSA",
@@ -195,10 +199,6 @@
     {
       "basename": "User Showcases",
       "path": "User Showcases.md"
-    },
-    {
-      "basename": "Updates and Bug Fixes",
-      "path": "Updates and Bug Fixes.md"
     }
   ],
   "omittedPaths": [],

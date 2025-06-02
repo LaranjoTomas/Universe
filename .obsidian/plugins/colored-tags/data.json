@@ -172,7 +172,9 @@
     "RSU": 148,
     "Vanetza": 149,
     "Summary": 150,
-    "SD": 151
+    "SD": 151,
+    "CLE": 152,
+    "Exam": 153
   },
   "_version": 3
 }
