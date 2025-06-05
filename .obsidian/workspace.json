@@ -24,17 +24,17 @@
             }
           },
           {
-            "id": "c2ca2f766ffe154b",
+            "id": "ceba815411953bd8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/CLE/Written Examination.md",
+                "file": "Education/SD/Written Exam Type.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Written Examination"
+              "title": "Written Exam Type"
             }
           }
         ],
@@ -170,13 +170,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/CLE/Written Examination.md",
+                "file": "Education/SD/Written Exam Type.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Written Examination"
+              "title": "Outline of Written Exam Type"
             }
           },
           {
@@ -223,7 +223,7 @@
             }
           },
           {
-            "id": "76c662d239352b26",
+            "id": "e84616d6028711e8",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -286,11 +286,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "c2ca2f766ffe154b",
+  "active": "ceba815411953bd8",
   "lastOpenFiles": [
+    "Education/SD/Summary.md",
+    "Education/SD/Written Exam Type.md",
     "0-HOME.md",
     "Education/CLE/Written Examination.md",
-    "Education/SD/Summary.md",
     "Untitled 1.md",
     "Ideas/src_2_img1.png",
     "Education/SRC/Project_2.md",
@@ -327,7 +328,6 @@
     "imgs/image 1.png",
     "imgs/gnutella_structureless.png",
     "1-TASKS.md",
-    "Teamplates/Daily note.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",

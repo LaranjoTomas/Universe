@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
-      "basename": "Written Examination",
-      "path": "Education/CLE/Written Examination.md"
+      "basename": "Written Exam Type",
+      "path": "Education/SD/Written Exam Type.md"
+    },
+    {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "Summary",
-      "path": "Education/SD/Summary.md"
+      "basename": "Written Examination",
+      "path": "Education/CLE/Written Examination.md"
     },
     {
       "basename": "RSA",
@@ -195,10 +199,6 @@
     {
       "basename": "00. Study",
       "path": "20 - Work & Study/Study/00. Study.md"
-    },
-    {
-      "basename": "User Showcases",
-      "path": "User Showcases.md"
     }
   ],
   "omittedPaths": [],

@@ -174,7 +174,8 @@
     "Summary": 150,
     "SD": 151,
     "CLE": 152,
-    "Exam": 153
+    "Exam": 153,
+    "Notes": 154
   },
   "_version": 3
 }
