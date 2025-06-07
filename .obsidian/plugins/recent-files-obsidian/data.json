@@ -5,6 +5,22 @@
       "path": "Education/SD/Everything.md"
     },
     {
+      "basename": "itertools",
+      "path": "Dev/Python/Modules/itertools.md"
+    },
+    {
+      "basename": "publisher-subscriber_model",
+      "path": "imgs/publisher-subscriber_model.png"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "server_replication",
+      "path": "imgs/server_replication.png"
+    },
+    {
       "basename": "Summary",
       "path": "Education/SD/Summary.md"
     },
@@ -51,10 +67,6 @@
     {
       "basename": "Written Exam Type",
       "path": "Education/SD/Written Exam Type.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Aula",
@@ -187,18 +199,6 @@
     {
       "basename": "The Odyssey",
       "path": "Books/The Odyssey.md"
-    },
-    {
-      "basename": "Qin",
-      "path": "10 - People/Family/Qin.md"
-    },
-    {
-      "basename": "Mother",
-      "path": "10 - People/Family/Mother.md"
-    },
-    {
-      "basename": "Father",
-      "path": "10 - People/Family/Father.md"
     }
   ],
   "omittedPaths": [],
