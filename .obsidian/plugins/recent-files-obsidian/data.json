@@ -1,12 +1,48 @@
 {
   "recentFiles": [
     {
-      "basename": "Aula",
-      "path": "Education/SD/Aula.md"
+      "basename": "Everything",
+      "path": "Education/SD/Everything.md"
+    },
+    {
+      "basename": "Critical_region_SD",
+      "path": "imgs/Critical_region_SD.png"
+    },
+    {
+      "basename": "cooperating_process",
+      "path": "imgs/cooperating_process.png"
+    },
+    {
+      "basename": "Indep_process",
+      "path": "imgs/Indep_process.png"
+    },
+    {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
+    },
+    {
+      "basename": "Test_preemptiveness_1",
+      "path": "imgs/Test_preemptiveness_1.png"
+    },
+    {
+      "basename": "Test_preemptiveness_2",
+      "path": "imgs/Test_preemptiveness_2.png"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "Written Exam Type",
+      "path": "Education/SD/Written Exam Type.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Aula",
+      "path": "Education/SD/Aula.md"
     },
     {
       "basename": "Configs",
@@ -35,10 +71,6 @@
     {
       "basename": "ADCs",
       "path": "Education/ASE/ADCs.md"
-    },
-    {
-      "basename": "README",
-      "path": "README.md"
     },
     {
       "basename": "Pasted image 20250331094249",
@@ -163,34 +195,6 @@
     {
       "basename": "00. People",
       "path": "10 - People/Family/00. People.md"
-    },
-    {
-      "basename": "One",
-      "path": "10 - People/Colleagues/One.md"
-    },
-    {
-      "basename": "Two",
-      "path": "10 - People/Colleagues/Two.md"
-    },
-    {
-      "basename": "00. Work",
-      "path": "20 - Work & Study/Work/00. Work.md"
-    },
-    {
-      "basename": "00. Study",
-      "path": "20 - Work & Study/Study/00. Study.md"
-    },
-    {
-      "basename": "User Showcases",
-      "path": "User Showcases.md"
-    },
-    {
-      "basename": "Updates and Bug Fixes",
-      "path": "Updates and Bug Fixes.md"
-    },
-    {
-      "basename": "Frequently Asked Questions",
-      "path": "Frequently Asked Questions.md"
     }
   ],
   "omittedPaths": [],

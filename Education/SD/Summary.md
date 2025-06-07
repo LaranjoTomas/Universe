@@ -40,6 +40,8 @@ tags:
 # Middleware and Sockets
 
 - **TCP**: reliable, bidirectional, ....
+- **UDP**
+- **Socket** identified by Ip and port
 
 
 # Remote Invocation Principles
