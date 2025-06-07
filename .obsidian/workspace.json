@@ -22,6 +22,16 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "d249abf83fc7481f",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ]
       }
@@ -218,7 +228,7 @@
             }
           },
           {
-            "id": "972aabbc3b650454",
+            "id": "e623fb52618fc247",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -283,10 +293,14 @@
   },
   "active": "a4b397a05669a3b0",
   "lastOpenFiles": [
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
+    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
+    "Excalidraw/Scripts/Downloaded",
+    "Excalidraw/Scripts",
+    "0-HOME.md",
     "configs.md",
     "Education/SRC/Configs.md",
     "Excalidraw/SRC_1.md",
-    "0-HOME.md",
     "configs 1.md",
     "Education/SRC/Project.md",
     "Education/SRC/Report.md",
@@ -318,17 +332,13 @@
     "Teamplates/Daily note.md",
     "Teamplates/Book.md",
     "Teamplates/Aula.md",
-    "README.md",
     "Pasted image 20250331094123.png",
-    "Education/RSA/Self-organized systems.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
     "Education/CLE",
     "Education/ASE",
     "DOCUMENTS/C2.pdf",
-    "DOCUMENTS/SRC",
-    "DOCUMENTS/SD",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",

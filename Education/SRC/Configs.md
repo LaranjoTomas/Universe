@@ -254,6 +254,7 @@ set firewall name OUTSIDE-DMZ rule 40 action accept
 set firewall name OUTSIDE-DMZ rule 40 description "Allow DNS to DMZ"
 set firewall name OUTSIDE-DMZ rule 40 destination port 53
 set firewall name OUTSIDE-DMZ rule 40 protocol udp
+set firewall name OUTSIDE-DMZ rule 50 enable-statistics
 set firewall name OUTSIDE-DMZ rule 999 action drop
 set firewall name OUTSIDE-DMZ rule 999 description "Drop all other traffic"
 commit
@@ -533,6 +534,13 @@ interface FastEthernet 1/0
  switchport access vlan 1
  no shutdown
 exit
+### IPsec Profiles
+crypto ipsec transform-set TSET esp-aes esp-sha-hmac
+crypto ipsec profile VLAN10-IPSEC
+ set transform-set TSET
+crypto ipsec profile VLAN20-IPSEC
+ set transform-set TSET
+exit
 ### VLAN Interfaces
 interface Vlan10
  description VLAN10-Network
@@ -608,14 +616,6 @@ interface Tunnel20
  tunnel mode ipsec ipv4
  tunnel protection ipsec profile VLAN20-IPSEC
 exit
-### IPsec Profiles
-crypto ipsec transform-set TSET esp-aes esp-sha-hmac
-crypto ipsec profile VLAN10-IPSEC
- set transform-set TSET
-crypto ipsec profile VLAN20-IPSEC
- set transform-set TSET
-exit
-
 # SWL3 C2
 
 ### Core switch with VRRP for high availability
