@@ -5,6 +5,14 @@
       "path": "Education/SD/Everything.md"
     },
     {
+      "basename": "3-BOOKS",
+      "path": "3-BOOKS.md"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
       "basename": "itertools",
       "path": "Dev/Python/Modules/itertools.md"
     },
@@ -59,10 +67,6 @@
     {
       "basename": "Test_preemptiveness_2",
       "path": "imgs/Test_preemptiveness_2.png"
-    },
-    {
-      "basename": "README",
-      "path": "README.md"
     },
     {
       "basename": "Written Exam Type",
@@ -195,10 +199,6 @@
     {
       "basename": "00. Cardbox",
       "path": "50 - Zettelkasten/00. Cardbox.md"
-    },
-    {
-      "basename": "The Odyssey",
-      "path": "Books/The Odyssey.md"
     }
   ],
   "omittedPaths": [],

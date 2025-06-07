@@ -318,4 +318,207 @@ Unlike the traditional client-server model, the publisher-subscriber model invol
 - Mail clients act as both **publishers** (sending messages) and **subscribers** (receiving messages).
 - Buyers act as **subscribers** requesting product information from the trading platform.
 - The trading platform itself acts as the **broker**, managing transactions between sellers and buyers.
-- 
+![[e-mail_model.png]]
+
+## Fundamental Models in Distributed Systems
+
+In distributed systems, where processes cooperate and communicate over a network, **performance** depends heavily on the efficiency of message exchange. When remote services are involved, response times rely not only on server load and performance but also on network routing, transfer capabilities, and delays in software components. 
+To achieve fast interactive responses, systems should have:
+- Few software layers
+- Small amounts of data transferred per interaction
+
+However, **performance** is not the only concern; other quality attributes include:
+- **Reliability**
+- **Security**
+- **Adaptability** to changing configurations and resource availability
+
+For time-critical applications, ensuring necessary computing and network resources are available at the right times is essential.
+
+### Performance of a Communication Channel
+Communication channels may be realized by continuous data streams or by message passing. Key properties include:
+- **Latency:**  
+    The delay from when the sender starts transmitting to when the receiver starts receiving. It depends on OS processing times, network access delays, and routing overhead.
+- **Bandwidth:**  
+    The total amount of data that can be transmitted over the network in a given time.
+- **Jitter:**  
+    The variation in time to deliver a sequence of similar messages between endpoints.
+
+### Variants of the Interaction Model
+
+Distributed systems vary in timing guarantees, spanning two extremes:
+- **Synchronous Distributed Systems:**
+    - Each process step’s execution time has known lower and upper bounds.
+    - Message delivery has a known upper bound.
+    - Local clocks have a bounded drift from real time.
+- **Asynchronous Distributed Systems:**
+    - Each process step’s execution time has an arbitrary (but finite) upper bound.
+    - Message delivery has an arbitrary (but finite) upper bound.
+    - Local clocks may drift arbitrarily from real time. 
+
+### Failure Model
+In distributed systems, processes and communication channels can fail, deviating from their intended behavior. Failure types include:
+- **Omission Failures:**  
+    Prescribed actions do not occur.
+- **Timing Failures:**  
+    Actions occur but do not meet timing constraints.
+- **Arbitrary (Byzantine) Failures:**  
+    Unexpected errors occur temporarily or permanently due to malfunction in any component.
+
+### Failure classification
+
+![[Failure_classification_sd.png]]
+
+### Security Model
+
+Security in distributed systems is ensured by protecting processes, communication channels, and resources from unauthorized access.
+- Resources may have different access rights, supporting privacy and sharing across various user classes.
+- An **authority (principal)**—a user or process—is associated with each operation invocation and result.
+- The **server** verifies the principal's identity and access rights before performing operations or rejects requests otherwise.
+- The **client** verifies the server’s identity to ensure replies come from the intended server.
+
+An **enemy** (adversary) is assumed capable of:
+- Sending arbitrary messages to any process.
+- Reading any message exchanged between processes.
+The adversary might connect legitimately or unauthorized to the network.
+Threats include:
+- **Threats to Processes:**  
+    Processes may receive messages whose sender identity they cannot verify.
+- **Threats to Communication Channels:**  
+    The adversary may copy, alter, or inject messages in transit, threatening privacy, integrity, and availability.
+    
+
+# Message Passing
+## Communication systems
+
+### Performance
+- **Key Performance Factors**:
+  - **Latency**: The delay between sending a message and the start of reception (equivalent to sending an empty message)
+  - **Data Transfer Rate**: The speed at which data is transmitted between sender and receiver
+  - **Bandwidth**: System throughput, measured as the volume of message traffic processed per unit of time
+  - **Total Transmission Time** = $$ Latency + \frac{Message Length}{Data Transfer Rate} $$
+- **Quality of Service (QoS)**:
+  - Defines the system's ability to meet **deadline constraints** for **transmitting and processing** **continuous data flows***
+  - Requirements: **Latency** must stay **below** a defined **upper limit**, and **bandwidth** must stay **above** a defined **lower limit**
+  
+- **Reliability and Error Handling**:
+  - Modern **communication systems** are **highly reliable**
+  - **Failures** are more often caused by **software errors** than network issues
+  - Error detection and correction is delegated to applications (following the end-to-end argument)
+
+### Communication Abstraction
+- **Communication systems** should be **integrated and abstract**, **hiding** the complexity of **underlying physical networks**
+- **Network software** is organized in a **hierarchy of layers** for a structured approach
+- Each layer presents an **interface** to the **layer above**, describing the communication system logically
+- Data encapsulation occurs at each layer:
+  - **Sending side:** Each layer receives data from above, encapsulates it, and passes it down
+  - **Receiving side:** Data is processed in reverse, with each layer removing encapsulation and passing it upward
+## Programming Interface
+### Middleware and Sockets
+#### Role of Middleware
+- Middleware provides an **abstraction layer** for communication between processes that do **not share an address space**.
+- It introduces a communication device known as a **socket**, which serves as an endpoint for inter-process communication.
+![[MiddleWare and sockets.png]]
+#### Socket Characteristics
+
+A **socket** is uniquely identified by:
+- **IP Address** – Identifies the host computer system.
+- **Port Number** – Specifies the endpoint of a communication channel within that system.
+
+## Transmission Control Protocol (TCP)
+
+- **Connection-Oriented:** A virtual communication channel must be established before any data exchange.
+- **Bidirectional:** Once connected, data flows in both directions between endpoints.
+- **Asymmetric:** Designed for the **client-server model**, where each endpoint has a distinct role.
+### TCP Protocol
+- **Client Side**:
+  1. Instantiate Communication Socket
+  2. Connect to Server (using server's public address)
+  3. Open Input & Output Streams
+  4. Write Request to the server
+  5. Read Reply from the server
+  6. Close Streams & Communication Socket
+
+- **Server Side**:
+  1. Instantiate Listening Socket (binds to server's public address)
+  2. Continuously Listen for client connection requests
+ 
+  3. When a request arrives:
+     - Instantiate Communication Socket for client
+     - Create and Start a Service Proxy Agent
+
+  4. Within Service Proxy Agent:
+     - Open Input & Output Streams
+     - Read Request from Client
+     - Execute Local Processing
+     - Write Reply to Client
+     - Close Streams & Communication Socket
+## User Datagram Protocol (UDP)
+
+- **Connectionless:** No need to establish a communication channel before sending data.
+- **Unidirectional:** Designed to send a single message from one endpoint to another.
+- **Symmetric:** No predefined roles; both endpoints act equivalently.
+### UDP Protocol
+
+- **Socket Types**:
+  - Unlike TCP, UDP does not require a connection before data exchange
+  - Messages (datagram packets) are sent directly from sender to receiver
+  - **Receiving Socket**: Instantiated by the receiver at a specific port, listens for incoming packets from multiple sources
+  - **Sending Socket**: Instantiated by the sender to transmit packets, can send messages to multiple destination addresses
+
+- **Communication Flow**:
+  - **Source Side**:
+    1. Instantiate Send Socket
+    2. Convert Message to Byte Array
+    3. Instantiate Data Packet (containing the byte array and destination address)
+    4. Send Data Packet to the receiver
+  - **Destination Side**:
+    1. Instantiate Receive Socket (binds to a public address/port)
+    2. Receive Data Packet from the network
+    3. Convert Byte Array to Message
+    4. Process the Received Message
+
+## Transformation Principles
+
+- **Changes for Distributed Execution**:
+  - **Minimal modifications** should be applied to the **interaction mechanism** among entities
+  - **Cooperating processes and shared resources** reside in **different computer systems (no shared address space)**
+### Implications for Remote Method Invocation:
+- **Method invocation** must occur via explicit message exchange:
+  - A **request message** is sent for method invocation
+  - A **response message** is sent back with the return value
+- **Message Content**
+  - Must include **method parameters and return values**
+  - Must carry **caller process attributes** relevant to execution
+- **Pass-by-Value Requirement**
+  - All parameters must be **passed by value** since **direct memory sharing is not possible** 
+
+### Message representation and Interpretation
+- Messages are transmitted through **communication channels**.
+- At the **lowest level**, a message is simply an **array of bytes**.
+- Since the client and server are **separate programs**, the receiver must be able to **correctly interpret** the incoming byte array.
+
+Ensuring Proper Message Interpretation. A well-formed message must include:
+- **Parameter values**
+- **Parameter types**
+- **Data structure information**
+
+### Marshaling and Unmarshaling
+#### Marshaling
+- The process of **converting parameters and data** into a structured message for transmission over the network.
+#### Unmarshaling
+- The reverse process: **extracting parameter values** from a received byte array for interpretation by the receiver.
+
+Java **automatically handles** marshaling and unmarshaling, developers only need to define the message types as implementing the **Serializable** interface.
+
+## Client Architecture
+
+### Changes in the Main Thread Execution
+
+- **Previously**:  
+    The main thread was responsible for instantiating:
+    - Cooperating processes
+    - Shared resource (locally)
+- **Now**:
+    - The **shared resource resides remotely** in a different address space.
+        
+    - It **cannot be instantiated locally**.
