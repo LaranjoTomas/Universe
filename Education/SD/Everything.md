@@ -520,5 +520,152 @@ Java **automatically handles** marshaling and unmarshaling, developers only need
     - Shared resource (locally)
 - **Now**:
     - The **shared resource resides remotely** in a different address space.
-        
     - It **cannot be instantiated locally**.
+
+### Remote Reference (Stub)
+- A **remote reference (stub)** is instantiated in place of the actual shared resource.
+#### Stub Instantiation Parameters:
+- Server’s **Internet address**
+- Server’s **listening port**
+- Any **other initialization values** must be sent using a **method invocation** on the stub.
+#### Responsibilities of the Stub:
+- Intercept method calls on the shared resource.
+- Convert them into **message exchanges**.
+- Send **requests** to the server.
+- Receive and return **responses** to the caller.
+### Stub for the Shared Resource
+
+#### Structure:
+Acts as a **proxy for remote method invocation**.
+##### Stub Operation Steps (Per Method Call):
+1. **Open Communication Channel**  
+    (e.g., TCP socket connection to the server)
+2. **Create Outgoing Message**  
+    Contains:
+    - Method identification
+    - Parameters
+    - Caller process attributes
+3. **Send Message** to the server
+4. **Receive and Validate Response**
+5. **Update Caller State**  
+    (based on the result)
+6. **Close Communication Channel**
+7. **Return Method Result**
+### Data Type Changes
+In the **Main Thread**:
+- Replace instantiation of the actual shared resource with its **stub**.
+- **Initialization values** are sent via a method call on the stub.
+- Add logic to call `shutdown()` on the stub if the server must be shut down.
+In the **Cooperating Processes**:
+- Pass the **stub reference** instead of the shared resource reference.
+### Data Type for Communication Channel
+Encapsulates all **socket operations**:
+- Connection setup
+- Message transmission
+- Message reception
+- Connection termination
+### Data Type for Messages
+#### Design Options:
+1. **Single Message Type**  
+    One data structure that handles all message scenarios.
+2. **Multiple Message Types**  
+    Separate structures for:
+    - Requests
+    - Replies
+    - Errors
+    - Specific method calls
+
+## Server Architecture
+
+### Base Thread (Main Server Thread)
+- The **shared resource** is passive and **instantiated by the base thread**.
+- A **communication channel (socket)** is opened to listen on a **public address**.
+- Upon receiving a request:
+    1. A **Service Proxy Agent Thread** is created.
+    2. The base thread immediately resumes listening.
+    3. This model supports **server replication**, enabling concurrent request handling.
+
+### Service Proxy Agent (Per-Request Handler)
+- Receives and **decodes the incoming message**.
+- **Extracts process attributes** from the message.
+- Becomes a **client clone** by initializing those attributes.
+- **Invokes the method** on the shared resource.
+- Builds and sends a **response message** back to the client.
+- **Closes the communication channel** and self-terminates.
+
+### Key Data Types
+#### 1. Main Thread (Server Base Thread)
+- **New type** but largely reusable across servers.
+- Required Customizations:
+    - The **public address** for service exposure.
+    - Specific **shared resource instantiation**.
+    - Server-specific **resource interface instantiation**.
+
+#### Service Proxy Agent Thread
+- **New type**, generally reusable.
+- Must:
+    - **Implement interfaces** of all possible client classes.
+    - Provide methods to **set/get client attributes**.
+
+#### Interface to the Shared Resource
+- **New**, invariant across implementations.
+- Public method:
+    - `processAndReply()` – performs the entire service lifecycle:
+        1. **Validate incoming message**
+        2. **Decode and extract client attributes**
+        3. **Invoke resource logic**
+        4. **Construct and return response message**
+
+#### Shared Resource
+- Mostly unchanged.
+- Modification:
+    - Replace references to cooperating processes with **service proxy agent references**.
+
+#### Communication Channel
+- **New type**, used by both server and proxy agents.
+- Responsibilities:
+    - **Socket creation and handling**
+    - **Sending/receiving messages**
+    - **Managing the connection lifecycle**
+
+#### Message Data Type
+- **Shared between client and server**
+- Supports:
+    - **Serialization / marshaling**
+    - **Parameter encoding**
+    - **Reply formatting and decoding**
+
+## Mixed Architecture
+
+### Key Concept
+- In complex **distributed systems**, multiple **servers** are involved.
+- A **server** may:
+    - Provide services to clients.
+    - **Request services** from other servers.
+- Thus, a single server often **acts both as a client and a server**.
+
+### Implementation Approach
+- The dual role introduces **no conceptual complexity**:
+    - The server **accepts requests** like any other server.
+    - It also **sends requests** like a client.
+- This leads to a **mixed architecture**, where:
+    - Each server includes both **client and server modules**.
+    - The **server role** handles **incoming service requests**.
+    - The **client role** initiates **outgoing requests** to other services.
+
+#### Structural Adjustments
+##### 1. Dual Instantiation
+Each Server must instantiate:
+- A **listening socket:** for receiving client or peer server requests
+- A **communication module:** for sending requests to other servers.
+##### 2. Unified Message Format
+- Message Structures remain **consistent** across roles
+- Supports seamless marshaling/unmarshaling and interpretation
+##### 3. Concurrency Management
+- Essential to handle:
+	- Multiple **incoming connections** (server side)
+	- Multiple **outgoing connections** (client side)
+- Proper synchronization and thread management are critical for:
+	- **Responsiveness**
+	- **Scalability**
+	- **Reliability**

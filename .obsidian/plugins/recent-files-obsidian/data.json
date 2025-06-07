@@ -5,12 +5,16 @@
       "path": "Education/SD/Everything.md"
     },
     {
-      "basename": "3-BOOKS",
-      "path": "3-BOOKS.md"
-    },
-    {
       "basename": "README",
       "path": "README.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "3-BOOKS",
+      "path": "3-BOOKS.md"
     },
     {
       "basename": "itertools",
@@ -19,10 +23,6 @@
     {
       "basename": "publisher-subscriber_model",
       "path": "imgs/publisher-subscriber_model.png"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "server_replication",
