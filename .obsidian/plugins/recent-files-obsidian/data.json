@@ -5,6 +5,26 @@
       "path": "Education/SD/Everything.md"
     },
     {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
+    },
+    {
+      "basename": "Figure_1",
+      "path": "imgs/Figure_1.png"
+    },
+    {
+      "basename": "rocky_beach_2",
+      "path": "imgs/rocky_beach_2.png"
+    },
+    {
+      "basename": "Hoare_monitor",
+      "path": "imgs/Hoare_monitor.png"
+    },
+    {
+      "basename": "header 1",
+      "path": "imgs/header 1.png"
+    },
+    {
       "basename": "Critical_region_SD",
       "path": "imgs/Critical_region_SD.png"
     },
@@ -15,10 +35,6 @@
     {
       "basename": "Indep_process",
       "path": "imgs/Indep_process.png"
-    },
-    {
-      "basename": "Summary",
-      "path": "Education/SD/Summary.md"
     },
     {
       "basename": "Test_preemptiveness_1",
@@ -95,10 +111,6 @@
     {
       "basename": "image",
       "path": "imgs/image.png"
-    },
-    {
-      "basename": "header",
-      "path": "header.png"
     },
     {
       "basename": "Trigonometry",
@@ -187,14 +199,6 @@
     {
       "basename": "Father",
       "path": "10 - People/Family/Father.md"
-    },
-    {
-      "basename": "Daughter",
-      "path": "10 - People/Family/Daughter.md"
-    },
-    {
-      "basename": "00. People",
-      "path": "10 - People/Family/00. People.md"
     }
   ],
   "omittedPaths": [],
