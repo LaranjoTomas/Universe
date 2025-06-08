@@ -861,3 +861,168 @@ Upon receiving the response, the client estimates the round-trip time (RTT) and 
 3. **Reply is sent** at **UTC time** tUTC 2
 	- Reaches client at **local time** t2 after message delay tM2.
 
+Assuming one message experienced **minimum delay (t_{MIN})**  the **worst-case uncertainty** is:
+$$ \triangle est = \frac{t_{2} - t_{1}}{2} - t_{MIN} $$
+
+### Berkeley algorithm
+
+Is an **internal clock synchronization** method used when **no UTC time source is available**. Ensures that all **processing nodes** maintain **synchronized local clocks**.
+
+Periodically, one node is elected or designated as the **master node**.
+The master **proactively polls** all nodes in the system asking for current time.
+After the master:
+1. **Calculates the average time offset** between itself and other nodes
+2. **Computes the correction** needed for each node to align with the average
+3. **Sends back the offset corrections**
+Each node then adjusts its clock based on the received correction.
+
+![[Berkeley_algorithm_sd.png]]
+### Network Time Protocol
+
+**NTP** is designed specifically for **global synchronization over the Internet**.
+#### **Goals of NTP:**
+- **Accurate synchronization:** Any computer system connected to the internet is able to adjust its local clock
+- **Timely adjustments:** clock corrections at a **frequent rate** prevents drift
+- **Resilience to disconnection:** 
+- **Security and robustness:**
+
+NTP relies on **hierarchical structure** of time servers, organized into multiple **levels called strata**.
+
+![[NTP_strata.png]]
+- **Stratum 1:** These are **primary server** that are directly connected to a UTC source. Serve as root of the hierarchy
+- **Stratum 2 and below:** Secondary servers, synchronizes clocks with one or more servers in **stratum n-1**
+- **Lateral coordination:** Servers in same stratum can also synch with each other
+As u move down the hierarchy the **uncertainty of time info increases.**
+
+# Logical Clocks
+
+Introduced by Lamport, provide a way to order events in distributed sysmtes without relying on synchronized physical clocks. 
+**Logical Clocks** capture **causal relationships** and **information flow** between processes.
+
+### What is an Event?
+Represents any significant activity within a process. **Message sending** and **message receiving** are important for synch.
+
+## Principles of Event Ordering
+
+Two fundamental principles:
+- **Intra-process ordering:** Events occuring in same process, happen in the order perceived by that process 
+- **Inter-process message causality:** If a process sends a message to another, the sending event must logically occur before the receiving event.
+These principles ensure causality is preserved.
+
+### Classification of Event pairs
+
+They are classified as:
+- **Sequential events:** is **possible to determine** that one event happened before the other
+- **Concurrent:** No causal or temporal relationship; neither event can be said to have happened before the other
+
+## Lamport’s Happened-Before relation
+
+Leslie Lamport introduced a foundational concpet for event, denoted as:
+$$ e ≺ e' $$
+This relation defines a **partial order** on events
+
+**Formal Definition**
+1. **Intra-process order (local program order):**
+	if e and e' occur in the same process pi, and e precedes e', then e ≺ e'
+2. **Message causality:**
+	if e = send(m) and e' = receive(m), then e ≺ e'
+3. **Transitivity:**
+	if e≺e' and e'≺e'', then e≺e''
+
+![[ex1_lamport-relation.png]]
+**Sequencial Events:**
+$$ d \prec j \wedge j \prec k \wedge k \prec c, \Rightarrow d \prec c $$
+**Concurrent Events:**
+
+$$ \neg (f \prec c) \wedge \neg(c \prec f), \Rightarrow f \parallel c   $$
+$$ \neg (a \prec l) \wedge \neg(l \prec a), \Rightarrow a \parallel l   $$
+
+## Scalar Logical Clock
+
+Each process $p_{i}$ maintains a logical Clock $C_{k}$  that tracks event ordering without relying on physical time. 
+1. **Initialization:** 
+	The logical clock starts at zero $$C_{k_{i}} = 0$$
+2. **Local Event Occurrence:** 
+	When a process performs a local event, increments its clock by a constant $$ C_{k_{i}} \leftarrow C_{k_{i}} + a_{i} $$
+3. **Message Sending:**
+	Before sending a message, the process increments its clock $$ C_{k_{i}} \leftarrow C_{k_{i}} + a_{i} $$
+	It then attaches the timestamp $T_{S} = C_{k_{i}}$ 
+4. **Message Reception:**
+	Upon receiving a message with timestamp $t_{s}$ , the process updates its clock as $$ C_{k_{i}} \leftarrow max(C_{k}, t_{s}) $$
+	then it increments the clock for the receive event $$ C_{k_{i}} \leftarrow C_{k_{i}} + \alpha_{i} $$
+	This mechanism guarantees that the logical clock values respect Lamport's relation
+
+### Synchronized Replicas
+
+In distributed systems with replicated data, ensuring **permanent synchronization** across all replicas is critical. Without coordination, concurrent write operations can lead to inconsistent states.
+#### The Challenge
+Write operations must:
+- Be applied in the same order on all replicas.
+- Be reliably delivered.
+- Handle concurrency to avoid divergence.
+
+To achieve this, two main **synchronization requirements** must be met:
+1. **Propagation Before Execution**: A process must inform all replicas before applying a change.
+2. **Uniform Execution Order**: All replicas must execute operations in the same global order, regardless of arrival time.
+
+These guarantees depend on the system assuming:
+- No process failures.
+- No message loss.
+
+### Lamport's Algorithm for Synchronization
+
+Lamport proposed a method using **logical clocks** and **priority queues** to ensure consistent update ordering across replicas.
+#### Algorithm Overview
+1. **Operation Intent**:  
+    When a process wants to modify a replica, it timestamps the operation using its logical clock.
+2. **Broadcast**:  
+    The timestamped message is sent to all other processes, including itself.
+3. **Message Handling**:  
+    Upon receipt, each process:
+    - Updates its logical clock per Lamport’s rules.
+    - Inserts the operation into a local priority queue, sorted by timestamp and process ID (to break ties).
+4. **Acknowledgment**:  
+    Every process acknowledges each received message, even its own.
+5. **Execution**:  
+    A process executes the operation **only when**:
+    - It’s at the head of its queue.
+    - It has received acknowledgments from all group members.
+This ensures that all processes apply all updates in the **same order**, achieving **strong consistency** across replicas.
+## Vector Logic Clock
+
+Lamport’s scalar clocks capture causality only in one direction:  
+If `e → e'` then `C(e) < C(e')`,  
+but the reverse is not always true. This limitation means scalar clocks can't definitively detect concurrency
+
+### Why Vector Clocks?
+
+To solve this, **Mattern (1989)** and **Fidge (1991)** introduced **vector clocks**. Unlike scalar clocks, vector clocks track both:
+- A process’s local event history
+- Its partial knowledge of other processes’ histories
+This enables accurate detection of:
+- **Causality**: `VC(e) < VC(e') ⇔ e → e'`
+- **Concurrency**: `VC(e) ∥ VC(e')` (neither precedes the other)
+
+### How Vector Clocks Work
+
+Each process `pᵢ` maintains a vector `Vᵢ` of size `N` (number of processes):
+- `Vᵢ[i]`: count of events at `pᵢ`
+- `Vᵢ[j]`: latest known count of events at `pⱼ`, based on received messages
+#### Vector Clock Update Rules:
+1. **Initialization**:  
+    `Vᵢ[j] = 0` for all `j`
+2. **Local Event at pᵢ**:  
+    `Vᵢ[i] += 1`
+3. **Sending a Message**:
+    - First: `Vᵢ[i] += 1`
+    - Then: attach a **copy** of `Vᵢ` to the message
+4. **Receiving a Message with Timestamp `ts`**:  
+    For all `j`: `Vᵢ[j] = max(Vᵢ[j], ts[j])`  
+    Then update local clock: `Vᵢ[i] += 1`
+
+### Comparing Vector Timestamps
+
+Given two vector timestamps `V` and `V′`:
+- `V = V′` ⇔ all components equal
+- `V < V′` ⇔ all components of `V` ≤ `V′`, and at least one is strictly less
+- If neither `V < V′` nor `V′ < V`, then `V ∥ V′` (events are **concurrent**)
