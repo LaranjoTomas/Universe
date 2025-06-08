@@ -5,8 +5,24 @@
       "path": "Education/SD/Everything.md"
     },
     {
+      "basename": "Работа с регулярными выражениями",
+      "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
+    },
+    {
       "basename": "README",
       "path": "README.md"
+    },
+    {
+      "basename": "3-BOOKS",
+      "path": "3-BOOKS.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "Singleton",
+      "path": "Dev/Python/Modules/Singleton.md"
     },
     {
       "basename": "2-PROJECTS",
@@ -31,10 +47,6 @@
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
-    },
-    {
-      "basename": "3-BOOKS",
-      "path": "3-BOOKS.md"
     },
     {
       "basename": "itertools",
@@ -107,10 +119,6 @@
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
     },
     {
       "basename": "Raspberry Pi server",
@@ -191,14 +199,6 @@
     {
       "basename": "Main C Vulnerabilities",
       "path": "Dev/C/Main C Vulnerabilities.md"
-    },
-    {
-      "basename": "Basic functions for memory management",
-      "path": "Dev/C/Memory management/Basic functions for memory management.md"
-    },
-    {
-      "basename": "Logo ideas",
-      "path": "Dev/Logo ideas.md"
     }
   ],
   "omittedPaths": [],

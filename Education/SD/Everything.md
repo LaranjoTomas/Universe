@@ -1057,5 +1057,243 @@ To manage shared object access, a **guardian process** (or coordinator) is intro
 This approach ensures **mutual exclusion** but at the cost of added overhead and a critical dependency on a single coordinator.
 
 #### Logic Ring
+Processes are organized in a circular structure with strict communication rules and controlled access to shared resources.
+#### **Structure & Communication Rules**
+- **Ring Configuration**: Processes are logically connected in a circle (closed comm loop).
+- Each process $p_{i}$​ can:
+    - **Receive messages** from $p_{(i-1)}|N|$ (its predecessor),
+    - **Send messages** to $p_{(i+1)}|N|$ (its successor),  
+        where N is the total number of processes.
+#### **Token Passing Mechanism**
+- A special message called a **token** circulates around the ring.
+- Only the **process holding the token** is allowed to access the **shared resource** (e.g., a critical section, file, or device).
+- Once done, the process passes the token to its successor.
 
 ![[Logic_ring_SD.png]]
+#### **Token-Based Access Protocol (Ring Topology)**
+**Mechanism**:
+- A **single token** circulates among all processes.
+- Only the process holding the token can access the shared resource.
+**Requesting Access**:
+- If process $p_{i}$ **needs access**:
+    - It **waits for the token**.
+    - Upon receiving the token, it accesses the object.
+    - After finishing, it sends the token to $p_{(i+1)}|N|$​.
+- If $p_{i}$​ **doesn't need access**:
+    - It **immediately forwards the token** to the next process.
+
+- **Message Overhead**  
+    A message is exchanged in every cycle, regardless of whether any process actually needs to access the shared object. This means there's a constant communication cost, even when the system is idle.
+- **Efficiency in Small Groups**  
+    The protocol performs very well when the number of participating processes is small. The token circulates quickly, leading to minimal waiting time for access.
+- **Scalability Limitation**  
+    As the number of processes increases, the system becomes less responsive. A process may wait a long time to receive the token, even if no other process is actively using the shared resource. This delay is due to the strict circulation order of the token, which cannot be bypassed.
+
+### Mutual Exclusion with Logical Clocks
+**Ricart and Agrawala (1981)** proposed a distributed algorithm for achieving **mutual exclusion** among _N_ processes. The key idea is to 
+**order access requests** using **Lamport logical clocks** to avoid conflicts and ensure fairness.
+#### Consensus on Access Order
+- Every process in the system maintains agreement on the **total order** of access requests.
+- This ordering ensures a **global consensus** when deciding **who gets access** to a shared resource.
+- Requests are only granted when:
+    - The request is the **earliest** in the logical clock order.
+    - All other processes have either:
+        - Not made a request, or
+        - Sent a reply acknowledging the request.
+
+![[Total Ordering of Events_sd.png]]
+
+Every message includes a **logical timestamp** of the sending event. Upon receiving a message, a process **updates its logical clock** based on **Lamport's clock rules** (i.e., take the max of local and received timestamps + 1).
+### Extended Timestamps for Total Order
+- To achieve **total ordering**, each access request is tagged with an **extended timestamp**:  
+    `(ts(m), id(m))`  
+    Where:
+    - `ts(m)` = logical timestamp of the message
+    - `id(m)` = sender’s process ID
+- This pair helps:
+    - Break **ties** when timestamps are equal.
+    - Establish a **deterministic total order** of events.
+#### Message Overhead
+- Each critical section access requires `2(N−1)` messages:
+    - `(N−1)` **request** messages
+    - `(N−1)` **grant** (reply) messages
+#### Efficiency vs Scalability
+- **Efficient for small groups**: fewer messages and fast coordination.
+- **Scalability limitation**:
+    - Message count increases quickly with **larger process groups**.
+    - Can become **communication-intensive**.
+#### Group-Based Permission Model (Maekawa, 1985)
+- Mutual exclusion without contacting **all** processes.
+- Each process belongs to a **subset (group)** of processes.
+- To access a shared object, a process needs **permission from all group members**.
+#### Ensuring Mutual Exclusion
+- Groups are **not disjoint**—they must **intersect**.
+- This guarantees:
+    - No two processes can **simultaneously** enter the critical section.
+    - There's always at least one process common to conflicting requests.
+#### Permission by Voting
+- Access is granted using a **voting mechanism**:
+    - A process can enter the critical section **only after receiving all votes** from its group.
+    - Each process can vote for **only one** requester at a time.
+
+### Minimizing the Number of Messages
+
+To reduce communication overhead in distributed mutual exclusion, an approximate voting group structure can be used.
+- Processes are organized in a √N × √N matrix.
+- Each process belongs to exactly **two voting groups**:
+    - One corresponding to its **row**
+    - One corresponding to its **column**
+This design ensures that:
+- Every pair of processes shares at least one group (intersection property)
+- Total message complexity per access becomes **O(√N)** instead of O(N)
+Each access involves approximately **3 × O(√N)** messages **(requests, grants, and releases within the groups)**, making the protocol much more **scalable and efficient** for large systems.
+
+#### Correctness Issue: Potential Deadlock
+While Maekawa’s method is efficient, it **can lead to deadlock** due to circular wait conditions.
+##### Solution: Enforcing Order
+To prevent deadlock:
+- Assign a **total order** to all requests using Lamport timestamps or logical clocks.
+- Each voter grants permission only to the **earliest request**.
+- Processes maintain a **priority queue** of pending requests ordered by timestamp.
+When a process finishes using the shared resource:
+- It releases its vote to the next process in its queue.
+An alternative safeguard involves a **fallback mechanism**:
+- Use a **centralized coordinator** or a **token-based system** during high contention to guarantee forward progress.
+
+### Election Procedure in Symmetric Process Groups
+A **leader** may need to be elected to perform a task (e.g., coordination, resource management). Even though all processes are peers, the system must satisfy key properties for correctness:
+- **Termination**: The election finishes in a finite number of steps.
+- **Unambiguity**: Only one process is elected.
+- **Consensus**: All processes agree on the elected leader.
+These conditions ensure that the election process is both reliable and deterministic, even in a fully distributed setting.
+
+##### System Assumptions for Election Protocols
+Before running any election algorithm, certain conditions about the system are assumed:
+- **Fixed Process Group**:  
+    The number of processes is known and does not change.
+- **Process States**:  
+    A process is either:
+    - _Alive and executing_, or
+    - In _catastrophic failure_ (i.e., fully unresponsive or crashed).
+- **Message Transmission Timing**:  
+    Message delivery time is bounded, allowing the use of **timeouts** to detect failures.
+- **Communication Reliability**:  
+    Messages can be **lost**, so protocols must include:
+    - Retransmissions
+    - Acknowledgments
+
+##### Ring-Based Election: Initialization
+- Initially, **no election is in progress** and all processes are in the **non-participant** state.
+- **Any process** can start an election:
+    - Sets its state to _participant_
+    - Sends a `start election` message to the **next process in the ring**
+    - Message includes the sender's **process ID**
+
+##### Handling start election Messages
+When a process receives a `start election` message, it compares the message's ID to its own:
+- **Case 1: message ID < own ID**
+    - Forwards the message unchanged to the next process
+    - Becomes a _participant_ (if not already)
+- **Case 2: message ID > own ID**
+    - If not a participant:
+        - Replaces message ID with its own ID
+        - Forwards it to the next process
+        - Sets state to _participant_
+    - If already a participant:
+        - Discards the message to reduce traffic
+- **Case 3: message ID = own ID**
+    - The process has received its own ID back — it is now the **elected leader**
+##### Leader Announcement
+Once a process has been elected:
+- It sends an `elected` message containing its own ID to the next process.
+### Handling `elected` Messages
+- Every process receiving the `elected` message:
+    - **Resets participation state** to _non-participant_
+- **If leader ID ≠ own ID**:
+    - Stores the new leader’s ID
+    - Forwards the message
+- **If leader ID = own ID**:
+    - Discards the message — the election process has completed
+##### Failure and Recovery
+###### Failure Detection
+- Use **timeouts** to detect failures:
+    - If no message is received from the next process within a given time, assume it has failed.
+###### Bypassing Failed Processes
+- On detecting failure:
+    - **Skip the failed process** and forward the message to the next alive process
+    - This requires:
+        - Maintaining a **local view** of the ring
+        - Or relying on an **external failure detector**
+
+### Failure and Recovery in Election Protocols
+Handling dynamic failures and recoveries requires extra mechanisms to ensure correctness and consistency across the system.
+#### Rejoining After Recovery
+When a previously failed process comes back online:
+- It must **announce its return** to the group.
+- The **ring structure must be updated** to include the recovered process.
+- In some cases, this may **suspend the current election** and trigger a restart with the updated topology.
+#### Reliable Communication Layer
+To cope with unreliable channels:
+- Every election-related message should be **acknowledged (ACKed)**.
+- If no ACK is received within a timeout:
+    - The message is **resent**, with a retry limit to avoid infinite retries.
+#### Timeout and Restart Mechanisms
+- If a process suspects message loss or election stalling:
+    - It can **restart the election**, potentially using a **higher process ID** to resolve conflicts.
+- Care must be taken to avoid **concurrent elections**, which could lead to inconsistencies.
+#### General Election Initialization (Alternate Form)
+A different version of the election algorithm (e.g., Bully-style) works as follows:
+- Initially, all processes are in the **no participant** state.
+- **Any process** can trigger an election:
+    - Marks itself as _participant_
+    - Sends a `start election` message (with its own ID) to **all processes with lower IDs**
+##### Handling Messages
+- **On receiving a `start election` message**:
+    - Reply with an **acknowledge message**
+    - If in `no participant` state:
+        - Become a participant
+        - Forward a new `start election` message to lower-ID processes
+- **On receiving an `acknowledge` message**:
+    - The sender waits for an `elected` message to learn the leader's identity
+- **If no `acknowledge` is received within timeout**:
+    - The process assumes it's the **lowest-ID live process**
+    - Declares itself **leader**
+    - Sends an `elected` message to all processes
+
+### Garcia-Molina’s Election Algorithm (1982)
+This algorithm was originally designed for **static, failure-free environments**, assuming:
+- A **known set of processes**
+- **Reliable communication**
+- No failure **during** election
+#### Extensions for Fault Tolerance
+##### Process Failure
+- Use **timeouts and heartbeats** to detect failures.
+- If the **coordinator fails**:
+    - The **highest-ID process** detecting the failure initiates a new election.
+    - It queries higher-ID processes; if none respond, it **elects itself**.
+##### Failure Propagation
+- Once a failure is detected:
+    - Processes **broadcast the updated membership** list to maintain consistency.
+##### Process Recovery
+When a failed process returns:
+- It **announces itself** to the group.
+- Sends a **“Who is leader?”** query to learn the current leader.
+- If its ID is **higher than the current leader**, it may initiate an election (depending on policy).
+
+### Robust Communication Handling
+#### Message Reliability
+- Use **ACKs and retransmissions** for critical messages:
+    - `start election`
+    - `acknowledge`
+    - `elected`
+#### Election Recovery
+- If a process **waits too long** after starting an election without success:
+    - It **retries** the election
+    - Use **election IDs or round numbers** to avoid duplicate or conflicting elections
+### Enhancements for Robustness
+- **Membership Service**:
+    - Use a distributed or centralized service to track **active processes**
+    - Ensures all nodes are informed of the current system view
+- **Persistent State**:
+    - Election-related state (e.g., current leader, participation flag) can be stored persistently
+    - Allows recovery processes to resume cleanly after a crash
