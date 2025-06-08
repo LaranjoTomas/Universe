@@ -168,6 +168,8 @@ To prevent multiple threads from coexisting inside a monitor, rules are needed t
 ![[Lampson_monitor.png]]
 # Introductory Concepts
 
+## Cloud Computing
+
 # System models
 
 ## Models in Distributed Systems
@@ -1026,3 +1028,34 @@ Given two vector timestamps `V` and `V′`:
 - `V = V′` ⇔ all components equal
 - `V < V′` ⇔ all components of `V` ≤ `V′`, and at least one is strictly less
 - If neither `V < V′` nor `V′ < V`, then `V ∥ V′` (events are **concurrent**)
+
+![[Vector_logic_clock.png]]
+
+Let `e` and `e′` be events in processes `pᵢ` and `pⱼ`, with associated vector timestamps `Vᵢ(e)` and `Vⱼ(e′)`.
+
+The core principle is $$ e \prec e' \Leftrightarrow V_{i}(e) < V_{j}(e') $$
+- $\prec$  denotes the **“happened-before” relation** (as defined by Lamport)
+- < denotes the **strict vector clock comparison**.
+This equivalence gives vector clocks their power:  
+They **fully capture causality** — if and only if `Vᵢ(e) < Vⱼ(e′)`, then `e` causally precedes `e′`.
+If neither `Vᵢ(e) < Vⱼ(e′)` nor `Vⱼ(e′) < Vᵢ(e)`, then the events are **concurrent**, with no causal relationship.
+
+# Group Communication
+
+In group communication systems, all processes are treated as equals — there are no privileged roles, and coordination must be achieved through **message passing**, since there is **no shared memory space**. Synchronizing access to shared resources is crucial to avoid race conditions and ensure consistent system behavior.
+
+To manage shared object access, a **guardian process** (or coordinator) is introduced. This design is a natural extension of the client-server model, where the guardian serializes access by queuing requests and granting them one at a time.
+#### How the Access Protocol Works:
+- When a process `pᵢ` wants to access a shared object, it sends a _request_ to the guardian `pₙ`.
+- If the object is free, the guardian replies with _grant access_. Otherwise, it queues the request.
+- Once granted, `pᵢ` can proceed. After finishing, it sends a _release_ message.
+- The guardian then grants access to the next process in the queue, if any.
+#### Key Considerations:
+- **Message Overhead**: Each access involves three messages — request, grant, release.
+- **Not Fully Decentralized**: The guardian creates a centralized control point.
+- **Single Point of Failure**: If the guardian crashes, no process can proceed, halting coordination.
+This approach ensures **mutual exclusion** but at the cost of added overhead and a critical dependency on a single coordinator.
+
+#### Logic Ring
+
+![[Logic_ring_SD.png]]
