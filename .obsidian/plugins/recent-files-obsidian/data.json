@@ -5,8 +5,28 @@
       "path": "Education/SD/Everything.md"
     },
     {
+      "basename": "Cristian’s Method_decomposition",
+      "path": "imgs/Cristian’s Method_decomposition.png"
+    },
+    {
+      "basename": "Cristian's Method",
+      "path": "imgs/Cristian's Method.png"
+    },
+    {
+      "basename": "2-PROJECTS",
+      "path": "2-PROJECTS.md"
+    },
+    {
       "basename": "README",
       "path": "README.md"
+    },
+    {
+      "basename": "Addressing_Space_A_SD",
+      "path": "imgs/Addressing_Space_A_SD.png"
+    },
+    {
+      "basename": "Addressing_Space_B_Sd",
+      "path": "imgs/Addressing_Space_B_Sd.png"
     },
     {
       "basename": "0-HOME",
@@ -117,10 +137,6 @@
       "path": "Education/RSA/Ad-Hoc Networks.md"
     },
     {
-      "basename": "2-PROJECTS",
-      "path": "2-PROJECTS.md"
-    },
-    {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
     },
@@ -183,22 +199,6 @@
     {
       "basename": "Logo ideas",
       "path": "Dev/Logo ideas.md"
-    },
-    {
-      "basename": "00. Homepage",
-      "path": "40 - Obsidian/Homepages/00. Homepage.md"
-    },
-    {
-      "basename": "00. Dashboard",
-      "path": "40 - Obsidian/Homepages/00. Dashboard.md"
-    },
-    {
-      "basename": "00. Library",
-      "path": "30 - Reading/00. Library.md"
-    },
-    {
-      "basename": "00. Cardbox",
-      "path": "50 - Zettelkasten/00. Cardbox.md"
     }
   ],
   "omittedPaths": [],
