@@ -1,8 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Exams",
+      "path": "Education/SD/Exams.md"
+    },
+    {
       "basename": "Everything",
       "path": "Education/SD/Everything.md"
+    },
+    {
+      "basename": "SD_Exam stuff",
+      "path": "Excalidraw/SD_Exam stuff.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Excalidraw/Untitled.md"
     },
     {
       "basename": "Работа с регулярными выражениями",
@@ -43,10 +59,6 @@
     {
       "basename": "Addressing_Space_B_Sd",
       "path": "imgs/Addressing_Space_B_Sd.png"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "itertools",
@@ -187,18 +199,6 @@
     {
       "basename": "Backend documentation",
       "path": "Projects/OWL/Backend/Backend documentation.md"
-    },
-    {
-      "basename": "IPSA Documentation",
-      "path": "Projects/IPSA/IPSA Documentation.md"
-    },
-    {
-      "basename": "YFinance",
-      "path": "Projects/IPSA/bugs/YFinance.md"
-    },
-    {
-      "basename": "Main C Vulnerabilities",
-      "path": "Dev/C/Main C Vulnerabilities.md"
     }
   ],
   "omittedPaths": [],

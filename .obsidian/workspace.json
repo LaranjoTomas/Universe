@@ -24,14 +24,49 @@
             }
           },
           {
-            "id": "5b6068e1d5ea207e",
+            "id": "731fef651d3d0b10",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/SD/Exams.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Exams"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "9c3126f659bd4c85",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "592233480e1d3e2b",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SD_Exam stuff.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SD_Exam stuff"
+            }
+          },
+          {
+            "id": "c9110cd7b2c9f278",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Education/SD/Everything.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "pinned": true,
@@ -137,7 +172,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -182,13 +218,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SD/Everything.md",
+                "file": "Education/SD/Exams.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Everything"
+              "title": "Outline of Exams"
             }
           },
           {
@@ -235,7 +271,7 @@
             }
           },
           {
-            "id": "bc5bc51546425ee4",
+            "id": "9be2315a201ee728",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -299,10 +335,18 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "5b6068e1d5ea207e",
+  "active": "731fef651d3d0b10",
   "lastOpenFiles": [
-    "Dev/Python/Modules/Работа с регулярными выражениями.md",
+    "image-1.png",
     "Education/SD/Everything.md",
+    "Education/SD/Exams.md",
+    "image.png",
+    "Excalidraw/SD_Exam stuff.md",
+    "imgs/YEsyes_sd.png",
+    "0-HOME.md",
+    "Excalidraw/Untitled.md",
+    "imgs/ex24_17_6_sd.png",
+    "Dev/Python/Modules/Работа с регулярными выражениями.md",
     "README.md",
     "imgs/Total Ordering of Events_sd.png",
     "3-BOOKS.md",
@@ -315,11 +359,7 @@
     "imgs/NTP_strata.png",
     "imgs/Berkeley_algorithm_sd.png",
     "imgs/Cristian’s Method_decomposition.png",
-    "imgs/Cristian's Method.png",
-    "imgs/Addressing_Space_A_SD.png",
     "Untitled.md",
-    "imgs/Addressing_Space_B_Sd.png",
-    "0-HOME.md",
     "Dev/Python/Modules/itertools.md",
     "Education/SD/Summary.md",
     "!Rsa.png.md",
@@ -335,10 +375,6 @@
     "configs 1.md",
     "Education/SRC/Project.md",
     "Education/SRC/Report.md",
-    "Education/SRC/Aula.md",
-    "Untitled 2.md",
-    "Ideas/RaspberryPi server/Raspberry Pi server.md",
-    "Excalidraw/RSA.md",
     "Templates",
     "Excalidraw",
     "Education/SRC",
