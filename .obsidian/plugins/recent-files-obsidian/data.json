@@ -1,6 +1,18 @@
 {
   "recentFiles": [
     {
+      "basename": "Exams",
+      "path": "Education/SRC/Exams.md"
+    },
+    {
+      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Everything",
       "path": "Education/SD/Everything.md"
     },
@@ -15,10 +27,6 @@
     {
       "basename": "SD_Exam stuff",
       "path": "Excalidraw/SD_Exam stuff.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Untitled",
@@ -191,14 +199,6 @@
     {
       "basename": "Utils",
       "path": "Projects/OWL/Backend/Utils.md"
-    },
-    {
-      "basename": "Server DB",
-      "path": "Projects/OWL/Backend/Server DB.md"
-    },
-    {
-      "basename": "Backend documentation",
-      "path": "Projects/OWL/Backend/Backend documentation.md"
     }
   ],
   "omittedPaths": [],
