@@ -87,6 +87,34 @@ Uma **ordem parcial** só ordena eventos baseado em relações de causalidade, e
 
 ![[image-1.png | 600]]
 
-The role of the distributor is to foward the service requests to any of the servers but how he decides which server to foward to is decided on the working load each server is enduring when seen from the distributor point of view. Each replica of the shared region in each server is continuously synchronized too 
+The role of the distributor is to foward the service requests to any of the servers but how he decides which server to foward to is decided on the working load each server is enduring when seen from the distributor point of view, he acts as an intermediary between clients and a pool of servers, fowarding service requests based on the current load of eahc server. Each replica of the shared region in each server is continuously synchronized too look for any alteration made to it so all the servers have their shared resource updated. The system should operate such that each incoming request is dynamically routed to the server with the lowest perceived workload, for efficiency. For this decisions the distributor can estimate a servers load using metrics like cpu usage, memory usage, response time, etc. This metrics can be periodically reported by each server like the heartbeat method of process failure. If a server fails to responde within a defined timeout, it is marked unavailable and exclused from the pool until recovery. For the replicas of the shared region a replication protocol must be implemented to ensure consistency acrross servers.
 
 
+# Exam 2022
+
+## 4 de Julho
+
+#### 1. The diagram bellow aims to depict in a hierarchical way the different layers of software/hardware modules required to run a distributed application in a parallel machine based on off-the-shelf computer systems. What is the role played by the middleware layers in this context? Explain why the Java Virtual Machine (JVM) may be thought of as part of the middleware.
+![[image-2.png]]
+
+**R:** The middleware provides an abstraction layer for communication between processes that do not share an address space. A communication device is provided which serves as an endpoint for inter-process communication. It ensures that applications can run transparently across different nodes, while it handles complex message passing, load balancing, fault tolerance, and data consistency without requiring the application developer to manage these.
+
+The JVM is considered as middleware because it provides a platform-independent execution environment. Allowing applications written on Java to run on any  system compatible with JVM.
+
+#### 3. ![[image-3.png]]
+
+##### **I)**
+a(1) e(1) j(1)| b(2) f(2) | g(3) c(3) | k(4) k(4) d(4)| l(5) | i(6) 
+##### **II)**
+$a \parallel j$
+$e \prec d$
+
+#### 4. The role of the distributor is to forward service requests to the primary server. The backup server is updated by the primary server so that their internal states are continuously synchronized. Assume that the reliability of the hardware platform that takes the role of distributor is much higher than the reliability of the hardware platforms that take the role of primary or backup servers. Which hardware platform is chosen as primary, is decided in a dynamical way: i) it is the first to register in the distributor after reboot; ii) it is the backup server, thereby changing its role, if primary fails. What kind of data the distributor and the primary have to keep internally in order for operations to be carried out as expected? How do the distributor and the backup server become aware of a primary failure? What operations have to be carried out to overcome this problem? Assume that no messages are lost and message transmission time is limited.
+
+![[image-4.png | 600]]
+
+
+**R:** The primary needs the shared resource, a communication channel to the distributor and a communication channel to the BackUp server.
+The Distributor would need the service requests made by the clients, and the address/ID/port of the primary server and the backUp server.
+The primary server may have a protocol to alert in case of failure, like heartbeat which may carry information about internal state, the response time of the primary server may hit the timeout value predefined aswell.
+Change the primary server status and redirected the distributor to the backUp server until the previous primary server is stable and operational again.

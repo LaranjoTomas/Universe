@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Exams",
-      "path": "Education/SD/Exams.md"
-    },
-    {
       "basename": "Everything",
       "path": "Education/SD/Everything.md"
+    },
+    {
+      "basename": "Written Exam Type",
+      "path": "Education/SD/Written Exam Type.md"
+    },
+    {
+      "basename": "Exams",
+      "path": "Education/SD/Exams.md"
     },
     {
       "basename": "SD_Exam stuff",
@@ -111,10 +115,6 @@
     {
       "basename": "Test_preemptiveness_2",
       "path": "imgs/Test_preemptiveness_2.png"
-    },
-    {
-      "basename": "Written Exam Type",
-      "path": "Education/SD/Written Exam Type.md"
     },
     {
       "basename": "Aula",

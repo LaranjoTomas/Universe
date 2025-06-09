@@ -1297,3 +1297,228 @@ When a failed process returns:
 - **Persistent State**:
     - Election-related state (e.g., current leader, participation flag) can be stored persistently
     - Allows recovery processes to resume cleanly after a crash
+
+# Consistency and Replication
+
+## Regions of Distributed Storage
+Distributed storage means copying data across multiple processing nodes, with each node having a full local replica. Operations are either **write-like** or **read-like**.
+- Writes must update all replicas to stay consistent.
+- Reads may or may not propagate depending on the consistency rules.
+- Access to local copies happens concurrently, allowing parallel processing.
+This setup offers data redundancy but requires careful synchronization. All operations are **synchronous**, only able to issue a new operation when previous is completed.
+### Consistency Models
+Consistency models are rules that define correct behavior for distributed systems. They determine what values a read operation can return based on previous writes.
+- These models ensure data remains predictable despite concurrent access.
+- They are called **data-centric consistency models** when multiple processes can access data simultaneously.
+- The main challenge is precisely defining and enforcing these rules.
+They act as a contract to maintain data reliability across replicas.
+
+### Defining "Correct Operation"
+The correctness of a distributed storage system is judged by comparing what actually happens to idealized sequences called **canonical sequences**. These sequences:
+- Are **virtual**, meaning they don’t have to happen exactly as shown.
+- Are created by interleaving the operation histories from all processes.
+- Must follow the rules of the chosen consistency model.
+If no canonical sequence fits the observed operations while respecting the model, the system is deemed to have violated the consistency guarantees.
+
+## Strict Consistency
+
+Strict consistency means **every read returns the value from the most recent write**. This model assumes all operations happen in **one global, perfectly ordered sequence**—an ideal only possible in single-processor systems.
+
+- In distributed systems, this is **impossible** because:
+    - **Physical signal speeds are limited**, so clocks at different nodes can’t be perfectly synced.
+    - There’s **no global clock** to order events absolutely.
+    - **Reads and writes take time**, and **delays cause asynchrony**.
+
+As a result, **events cannot be globally ordered by real time**. Instead, distributed systems use **logical clocks** or **causal ordering** to understand event sequences.
+
+![[image-5.png]]
+
+## Linearizability
+
+**Linearizability** ensures that parallel operations on a register appear as if they occur in a single, well-defined order that respects the real-time sequence seen locally by each process. It’s a strong consistency model relying on synchronization to approximate a **global clock** and **totally order** events.
+- The goal is for **every process to always see the latest value**.
+- Operations seem atomic and instantaneous, as if executed on a single centralized storage.
+- Each operation takes effect at one indivisible point between invocation and completion.
+- The global operation order respects the real-time order observed locally.
+- It gives the illusion of one consistent data copy, despite concurrent access and replication.
+**Implementation:**
+- All reads and writes must be propagated and acknowledged by all replicas before completing.
+- This requires total ordering of operations, often implemented with **Lamport logical clocks**:
+    - Each process keeps a logical clock updated per Lamport’s rules to maintain consistent ordering.
+- Logical clocks help serialize operations, preserving causal and real-time constraints.
+**Application Areas:**  
+Linearizability is crucial in systems needing strong consistency and fairness, such as:
+- Government services
+- Financial transactions
+- Distributed databases requiring immediate update visibility
+- Critical infrastructure control
+
+## Sequencial consistency
+
+Sequential consistency means all processes see operations on a register as if they were executed in a single, well-defined sequence that preserves each process’s local execution order. Unlike stricter models, it does not rely on global or synchronized time to define correctness.
+- There is a virtual global sequence of operations that:
+    - Maintains the program order for each process’s operations.
+    - Ensures all processes see a consistent history as if operations happened one at a time.
+- Actual operations may run concurrently, but the outcome must appear sequential and ordered per process.
+
+**Implementation:**
+- Only **write-like operations** must be propagated and acknowledged by all replicas before taking effect.
+- **Read-like operations** can access local copies without coordination, provided consistency is maintained.
+- A total order on writes is created using **Lamport logical clocks**:
+    - Each process updates its logical clock per Lamport’s rules.
+    - Messages are timestamped to ensure consistent write ordering.
+This ensures that all processes observe writes in the same order, preserving program order without needing global time.
+
+**Application Areas:**  
+Sequential consistency fits systems prioritizing fairness and logical ordering, such as:
+- Booking systems
+- E-commerce platforms
+- Online inventory management
+- Collaborative editing tools
+
+## Causal Consistency
+
+Causal consistency means operations that are causally related appear in the same order to all processes, while concurrent (unrelated) operations can be seen in different orders. Causality arises when:
+- Operations are sequential within the same process (program order).
+- A read observes a value written by a previous write (read-write dependency).
+- A global canonical sequence exists only for causally related operations, preserving their order across processes.
+- Concurrent operations may be perceived in any order, without breaking the model.
+
+**Implementation:**
+- Only **write-like operations** need propagation and acknowledgment across replicas.
+- The system uses **vector clocks** to maintain a partial order of operations:
+    - Each process tracks a vector of counters (one per process).
+    - Operations carry these vectors as timestamps to enforce causal order.
+This approach guarantees that causally linked operations are seen in the same order, while allowing flexibility for independent operations.
+
+**Application Areas:**  
+Causal consistency suits applications where cause-effect matters, such as:
+- Chat apps (ensuring replies follow messages)
+- Collaborative editing tools
+- Social media feeds (comments follow posts)
+
+## Fifo Consistency
+
+FIFO consistency ensures that write operations from each individual process are observed by all other processes in the exact order they were issued. However, there is no global ordering across different processes' writes, and reads are not constrained in this model.
+- The model does **not require a global sequence** of operations.
+- Each process sees writes from any other single process in the order they were performed.
+- Writes from different processes may be interleaved differently across nodes.
+- Read operations do not affect shared state and are not restricted.
+
+**Implementation:**
+- Only **write-like operations** need to be propagated and ordered per sender.
+- Each process attaches a monotonically increasing sequence number to its writes.
+- Receiving processes use this sequence number to deliver writes in the correct order per sender.
+- No ordering is enforced between writes from different senders.
+
+**Application Areas:**  
+FIFO consistency fits systems where weaker consistency is acceptable, such as:
+- News distribution platforms
+- Weather forecasting systems
+- Multimedia streaming
+- Sensor data aggregation
+
+# Distributed Transactions
+
+### What is a Transaction?
+A transaction is a sequence of read and write operations from a client targeting shared data managed by a server. It must be treated as an indivisible unit, meaning the server handles it atomically—either all operations succeed together or none are applied.
+**Server Responsibilities:**
+- Ensure atomic execution of all operations.
+- Apply **all-or-nothing** semantics: either commit the entire transaction or roll it back fully.
+- Handle failures gracefully, guaranteeing no partial updates.
+
+### ACID Properties of Transactions
+Transactions follow four key properties to maintain reliability and correctness (as defined by Härder and Reuter):
+- **Atomicity:** All operations succeed or none do.
+- **Consistency:** The system moves from one valid state to another, preserving rules.
+- **Isolation:** Transactions run without interference; intermediate states are hidden from others.
+- **Durability:** Once committed, changes persist permanently, surviving failures.
+
+### Organization of Operations
+A server-side coordinator manages each transaction:
+- On client request, it opens a transaction and assigns a unique ID.
+- All subsequent operations reference this transaction ID.
+- Operations return statuses:
+    - Success — client continues.
+    - Failure — transaction aborts.
+- Clients can also abort transactions explicitly at any time.
+### Completing the Transaction
+A transaction finishes when the client sends an end-of-transaction command.
+- If all operations succeed, the transaction is **committed** and all changes become permanent in the shared data.
+- If any operation fails, the transaction is **aborted**, discarding all changes.
+- After aborting, the client can retry the transaction later.
+
+### Concurrency Issues 
+When multiple transactions access or modify the same data concurrently, **race conditions** can occur, causing **data inconsistency**. Proper control of concurrent access is crucial for correctness.
+#### Conflicting Operations
+Special care is needed when different transactions read and write the same register:
+- If two transactions write to the same register:
+    - One transaction locks the register first.
+    - Modifications are made on a local copy.
+    - Upon commit, the shared register is updated and the lock is released.
+    - The second transaction waits until the lock is free before proceeding.
+
+Synchronization mechanisms like **locking** are essential to:
+- Prevent lost updates and inconsistent states.
+- Ensure **serializability** and **isolation** between concurrent transactions.
+
+## Distributed Transactions
+In distributed transactions, the shared data region is split across multiple servers, with each server managing part of the data and executing a segment of the transaction.
+- The main challenge is ensuring **atomicity across servers**:
+    - All parts of the transaction must be **committed together** or **aborted together**.
+- Coordinating this requires protocols that guarantee a unified decision despite the distributed nature.
+### Nested Transactions
+A distributed transaction can be organized into **nested transactions**, where a top-level (parent) transaction spawns multiple subtransactions, potentially running on different machines.
+- Subtransactions execute independently but logically belong to the parent transaction.
+- Each subtransaction may commit locally, yet their effects remain **tentative** until the parent commits.
+#### Abort Propagation
+- If the parent transaction aborts, **all subtransactions must also abort**, even if they have locally committed.
+- This mechanism ensures **global atomicity and consistency** across the distributed system.
+#### **Summary**
+- Nested transactions enable modularity and partial execution in distributed environments.
+- Commit decisions flow hierarchically to maintain **ACID** properties throughout the transaction tree.
+
+### Two-Phase Commit Protocol (2PC)
+The two-phase commit protocol coordinates transaction outcomes across multiple servers, ensuring atomic commit or abort of distributed transactions
+**Phase 1: Voting**
+- The coordinator sends a **voteRequest** to all participant servers.
+- Each participant replies with:
+    - **voteCommit** if ready to commit its part.
+    - **voteAbort** if unable to commit.
+**Phase 2: Decision**
+- The coordinator collects votes and decides:
+    - Sends **globalCommit** if all participants voted commit.
+    - Sends **globalAbort** if any participant voted abort.
+- Upon receiving the decision, participants:
+    - **Commit** local changes if globalCommit.
+    - **Abort** and discard changes if globalAbort.
+This protocol ensures all parts of a distributed transaction are either committed or aborted consistently.
+
+### Three-Phase Commit (3PC)
+
+3PC enhances the Two-Phase Commit (2PC) protocol by adding an extra phase to avoid blocking when the coordinator crashes, enabling participants to make progress without indefinite waiting.
+**Phase 1: Voting**
+- Coordinator sends **voteRequest** to all participants.
+- Participants reply with either:
+    - **voteCommit** (ready to commit), or
+    - **voteAbort** (cannot commit).
+**Phase 2: Pre-Commit**
+- If all vote commit, coordinator sends **preCommit** message.
+- Participants:
+    - Acknowledge readiness.
+    - Enter a **prepared state** (promise to commit but don’t commit yet).
+**Phase 3: Do-Commit**
+- After all acknowledgments, coordinator sends **globalCommit**.
+- Participants perform the actual commit.
+#### Safety and Failure Handling
+- Intermediate states prevent jumping directly to COMMIT or ABORT, ensuring safety.
+- Participants never wait indefinitely; progress is guaranteed.
+- If coordinator crashes during Pre-Commit:
+    - Participants can safely commit, as agreement is known.
+- If a participant times out, it queries others:
+    - If others are in COMMIT or ABORT, it adopts that decision.
+    - If all in PRECOMMIT, it commits safely.
+    - If all in READY, it aborts to maintain safety.
+#### Why 3PC is Rarely Used
+- Adds complexity and overhead.
+- 2PC is usually sufficient in reliable, well-managed systems.
