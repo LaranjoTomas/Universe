@@ -9,6 +9,18 @@
       "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
     },
     {
+      "basename": "Pasted Image 20250609201023_981",
+      "path": "Pasted Image 20250609201023_981.png"
+    },
+    {
+      "basename": "Pasted Image 20250609201058_687",
+      "path": "Pasted Image 20250609201058_687.png"
+    },
+    {
+      "basename": "SRC_1",
+      "path": "Excalidraw/SRC_1.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -133,10 +145,6 @@
       "path": "Education/SRC/Configs.md"
     },
     {
-      "basename": "SRC_1",
-      "path": "Excalidraw/SRC_1.md"
-    },
-    {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "badges_python",
       "path": "imgs/badges_python.png"
-    },
-    {
-      "basename": "badges_cpp",
-      "path": "imgs/badges_cpp.png"
-    },
-    {
-      "basename": "Utils",
-      "path": "Projects/OWL/Backend/Utils.md"
     }
   ],
   "omittedPaths": [],

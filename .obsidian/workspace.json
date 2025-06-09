@@ -6,7 +6,6 @@
       {
         "id": "4509724f8bf84da7",
         "type": "tabs",
-        "dimension": 54.965753424657535,
         "children": [
           {
             "id": "e7a7b303c61786dc",
@@ -40,25 +39,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "afbd354be2ec5910",
-        "type": "tabs",
-        "dimension": 45.034246575342465,
-        "children": [
-          {
-            "id": "f02eec672b6a4be9",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-06-09 19.42.32.excalidraw"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -320,11 +300,15 @@
   },
   "active": "e018d47e7a5f759e",
   "lastOpenFiles": [
-    "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
-    "0-HOME.md",
-    "Education/SRC/Exams.md",
-    "image-7.png",
     "image-6.png",
+    "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
+    "Education/SRC/Exams.md",
+    "Pasted Image 20250609201023_981.png",
+    "Pasted Image 20250609201058_687.png",
+    "Excalidraw/SRC_1.md",
+    "0-HOME.md",
+    "Pasted Image 20250609200922_364.png",
+    "image-7.png",
     "Education/SD/Everything.md",
     "image-5.png",
     "Education/SD/Written Exam Type.md",
@@ -333,11 +317,8 @@
     "image-3.png",
     "image-2.png",
     "image-1.png",
-    "image.png",
     "Excalidraw/SD_Exam stuff.md",
-    "imgs/YEsyes_sd.png",
     "Excalidraw/Untitled.md",
-    "imgs/ex24_17_6_sd.png",
     "Dev/Python/Modules/Работа с регулярными выражениями.md",
     "README.md",
     "3-BOOKS.md",
@@ -355,9 +336,7 @@
     "Excalidraw/Scripts",
     "configs.md",
     "Education/SRC/Configs.md",
-    "Excalidraw/SRC_1.md",
     "configs 1.md",
-    "Education/SRC/Project.md",
     "Templates",
     "Excalidraw",
     "Education/SRC",
