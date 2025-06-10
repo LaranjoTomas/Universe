@@ -1,12 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "Exams",
+      "path": "Education/SD/Exams.md"
+    },
+    {
       "basename": "Everything",
       "path": "Education/SD/Everything.md"
     },
     {
-      "basename": "Exams",
-      "path": "Education/SD/Exams.md"
+      "basename": "Written Exam Type",
+      "path": "Education/SD/Written Exam Type.md"
+    },
+    {
+      "basename": "Summary",
+      "path": "Education/SD/Summary.md"
     },
     {
       "basename": "Exams",
@@ -31,10 +39,6 @@
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
-    },
-    {
-      "basename": "Written Exam Type",
-      "path": "Education/SD/Written Exam Type.md"
     },
     {
       "basename": "SD_Exam stuff",
@@ -95,10 +99,6 @@
     {
       "basename": "server_replication",
       "path": "imgs/server_replication.png"
-    },
-    {
-      "basename": "Summary",
-      "path": "Education/SD/Summary.md"
     },
     {
       "basename": "Figure_1",

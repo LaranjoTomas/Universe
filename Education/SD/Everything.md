@@ -1543,6 +1543,7 @@ The two-phase commit protocol coordinates transaction outcomes across multiple s
 - Each participant replies with:
     - **voteCommit** if ready to commit its part.
     - **voteAbort** if unable to commit.
+
 **Phase 2: Decision**
 - The coordinator collects votes and decides:
     - Sends **globalCommit** if all participants voted commit.
@@ -1560,11 +1561,13 @@ This protocol ensures all parts of a distributed transaction are either committe
 - Participants reply with either:
     - **voteCommit** (ready to commit), or
     - **voteAbort** (cannot commit).
+
 **Phase 2: Pre-Commit**
 - If all vote commit, coordinator sends **preCommit** message.
 - Participants:
     - Acknowledge readiness.
     - Enter a **prepared state** (promise to commit but don’t commit yet).
+
 **Phase 3: Do-Commit**
 - After all acknowledgments, coordinator sends **globalCommit**.
 - Participants perform the actual commit.
