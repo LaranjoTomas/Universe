@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Everything",
+      "path": "Education/SD/Everything.md"
+    },
+    {
+      "basename": "Exams",
+      "path": "Education/SD/Exams.md"
+    },
+    {
       "basename": "Exams",
       "path": "Education/SRC/Exams.md"
     },
@@ -25,16 +33,8 @@
       "path": "0-HOME.md"
     },
     {
-      "basename": "Everything",
-      "path": "Education/SD/Everything.md"
-    },
-    {
       "basename": "Written Exam Type",
       "path": "Education/SD/Written Exam Type.md"
-    },
-    {
-      "basename": "Exams",
-      "path": "Education/SD/Exams.md"
     },
     {
       "basename": "SD_Exam stuff",

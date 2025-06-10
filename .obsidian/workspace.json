@@ -24,15 +24,33 @@
             }
           },
           {
-            "id": "e018d47e7a5f759e",
+            "id": "19b721cf06cf9581",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/SRC/Exams.md",
+                "file": "Education/SD/Everything.md",
+                "mode": "preview",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Everything"
+            }
+          },
+          {
+            "id": "b28360a0a5e30743",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/SD/Exams.md",
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Exams"
             }
@@ -181,13 +199,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SRC/Exams.md",
+                "file": "Education/SD/Everything.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Exams"
+              "title": "Outline of Everything"
             }
           },
           {
@@ -234,7 +252,7 @@
             }
           },
           {
-            "id": "9be2315a201ee728",
+            "id": "56d316cfd4dfeee4",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -298,21 +316,21 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e018d47e7a5f759e",
+  "active": "19b721cf06cf9581",
   "lastOpenFiles": [
+    "Education/SD/Exams.md",
+    "Education/SD/Everything.md",
+    "0-HOME.md",
+    "Education/SRC/Exams.md",
     "image-6.png",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
-    "Education/SRC/Exams.md",
     "Pasted Image 20250609201023_981.png",
     "Pasted Image 20250609201058_687.png",
     "Excalidraw/SRC_1.md",
-    "0-HOME.md",
     "Pasted Image 20250609200922_364.png",
     "image-7.png",
-    "Education/SD/Everything.md",
     "image-5.png",
     "Education/SD/Written Exam Type.md",
-    "Education/SD/Exams.md",
     "image-4.png",
     "image-3.png",
     "image-2.png",

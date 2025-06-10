@@ -122,7 +122,7 @@ Deadlock can only occur if **all four conditions** below hold simultaneously:
 1. **Mutual Exclusion:** Each resource is either free or assigned to exactly one process
 2. **Hold and wait (waiting with Retention):** A process holding some resources can request additional resource without releasing the ones it holds
 3. **No Preemption (Non-Liberation):** Resources can only be released voluntarily by the process holding them
-4. **Circular Wait:** A cycle exists where each process waits for a resource held buy the next process in the chain
+4. **Circular Wait:** A cycle exists where each process waits for a resource held by the next process in the chain
 
 ### Deadlock prevention
 
@@ -168,7 +168,65 @@ To prevent multiple threads from coexisting inside a monitor, rules are needed t
 ![[Lampson_monitor.png]]
 # Introductory Concepts
 
-## Cloud Computing
+The conventional definition of distributed system states that one is dealing with an [operating] system whose components, located in the different processing nodes of a parallel computer system, communicate and coordinate their actions through message passing. 
+
+### Cloud Computing
+
+**Resources on Demand**  
+Cloud computing offers services that users can request and use as needed, without concern for the underlying infrastructure. These services are typically provided under three main models:
+- pecific applications, run remotely (software as a service)
+- specific hardware means for computation (platform as a service)
+- specific resources, such as mass storage or tailored running environments (infrastructure as a service)
+
+**Indirect Access**  
+Cloud resources are accessed remotely over the internet using **standard communication protocols**. This can be done from a wide variety of devices, including desktops, laptops, tablets, and smartphones.
+
+**Scalability**  
+One of the defining features of cloud computing is its **elasticity** — the ability to **scale resources up or down** based on demand. This creates the **illusion of unlimited capacity**, ensuring that user needs are met dynamically without service interruption.
+### Types of distributed systems
+**Cluster Systems:** Collection of computer systems interconnected by a high speed network. Goal is application parallelization.
+**Grid Systems:** No assumptions on the hardware that form the processing nodes, nor the operating system or interconnecting networks. It brings resources together from different organizations for a community of people.
+**Transaction information systems:** Main processing nodes run applications whose primary goal is to manage information organized in databases called servers.  Info made available to remote-run programs, clients.
+**Entrepise integration systems:** application components should be able to communicate directly with one another and not merely through the request / reply behavior supported by transaction information systems.
+
+### Middleware
+Model of programmable virtual machine that hides all the underlying **heterogeneity** – the so called **middleware**.
+#### Heterogeneity in Distributed Systems
+
+Modern parallel and distributed systems exhibit heterogeneity in several forms — from the interconnection of diverse networks and use of various hardware platforms to differing operating systems and programming languages. Additionally, applications often integrate components from multiple vendors. This diversity necessitates localized solutions to create a coherent system. These solutions may involve standardizing network architectures, converting data representations into a common format, unifying communication interfaces across OSes, and aligning data structures between programming languages. Industry-wide standards also play a vital role in ensuring interoperability.
+#### Transparency in Distributed Systems
+
+**Transparency** refers to the ability of a distributed system to hide its complexity from users and developers, presenting a unified and simple interface. A transparent system allows access and operations on distributed resources without exposing the underlying diversity and mechanics.
+The **middleware layer** is central in achieving transparency — the more seamless the resource access and operation, the higher the abstraction and usability.
+##### Modes of Transparency
+- **Access Transparency**: Users access local and remote resources with the same operations.
+- **Position Transparency**: Resource location doesn’t need to be known by the user.
+- **Network Transparency**: Combines access and position transparency, hiding network-level details.
+- **Mobility Transparency**: Users can move within the system without disrupting ongoing operations.
+- **Migration Transparency**: Resources can move without affecting how they are accessed.
+- **Relocation Transparency**: Resources can move even during access, without interrupting execution.
+- **Replication Transparency**: Resources may be replicated without users noticing.
+- **Performance Transparency**: The system can reconfigure dynamically to handle load changes.
+- **Scaling Transparency**: Applications and systems can scale without structural or algorithmic changes.
+- **Concurrency Transparency**: Multiple entities can access shared resources concurrently while maintaining consistency.
+- **Failure Transparency**: System continues to function smoothly even in the presence of component failures.
+### Openness
+
+Degree of how "scalable" the system is.
+
+### Failure handling
+Distributed systems are inherently prone to **partial failures**, due to their dependence on numerous hardware and software components. While some failures are easy to detect, many are subtle and may go unnoticed or be **suspected** without confirmation, making fault management particularly challenging.
+#### Basic Strategies for Handling Failures
+1. **Masking Failures**  
+    Some failures can be detected and **hidden** from users to preserve seamless operation. For example:
+    - **Lost messages** can often be retransmitted once detected.
+    - **Data replication** allows the system to retrieve information from backup copies if one becomes corrupted.
+2. **Recovering from Failures**  
+    To enable recovery, systems must periodically **save internal states** (checkpoints). In the event of a failure:
+    - Processes can **resume from the last saved state** rather than starting over.
+    - This may involve **migrating code** to alternative hardware and accessing **updated data copies** to maintain continuity.
+3. **Tolerating Failures**  
+    Some failures are **unresolvable or too costly to fix**. In such cases, instead of endlessly retrying and leaving users in uncertainty, the system should **acknowledge the failure explicitly** and inform the user, allowing them to make informed decisions or retry later.
 
 # System models
 
@@ -487,7 +545,7 @@ A **socket** is uniquely identified by:
 ### Implications for Remote Method Invocation:
 - **Method invocation** must occur via explicit message exchange:
   - A **request message** is sent for method invocation
-  - A **response message** is sent back with the return value
+  - A **response message** is sent back with the return value
 - **Message Content**
   - Must include **method parameters and return values**
   - Must carry **caller process attributes** relevant to execution
