@@ -29,7 +29,7 @@ tags:
 - **Interaction:** bandwidth, latency, jitter
 - **Failure:** omission, timing, byzantine
 - **Security:** process and channel threats, access control
-**Latency** is the time it takes to get the something from one device to the other, **Jitter** is the variation in that time delay.  
+- **Latency** is the time it takes to get the something from one device to the other, **Jitter** is the variation in that time delay.  
 
 # Communication Fundamentals
 
@@ -40,6 +40,8 @@ tags:
 # Middleware and Sockets
 
 - **TCP**: reliable, bidirectional, ....
+- **UDP**
+- **Socket** identified by Ip and port
 
 
 # Remote Invocation Principles

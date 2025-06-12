@@ -22,8 +22,23 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "2740d4b35cee5d1c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 2"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -155,13 +170,12 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "0-HOME.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 0-HOME"
+              "title": "Outline"
             }
           },
           {
@@ -273,20 +287,31 @@
   },
   "active": "aa857a2f2890e82c",
   "lastOpenFiles": [
+    "Untitled 2.md",
+    "imgs/state_diagram_sd_1.png",
+    "imgs/src_2_img1.png",
+    "imgs/server_replication.png",
+    "imgs/resource_replication.png",
+    "imgs/request_serialization.png",
+    "imgs/publisher-subscriber_model.png",
+    "imgs/peer_communication_SD.png",
+    "imgs/header 1.png",
+    "imgs/ex24_17_6_sd.png",
+    "imgs/ex1_lamport-relation.png",
+    "Excalidraw/Untitled.md",
+    "Excalidraw/SD_Exam stuff.md",
+    "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
+    "0-HOME.md",
+    "Education/SRC/Exams.md",
+    "Education/SD/Exams.md",
+    "Education/SD/Everything.md",
     "Education/SD/Written Exam Type.md",
     "Education/SD/Summary.md",
-    "0-HOME.md",
     "Education/CLE/Written Examination.md",
     "Untitled 1.md",
-    "Ideas/src_2_img1.png",
     "Education/SRC/Project_2.md",
     "Excalidraw/RSA.md",
     "Untitled.md",
-    "imgs/RSA_project.png",
-    "imgs/MCM.png",
-    "imgs/DENM.png",
-    "imgs/CAM.png",
-    "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.svg",
     "Excalidraw/Scripts/Downloaded/Excalidraw Collaboration Frame.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
@@ -300,19 +325,8 @@
     "Education/SRC/Project.md",
     "Education/SRC/Aula.md",
     "Education/SRC/Report.md",
-    "Excalidraw/ASE-Schematic.md",
-    "Templates/Image Template.md",
-    "Templates/Daily note.md",
-    "Templates/Book.md",
-    "Templates/Aula.md",
     "Templates",
-    "Excalidraw/SD_SCHEMA.md",
     "Excalidraw",
-    "imgs/rendezvous_peers.png",
-    "imgs/image 2.png",
-    "imgs/image 1.png",
-    "imgs/gnutella_structureless.png",
-    "1-TASKS.md",
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
