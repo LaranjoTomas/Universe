@@ -24,45 +24,13 @@
             }
           },
           {
-            "id": "19b721cf06cf9581",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/SD/Everything.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          },
-          {
-            "id": "b28360a0a5e30743",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/SD/Exams.md",
-                "mode": "preview",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Exams"
-            }
-          },
-          {
-            "id": "a385e77add7a419b",
+            "id": "72b8df3f874045f6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Education/SD/Everything.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -70,7 +38,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -167,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -212,13 +181,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Education/SD/Exams.md",
+                "file": "Education/SD/Everything.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Exams"
+              "title": "Outline of Everything"
             }
           },
           {
@@ -265,7 +234,7 @@
             }
           },
           {
-            "id": "56d316cfd4dfeee4",
+            "id": "82d471ec12b45472",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -298,7 +267,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 294.5
+    "width": 294.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -328,15 +298,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "b28360a0a5e30743",
+  "active": "72b8df3f874045f6",
   "lastOpenFiles": [
+    "0-HOME.md",
+    "Education/SD/Exams.md",
     "Education/SD/Written Exam Type.md",
     "Education/SD/Everything.md",
     "Education/SRC/Exams.md",
     "image-8.png",
-    "Education/SD/Exams.md",
     "Education/SD/Summary.md",
-    "0-HOME.md",
     "image-6.png",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
     "Pasted Image 20250609201023_981.png",
