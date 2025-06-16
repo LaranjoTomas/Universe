@@ -5,6 +5,10 @@
       "path": "Education/CLE/Everything.md"
     },
     {
+      "basename": "Untitled",
+      "path": "Untitled.md"
+    },
+    {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "image",
       "path": "imgs/image.png"
-    },
-    {
-      "basename": "Trigonometry",
-      "path": "Education/Math/Trigonometry/Trigonometry.md"
     }
   ],
   "omittedPaths": [],
