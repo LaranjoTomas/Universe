@@ -71,7 +71,7 @@ Exemplo de peer-to-peer seria BitTorrent, todos os participantes partilham peda�
 
 #### 3. The diagram depicts the time evolution of three processes whose local clocks are clocks are scalar logical clocks synchronized according to the Lamport algorithm.
 
-![[image.png]]
+![[image 3.png]]
 
 ##### **I)**
 a(1) e(1) | j(2) b(2) f(2) | g(3) c(3) k(3) | h(4) l(4) | d(5) i(5)
@@ -85,7 +85,7 @@ Uma **ordem parcial** só ordena eventos baseado em relações de causalidade, e
 
 #### 4. The schematics below depicts a simple solution for load balancing in a client-server model.  The role of the distributor is to forward service requests to any of the servers. The decision on which server a specific service request is forward to, is based on the working load each is presently enduring as perceived by the distributor. Bear also in mind that the copies of the shared region present in the servers must be continuously synchronized. Describe in general terms how the whole system should operate. What kind of criteria should the distributor use to estimate the working load of a server? What kind of protocol should the distributor implement to assess if a given server operating properly, or has failed? 
 
-![[image-1.png | 600]]
+![[image-1 1.png| 600]]
 
 The role of the distributor is to foward the service requests to any of the servers but how he decides which server to foward to is decided on the working load each server is enduring when seen from the distributor point of view, he acts as an intermediary between clients and a pool of servers, fowarding service requests based on the current load of eahc server. Each replica of the shared region in each server is continuously synchronized too look for any alteration made to it so all the servers have their shared resource updated. The system should operate such that each incoming request is dynamically routed to the server with the lowest perceived workload, for efficiency. For this decisions the distributor can estimate a servers load using metrics like cpu usage, memory usage, response time, etc. This metrics can be periodically reported by each server like the heartbeat method of process failure. If a server fails to responde within a defined timeout, it is marked unavailable and exclused from the pool until recovery. For the replicas of the shared region a replication protocol must be implemented to ensure consistency acrross servers.
 
