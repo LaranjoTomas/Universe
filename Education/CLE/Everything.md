@@ -383,20 +383,78 @@ The challenge lies in efficiently combining the locally sorted chunks across all
 - If a single process (e.g., rank 0) needs the full sorted result:
     - Use `MPI_Gather` or `MPI_Gatherv` to collect chunks.
 - In many cases, keeping the data distributed is preferable, especially if further parallel computation follows.
-![[image.png]]
+![[image 5.png]]
 
 # Slurm - Workload Manager
 
 
+## Introduction to Slurm
 
+**Slurm**, Simples Linux Utility for Resource Management, is an open-source workload manager and job scheduler designed for **Linux-Clusters**. It is a core component of most high-performance computing (HPC) environments, enabling users to **efficiently queue**, schedule, and execute jobs on shared computational resources. Known for its **simplicity, scalability and fault tolerance**, Slurm plays a vital role in ensuring that HPC clusters operate smoothly and productively.
 
+## Role in HPC: Key Funcionalities
 
+As its core, Slurm handles **resource allocation**, granting users either exclusive or shared access to compute nodes within a specifies time window. This helps maximize hardware utilization and avoide conflicts between users. Once jobs are submitted, Slurm **launches and monitors** them, managing their execution across one or more nodes and tracking performance metrics and job states.
 
+It also provedes **queue management**, maintaining an ordered list of submitted jobs. Slurm determines job execution order based on defined scheduling policies, accounting for job priorities, user quotas, and any declared dependencies. This structured handling ensures **fairness, efficiency, and adaptability across diverse workloads.** 
 
+## Why It's Popular
 
+Scales efficiently from small clusters to national supercomputers. Supports a large and active user community and offers robust documentation and support infrastructure.
 
+## What Slurm Does
 
+**Converts** a cluster of networked Linux machines into a **unifies batch computing resource**.
+Manages how users interact with the clusts throught **job submission**, not direct execution.
 
+## Architecture and Core Components
 
+![[image.png]]
+### Slurm Architecture Overview
+
+Slurm follows a **centralized controller / distributed agent** model. The central control node runs the main management service (`slurmctld`), while each compute node runs a lightweight execution daemon (`slurmd`). This separation allows Slurm to scale effectively, maintain fault tolerance, and remain modular.
+
+### Core Components
+#### `slurmctld` – Controller Daemon
+Acts as the brain of the Slurm system. It runs on the head or login node and is responsible for job scheduling, resource allocation, and handling user requests (`sbatch`, `srun`, etc.).
+- Manages the global job queue
+- Allocates resources and enforces policies
+- Coordinates with `slurmd` on compute nodes
+- Supports failover with a backup controller
+- Communicates using Remote Procedure Calls (RPC)
+#### `slurmd` – Node Daemon
+Runs on each compute node, executing tasks and reporting their status back to the controller.
+- Launches and monitors user jobs
+- Receives instructions from `slurmctld`
+- Reports job status and node resource usage
+- Uses a hierarchical message-passing model for scalability
+#### `slurmdbd` – Database Daemon _(Optional)_
+Maintains a persistent database of job accounting information. It is essential for fair-share scheduling and historical usage tracking.
+- Logs job history, usage, and user activity
+- Requires a backend like MySQL or MariaDB
+- Enables advanced reporting and analytics
+- Supports accounting across multiple clusters
+#### `slurmrestd` – REST API Daemon _(Optional)_
+Exposes Slurm functions via a RESTful interface, allowing programmatic interaction or integration with web UIs and automation tools.
+- Enables external systems to interact with Slurm
+- Useful for dashboards, job monitoring tools, and workflow managers
+- Optional — not required for normal cluster operation
+
+### Authentication: MUNGE
+Slurm relies on **MUNGE** for secure authentication, ensuring that only authorized users and daemons can communicate and control jobs.
+- Validates job submission requests
+- Protects inter-daemon communication
+- Avoids impersonation or unauthorized usage
+
+### Typical Job Workflow
+The workflow of a submitted job proceeds through several coordinated steps:
+1. **User submits job** using `sbatch` or `srun`.
+2. **`slurmctld` receives and evaluates** the request (resource availability, queue policies, etc.).
+3. **Resources are assigned**, and selected nodes are notified.
+4. **`slurmd` daemons on the compute nodes launch** the job processes.
+5. **Execution is monitored**, and upon completion, status is reported back to `slurmctld`.
+6. _(Optional)_ **Job metadata is logged** by `slurmdbd` for accounting/reporting.
+
+**Design Insight**: Submission and execution are decoupled. Users only interface with `slurmctld`, which then delegates execution to `slurmd` on compute nodes.
 
 

@@ -2943,6 +2943,8 @@ tDi
 tsC
 trajectories
 transferring
+terabytes
+trade
 Statistic
 SlRvb
 Story
@@ -5871,6 +5873,7 @@ Stages
 Speedup
 Speculative
 Scheduling
+Slurm
 moc
 modified
 my
@@ -8812,6 +8815,9 @@ modifies
 mostly
 mailbox
 mailboxes
+messaging
+manner
+mergesort
 Root
 Rectangular
 Relationships
@@ -11639,6 +11645,8 @@ Ready
 Rendezvous
 Ranks
 Rank
+Reduction
+Redistribution
 created
 cssclasses
 customize
@@ -15123,6 +15131,16 @@ communicator
 communicators
 communications
 categorize
+carefully
+coordinated
+chunks
+combined
+commutative
+combine
+contrast
+classical
+chunk
+combining
 hide
 hosted
 heading
@@ -17813,6 +17831,7 @@ hierarchically
 hides
 heterogeneity
 hbl
+halving
 properties
 png
 page
@@ -20895,6 +20914,10 @@ pipeline
 pipelining
 packing
 payload
+proceeds
+parallelized
+partitioned
+progressively
 ITS
 In
 Included
@@ -23707,6 +23730,9 @@ Interconnect
 Instruction
 Identification
 Implicit
+Indicates
+Initiates
+Initial
 Theme
 The
 Themes
@@ -26482,6 +26508,7 @@ TqrO
 Topogoly
 Temporary
 Turing
+Target
 by
 better
 br
@@ -29482,6 +29509,12 @@ bEgG
 bfT
 bEP
 bVz
+barrier
+bottleneck
+balanced
+bitonic
+buckets
+bucket
 for
 fonts
 files
@@ -35308,6 +35341,7 @@ Ora
 OFjj
 OwBKj
 ODXD
+Optional
 Vault
 VB
 Vv
@@ -43827,6 +43861,7 @@ Conditions
 Communicators
 COMM
 Collective
+Completion
 out
 on
 of
@@ -46481,6 +46516,9 @@ observes
 organizations
 ongoing
 oba
+organizes
+overlap
+offs
 Publish
 Pills
 Positions
@@ -49390,6 +49428,8 @@ Passage
 Predefined
 Portability
 Perfect
+Parallel
+Pairwise
 Depreciated
 Download
 Dark
@@ -52210,6 +52250,10 @@ DWi
 DRd
 DFFb
 DENM
+Distributing
+Dividing
+Desired
+Doubling
 experience
 enlarges
 either
@@ -55478,6 +55522,8 @@ exceptions
 exclusively
 essentially
 envelope
+elapsed
+evenly
 Allows
 Already
 Adjustments
@@ -58324,6 +58370,8 @@ Alan
 Arithmetic
 Actively
 Automatically
+Algorithmic
+Approaches
 you
 your
 yt
@@ -63841,6 +63889,7 @@ lES
 lVO
 lPGU
 lHT
+limitations
 and
 are
 across
@@ -66960,6 +67009,8 @@ aBwo
 angle
 approximates
 assumption
+arrived
+affects
 icon
 in
 if
@@ -69847,6 +69898,7 @@ interrelated
 ideally
 invalidated
 isolated
+impractical
 used
 using
 upon
@@ -72798,6 +72850,7 @@ ufeT
 uIg
 underlies
 universe
+uniform
 No
 Navigation
 NzZj
@@ -75471,6 +75524,7 @@ NDtr
 NRS
 NUAKZ
 Neumann
+NUMA
 need
 near
 ns
@@ -81284,6 +81338,9 @@ dUH
 dfe
 dzr
 dBCN
+delivers
+datasets
+distributions
 snippets
 spans
 smaller
@@ -84671,6 +84728,12 @@ standardized
 specification
 serialized
 strategically
+summing
+scales
+sublists
+splitters
+skewed
+sequentially
 vault
 vn
 vY
@@ -90582,6 +90645,11 @@ retain
 receivers
 rank
 ranks
+reduction
+redistributed
+redistribution
+ranges
+retains
 work
 with
 within
@@ -104318,6 +104386,7 @@ LyE
 LKW
 LAKs
 Launches
+Leaf
 Heading
 Horizontal
 Headings
@@ -109719,6 +109788,7 @@ UDE
 UCLn
 UjaBs
 UHIH
+Utilization
 Metadata
 Move
 Main
@@ -112411,6 +112481,7 @@ Manages
 Multicore
 Multicast
 MPI
+Measuring
 Zoom
 ZTz
 ZW
@@ -117930,6 +118001,11 @@ Bank
 Buffers
 Branch
 Blocked
+Beyond
+Bcast
+Barrier
+Bitonic
+Bucket
 Wider
 Wrapping
 WQQ
@@ -120688,6 +120764,8 @@ WqY
 WAXp
 Wgz
 WORLD
+Workflow
+Workload
 Quotation
 Query
 Qss
@@ -134202,6 +134280,9 @@ guaranteed
 glw
 gDeNe
 grained
+gathered
+gigabytes
+goals
 qtt
 qa
 qY
@@ -142162,6 +142243,7 @@ kEO
 kinda
 kOq
 kZUr
+keeping
 zg
 zS
 zY

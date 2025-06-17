@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "a0789e67c2324c93",
+            "id": "2f0271cb062a6364",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -234,7 +234,7 @@
             }
           },
           {
-            "id": "34a7f26ae81a3d7b",
+            "id": "277be6e9f153d455",
             "type": "leaf",
             "state": {
               "type": "tasks_timeline_view",
@@ -244,7 +244,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 6
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -298,11 +298,13 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "a0789e67c2324c93",
+  "active": "2f0271cb062a6364",
   "lastOpenFiles": [
     "image.png",
-    "Untitled.md",
+    "0-HOME.md",
     "Education/CLE/Everything.md",
+    "imgs/image 5.png",
+    "Untitled.md",
     "Untitled 2.md",
     "imgs/image-1 1.png",
     "Education/RSA/Vehicular Networks.md",
@@ -313,7 +315,6 @@
     "imgs/Pasted Image 20250609200922_364.png",
     "imgs/Pasted Image 20250609201023_981.png",
     "imgs/Pasted Image 20250609201058_687.png",
-    "0-HOME.md",
     "Education/SD/Everything.md",
     "Education/SD/Exams.md",
     "Education/SD/Written Exam Type.md",
@@ -324,7 +325,6 @@
     "Excalidraw/SRC_1.md",
     "imgs/image-7.png",
     "imgs/image-5.png",
-    "imgs/image-4.png",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/Untitled.md",
     "Dev/Python/Modules/Работа с регулярными выражениями.md",
