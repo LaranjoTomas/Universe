@@ -36,6 +36,20 @@
               "icon": "lucide-file",
               "title": "Everything"
             }
+          },
+          {
+            "id": "0595adfd4d99b42b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/CLE/Summary.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Summary"
+            }
           }
         ],
         "currentTab": 1
@@ -232,19 +246,9 @@
               "icon": "lucide-archive",
               "title": "All properties"
             }
-          },
-          {
-            "id": "277be6e9f153d455",
-            "type": "leaf",
-            "state": {
-              "type": "tasks_timeline_view",
-              "state": {},
-              "icon": "calendar-clock",
-              "title": "Tasks Timeline"
-            }
           }
         ],
-        "currentTab": 6
+        "currentTab": 5
       },
       {
         "id": "41cea9e5fec7dd3b",
@@ -295,21 +299,22 @@
       "github-sync:Sync with Remote": false,
       "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false
+      "periodic-notes:Open today": false,
+      "obsidian-memos:Thino": false
     }
   },
   "active": "2f0271cb062a6364",
   "lastOpenFiles": [
+    "Education/CLE/Summary.md",
+    "Education/CLE/Everything.md",
     "image.png",
     "0-HOME.md",
-    "Education/CLE/Everything.md",
     "imgs/image 5.png",
     "Untitled.md",
     "Untitled 2.md",
     "imgs/image-1 1.png",
     "Education/RSA/Vehicular Networks.md",
     "imgs/image 4.png",
-    "Education/CLE/Summary.md",
     "Education/SD/Summary.md",
     "Education/CLE/Written Examination.md",
     "imgs/Pasted Image 20250609200922_364.png",
@@ -324,7 +329,6 @@
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
     "Excalidraw/SRC_1.md",
     "imgs/image-7.png",
-    "imgs/image-5.png",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/Untitled.md",
     "Dev/Python/Modules/Работа с регулярными выражениями.md",

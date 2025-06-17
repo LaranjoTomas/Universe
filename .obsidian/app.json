@@ -16,5 +16,13 @@
   },
   "userIgnoreFilters": [
     "Teamplates/"
+  ],
+  "spellcheckDictionary": [
+    "Slurm",
+    " Slur",
+    " Slur",
+    " Slur",
+    "MUNGE",
+    " Slur"
   ]
 }

@@ -392,11 +392,15 @@ The challenge lies in efficiently combining the locally sorted chunks across all
 
 **Slurm**, Simples Linux Utility for Resource Management, is an open-source workload manager and job scheduler designed for **Linux-Clusters**. It is a core component of most high-performance computing (HPC) environments, enabling users to **efficiently queue**, schedule, and execute jobs on shared computational resources. Known for its **simplicity, scalability and fault tolerance**, Slurm plays a vital role in ensuring that HPC clusters operate smoothly and productively.
 
-## Role in HPC: Key Funcionalities
+## What are Compute Nodes?
 
-As its core, Slurm handles **resource allocation**, granting users either exclusive or shared access to compute nodes within a specifies time window. This helps maximize hardware utilization and avoide conflicts between users. Once jobs are submitted, Slurm **launches and monitors** them, managing their execution across one or more nodes and tracking performance metrics and job states.
+In HPC Systems, **compute nodes** are the worker machines in a high-performance computing cluster. Their primary role is to **run user applications and perform computations**, not to handle system management or user interactions.
 
-It also provedes **queue management**, maintaining an ordered list of submitted jobs. Slurm determines job execution order based on defined scheduling policies, accounting for job priorities, user quotas, and any declared dependencies. This structured handling ensures **fairness, efficiency, and adaptability across diverse workloads.** 
+## Role in HPC: Key Functionalities
+
+As its core, Slurm handles **resource allocation**, granting users either exclusive or shared access to compute nodes within a specific time window. This helps maximize hardware utilization and avoid conflicts between users. Once jobs are submitted, Slurm **launches and monitors** them, managing their execution across one or more nodes and tracking performance metrics and job states.
+
+It also provides **queue management**, maintaining an ordered list of submitted jobs. Slurm determines job execution order based on defined scheduling policies, accounting for job priorities, user quotas, and any declared dependencies. This structured handling ensures **fairness, efficiency, and adaptability across diverse workloads.** 
 
 ## Why It's Popular
 
@@ -405,7 +409,7 @@ Scales efficiently from small clusters to national supercomputers. Supports a la
 ## What Slurm Does
 
 **Converts** a cluster of networked Linux machines into a **unifies batch computing resource**.
-Manages how users interact with the clusts throught **job submission**, not direct execution.
+Manages how users interact with the clusters throughout **job submission**, not direct execution.
 
 ## Architecture and Core Components
 
@@ -451,10 +455,125 @@ The workflow of a submitted job proceeds through several coordinated steps:
 1. **User submits job** using `sbatch` or `srun`.
 2. **`slurmctld` receives and evaluates** the request (resource availability, queue policies, etc.).
 3. **Resources are assigned**, and selected nodes are notified.
-4. **`slurmd` daemons on the compute nodes launch** the job processes.
+4. **`slurmd` Daemons on the compute nodes launch** the job processes.
 5. **Execution is monitored**, and upon completion, status is reported back to `slurmctld`.
 6. _(Optional)_ **Job metadata is logged** by `slurmdbd` for accounting/reporting.
 
-**Design Insight**: Submission and execution are decoupled. Users only interface with `slurmctld`, which then delegates execution to `slurmd` on compute nodes.
+**Design Insight**: Submission and execution are decoupled. Users only interact with `slurmctld`, which then delegates execution to `slurmd` on compute nodes.
 
 
+## User Interaction
+
+User do not execute programs directly on computer nodes. Instead, they interact with **Slurm** by submitting jobs to the scheduler, which then handles allocation and execution.
+This indirect model supports shared, efficient use of HPC resources.
+
+### Key Commands for Job Submission
+
+1. **`sbatch`** - Batch Job Submission
+	This is the most common method for submitting jobs in Slurm. It takes a job script as input, a shell script that contains both Slurm configuration directives and execution commands.
+	- Ideal for:
+		- Production workloads
+		- Reproducible runs
+2. **`srun`** - Job launching Tool
+	Used to execute a command across allocated resources, either within a script or interactively. If used outside a batch job, `srun` will attempt to allocate resources dynamically.
+3. **`salloc`** - Request an interactive session
+	Grants the user an interactive shell on allocated compute nodes
+	- Useful for:
+		- Interactive debugging
+		- Testing GUI applications
+		- Running interpreters or live tools
+
+### Job Script Basics
+
+**Batch Jobs in Slurm are driven by shell scripts**. These scripts contain **Slurm directives** and **Standard shell commands**.
+
+`#SBATCH` Lines are **job configuration options** for Slurm, they are comments to the shell but parsed by Slurm.
+
+**Workflow:**
+1. Save your script (.sh)
+2. Submit with `sbatch script.sh`
+3. Slurm queues the job
+4. When the requested resources are free, the job runs on a **compute node**
+
+## Job Queues & Monitoring in Slurm
+
+Once a job is submitted in Slurm, it enters a **queue** known as a **partition**. The Slurm scheduler manages these queues, prioritizing jobs based on availability, policy, and job requirements. Users can monitor and manage jobs in real-time using several built-in commands.
+
+### Monitoring Jobs
+You can track the status of submitted and running jobs using:
+- **`squeue`** – Displays active jobs in the queue.  
+    Common output fields include:
+    - **Job ID**
+    - **User**
+    - **Partition**
+    - **State** (e.g., `PD` = Pending, `R` = Running)
+    - **Node count** and **run time**
+- **`sinfo`** – Reports cluster-wide resource and partition status.
+    - Shows node state: `idle`, `allocated`, `drained`, etc.
+    - Useful for understanding system load and node availability.
+
+### Managing Jobs
+- **`scancel <jobid>`** – Cancels a specific job by its ID.
+    - Can stop jobs that are queued or currently running.
+    - Used when jobs are misconfigured, need to be halted, or are consuming too many resources.
+
+### Viewing Job History
+If Slurm’s accounting system is enabled (via `slurmdbd`), users can access detailed historical job data:
+- **`sacct`** – Displays info about completed jobs.  
+    Provides:
+    - Start/end timestamps
+    - Exit code
+    - CPU and memory usage
+    - Total runtime
+    - Node allocation details
+
+This command is valuable for:
+- Debugging failed jobs
+- Resource usage analysis
+- Optimizing future submissions
+
+## MPI & Slurm: Parallel Execution in HPC
+
+Slurm was built with MPI-based workloads in mind. While MPI handles **communication between processes**, Slurm handles **resource allocation and job launching**, making it easier to run distributed parallel applications across nodes.
+
+### What is MPI?
+**MPI (Message Passing Interface)** is a standardized protocol for parallel programming in distributed memory systems. It allows separate processes, possibly on different nodes, to:
+- Exchange data over a network
+- Synchronize with one another
+- Divide large problems into concurrent computations
+
+MPI is heavily used in:
+- Scientific computing (e.g., physics simulations)
+- Engineering tasks (e.g., CFD, FEA)
+- Large-scale data analytics and training workloads
+
+### Role of Slurm in MPI Execution
+**Slurm** doesn't just queue the job—it prepares the environment for MPI execution:
+- Allocates the requested number of **nodes** and **cores**
+- Launches **MPI processes (ranks)** across those nodes
+- Automatically manages:
+    - Rank distribution and node assignment
+    - Process binding (CPU affinity)
+    - Inter-node communication setup
+### Launching MPI Programs in Slurm
+
+
+**Slurm** allocates **4 nodes**, with **4 MPI ranks** on each,**`srun`** launches **16 total MPI processes**. 
+Then Slurm automatically:
+- Wires up MPI communication
+- Handles node list & rank distribution
+- Sets up process binding and affinity
+- Tracks job accounting & resource usage
+
+### Why use **`srun`**?
+- **No hostfile needed** — Slurm knows your allocated resources
+- Uses **PMI (Process Management Interface)** for efficient startup
+- Automatically:
+    - Manages CPU binding and affinity
+    - Tracks memory and core usage
+    - Integrates with job accounting
+
+Many HPC centers recommend `srun` because it:
+- Simplifies MPI job scripts
+- Improves reliability across systems
+- Reduces manual setup overhead

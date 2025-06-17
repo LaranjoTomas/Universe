@@ -482,7 +482,7 @@ function formatFileSize(fileSize) {
 function getFolderStructure(folder) {
   const folders = folder.split("/").slice(0, -1);
   if (folders.length === 0) {
-    return "//";
+    return "/";
   }
   return "/" + folders.join("/");
 }
@@ -513,8 +513,9 @@ function getTagsPerFile(file) {
     }
     if (frontmatter_tags !== void 0 && frontmatter_tags.tags) {
       for (let i = 0, len = frontmatter_tags.tags.length; i < len; i++) {
-        if (arrTags.indexOf(frontmatter_tags.tags[i]) < 0) {
-          arrTags.push("#" + frontmatter_tags.tags[i]);
+        const fmTag = "#" + frontmatter_tags.tags[i];
+        if (arrTags.indexOf(fmTag) < 0) {
+          arrTags.push(fmTag);
         }
       }
     }
@@ -650,6 +651,7 @@ var DNModal = class extends import_obsidian2.Modal {
     this.colored_files = false;
     // Hide columns
     this.hide_columns = [];
+    this._previewComponent = new import_obsidian2.Component();
     this.dnHandleIntersection = (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
@@ -664,7 +666,7 @@ var DNModal = class extends import_obsidian2.Modal {
   async onOpen() {
     var _a;
     const { contentEl } = this;
-    this._previewComponent = new import_obsidian2.Component();
+    this._previewComponent.load();
     this._hoverDiv = this.contentEl.createEl("div", { cls: "dn-preview" });
     await this.updateModalData();
     const leaf = (_a = this.app.workspace) == null ? void 0 : _a.getMostRecentLeaf();
@@ -679,15 +681,6 @@ var DNModal = class extends import_obsidian2.Modal {
     this._isDraggingPreview = false;
     this._hoverDivLeft = "";
     this._hoverDivTop = "";
-    this._hoverDiv.addEventListener("click", (evt) => {
-      evt.stopPropagation();
-    });
-    this.contentEl.addEventListener("click", (evt) => {
-      this.dnHidePreview();
-    });
-    this._hoverDiv.addEventListener("mousedown", (evt) => this.dnHoverDragOnMouseDown(evt));
-    this._hoverDiv.addEventListener("mousemove", (evt) => this.dnHoverDragOnMouseMove(evt));
-    this._hoverDiv.addEventListener("mouseup", (evt) => this.dnHoverDragOnMouseUp(evt));
   }
   async updateModalData() {
     this._files = [];
@@ -927,6 +920,8 @@ var DNModal = class extends import_obsidian2.Modal {
         return param.slice(1, -1);
       } else if (param.startsWith(".")) {
         return "\\" + param + "$";
+      } else if (param.startsWith("/") && param.length === 1) {
+        return "^/$";
       } else {
         return param;
       }
@@ -941,7 +936,7 @@ var DNModal = class extends import_obsidian2.Modal {
   // Search
   async searchAction(val, files) {
     let rExp;
-    const isExcludeSearch = val.startsWith("!") && val.length >= 2;
+    const isExcludeSearch = val.startsWith("!") && val.length >= 1;
     let excludeParam = isExcludeSearch ? val.slice(1) : val;
     if (excludeParam.startsWith('"') && excludeParam.endsWith('"')) {
       excludeParam = excludeParam.slice(1, -1);
@@ -968,10 +963,18 @@ var DNModal = class extends import_obsidian2.Modal {
       this._INPUT_SEARCH.classList.remove("dn-input-datesearch");
     }
     if (isExcludeSearch) {
-      this._files_results = files.filter((file) => {
-        const isMatch = file.name.toLowerCase().includes(excludeParam) || getFolderStructure(file.path).toLowerCase().includes(excludeParam) || (0, import_obsidian3.moment)(file.stat.mtime).format(this.date_format).toLowerCase().includes(excludeParam) || getTagsPerFile(file).toLowerCase().includes(excludeParam) || getPropsPerFile(file).toLowerCase().includes(excludeParam);
-        return isExcludeSearch ? !isMatch : isMatch;
-      });
+      let isMatch;
+      if (excludeParam === "/") {
+        this._files_results = files.filter((file) => {
+          isMatch = getFolderStructure(file.path).toLowerCase() === "/";
+          return isExcludeSearch ? !isMatch : isMatch;
+        });
+      } else {
+        this._files_results = files.filter((file) => {
+          isMatch = file.name.toLowerCase().includes(excludeParam) || getFolderStructure(file.path).toLowerCase().includes(excludeParam) || (0, import_obsidian3.moment)(file.stat.mtime).format(this.date_format).toLowerCase().includes(excludeParam) || getTagsPerFile(file).toLowerCase().includes(excludeParam) || getPropsPerFile(file).toLowerCase().includes(excludeParam);
+          return isExcludeSearch ? !isMatch : isMatch;
+        });
+      }
     } else {
       this._files_results = files.filter(
         (file) => {
@@ -1087,34 +1090,38 @@ var DNModal = class extends import_obsidian2.Modal {
         const tags_per_file = getTagsPerFile(file);
         const props_per_file = getPropsPerFile(file);
         const td6 = tr2.createEl("td", { title: tags_per_file });
-        const fTags = tags_per_file.split(" ");
-        fTags.forEach((tag) => {
-          td6.createEl("a", { cls: "dn-tag", text: tag }).onClickEvent((evt) => {
-            if (evt.button === 2) {
-              evt.preventDefault();
-            } else {
-              this._INPUT_SEARCH.value = tag;
-              this.dnModalSearchVault(this._INPUT_SEARCH.value);
-            }
+        if (tags_per_file !== "") {
+          const fTags = tags_per_file.split(" ");
+          fTags.forEach((tag) => {
+            td6.createEl("a", { cls: "tag", text: tag, href: tag }).onClickEvent((evt) => {
+              if (evt.button === 2) {
+                evt.preventDefault();
+              } else {
+                this._INPUT_SEARCH.value = tag;
+                this.dnModalSearchVault(this._INPUT_SEARCH.value);
+              }
+            });
           });
-        });
-        const td7 = tr2.createEl("td", { title: props_per_file });
-        const fProps = props_per_file.split("\n");
-        fProps.forEach((prop) => {
-          td7.createEl("a", { cls: "dn-tag", text: prop }).onClickEvent((evt) => {
-            if (evt.button === 2) {
-              evt.preventDefault();
-            } else {
-              this._INPUT_SEARCH.value = prop;
-              this.dnModalSearchVault(this._INPUT_SEARCH.value);
-            }
+        }
+        const td7 = tr2.createEl("td");
+        if (props_per_file !== "") {
+          const fProps = props_per_file.split("\n");
+          fProps.forEach((prop) => {
+            td7.createEl("a", { cls: "dn-tag", text: prop, title: props_per_file }).onClickEvent((evt) => {
+              if (evt.button === 2) {
+                evt.preventDefault();
+              } else {
+                this._INPUT_SEARCH.value = prop;
+                this.dnModalSearchVault(this._INPUT_SEARCH.value);
+              }
+            });
           });
-        });
+        }
       });
       paginationContainer.empty();
-      paginationContainer.createEl("span", { cls: "dn-pagination-total-results", text: `File(s): ${f.length} ` });
-      paginationContainer.createEl("span", { cls: "dn-pagination-current-page", text: `Page ${currentPage} of ${this._total_pages} ` });
-      const btnPrev = paginationContainer.createEl("button", { cls: "dn-btn-prev", text: "\u25C0", title: "Previous" });
+      paginationContainer.createEl("div", { cls: "dn-pagination-total-results", text: `File(s): ${f.length} ` });
+      const rightPagDiv = paginationContainer.createEl("div", { cls: "dn-pagination-current-page", text: `Page ${currentPage} of ${this._total_pages} ` });
+      const btnPrev = rightPagDiv.createEl("button", { cls: "dn-btn-prev", text: "\u25C0", title: "Previous" });
       if (currentPage === 1) {
         btnPrev.disabled = true;
       } else {
@@ -1125,7 +1132,7 @@ var DNModal = class extends import_obsidian2.Modal {
           this.dnShowModalSearchResults({ f, el, leaf, currentPage: currentPage - 1 });
         }
       });
-      const btnNext = paginationContainer.createEl("button", { cls: "dn-btn-next", text: "\u25B6", title: "Next" });
+      const btnNext = rightPagDiv.createEl("button", { cls: "dn-btn-next", text: "\u25B6", title: "Next" });
       if (currentPage === this._total_pages) {
         btnNext.disabled = true;
       } else {
@@ -1149,6 +1156,7 @@ var DNModal = class extends import_obsidian2.Modal {
       dnTableManager.hideColumns(this.hide_columns);
     } else {
       tr.empty();
+      paginationContainer.createEl("div", { cls: "dn-pagination-total-results", text: `File(s): 0 ` });
       this._divSearchResults.createEl("p", { cls: "dn-no-results-found", text: "No files found." });
     }
   }
@@ -1688,10 +1696,10 @@ var DNModal = class extends import_obsidian2.Modal {
         rowTags.createEl("div", { text: "Tag(s): ", cls: "dn-property-name" });
         const propTags = rowTags.createEl("div");
         const curTags = getTagsPerFile(file);
-        if (curTags) {
+        if (curTags !== "") {
           const tags = curTags.split(" ");
           for (let i = 0, len = tags.length; i < len; i++) {
-            propTags.createEl("a", { text: tags[i], cls: "dn-tag" }).onClickEvent((evt2) => {
+            propTags.createEl("a", { text: tags[i], href: tags[i], cls: "tag" }).onClickEvent((evt2) => {
               if (evt2.button === 2) {
                 evt2.preventDefault();
               } else {
@@ -1771,20 +1779,20 @@ var DNModal = class extends import_obsidian2.Modal {
   }
   dnShowPreviewFile(evt, file) {
     this._hoverDiv.empty();
-    const divPreviewName = this._hoverDiv.createEl("div", { cls: "dn-property-row" });
+    const topBar = this._hoverDiv.createEl("div", { cls: "dn-preview-top-bar" });
+    const btnClosePreview = topBar.createEl("div", { cls: "modal-close-button" });
+    btnClosePreview.onClickEvent((evt2) => {
+      evt2.stopPropagation();
+      this.dnHidePreview();
+    });
+    const previewTop = topBar.createEl("div", "dn-preview-titlebar");
+    const divPreviewName = previewTop.createEl("div", { cls: "dn-property-row" });
     divPreviewName.createEl("div", { text: "Name: ", cls: "dn-property-name-sm" });
     divPreviewName.createEl("div", { text: file.name, cls: "dn-property-value" });
-    const divPreviewPath = this._hoverDiv.createEl("div", { cls: "dn-property-row" });
+    const divPreviewPath = previewTop.createEl("div", { cls: "dn-property-row" });
     divPreviewPath.createEl("div", { text: "Path: ", cls: "dn-property-name-sm" });
     divPreviewPath.createEl("div", { text: getFolderStructure(file.path), cls: "dn-property-value" });
-    const divButtons = this._hoverDiv.createEl("div", { cls: "dn-div-top-preview-btns" });
-    divButtons.classList.add("dn-hidden");
-    this._hoverDiv.addEventListener("mouseenter", () => {
-      divButtons.classList.remove("dn-hidden");
-    });
-    this._hoverDiv.addEventListener("mouseleave", () => {
-      divButtons.classList.add("dn-hidden");
-    });
+    const divButtons = topBar.createEl("div", { cls: "dn-div-top-preview-btns" });
     const btnPreviewOpenFile = divButtons.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
     btnPreviewOpenFile.onClickEvent(() => {
       this.dnHidePreview();
@@ -1803,17 +1811,21 @@ var DNModal = class extends import_obsidian2.Modal {
       this.app.workspace.getLeaf("window").openFile(file);
     });
     this._hoverRender = this._hoverDiv.createEl("div", { cls: "dn-pr-content" });
-    import_obsidian2.MarkdownRenderer.render(
-      this.app,
-      "![[" + file.path + "]]",
-      this._hoverRender,
-      file.path,
-      this._previewComponent
-    );
-    this._hoverRender.addEventListener("mousedown", (evt2) => {
-      evt2.stopPropagation();
-    });
+    try {
+      import_obsidian2.MarkdownRenderer.render(
+        this.app,
+        "![[" + (0, import_obsidian2.normalizePath)(file.path) + "]]",
+        this._hoverRender,
+        (0, import_obsidian2.normalizePath)(file.path),
+        this._previewComponent
+      );
+    } catch (error) {
+      return;
+    }
     this._hoverDiv.style.display = "block";
+    previewTop.addEventListener("mousedown", (evt2) => this.dnHoverDragOnMouseDown(evt2));
+    this._hoverDiv.addEventListener("mousemove", (evt2) => this.dnHoverDragOnMouseMove(evt2));
+    this._hoverDiv.addEventListener("mouseup", (evt2) => this.dnHoverDragOnMouseUp(evt2));
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     const divW = this._hoverDiv.offsetWidth;
@@ -1822,9 +1834,7 @@ var DNModal = class extends import_obsidian2.Modal {
       this._hoverDiv.style.left = ((screenWidth - divW) / 2).toString() + "px";
       this._hoverDiv.style.top = ((screenHeight - divH) / 2).toString() + "px";
     }
-    this._hoverRender.removeEventListener("mousedown", (evt2) => {
-      evt2.stopPropagation();
-    });
+    previewTop.removeEventListener("mousedown", (evt2) => this.dnHoverDragOnMouseDown(evt2));
   }
   dnHidePreview() {
     this._isDraggingPreview = false;
@@ -2000,13 +2010,6 @@ var DNModal = class extends import_obsidian2.Modal {
     this._SELECT_SORT.removeEventListener("change", () => {
       this.dnSortColumnWithSelect();
     });
-    this._hoverDiv.removeEventListener("click", (evt) => {
-      evt.stopPropagation();
-    });
-    this.contentEl.removeEventListener("click", (evt) => {
-      this.dnHidePreview();
-    });
-    this._hoverDiv.removeEventListener("mousedown", (evt) => this.dnHoverDragOnMouseDown(evt));
     this._hoverDiv.removeEventListener("mousemove", (evt) => this.dnHoverDragOnMouseMove(evt));
     this._hoverDiv.removeEventListener("mouseup", (evt) => this.dnHoverDragOnMouseUp(evt));
     if (this.intersectionObserver) {
