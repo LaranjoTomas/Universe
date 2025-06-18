@@ -9,6 +9,10 @@
       "path": "Education/CLE/Summary.md"
     },
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
     },
@@ -35,10 +39,6 @@
     {
       "basename": "Everything",
       "path": "Education/SD/Everything.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Exams",

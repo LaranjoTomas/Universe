@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "2f0271cb062a6364",
+            "id": "400704caf16281b6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -38,7 +38,7 @@
             }
           },
           {
-            "id": "0595adfd4d99b42b",
+            "id": "cf44a3b4127b40f5",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -149,8 +149,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -298,17 +297,16 @@
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "obsidian-memos:Memos": false,
-      "periodic-notes:Open today": false,
-      "obsidian-memos:Thino": false
+      "obsidian-memos:Thino": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "2f0271cb062a6364",
+  "active": "400704caf16281b6",
   "lastOpenFiles": [
     "Education/CLE/Summary.md",
     "Education/CLE/Everything.md",
-    "image.png",
     "0-HOME.md",
+    "image.png",
     "imgs/image 5.png",
     "Untitled.md",
     "Untitled 2.md",
