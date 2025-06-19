@@ -95,13 +95,13 @@ The role of the distributor is to foward the service requests to any of the serv
 ## 4 de Julho
 
 #### 1. The diagram bellow aims to depict in a hierarchical way the different layers of software/hardware modules required to run a distributed application in a parallel machine based on off-the-shelf computer systems. What is the role played by the middleware layers in this context? Explain why the Java Virtual Machine (JVM) may be thought of as part of the middleware.
-![[image-2.png]]
+![[image-2 1.png]]
 
 **R:** The middleware provides an abstraction layer for communication between processes that do not share an address space. A communication device is provided which serves as an endpoint for inter-process communication. It ensures that applications can run transparently across different nodes, while it handles complex message passing, load balancing, fault tolerance, and data consistency without requiring the application developer to manage these.
 
 The JVM is considered as middleware because it provides a platform-independent execution environment. Allowing applications written on Java to run on any  system compatible with JVM.
 
-#### 3. ![[image-3.png]]
+#### 3. ![[image-3 1.png]]
 
 ##### **I)**
 a(1) e(1) j(1)| b(2) f(2) | g(3) c(3) | k(4) k(4) d(4)| l(5) | i(6) 
@@ -111,7 +111,7 @@ $e \prec d$
 
 #### 4. The role of the distributor is to forward service requests to the primary server. The backup server is updated by the primary server so that their internal states are continuously synchronized. Assume that the reliability of the hardware platform that takes the role of distributor is much higher than the reliability of the hardware platforms that take the role of primary or backup servers. Which hardware platform is chosen as primary, is decided in a dynamical way: i) it is the first to register in the distributor after reboot; ii) it is the backup server, thereby changing its role, if primary fails. What kind of data the distributor and the primary have to keep internally in order for operations to be carried out as expected? How do the distributor and the backup server become aware of a primary failure? What operations have to be carried out to overcome this problem? Assume that no messages are lost and message transmission time is limited.
 
-![[image-4.png | 600]]
+![[image-4 1.png| 600]]
 
 
 **R:** The primary needs the shared resource, a communication channel to the distributor and a communication channel to the BackUp server.

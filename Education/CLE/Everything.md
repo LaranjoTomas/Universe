@@ -415,7 +415,7 @@ Manages how users interact with the clusters throughout **job submission**, not 
 
 ## Architecture and Core Components
 
-![[image.png]]
+![[image 6.png]]
 ### Slurm Architecture Overview
 
 Slurm follows a **centralized controller / distributed agent** model. The central control node runs the main management service (`slurmctld`), while each compute node runs a lightweight execution daemon (`slurmd`). This separation allows Slurm to scale effectively, maintain fault tolerance, and remain modular.

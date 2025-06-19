@@ -22,79 +22,8 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
-          },
-          {
-            "id": "be5a98b43462617e",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/CLE/Tests.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Tests"
-            }
-          },
-          {
-            "id": "3127aef26cee2dc5",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "Drawing 2025-06-19 20.27.32.excalidraw"
-            }
-          },
-          {
-            "id": "eeac6f9721f1dc89",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/CLE/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          },
-          {
-            "id": "8364db80066afe61",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/CLE/Questions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Questions"
-            }
-          },
-          {
-            "id": "47726222c92c5ccd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/CLE/Summary.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Summary"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -191,8 +120,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -344,27 +272,27 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "be5a98b43462617e",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Education/CLE/Tests.md",
+    "imgs/image 6.png",
+    "imgs/image-1 2.png",
+    "imgs/image-2 1.png",
+    "0-HOME.md",
+    "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
     "Education/CLE/Everything.md",
     "Education/CLE/Questions.md",
-    "Education/CLE/Tests.md",
-    "image-13.png",
-    "image-12.png",
-    "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
+    "imgs/image-13.png",
+    "imgs/image-12.png",
     "Education/CLE/Written Examination.md",
-    "image-11.png",
-    "image-10.png",
-    "image-9.png",
-    "image-8.png",
-    "0-HOME.md",
+    "imgs/image-11.png",
+    "imgs/image-10.png",
+    "imgs/image-9.png",
+    "imgs/image-8 1.png",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
-    "image-7.png",
-    "image-6.png",
+    "imgs/image-7 1.png",
     "Excalidraw/Untitled.md",
     "Education/CLE/Summary.md",
-    "image-5.png",
-    "image-4.png",
     "Untitled.md",
     "Untitled 2.md",
     "Education/RSA/Vehicular Networks.md",

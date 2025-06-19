@@ -10,7 +10,7 @@
 
 ### 2. Assumindo que a empresa deseja implementar um conjunto de servidores para prestação de serviços, nomeadamente (i) vários servidores Web HTTPS na DMZ com vários sites/domínios (portas TCP 443) públicos que deverão estar disponíveis para o exterior, (ii) dois servidores de Email na DMZ (portas TCP 465 para clientes e servidores) públicos que deverão estar disponíveis para clientes internos e externos, (ii) um servidor Web HTTPS com a Intranet da empresa (porta TCP 443) no Datacenter B que deverá estar disponível apenas para os terminais internos das VLAN 5 e 6, e (iii) três servidores de backup de dados (portas TCP 5001 a 5002) no Datacenter C que apenas deverão estar acessíveis pelos servidores Web HTTPS e por um servidor pré-definido externo para sincronização/replicação dos dados.
 
-![[image-7.png]]
+![[image-7 1.png]]
 
 #### a) Proponha as alterações de arquitetura de rede necessárias de modo a poder implementar o controlo de fluxos e proteção contra ataques DDoS. Defina as diferentes zonas da rede e desenhe um diagrama de rede com as alterações propostas
 
@@ -55,7 +55,7 @@ Firewalls building A e Building B:
 	Permitir tráfego das vlans 5 e 6 internas da rede para o intranet HTTPS Web Server no Datacenter B
 	Permitir tráfego das vlans 1-6 para conseguirem aceder à internet
 
-![[image-6.png]]
+![[image-6 1.png]]
 ### 3. Proponha uma solução de comunicação e encaminhamento IPv4 ao nível da rede, e respetivas alterações nas regras das Firewalls, que garanta que o tráfego TCP para os servidores de backup no Datacenter C (via WAN) seja encaminhado de forma que garanta confidencialidade.
 
 **R:**  Para assegurar confidencialidade no tráfego TCP nas portas 5001 e 5002 que atravessam o WAN para os backup Servers no datacenter C seria usar IPsec VPN tunnels. Configura um túnel IPsec site-to-site entre um router na secção do Core e o router 9 (datacenter C), com auntenticação de chaves pre-compartilhadas ou certificados de uma entitade certificadora, e depois colocar o tunnel cobrindo apenas a rede 192.2.0.0/20 para 10.0.0.0/28. 
@@ -87,7 +87,7 @@ Firewall do datacenter C recusar tráfego 5001 e 5002, aceitar tráfego 500, 450
 ### 1. Explique as diferentes fases e possíves vetores de ataque para o roubo de dados num sistema de base de dados numa empresa. Apresente possíveis mecanismos de defesa.
 **R:** Existem cerca de **8 fases de ataque** para o roubo de dados num sistema de base de dados numa empresa. **Estas começam por aquisição de conhecimento sobre a empresa**, por meios de Engenharia social, phishing emails, etc. Depois vem a **infiltração** de malware em possiveis componentes eletrónicos na network da empresa que irá **aprender** como a empresa está estruturada e aonde está guardado informações importantes. De seguida este malware irá **propagar-se** pelos sistemas de empresa e os seus empregados para conseguir aumentar o seu alcance. Por último **ele junta todas as informações** que possam ser uteis para os atacantes para poder **exfiltra-las** de network interior. Mecanismos de defesa possiveis para evitar tais situações são diversos e cada um afeta uma fase diferente do ataque para o roubo de dados num sistem de base de dados numa empresa. De fazer treinos periódicos de segurança a cada empregado, construir mecanismos de proteção contra emails de phishing como melhorar as defesas internas da rede para detetar ameaças que estejam tanto a tentar entrar como no interior.
 
-![[image-8.png]]
+![[image-8 1.png]]
 
 ### 2. Uma empresa pretende colocar na sua infraestrutura de rede um conjunto de servidores HTTPS (portos TCP 443 e TCP 8888) acessíveis do exterior com vários serviços Web da empresa. Proponha uma solução de proteção da rede que permita (i) controlar os fluxos de tráfego de acesso aos serviços e (ii) proteger a infraestrutura contra ataques de negação de serviço distribuídos (DDoS). Assuma que a empresa apenas tem uma infraestrutura de encaminhamento de tráfego IP e que possui utilizadores internos que precisam de aceder à Internet.
 

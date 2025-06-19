@@ -1,8 +1,28 @@
 {
   "recentFiles": [
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Tests",
       "path": "Education/CLE/Tests.md"
+    },
+    {
+      "basename": "image 6",
+      "path": "imgs/image 6.png"
+    },
+    {
+      "basename": "image-1 2",
+      "path": "imgs/image-1 2.png"
+    },
+    {
+      "basename": "image-2 1",
+      "path": "imgs/image-2 1.png"
+    },
+    {
+      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
     },
     {
       "basename": "Everything",
@@ -13,16 +33,8 @@
       "path": "Education/CLE/Questions.md"
     },
     {
-      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-    },
-    {
       "basename": "Written Examination",
       "path": "Education/CLE/Written Examination.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
@@ -187,18 +199,6 @@
     {
       "basename": "RSA",
       "path": "Excalidraw/RSA.md"
-    },
-    {
-      "basename": "ADCs",
-      "path": "Education/ASE/ADCs.md"
-    },
-    {
-      "basename": "Pasted image 20250331094249",
-      "path": "imgs/Pasted image 20250331094249.png"
-    },
-    {
-      "basename": "Self-organized systems",
-      "path": "Education/RSA/Self-organized systems.md"
     }
   ],
   "omittedPaths": [],

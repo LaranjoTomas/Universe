@@ -1389,7 +1389,7 @@ Strict consistency means **every read returns the value from the most recent wri
 
 As a result, **events cannot be globally ordered by real time**. Instead, distributed systems use **logical clocks** or **causal ordering** to understand event sequences.
 
-![[image-5.png]]
+![[image-5 1.png]]
 
 ## Linearizability
 
