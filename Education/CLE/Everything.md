@@ -81,6 +81,8 @@ In **multicore processors**, multiple cores may access and modify **shared data*
 ## Program vs. Process
 - A **program** is a _static_ sequence of instructions.
 - A **process** is a _dynamic_ execution instance of a program.
+
+**A Program is an organized set of operations designed to accomplish a specific objective.** **A Process is the active execution of a program.**
 ### 🔍 A Process Includes:
 - **Addressing space** – Code and current variable values.
 - **Processor context** – Register states.

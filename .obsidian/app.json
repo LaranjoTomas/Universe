@@ -23,6 +23,10 @@
     " Slur",
     " Slur",
     "MUNGE",
-    " Slur"
+    " Slur",
+    "CUDA",
+    "Amdahl",
+    "*Amdah",
+    "amdahl"
   ]
 }
