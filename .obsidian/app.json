@@ -27,6 +27,8 @@
     "CUDA",
     "Amdahl",
     "*Amdah",
-    "amdahl"
+    "amdahl",
+    "multiprogrammed",
+    "cuda"
   ]
 }

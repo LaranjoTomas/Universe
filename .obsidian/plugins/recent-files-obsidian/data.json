@@ -1,20 +1,32 @@
 {
   "recentFiles": [
     {
-      "basename": "Questions",
-      "path": "Education/CLE/Questions.md"
+      "basename": "Tests",
+      "path": "Education/CLE/Tests.md"
+    },
+    {
+      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/CLE/Everything.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
+      "basename": "Untitled",
+      "path": "Excalidraw/Untitled.md"
+    },
+    {
       "basename": "Summary",
       "path": "Education/CLE/Summary.md"
     },
     {
-      "basename": "Everything",
-      "path": "Education/CLE/Everything.md"
+      "basename": "Questions",
+      "path": "Education/CLE/Questions.md"
     },
     {
       "basename": "Vehicular Networks",
@@ -67,10 +79,6 @@
     {
       "basename": "SD_Exam stuff",
       "path": "Excalidraw/SD_Exam stuff.md"
-    },
-    {
-      "basename": "Untitled",
-      "path": "Excalidraw/Untitled.md"
     },
     {
       "basename": "Работа с регулярными выражениями",
@@ -191,14 +199,6 @@
     {
       "basename": "Self-organized systems",
       "path": "Education/RSA/Self-organized systems.md"
-    },
-    {
-      "basename": "Ad-Hoc Networks",
-      "path": "Education/RSA/Ad-Hoc Networks.md"
-    },
-    {
-      "basename": "image",
-      "path": "imgs/image.png"
     }
   ],
   "omittedPaths": [],
