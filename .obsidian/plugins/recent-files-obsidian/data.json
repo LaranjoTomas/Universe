@@ -5,16 +5,28 @@
       "path": "Education/CLE/Tests.md"
     },
     {
-      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-    },
-    {
       "basename": "Everything",
       "path": "Education/CLE/Everything.md"
     },
     {
+      "basename": "Questions",
+      "path": "Education/CLE/Questions.md"
+    },
+    {
+      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
+    },
+    {
+      "basename": "Written Examination",
+      "path": "Education/CLE/Written Examination.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
     },
     {
       "basename": "Untitled",
@@ -25,20 +37,12 @@
       "path": "Education/CLE/Summary.md"
     },
     {
-      "basename": "Questions",
-      "path": "Education/CLE/Questions.md"
-    },
-    {
       "basename": "Vehicular Networks",
       "path": "Education/RSA/Vehicular Networks.md"
     },
     {
       "basename": "Summary",
       "path": "Education/SD/Summary.md"
-    },
-    {
-      "basename": "Written Examination",
-      "path": "Education/CLE/Written Examination.md"
     },
     {
       "basename": "Pasted Image 20250609200922_364",
@@ -67,10 +71,6 @@
     {
       "basename": "Exams",
       "path": "Education/SRC/Exams.md"
-    },
-    {
-      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
     },
     {
       "basename": "SRC_1",

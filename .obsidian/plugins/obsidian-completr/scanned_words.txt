@@ -2948,6 +2948,7 @@ trade
 topologies
 torus
 today
+taks
 Statistic
 SlRvb
 Story
@@ -5884,6 +5885,9 @@ Submit
 Shows
 Synchronize
 SIMD
+SEends
+Star
+Sketch
 moc
 modified
 my
@@ -8840,6 +8844,10 @@ multithreading
 months
 multiply
 massive
+manners
+matrixs
+memories
+multiprocessors
 Root
 Rectangular
 Relationships
@@ -15187,6 +15195,11 @@ compilers
 categorized
 contrasts
 cored
+cuda
+corruption
+closer
+counting
+computationally
 hide
 hosted
 heading
@@ -17883,6 +17896,8 @@ hostfile
 heterogenous
 humans
 humble
+happening
+hub
 properties
 png
 page
@@ -20984,6 +20999,10 @@ prefetching
 professions
 parallelizing
 prioritize
+proximity
+pathological
+programmers
+paramount
 ITS
 In
 Included
@@ -23809,6 +23828,7 @@ Insight
 Interactive
 Integrates
 Improves
+Invoking
 Theme
 The
 Themes
@@ -26590,6 +26610,8 @@ Tracks
 Topologies
 Torus
 Terminated
+Third
+Transferring
 by
 better
 br
@@ -29597,6 +29619,10 @@ bitonic
 buckets
 bucket
 blend
+balance
+barriers
+bimCZ
+bpTC
 for
 fonts
 files
@@ -40992,6 +41018,8 @@ Gather
 GPUs
 Grants
 Granularity
+Grained
+Graphics
 Check
 Checkboxes
 Callouts
@@ -43975,6 +44003,7 @@ Clearly
 Compare
 Chunks
 Communicator
+Copying
 out
 on
 of
@@ -46633,6 +46662,11 @@ organizes
 overlap
 offs
 objective
+operand
+operands
+ofc
+overload
+offload
 Publish
 Pills
 Positions
@@ -49553,6 +49587,8 @@ Pending
 PMI
 Prevention
 Paradigms
+Present
+PNs
 Depreciated
 Download
 Dark
@@ -52385,6 +52421,8 @@ Detail
 Decomposition
 Discuss
 Differentiate
+Destroying
+Delays
 experience
 enlarges
 either
@@ -55669,6 +55707,9 @@ excluding
 excel
 enhanced
 envelop
+expects
+evolved
+everyone
 Allows
 Already
 Adjustments
@@ -58522,6 +58563,7 @@ ARE
 Allocates
 Avoids
 Amdahl
+Allocating
 you
 your
 yt
@@ -64044,6 +64086,8 @@ launches
 lightweight
 logged
 launching
+lYBY
+letting
 and
 are
 across
@@ -67176,6 +67220,7 @@ alone
 advancements
 amdahl
 avoided
+aWjk
 icon
 in
 if
@@ -70076,6 +70121,10 @@ inherent
 improvement
 initiated
 issuefrom
+introducing
+interprocess
+introduce
+interconnections
 used
 using
 upon
@@ -73032,6 +73081,7 @@ utilization
 unifies
 undergone
 undergo
+underutilizes
 No
 Navigation
 NzZj
@@ -75706,6 +75756,7 @@ NRS
 NUAKZ
 Neumann
 NUMA
+NVIDIA
 need
 near
 ns
@@ -78342,6 +78393,9 @@ networked
 notified
 necessity
 nuclear
+notify
+nDdF
+npc
 download
 depending
 does
@@ -81541,6 +81595,13 @@ drawbacks
 dedicated
 degrees
 denied
+distant
+designing
+degrade
+deadlocks
+day
+deal
+divide
 snippets
 spans
 smaller
@@ -84958,6 +85019,9 @@ scaled
 subdivided
 subtask
 supposed
+scatter
+sketch
+swGO
 vault
 vn
 vY
@@ -90878,6 +90942,8 @@ reporting
 rise
 reshuffling
 racing
+raise
+reason
 work
 with
 within
@@ -93598,6 +93664,8 @@ wIDAT
 weather
 workloads
 workflow
+wgWd
+warp
 Embed
 Edges
 Embeded
@@ -96390,6 +96458,8 @@ Engineering
 Evolution
 Elaborate
 Enumerate
+EmGEQxff
+Especially
 Kanban
 KD
 KuTyw
@@ -99073,6 +99143,7 @@ KHA
 KNv
 KQlH
 Known
+KPiHzXTU
 Features
 Folder
 File
@@ -101929,6 +102000,9 @@ Functionalities
 Furthermore
 Fat
 Factor
+Fourth
+Fifth
+Freeing
 Light
 Larger
 Line
@@ -107402,6 +107476,8 @@ Handlers
 Hypercube
 Hardware
 HPCs
+Host
+Heterogeneous
 Underline
 Ue
 Uy
@@ -115464,6 +115540,8 @@ ZRF
 ZMr
 ZNG
 ZYAJ
+ZRhtpUgL
+Zpx
 Blockquotes
 Bullet
 Bzj
@@ -118270,6 +118348,7 @@ Bcast
 Barrier
 Bitonic
 Bucket
+Broadcasts
 Wider
 Wrapping
 WQQ
@@ -121031,6 +121110,7 @@ WORLD
 Workflow
 Workload
 Wires
+WARP
 Quotation
 Query
 Qss
@@ -126257,6 +126337,7 @@ YTx
 YSLz
 Yhf
 YJs
+Ymu
 xmp
 xpacket
 xmpmeta
@@ -134555,6 +134636,7 @@ granularity
 gains
 grows
 generic
+geometry
 qtt
 qa
 qY
@@ -142521,6 +142603,7 @@ kZUr
 keeping
 kernels
 knows
+kinds
 zg
 zS
 zY
