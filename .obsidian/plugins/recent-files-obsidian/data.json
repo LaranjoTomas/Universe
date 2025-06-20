@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "RSA_Test",
+      "path": "Education/RSA/RSA_Test.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/RSA/Everything.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -191,14 +199,6 @@
     {
       "basename": "Project",
       "path": "Education/SRC/Project.md"
-    },
-    {
-      "basename": "Raspberry Pi server",
-      "path": "Ideas/RaspberryPi server/Raspberry Pi server.md"
-    },
-    {
-      "basename": "RSA",
-      "path": "Excalidraw/RSA.md"
     }
   ],
   "omittedPaths": [],

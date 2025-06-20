@@ -3,6 +3,14 @@ tags:
   - "#RSA"
   - "#Test"
 ---
+# Test 23 junho 2023
+
+## 7. Considere duas situações distintas num cenário de sistema de cooperação entre veículos: lane merge numa auto-estrada, e entrada numa rotunda com veículos de 4 e 2 rodas. Com as mensagens de comunicação estudadas na disciplina, proponha a conceção de um sistema de cooperação:
+### a) Apenas com sistemas de comunicação; (2.5 valores)
+
+**R:** Para a situação de lane merge numa autoestrada as mensagens a serem utilizadas seriam CAM (Cooperative awareness Messages) e DENM (Decentralized Environmental notification messages). A estratégia de cooperação seria a seguinte: os veículos que se aproximam da zona de fusão transmitem CAM periodicamente para permitir os veículos na faixa da autoestrada conheçam a intenção dos que querem entrar; os veículos podem usar DENMs para notificar as mudanças de velocidade ou obstáculos que possam justificar a lane merge anticipada; 
+### b) Com ambos os sistemas de sensorização e comunicação. (2.5 valores) Descreva os cenários, mensagens e informação transmitida para tomada de decisão
+
 
 # De acordo com os conceitos e funcionamento de CDNs e redes peer-to-peer, explique quais são as maiores semelhanças e diferenças entre estas redes.
 
