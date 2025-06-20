@@ -8,8 +8,27 @@ tags:
 ## 7. Considere duas situações distintas num cenário de sistema de cooperação entre veículos: lane merge numa auto-estrada, e entrada numa rotunda com veículos de 4 e 2 rodas. Com as mensagens de comunicação estudadas na disciplina, proponha a conceção de um sistema de cooperação:
 ### a) Apenas com sistemas de comunicação; (2.5 valores)
 
-**R:** Para a situação de lane merge numa autoestrada as mensagens a serem utilizadas seriam CAM (Cooperative awareness Messages) e DENM (Decentralized Environmental notification messages). A estratégia de cooperação seria a seguinte: os veículos que se aproximam da zona de fusão transmitem CAM periodicamente para permitir os veículos na faixa da autoestrada conheçam a intenção dos que querem entrar; os veículos podem usar DENMs para notificar as mudanças de velocidade ou obstáculos que possam justificar a lane merge anticipada; 
+**R:** 
+Para a situação de lane merge numa autoestrada as mensagens a serem utilizadas seriam CAM (Cooperative awareness Messages) e DENM (Decentralized Environmental notification messages), MCM. A estratégia de cooperação seria a seguinte: os veiculos que se aproximam da autoestrada transmitem CAMs periodicamente, fornecendo informação do veiculo que manda como posição, velocidade, direção e aceleração o que permite outros veículos na faixa da autoestrada estarem cientes da presença dos outros veículos; em caso de obstáculos, travagens imprevistas, etc, que possam justificar uma lane merge antecipada os veículos devem enviar DENMs para alertar os restantes da emergência a acontecer; Por último o veículo que pretende fazer mudança de faixa envia uma MCM (Manoeuvre coordination Message) para comunicar com os outros veículos e explicar a sua intenção de realizar uma manobra e qual manobra.
+
+Para a situação da entrada numa rotunda com veículos de 4 e 2 rodas seriam necessárias as seguintes mensagens estruturadas: CAM, DENM, SPATEM, MAPEM.
+Cada veículo envia CAMs para indicar a suas informações aos outros veículos na rotunda. Veículos de 2 rodas em especifico , são mais vulneráveis, então reforçam a sua presença digital com o envio de VAMs que aumentam a sua visibilidade para os outros veículos. Em situações de perigo ou emergência, como travagens bruscas, são geradas DENMs para alertar os outros veículos. Se existir infrastrutura inteligente de semáforos, o envio de SPATEM e MAPEM iria melhorar o sistema da rotunda. 
+
 ### b) Com ambos os sistemas de sensorização e comunicação. (2.5 valores) Descreva os cenários, mensagens e informação transmitida para tomada de decisão
+
+**R:** 
+**Lane merge numa autoestrada:**
+1. O veículo que pretende entrar na faixa observa com sensores (CPM) se existe espaço suficiente, aqui também é enviado **CAMs** messages por todos os veículos para cada veículo saber o seu environment.
+2. Envia **MCM** com a sua intenção de dar lane merge.
+3. Os veículos na faixa principal recebem a **MCM**, confirmam com sensores locais a presença do veículo e ajustam a sua velocidade para abrir espaço.
+4. Se algum veículo detetar via sensores um risco inesperado (um veículo em aceleração repentina, travagem brusca, etc...), pode emitir uma **DENM**.
+5. A lane merge ocorre de forma segura e coordenada.
+
+**Entrada numa Rotunda com Veículos de 2 e 4 Rodas:**
+1. Veículos comunicam a sua presença e intenção via **CAM/VAM** (VAM se for veículo de 2 rodas).
+2. A infraestrutura fornece a geometria e regras da rotunda via **MAPEM/SPATEM** se tiver a infraestrutura.
+3. Se um veículo de 2 rodas entrar numa zona de risco, os sensores (CPM) confirmam e o sistema pode emitir **DENM** para alertar os outros.
+4. Os veículos ajustam autonomamente a sua velocidade e trajetória com base nos dados de comunicação e sensores, garantindo segurança na entrada e circulação.
 
 
 # De acordo com os conceitos e funcionamento de CDNs e redes peer-to-peer, explique quais são as maiores semelhanças e diferenças entre estas redes.
