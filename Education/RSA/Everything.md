@@ -325,12 +325,15 @@ Partial Key Systems are cryptographic schemes where **each participant holds onl
 ## Diffie-Hellman Key Exchange
 - Establishes a shared session key over public channels.
 - Based on agreed `p` and `g`, users compute and exchange values to derive the same session key.
-## RSA Public-Key Encryption
+![[image.png]]
+
+## RSA (Rivest-Shamir-Adleman) Public-Key Encryption
 - Each user generates public/private key pairs.
 - Public key used for encryption, private for decryption.
-- Secure if large prime numbers are chosen.
+- Secure if large prime numbers are chosen, these numbers are randomly generated and used to create the keys.
+
 ## Key Management in Ad-Hoc Networks
-- Challenges: No infrastructure, mobility, physical vulnerability.
+- Challenges: No infrastructure to send key information to nodes, mobility-induced unstable network topology, physical vulnerability.
 #### Building Trust in Ad-Hoc Networks
 In ad-hoc networks, where devices don't know each other and there's no central authority, building trust is crucial for managing keys. 
 Trust is built through distributed methods:
@@ -338,6 +341,12 @@ Trust is built through distributed methods:
 - **Pre-existing Knowledge (Bootstrapping):** A small set of initially trusted nodes can introduce and authenticate others, extending a "web of trust."
 - **Trust Paths:** If Node A trusts Node B, and Node B trusts Node C, Node A might indirectly trust Node C. The challenge is verifying the strength of these paths in a dynamic network.
 - **Out-of-Band Verification:** Sometimes, trust can be established through physical interaction, like scanning a QR code with a public key in person before digital connection.
+##### In SOPKM (Self-organized Public Key Management)
+
+In this model, users emit certificates based on personal acquaintance. One certificate is a connection between nodes and its public key, contains the public key, the identity of the node and the signature of the one who emited it (issuer). This certificates are stored and distributed by the users themselves. 
+##### In SSAWN (Self-securing AD-hoc Wireless networks)
+
+This method utilizes a local model of trust, a node is considered trustworthy if a certain number of entities which are trustworthy claim him trusthworthy during a specified time. Once a node is trusted by the network, he is globaly accepted has a trustworthy node. SSAWN utilizes a mechanism of shared secret where the global secret key (SK) which is distributed to all nodes. Whichever "k" nodes that have a part of the secret build a distributed certificate authority. 
 
 ### SOPKM (Self-Organized Public Key Management)
 - Users issue and store certificates locally.
@@ -348,6 +357,15 @@ Trust is built through distributed methods:
     - Revocation by issuer.
     - Conflict resolution by comparing bindings.
 - Asks from neighbors for certificates it doesn't have
+**Vertices:** public keys of some nodes
+**Edges:** public keys certificates issued by users
+#### Certificate Exchange
+Each node `u` **multicasts its subgraphs** (`Gᵤ` and `Gᵤ'`) to its **1-hop physical neighbors**.
+- Instead of sending full certificates, the message includes only **unique identifiers** (e.g., hash values) of the certificates.
+- Upon receiving this message, neighbors **reply with the hash values** of the certificates in their current (updated and non-updated) repositories.
+- Node `u` then **cross-checks the received hashes** against its own repository and **requests only the missing certificates** from its neighbors.
+#### Certificate Update
+B
 ## SSAWN (Self-Securing Ad-Hoc Wireless Networks)
 - No central authority.
 - Trust based on endorsements from `k` neighbors.
