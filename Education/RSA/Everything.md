@@ -41,7 +41,7 @@ Can be transmitted by the vehicles and/or infrastructure nodes to coordinate a m
 ### Maneuver Cooperation Service
 
 This service serves as the orchestrator and facilitator, responsible for producing and managing the distribution of MCMs. Supports the driving automation functions of connected cooperative automated vehicles.
-![[image.png]]
+![[image 8.png]]
 
 
 ## ITS-G5
@@ -109,9 +109,8 @@ TCP was originally designed for **reliable, wired networks**, where:
 This makes **TCP unsuitable** for:
 - **Ad-hoc networks** (e.g., MANETs, VANETs)
 - **Wireless environments** with high variability
-
-### TCP Fundamentals (Conventional)
-**Variants:** Tahoe, Reno, NewReno  
+### TCP Concepts 
+**Conventional TCP:** Tahoe, Reno, NewReno  
 **Control parameters:**
 - **`cwnd` (Congestion Window):** Limits # of packets in-flight
 - **`ssthresh` (Slow Start Threshold):** Marks the transition to congestion avoidance
@@ -127,13 +126,13 @@ This makes **TCP unsuitable** for:
 3. **Fast Retransmit & Recovery:**
     - Triggered by **3 duplicate ACKs**
 
-### Challenges in Wireless & Ad-Hoc Networks
+### Differences in Wireless & Ad-Hoc Networks
 1. **Mobility**
     - Routes may change or disappear → **unstable links**
 2. **High Bit Error Rate**
     - Losses often due to **noise/fading**, not congestion
 3. **Unpredictability**
-    - RTT, bandwidth, and timeouts are harder to estimate
+    - **RTT**, bandwidth, and timeouts are harder to estimate
 4. **Contention for Airtime**
     - Both **intra-flow** and **inter-flow** contention occurs
 5. **Poor Long-Path Performance**
@@ -141,9 +140,9 @@ This makes **TCP unsuitable** for:
 
 ### Why TCP Fails
 #### Misinterpretation of Events:
-- **Route failure Congestion**
+- **Route failures as Congestion**
     - Causes unnecessary rate reduction
-- **Wireless losses Congestion**
+- **Wireless errors as Congestion**
     - Triggers congestion control unnecessarily
 #### Delay Spikes:
 - Lead to **false retransmissions** due to timeout miscalculation
@@ -170,7 +169,7 @@ TCP misinterprets losses due to route failures or wireless errors as congestion,
 - Poor performance, especially when retransmitted packets are lost.
 ## TCP CUBIC
 ### Overview
-TCP CUBIC is a modern congestion control algorithm optimized for high-speed networks and designed to be **RTT-independent**. It uses a **cubic function of time** since the last congestion event to determine the congestion window size.
+TCP CUBIC is a modern congestion control algorithm optimized for high-speed networks and designed to be **RTT-independent**. It uses a **cubic function of time** since the last congestion event to determine the congestion window size. 
 ### Key Properties
 - **Window Growth**:
     - `W(t) = C(t - K)^3 + W_max`
@@ -185,11 +184,11 @@ TCP CUBIC is a modern congestion control algorithm optimized for high-speed netw
     - For QUIC using CUBIC: `\beta = 0.15`
 ### Advantages
 - Does not rely on RTT for cwnd growth.
-- Better suited for lossy, high-delay environments.
+- Better suited for lossy, high-delay environments (P2P).
 - Gradual growth and aggressive probing improve performance over large paths.
 ## TCP VEGAS
 ### Overview
-TCP Vegas is a **delay-based** congestion control algorithm. Unlike loss-based variants, it tries to detect congestion **before** packet loss occurs.
+TCP Vegas is a **delay-based** congestion control algorithm. Unlike loss-based variants, it tries to detect congestion **before** packet loss occurs, and instantly it decreases the window size. So, **TCP Vegas** **handles the congestion without any packet loss** occuring.
 ### Congestion Detection
 - Uses the difference: `diff = Expected Rate - Actual Rate`
 - Expected Rate = `Window Size / BaseRTT`
@@ -201,29 +200,34 @@ TCP Vegas is a **delay-based** congestion control algorithm. Unlike loss-based v
 ### Additional Features
 - **Modified Slow Start**:
     - Exponential growth every other RTT only.
-    - If `diff > γ`, Vegas exits slow start early.
-- **New Retransmission Strategy**:
+    - If `diff > c`, Vegas exits slow start and changes to congestion avoidance.
+- **New Retransmission**:
     - Tracks transmission time.
+    - When DUPACK arrives, checks if it's expired
     - Uses timestamp instead of waiting for 3 DUPACKs to trigger retransmission.
+
 ### Benefits
 - Handles congestion **without packet loss**.
 - Smoother network behavior.
 - Better suited for stable but variable-delay environments.
 ## QUIC
-QUIC is a modern transport protocol built over **UDP** with integrated **TLS** and **multiplexing** features.
+
+QUIC is a modern transport protocol built over **UDP** with integrated **TLS** and **multiplexing** features. 
 ### Features
 - Combines transport and cryptographic handshake.
-- Uses **bidirectional** and **unidirectional** streams.
-- Eliminates head-of-line blocking.
+- Uses **bidirectional** (endpoints can send data) and **unidirectional** (single endpoint sends data) streams (these are ordered sequences of bytes).
+- Eliminates head-of-line blocking across multiple streams.
 - Handles loss recovery per stream.
 ### Flow Control
-- **Stream-level**: Prevents any one stream from consuming a full buffer.
-- **Connection-level**: Limits total data across all streams.
+- **Stream-level**: Prevents any one stream from consuming a full buffer, limits amount of data that can be sent on each stream.
+- **Connection-level**: Limits total data across all streams, limits total bytes of stream data sent on all streams.
 ### RTT Estimation
 - Uses **unique packet numbers** (monotonically increasing).
-- Measures RTT via timestamps on sent/ACKed packets.
+- **Measures RTT** via timestamps on sent/ACKed packets.
+- **Packet Loss** detected through lack of ACK packets.
 - Congestion control is decoupled from RTT, uses **CUBIC**.
 ## TCP-BuS: Buffering and Sequence Handling
+
 - Uses **route failure notifications** to detect disruptions.
 - Intermediate nodes **buffer** pending packets.
 - Sender **doubles RTO** on route failure.
@@ -233,36 +237,62 @@ QUIC is a modern transport protocol built over **UDP** with integrated **TLS** a
 ### Cons
 - Requires to be modified routing protocol.
 - Needs cooperation from intermediate nodes.
-## QoS and UDP
-### IntServ-Like Mechanisms
-- Reserve resources per flow.
+### Use Case:
+Can be used to improve TCP performance in wireless and ad-hoc networks, specifically in scenarios involving **route failures**. 
+- **Detection of Route Failures:** It uses explicit route failure notifications (errors) to identify when a path has broken.
+- **Buffering at Intermediate Nodes:** When a route failure is detected, intermediate nodes buffer the pending packets that were in transit. This prevents immediate packet loss that would otherwise occur if packets were simply dropped.
+- **Adjusting Retransmission Timeout (RTO):** Simultaneously, the TCP sender doubles its retransmission timeout (RTO) value. This allows more time for a new path to be found before unnecessary retransmissions are triggered.
+- **Path Re-discovery:** The system makes use of special messages, such as localized query and reply, which are modified to carry TCP connection and segment information, to find a new path.
+## QoS in UDP
+### **IntServ-Like** Mechanisms
+- Resource reservation protocol estimates and reserves resources at each node on the path.
 - Issues:
     - Estimating resources is hard.
     - Bandwidth fluctuates with mobility.
     - Re-reservation is needed on route change.
-### DiffServ-Like Mechanisms
-- Class-based service.
+### **DiffServ-Like** Mechanisms
+- Class-based service. Instead, of making explicit resource reservations for each flow, it simplifies it by categorizing traffic based on its needs.
 - Issues:
     - Hard to enforce admission control.
-    - Class overload due to lack of centralized ingress.
-### QoS Routing
+    - Class overload due to lack of centralized ingress nodes (point where traffic flows enter a particular network segment or domain).
+    - Hard to maintain assurances
+### **QoS Routing**
 - Routing metrics include QoS requirements.
-- Can inform a **source node** of the bandwidth and QoS availability of a destination node and of the path to the destination node
+- Can inform a **source node** of the **bandwidth and QoS availability** of a destination node and of the path to the destination node
 - Challenges:
     - Overhead
     - Route maintenance
     - Mobility responsiveness
     - Guaranteeing reserved resources
+Great for ad-hoc networks that need to minimize packet loss in stable connections.
 
+### **QoS for AODV** 
+- RREQ and RREP are extended with QoS info.
+- Nodes only forward RREQs if they can satisfy QoS requirements.
+- Routing tables are extended to include:
+    - Maximum delay
+    - Minimum bandwidth
+    - Sources requesting delay/bandwidth
+#### Loosing QoS
+If a node detects that the QoS cannot be maintained anymore, it originates an ICMP QoS_LOST message to all depending nodes
+
+### **QoS-OLSR**
+- MultiPoint Relays (MPRs) are selected based on QoS:
+    - **AB**: Available Bandwidth
+    - **PoNOS**: Neighbor diversity
+    - **LW**: Lane weight (traffic alignment)
+- Prioritizes stable, high-quality paths.
 
 # Security
 ## Symmetric vs Asymmetric Cipher
 ### Symmetric Cipher
 - Fast and secure for privacy/integrity.
-- Requires shared key → poor scalability.
+- Larger key length = more security
+- Requires shared key à priori → poor scalability.
 ### Asymmetric Cipher (Public-Key Encryption)
 - **No prior shared key needed.**
 - Scalable but computationally expensive.
+- Computationally intensive, may require certificate authority and the private key have to be confidential
 Vital for some systems duo to:
 - **Identity authentication**
 - **Secure Channel Establishment**
