@@ -365,15 +365,103 @@ Each node `u` **multicasts its subgraphs** (`Gᵤ` and `Gᵤ'`) to its **1-hop p
 - Upon receiving this message, neighbors **reply with the hash values** of the certificates in their current (updated and non-updated) repositories.
 - Node `u` then **cross-checks the received hashes** against its own repository and **requests only the missing certificates** from its neighbors.
 #### Certificate Update
-B
-## SSAWN (Self-Securing Ad-Hoc Wireless Networks)
-- No central authority.
-- Trust based on endorsements from `k` neighbors.
-### Core Ideas
-- Shared secret key (SK) is distributed among nodes.
-- Each node holds a **partial secret**.
-- Certificates are generated via **threshold cryptography**.
-- Malicious nodes cannot renew certificates.
-- Valid certificates mean global trust.
-- Emphasizes local monitoring and collaboration for global trust.
 
+Before a certificate expires, its issuer issues an updated version of the same certificate with an extended expiration time. 
+**Each node issues certificates updates periodically**.
+Needs time synchro of the nodes. **Certificates updates will be exchanged regularly**.
+
+#### Certificate Revocation
+
+Each user can revoke a certificate that it has issued if:
+- User-key binding (believes) in that certificate is **no longer valid**
+- Own private key is **compromised**
+**Certificate revocation:**
+- **Explicitly** - issues explicit revocation statement, only needs to send it to **nodes that it regularly updates**.
+- **Implicitly** - Expiration time of the certificate
+
+#### Malicious Users
+The **certificate exchange mechanism** allows nodes to gather **almost all certificates** from the graph `G`.
+- Nodes **cross-check user–key bindings** in the certificates they hold to **detect inconsistencies**:
+    - **Same username** bound to **different public keys**
+    - **Same public key** bound to **different usernames**
+- When conflicts are detected, **additional certificate exchanges** may be required to **resolve inconsistencies**.
+
+## SSAWN (Self-Securing Ad-Hoc Wireless Networks)
+
+**Goals:**
+- Achieve high security assurance
+- High success ration
+- Efficient communication
+
+**Localized trust model:** an entity is trusted if any `k` trusted entities claim so within a certain time period
+- `k` entities typically among the **entity’s one-hop neighbors**
+- Once a node is trusted by its **local** community, it is **globally** accepted as a trusted node.
+- Otherwise, a locally distrusted entity is regarded as untrustworthy in the entire network.
+
+### Shared secrets
+
+It uses RSA asymmetric keys for encryption mechanism. A Global secret key (SK) and the corresponding Public Key (PK), the **SK** is **distributed** among the nodes, any **`k`** **nodes** holding a **partial secret** form a distributed Certificate Authority. 
+**SK is used to sign certificates** for all nodes in the network. A certificate signed by SK can be verifies by the well-know public key **PK**. 
+Each node has a part of the secret:
+- **Unique ID**, from node's address
+- Mechanism for local detection of misbehaving nodes
+- At least K one-hop neighbouring nodes
+- Key pair for each node (public and secret keys)
+
+• **Partial secret key as a function of nodes IDs**.
+• **Node wanting to use the distributed CA**.
+• A misbehaving or broken node will be unable to renew its certificate.
+• A valid certificate represents the trust from a coalition of k nodes
+
+## Reputation Aproaches
+
+Reputation systems are used to **evaluate the reliability of nodes** in a distributed and self-organized manner.
+### Goals:
+- **Favor routing and communication** through **high-reputation nodes**
+- **Minimize interaction** with **misbehaving or unreliable nodes**
+- **Protect network traffic** from threats such as selfish or malicious behavior
+### Behavior and Reputation Assessment
+Nodes evaluate each other based on **packet forwarding behavior**, such as:
+- **Correct forwarding**
+- **Altering packets**
+- **Injecting unauthorized packets**
+### Key Points:
+- **Observation-based evaluation** of neighboring nodes
+- **Reputation info is periodically exchanged** among neighbors
+- Nodes need **network interfaces in promiscuous mode** to monitor nearby traffic
+- **Level of trust** is assigned to the source of reputation reports
+### Classification of Nodes
+In a **decentralized, self-organizing system**, nodes are categorized based on behavior:
+- **Friendly:** Participate as expected
+- **Selfish:** Refuse to forward packets
+- **Malicious:** Inject or misroute traffic
+### Mechanisms:
+- **Each node observes and evaluates** the behavior of its neighbors
+- **Reputation is used to select** the most **reliable and secure paths**
+- **Cooperation is encouraged** through:
+    - **Rewards** for obedient behavior
+    - **Sanctions** for intolerable actions
+### Reputation
+Total Reputation is a combination of:
+- **First-hand reputation**: Direct observations from neighbors
+- **Second-hand reputation**: Information received from other nodes
+#### Behavior Modeling:
+- A node’s behavior follows a **distribution**:
+    - Based on the **number of observed packets from a node**
+    - Evaluates how many packets were **not transmitted or were altered**
+    - A node is considered **friendly** if the **probability of well-transmitted packets** exceeds a threshold `x` (Bayesian approach)
+#### Collaborative Monitoring:
+- Nodes **exchange first-hand reputation data** with neighbors
+- A **deviation test** helps detect **false reports**:
+- If the probability `x` observed across multiple nodes deviates more than a threshold `d`, the report is considered untrustworthy
+### Reputation into the normal operation of the network
+Reputation influences several core functions:
+- **Path Selection**:
+    - Routes are chosen based on the **reputation of candidate nodes**
+- **Certification Graph Membership**:
+    - Only nodes with **high reputation** are allowed to join
+- **Key Management**:
+    - Nodes selected to receive **key parts or key pairs** must have **high reputation**
+#### Dynamic Reputation:
+- A node’s reputation can **change over time**
+- Nodes may be **temporarily inactive** or disconnected without necessarily being malicious

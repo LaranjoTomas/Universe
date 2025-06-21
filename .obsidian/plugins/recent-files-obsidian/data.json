@@ -2,15 +2,31 @@
   "recentFiles": [
     {
       "basename": "Everything",
-      "path": "Education/RSA/Everything.md"
+      "path": "Education/ASE/Everything.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
     },
     {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
+    },
+    {
+      "basename": "WIFI",
+      "path": "Education/ASE/WIFI.md"
+    },
+    {
+      "basename": "Project",
+      "path": "Education/ASE/Project.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/RSA/Everything.md"
     },
     {
       "basename": "Tests",
@@ -183,18 +199,6 @@
     {
       "basename": "Test_preemptiveness_1",
       "path": "imgs/Test_preemptiveness_1.png"
-    },
-    {
-      "basename": "Test_preemptiveness_2",
-      "path": "imgs/Test_preemptiveness_2.png"
-    },
-    {
-      "basename": "Aula",
-      "path": "Education/SD/Aula.md"
-    },
-    {
-      "basename": "Configs",
-      "path": "Education/SRC/Configs.md"
     }
   ],
   "omittedPaths": [],

@@ -24,13 +24,13 @@
             }
           },
           {
-            "id": "45185d80b2600c45",
+            "id": "867527656d215bcc",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/RSA/Everything.md",
+                "file": "Education/ASE/Everything.md",
                 "mode": "source",
                 "source": false
               },
@@ -40,23 +40,21 @@
             }
           },
           {
-            "id": "4e528bcb5835693a",
+            "id": "440a633d0ca3ce99",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/RSA/RSA_Test.md",
+                "file": "Education/ASE/Everything.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "RSA_Test"
+              "title": "Everything"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -306,14 +304,20 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "45185d80b2600c45",
+  "active": "867527656d215bcc",
   "lastOpenFiles": [
+    "image-2.png",
+    "0-HOME.md",
+    "Education/ASE/Everything.md",
+    "Education/RSA/RSA_Test.md",
+    "image-1.png",
+    "Education/ASE/ADCs.md",
+    "Education/ASE/WIFI.md",
+    "Education/ASE/Project.md",
+    "Education/RSA/Everything.md",
     "image.png",
     "Untitled.md",
-    "Education/RSA/Everything.md",
     "imgs/image 8.png",
-    "Education/RSA/RSA_Test.md",
-    "0-HOME.md",
     "imgs/image 7.png",
     "Education/CLE/Tests.md",
     "imgs/image 6.png",
@@ -326,8 +330,6 @@
     "imgs/image-12.png",
     "Education/CLE/Written Examination.md",
     "imgs/image-11.png",
-    "imgs/image-10.png",
-    "imgs/image-9.png",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
     "Excalidraw/Untitled.md",
     "Education/CLE/Summary.md",
@@ -340,10 +342,6 @@
     "Education/SRC/Exams.md",
     "Excalidraw/SRC_1.md",
     "Excalidraw/SD_Exam stuff.md",
-    "Dev/Python/Modules/Работа с регулярными выражениями.md",
-    "README.md",
-    "imgs/3-BOOKS.md",
-    "1-TASKS.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",

@@ -27,7 +27,7 @@ tags:
 
 ## 6. Num sistema de chaves parciais, identifique 2 problemas de segurança que podem acontecer. Justifique.
 
-**R:** Num sistema de chaves parciais, existe uma chave secreta global distribuída por todos os nós da network. Se um certo número de nós maliciosos na network pedirem pela reconstrução da chave entre eles mesmos poderiam reconstruir a chave e criar uma entidade certificadora falsa na rede, assim podem criar certificados fraudulentos. Por outro lado, apenas um nó malicioso poderia ao longo de algum tempo coletar as chaves parciais de vários nós na rede até conseguir revelar o segredo depois de bastante tempo.
+**R:** Num sistema de chaves parciais, existe uma chave secreta global distribuída por todos os nós da network e uma chave pública correspondente. Se um certo número de nós maliciosos na network pedirem pela reconstrução da chave entre eles mesmos, poderiam reconstruir a chave e criar uma entidade certificadora falsa na rede, assim podem criar certificados fraudulentos. Também é possivel apenas um nó malicioso, ao longo de algum tempo, coletar os segredos de vários nós na rede até conseguir revelar a chave secreta depois de algum tempo.
 
 ## 7. Considere duas situações distintas num cenário de sistema de cooperação entre veículos: lane merge numa auto-estrada, e entrada numa rotunda com veículos de 4 e 2 rodas. Com as mensagens de comunicação estudadas na disciplina, proponha a conceção de um sistema de cooperação:
 ### a) Apenas com sistemas de comunicação; (2.5 valores)
