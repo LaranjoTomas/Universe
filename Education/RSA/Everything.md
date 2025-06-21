@@ -1,46 +1,96 @@
 # Vehicular Network
 
+## Cooperative Awareness Messages (CAM)
+
+They are **Periodic** (1Hz -10Hz) and **contain information about the station, such as the position and speed**. These messages create and maintain awareness of vehicles using the road network or RSUs. These messages are used **to support basic safety applications**, such as **collision avoidance**, **lane merge coordination**, and **intersection management**, by enabling vehicles to track each other's presence and motion.
+
+## Decentralized Environmental Notification Messages (DENM)
+
+They are asynchronous messages that **create and maintain awareness about a road event** such as its type, position and the history of the event. Unlike CAMs, **DENMs** are **generated as events occur**. These messages are used **to warn nearby vehicles about hazards**, such as **accidents**, **obstacles**, **sudden braking**, or **dangerous weather conditions**, enabling timely and proactive reactions.
+
+## Vulnerable Road User Awareness Messages (VRU & VAM)
+
+They are periodic messages like CAMs to create and maintain awareness on VRUs (Vulnerable Road Users), and support the risk assessment. **VAM** has advantages over CAM messages because of its **flexibility in terms of specifying the VRU type and situation** (not possible with CAMs), they may be pedestrians, cyclist, motorcyclists or animals. These messages increase the **digital visibility** of smaller, more vulnerable road users to nearby vehicles, helping to reduce accidents due to blind spots.
+
+## Cooperative Perception Message (CPM)
+
+They are **periodic** messages **between stations** to **broadcast information** about the current environment perceived by 1 or more sensors. CPMs messages from sensors from a vehicle can be used by VRUs and infrastructure to exchange information obtained from their surrounding, improving awareness. They are just for perception, for example, extending a vehicle perception range beyond its line-of-sight (around corners).
+
+## Signal Phase and Timing (SPAT)
+
+Creates open interface for two-way communication between traffic signal controller and mobile devices. They have the state of the traffic signals in a intersection/etc. Used in cooperation with a **map**.
+
+## MAP (MAP)
+
+Geometric layout of intersection/etc. 
+## Manoeuvre Coordination Message (MCM)
+
+These messages are used for **planned maneuvers** of one or more vehicles in the network. They **include the intended maneuvers and one or more desired trajectories**. Generated continuously between (1Hz-10Hz) depending on the context. 
+**Examples:**
+- Goto Maneuver
+- Idle Maneuver
+- Follow Path Maneuver
+- Follow Trajectory
+- Scheduled Goto
+- Stop Maneuver
+- Maneuver Done
+- Teleoperation Maneuver
+- Teleoperation Done
+
+Can be transmitted by the vehicles and/or infrastructure nodes to coordinate a maneuver.
+### Maneuver Cooperation Service
+
+This service serves as the orchestrator and facilitator, responsible for producing and managing the distribution of MCMs. Supports the driving automation functions of connected cooperative automated vehicles.
+![[image.png]]
+
+
+## ITS-G5
+
+**Developed for vehicle-to-vehicle communication**, **adapted for latency-critical** V2X communications.
+Faces many challenges, the safety of vehicle communication rely heavily on periodic broadcast of basic safety messages which contain positions, velocities and other info. These messages with the PHY layer overheads typically around 300 bytes with full security, which can lead to channel congestion in dense vehicular environments. **Lackhandshakeke/ACK in delivering broadcast frames,*doesn'tesnt support QoS** 
+
+
 ## Cellular-V2X (C-V2X)
 
 **C-V2X** defines new interfaces called **PC5** for **V2V, V2I** communication. **V2N** is still over the legacy **LTE Uu** interface and provides over the top cloud services.
 
-It defines two Complementary Transmission Models:
+It defines two **Complementary Transmission Models**:
 - **Direct safety communication independent of cellular networks**
 - **Network communications for complementary services**
 
-**Direct communications** via PC5 interface.
-**Network communications** via Uu interface.
+**Direct communications** via **PC5 interface**. Builds upon LTE Direct device2device design with enhancements.
+**Network communications** via **Uu interface**. Uses LTE to broadcast messages from a V2X server to vehicles and beyond. Vehicles can send messages to the server via unicast.
 
 ![[image 7.png]]
 
 ### 1. C-V2X with 4G (LTE-V2X)
 #### Advantages
 - Commercially available today (existing LTE infrastructure).
-- Supports both direct communication (PC5) and network-based (Uu).
-- Suitable for basic safety applications (e.g., emergency braking alerts).
+- Supports **both direct communication (PC5) and network-based (Uu)**.
+- Suitable for **basic safety applications** (e.g., emergency braking alerts).
 - Compatible with both Mode 3 (network-assisted) and Mode 4 (autonomous, out-of-coverage).
-- Lower deployment cost compared to 5G.
+- **Lower deployment cost compared to 5G.**
 #### Disadvantages
-- Relatively high latency (~30–50 ms), unsuitable for real-time critical maneuvers.
-- Lower bandwidth and connection density (issues in crowded scenarios).
-- Limited reliability for ultra-critical applications (e.g., coordinated braking).
-- Insufficient for advanced services like cooperative driving or teleoperation.
-- Does not support network slicing or URLLC (Ultra Reliable Low Latency Communication).
+- Relatively **high latency** (~30–50 ms), unsuitable for real-time critical maneuvers.
+- **Lower bandwidth** and connection density (issues in crowded scenarios).
+- **Limited reliability** for ultra-critical applications (e.g., coordinated braking).
+- **Insufficient for advanced services like cooperative driving or teleoperation**.
+- **Does not support network slicing or URLLC** (Ultra Reliable Low Latency Communication).
 ### 2. C-V2X with 5G (NR-V2X)
 #### Advantages
-- Ultra-low latency (<5 ms) — ideal for real-time critical communications (e.g., advanced platooning).
-- High reliability (>99.999%) for safety and automation.
-- High communication capacity — suitable for dense urban environments with many connected vehicles.
+- **Ultra-low latency** (<5 ms) — ideal for real-time critical communications (e.g., advanced platooning).
+- **High reliability** (>99.999%) for safety and automation.
+- **High communication capacity** — suitable for dense urban environments with many connected vehicles.
 - Supports advanced functionalities:
   - **Automated cooperative platooning**
   - **Teleoperation**
   - **Edge computing**
   - **Network slicing**
-- Greater scalability and support for high-speed vehicles (>500 km/h).
+- Greater **scalability** and **support for high-speed vehicles** (>500 km/h).
 #### Disadvantages
-- Requires 5G infrastructure, which is still being deployed (not yet widely available).
-- Higher deployment cost.
-- Increased complexity in network resource management and system configuration.
+- **Requires 5G infrastructure**, which is still being deployed (not yet widely available).
+- **Higher deployment cost.**
+- I**ncreased complexity** in network resource management and system configuration.
 - 5G-compatible equipment (modems/OBUs) may still be more expensive.
 ## Final Note
 
@@ -278,3 +328,4 @@ Trust is built through distributed methods:
 - Malicious nodes cannot renew certificates.
 - Valid certificates mean global trust.
 - Emphasizes local monitoring and collaboration for global trust.
+

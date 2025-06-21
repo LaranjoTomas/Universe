@@ -24,8 +24,25 @@
             }
           },
           {
-            "id": "ea1735fdaf2caa8d",
+            "id": "45185d80b2600c45",
             "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/RSA/Everything.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Everything"
+            }
+          },
+          {
+            "id": "4e528bcb5835693a",
+            "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -33,6 +50,7 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "RSA_Test"
             }
@@ -262,7 +280,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "periodic-notes:Open today": false,
       "graph:Open graph view": false,
       "switcher:Open quick switcher": true,
       "canvas:Create new canvas": false,
@@ -285,14 +302,18 @@
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "obsidian-memos:Thino": false
+      "obsidian-memos:Thino": false,
+      "periodic-notes:Open today": false
     }
   },
-  "active": "ea1735fdaf2caa8d",
+  "active": "45185d80b2600c45",
   "lastOpenFiles": [
+    "Untitled.md",
     "Education/RSA/Everything.md",
-    "imgs/image 7.png",
+    "image.png",
+    "Education/RSA/RSA_Test.md",
     "0-HOME.md",
+    "imgs/image 7.png",
     "Education/CLE/Tests.md",
     "imgs/image 6.png",
     "imgs/image-1 2.png",
@@ -306,11 +327,9 @@
     "imgs/image-11.png",
     "imgs/image-10.png",
     "imgs/image-9.png",
-    "imgs/image-8 1.png",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
     "Excalidraw/Untitled.md",
     "Education/CLE/Summary.md",
-    "Untitled.md",
     "Untitled 2.md",
     "Education/RSA/Vehicular Networks.md",
     "Education/SD/Summary.md",
@@ -324,7 +343,6 @@
     "README.md",
     "imgs/3-BOOKS.md",
     "1-TASKS.md",
-    "Dev/Python/Modules/Singleton.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",

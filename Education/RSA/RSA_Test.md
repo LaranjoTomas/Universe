@@ -5,13 +5,37 @@ tags:
 ---
 # Test 23 junho 2023
 
+
+## 1. Quais os modos de comunicação disponíveis no C-V2X? De que forma podem ser utilizados para um sistema de platooning (carros em cadeia)? Justifique.
+
+**R:** Comunicação Direta (PC5) e comunicação de network (Uu). A comunicação direta permite comunicação entre veículos (V2V) e veículos para infraestruturas (V2I) é possível trocas de informações sobre o meio, com baixas latências de trocas de mensagens estruturadas como CAMs e DENMs e permite comunicações diretas próximas. Na comunicação de network (Uu) os veículos conseguem comunicar com a rede (V2N) ao nível maior do que apenas um nó, coletando assim mais informações de toda a network em si, é utilizado para comunicações em redes mais amplas. 
+
+## 2. No cenário anterior quais são as diferenças ao nível de funcionalidade e desempenho se for utilizado o 4G e 5G atual? Justifique.
+
+**R:** Como a Cellular-V2X foi criada em 4G ela funcionaria com os básicos necessários, a diferença entre utilizar uma network 4G e 5G neste caso seria igual às diferenças entre as networks 4G e 5G em geral. Enquanto 4G tem os seus benefícios, 5G têm melhor latência, o range de comunicações é menor, a largura de banda é maior. O C-V2X em 4G é possível criar as interfaces de comunicação direta e de network para PC5 e V2N, o que seria também expectável o mesmo de 5G, pois possui a mesma arquitetura base de 4G, mas com mais layers o que poderia aumentar a configurabilidade do mesmo.
+
+## 3. O TCP-Cubic e TCP-Vegas tentam melhorar o desempenho do protocolo de transporte, no entanto, tendo como base pressupostos diferentes ao nível do RTT e das perdas de pacotes. Qual deles considera mais interessante para uma rede peer-to-peer e para uma rede veicular, respetivamente? Justifique.
+
+**R:** TCP-Cubic é um protocolo que gere congestionamento numa network, independente de RTT para os cálculos da mudança do tamanho da janela congestionamento calculados após a perda de pacotes. Este protocolo seria melhor para uma rede peer-to-peer onde a perda de pacotes não seria tão impactante como numa rede veicular. TCP-Vegas é um protocolo que gere congestionamento numa rede antes que ocorra perda de pacotes, baseado no RTT e no tamanho da janela de congestionamento este protocolo seria mais favorável a uma rede veicular pois esta é carecterizada por alta mobilidade e imprevisibilidade.
+
+## 4. Considerando serviços por UDP, proponha uma solução para minimizar as perdas de pacotes numa rede de drones que se encontram num espaço controlado, com baixa probabilidade de desconexão completa entre eles.
+
+**R:** Uma solução para minimizar as perdas de pacotes numa rede de drones UDP que se encontram num espaço controlado, com baixa probabilidade de desconexão completa entre eles, seria o QoS Routing. QoS routing é um componente essencial de QoS que consegue informar o node original da bandwidth e a QoS availability do node destino e dos caminhos até ao nó destino. Com esta informação o nó de origem pode mandar os pacotes pelo caminho com menor probabilidade de perda de pacotes minimizando a perda de pacotes.
+## 5. Considerando um sistema de gestão de chaves em redes ad-hoc, como podem os nós, que não se conhecem, criar uma relação de confiança? Qual o papel dos sistemas de chaves assimétricas neste processo? Justifique.
+
+**R:** Numa rede SSAWN uma relação de confiança pode ser criada entre dois nós que não se conhecem à priori através da entidade certificadora distribuída (CA). Como o SSAWN utiliza chaves assimétricas, mas distribui uma chave secreta global entre os vários nós da network, qualquer nó que possua um segredo parcial pode formar uma entidade certificadora, e com a chave pode verificar se um certificado assinado pela chave global secreta é confiável ou não. Desta forma estabelece uma conexão de confiança entre os dois nós. O sistema de chaves assimétricas é essencial neste caso, pois como não existe partilha de chaves privadas elas não são necessárias para certificar/assinar algo, que depois seja necessária uma chave especifica do nó que a assinou nos outros nós. 
+
+## 6. Num sistema de chaves parciais, identifique 2 problemas de segurança que podem acontecer. Justifique.
+
+**R:** Num sistema de chaves parciais, existe uma chave secreta global distribuída por todos os nós da network. Se um certo número de nós maliciosos na network pedirem pela reconstrução da chave entre eles mesmos poderiam reconstruir a chave e criar uma entidade certificadora falsa na rede, assim podem criar certificados fraudulentos. Por outro lado, apenas um nó malicioso poderia ao longo de algum tempo coletar as chaves parciais de vários nós na rede até conseguir revelar o segredo depois de bastante tempo.
+
 ## 7. Considere duas situações distintas num cenário de sistema de cooperação entre veículos: lane merge numa auto-estrada, e entrada numa rotunda com veículos de 4 e 2 rodas. Com as mensagens de comunicação estudadas na disciplina, proponha a conceção de um sistema de cooperação:
 ### a) Apenas com sistemas de comunicação; (2.5 valores)
 
 **R:** 
 Para a situação de lane merge numa autoestrada as mensagens a serem utilizadas seriam CAM (Cooperative awareness Messages) e DENM (Decentralized Environmental notification messages), MCM. A estratégia de cooperação seria a seguinte: os veiculos que se aproximam da autoestrada transmitem CAMs periodicamente, fornecendo informação do veiculo que manda como posição, velocidade, direção e aceleração o que permite outros veículos na faixa da autoestrada estarem cientes da presença dos outros veículos; em caso de obstáculos, travagens imprevistas, etc, que possam justificar uma lane merge antecipada os veículos devem enviar DENMs para alertar os restantes da emergência a acontecer; Por último o veículo que pretende fazer mudança de faixa envia uma MCM (Manoeuvre coordination Message) para comunicar com os outros veículos e explicar a sua intenção de realizar uma manobra e qual manobra.
 
-Para a situação da entrada numa rotunda com veículos de 4 e 2 rodas seriam necessárias as seguintes mensagens estruturadas: CAM, DENM, SPATEM, MAPEM.
+Para a situação da entrada numa rotunda com veículos de 4 e 2 rodas seriam necessárias as seguintes mensagens estruturadas: CAM, DENM, SPATEM, MAPEM e VAM.
 Cada veículo envia CAMs para indicar a suas informações aos outros veículos na rotunda. Veículos de 2 rodas em especifico , são mais vulneráveis, então reforçam a sua presença digital com o envio de VAMs que aumentam a sua visibilidade para os outros veículos. Em situações de perigo ou emergência, como travagens bruscas, são geradas DENMs para alertar os outros veículos. Se existir infrastrutura inteligente de semáforos, o envio de SPATEM e MAPEM iria melhorar o sistema da rotunda. 
 
 ### b) Com ambos os sistemas de sensorização e comunicação. (2.5 valores) Descreva os cenários, mensagens e informação transmitida para tomada de decisão
@@ -31,7 +55,12 @@ Cada veículo envia CAMs para indicar a suas informações aos outros veículos 
 4. Os veículos ajustam autonomamente a sua velocidade e trajetória com base nos dados de comunicação e sensores, garantindo segurança na entrada e circulação.
 
 
-# De acordo com os conceitos e funcionamento de CDNs e redes peer-to-peer, explique quais são as maiores semelhanças e diferenças entre estas redes.
+
+
+
+
+# First half tests
+## De acordo com os conceitos e funcionamento de CDNs e redes peer-to-peer, explique quais são as maiores semelhanças e diferenças entre estas redes.
 
 - **Diferenças**:
   - CDN tem estrutura com servidor e clientes, é baseado em servidores dedicados distribuídos em vários locais estratégicos. Enquanto P2P basease na comunicação direta entre utilizadores.
@@ -41,18 +70,18 @@ Cada veículo envia CAMs para indicar a suas informações aos outros veículos 
   - Ambas as redes tornam-se melhor quantos mais pontos (servidores e nós) estiverem disponíveis.
   - Ambas os modelos reduzem a carga sobre um único servidor/nó, distribuindo os dados por vários pontos da rede.
 
-# Num protocolo peer-to-peer não estruturado, que mecanismos podem ser usados para procurar um conteúdo raro?
+## Num protocolo peer-to-peer não estruturado, que mecanismos podem ser usados para procurar um conteúdo raro?
 
 **Flooding** é o mecanismo mais comum usado para procurar um conteúdo numa rede P2P mas quando se trata de conteúdo raro este tem mais desvantagens que vantagens. 
 **K-Random walkers** em vez de enviar a consulta para todos os vizinhos, o nó escolhe aleatoriamente alguns vizinhos para enviar o pedido com um **TTL** alto. 
 Por último, o **Expanding Ring Search** aonde a pesquisa começa com um raio pequeno limitado aos primeiros vizinhos, se não encontrar o conteúdo o tamanho do raio vai aumentar a cada tentativa. até encontrar o conteúdo.
 
-# No protocolo de distribuição de conteúdos peer-to-peer BitTorrent, como é que este consegue incentivar os peer nodes a participar na rede e partilhar os conteúdos?
+## No protocolo de distribuição de conteúdos peer-to-peer BitTorrent, como é que este consegue incentivar os peer nodes a participar na rede e partilhar os conteúdos?
 
 O BitTorrent tem o principio de **tit-for-tat** aonde um utilizador terá de partilhar ficheiro na rede para poder receber ficheiros da mesma rede. Isto inabilita leeches the aproveitarem-se na rede.
-# Na manutenção da informação de conteúdos utilizando uma DHT, como se tem informação do local para incluir a localização de um conteúdo?
+## Na manutenção da informação de conteúdos utilizando uma DHT, como se tem informação do local para incluir a localização de um conteúdo?
 A manutenção da informação sobre a localização de conteúdos é feita através de um mecanismo de **hashing distribuído**. Um ficheiro, por exemplo, video.mp4 vai ser aplicado uma função hash que pode ser ao seu nome ou ao seu conteúdo que irá resultar num identificador. Este identificador será utilizado para determinar em que nó da DHT a informação fica armazenada. 
-# Numa rede de veículos numa cidade, com percursos distintos, utilizaria um protocolo de encaminhamento Location Aware Routing ou Batman? Justifique
+## Numa rede de veículos numa cidade, com percursos distintos, utilizaria um protocolo de encaminhamento Location Aware Routing ou Batman? Justifique
 
 #### **BATMAN**
 Se os percursos mencionados fossem semelhantes este ganhava.
@@ -66,60 +95,50 @@ Os percursos mencionados referem-se aos **percursos dos veículos**. Numa rede d
 
 **Protocolos Reactivos** são melhor para percursos distintos enquanto **Protocolos Proativos** são melhor para percursos semelhantes.
 
-# De que forma o Batman consegue manter informação da qualidade das ligações atualizada? Justifique.
+## De que forma o Batman consegue manter informação da qualidade das ligações atualizada? Justifique.
 
 Através de messagens OGM (Originator Message) que cada nó da rede manda periódicamente para informar o resto dos nós da sua presença. O batman utiliza a presença ou ausencia destes pacotes de controlo para determinar a qualidade das ligações. 
 
-# Nos mecanismos de aprendizagem é possível chegar a uma decisão ótima se estes forem distribuídos na rede? Justifique.
+## Nos mecanismos de aprendizagem é possível chegar a uma decisão ótima se estes forem distribuídos na rede? Justifique.
 
 Nos macanismos de aprendizagem distribuída, é possível chegar a uma decisão ótima, mas depende da eficiência na comunicação e no processo de combinação das informações de cada nó da rede. Maior parte dos casos a solução ótima pode ser aproximada, dependendo da arquitetura e das técnicas de consenso implementadas. Também depende de outros fatores, como o modelo de aprendizagem utilizado.
 
-# Num mecanismo de federated learning, os modelos locais podem ser diferentes? De que forma permitem ter uma convergência na aprendizagem? Justifique.
+## Num mecanismo de federated learning, os modelos locais podem ser diferentes? De que forma permitem ter uma convergência na aprendizagem? Justifique.
 
 No mecanismo de federated learning, os modelos locais podem ser diferentes. A convergência na aprendizagem depende de vários fatores:
 - **Agregação eficiente**: Algoritmos ajudam a encontrar um modelo global que minimiza a perda nos dispositivos locais.
 - **Distribuição de Dados**: Se os dados locais forem muito diferentes, a convergência pode ser mais lenta.
 - **Nº de rondas de aprendizagem**: Um número maior de iterações melhora a convergência, mas aumenta o custo de comunicação.
 Mesmo que os modelos locais possam ser diferentes em alguns cenários, é possível alcançar convergência através de métodos avançados de agregação e transferência de conhecimento.
-
---- 
----
-
-# Na pesquisa da informação de conteúdos utilizando uma DHT, como é que um nó consegue localizar qual o nó da DHT que contém informação do conteúdo?
+## Na pesquisa da informação de conteúdos utilizando uma DHT, como é que um nó consegue localizar qual o nó da DHT que contém informação do conteúdo?
 
 A pesquisa da informação de conteúdos numa DHT é feita através de mecanismos de Hashing, identificadores únicos e routing. Um nó a pesquisar por certo conteúdo necessita de dar hash do nome ou conteudo do ficheiro para depois com a key k, resultado da hash, conseguir usar routing (finger table) para procurar pela network que se encontra. Se o conteúdo foi guardado corretamente, ele estara num nó em que o seu identificador único é parecido com o do conteúdo que o nó inicial está à procura.
-
-# Qual a importância dos rendezvous peers e relay peers em sistemas peer-to-peer? Como se distinguem?
+## Qual a importância dos rendezvous peers e relay peers em sistemas peer-to-peer? Como se distinguem?
 
 Os **relay peers** oferecem a possibilidade de outros peers conseguirem comunicarem através de equipamento de firewall ou NAT. 
 Os **Rendezvous** são tipo pontos de encontro ou sitios para outros peers na rede conseguirem descobrir uns aos outros e os conteúdos. 
 Distinguem-se estes dois tipos de Nodes pois um faz parte da data stream e o outro da discovery path, isto é, um é utilizado para troca de dados e outro é utilizado na descoberta de nós.
-
-# Num protocolo peer-to-peer estruturado, qual a diferença na pesquisa de um conteúdo raro ou com muitas réplicas disponíveis na rede peer-to-peer?
+## Num protocolo peer-to-peer estruturado, qual a diferença na pesquisa de um conteúdo raro ou com muitas réplicas disponíveis na rede peer-to-peer?
 
 No protocologo P2P estruturado é usado DHT para a pesquisa de rare files. A diferença na pesquisa entre as duas raridades de conteúdos está na eficiência e na probabilidade de encontrar o conteúdo rapidamente. Isto deve-se à forma como o conteúdo é armazenado e como se localizam os dados na rede. Se o conteúdo tiver muitas réplicas ele pode estar armazenando em vários nós diferentes o que aumenta a probabilidade de encontrá-lo rápidamente. Se o conteúdo for raro e a rede estiver bem organizada ele estará em poucos nós da rede o que torna a sua pesquisa mais dificil, graças ao mapeamento do DHT a sua busdca ainda pode ser eficiente e só poderá acontecer algum problema se os poucos nós que conttêm este conteúdos estiveres offline ou falharem.
 A eficiência da DHT minimiza esse problema, desde que os nós que armazenam o conteúdo estejam disponiveís.
 
-# No protocolo de distribuição de conteúdos peer-to-peer IPFS, como é que este consegue incentivar os peer nodes a participar na rede e partilhar os conteúdos?
+## No protocolo de distribuição de conteúdos peer-to-peer IPFS, como é que este consegue incentivar os peer nodes a participar na rede e partilhar os conteúdos?
 
 In IPFS P2P **Bitswap Protocol** incentiva peer nodes a trocar blocos. Cada peer node possui um **want_list** e uma **have_list** . Qualquer desbalanceamento é anotado na forma de credito e débito. Cada nó na rede precisa de oferecer valor através de partilhar blocos, se um nó enviar um bloco ele ganha uim **IPFS token** que pode ser usado mais tarde para pedir um bloco. Qualquer outro problema que possa aparecer será tratado pelo **protocologo do BitSwap**
-
-# Numa rede de veículos numa cidade, com percursos semelhantes, por diferentes locais utilizaria um protocolo de encaminhamento AODV ou Batman? Justifique.
+## Numa rede de veículos numa cidade, com percursos semelhantes, por diferentes locais utilizaria um protocolo de encaminhamento AODV ou Batman? Justifique.
 
 Numa rede de veículos numa cidade com percursos semelhantes os protocologos do tipo proativos seriam melhores para a situação. Neste caso como o BATMAN não teria de descartar rotas anteriormente calculadas e só tem de as atualizar a partir dos veículos que estão a percorrer sempre o mesmo percurso vai levar a um menor overhead. BATMAN é mais eficiente que AODV nestes cenários com garantias de conectividade estável devido ao movimento dos veículos, enquanto AODV poderá construir rotas que ficam obsoletas rapidamente.
-
-# De que forma o OLSR consegue obter informação dos Multipoint relays atualizada? Justifique
+## De que forma o OLSR consegue obter informação dos Multipoint relays atualizada? Justifique
 
 O OLSR consegue obeter informação atualizada dos multipoint relays através do envio periódico de mensagens Hello, que permitem a descoberta e monitorização dos vizinhos. Isto permite anunciar-se aos seus vizinhos, determinar quem mais está lá e selecionar alguns sustemas para atuar com os multipoint relays.
-
-# Nos mecanismos de aprendizagem, em que situações e cenários faz sentido ter um modelo centralizado? Justifique.
+## Nos mecanismos de aprendizagem, em que situações e cenários faz sentido ter um modelo centralizado? Justifique.
 
 As situações ou cenários em que faz sentido ter um modelo centralizado podem ser:
 - **Disponibilidade e Acesso Total aos Dados**: Quando todos os dados necessários estão recolhidos localmente ou podem ser facilmente centralizados usar o modelo centralizado é uma boa ideia.
 - **Computação Elevada**: Se existe infraestrutura com elevada capacidade de processamento o treino de modelos complexos e de grandes dimensões torna-se viávEL
 - **Baixa Latência**: Para serviços tipo automação em que é necessário latênia baixa, ter o modelo centralizado seria benéfico.
-
-# Num mecanismo de federated learning, qual a influência dos algoritmos de agregação dos modelos? Justifique.
+## Num mecanismo de federated learning, qual a influência dos algoritmos de agregação dos modelos? Justifique.
 
 Em Federated Learning os parametros do modelo em treino são enviados ao servidor para serem agregados ao modelo global que depois irá devolver o modelo agregado aos clientes. 
 O modelo começa no device do user e é treinado com a informação local, depois é enviado ao servidor com o global model para ser agregado. Isto é essencial para criar global model mais generalizados. Estes algoritmos determinam como os parâmetros dos modelos locais são combinados para formar o modelo global generalizado.

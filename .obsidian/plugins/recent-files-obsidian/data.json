@@ -1,12 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "RSA_Test",
-      "path": "Education/RSA/RSA_Test.md"
-    },
-    {
       "basename": "Everything",
       "path": "Education/RSA/Everything.md"
+    },
+    {
+      "basename": "Untitled",
+      "path": "Untitled.md"
+    },
+    {
+      "basename": "RSA_Test",
+      "path": "Education/RSA/RSA_Test.md"
     },
     {
       "basename": "0-HOME",
@@ -195,10 +199,6 @@
     {
       "basename": "Configs",
       "path": "Education/SRC/Configs.md"
-    },
-    {
-      "basename": "Project",
-      "path": "Education/SRC/Project.md"
     }
   ],
   "omittedPaths": [],
