@@ -394,19 +394,15 @@ The **certificate exchange mechanism** allows nodes to gather **almost all certi
 - When conflicts are detected, **additional certificate exchanges** may be required to **resolve inconsistencies**.
 
 ## SSAWN (Self-Securing Ad-Hoc Wireless Networks)
-
 **Goals:**
 - Achieve high security assurance
 - High success ration
 - Efficient communication
-
 **Localized trust model:** an entity is trusted if any `k` trusted entities claim so within a certain time period
 - `k` entities typically among the **entity’s one-hop neighbors**
 - Once a node is trusted by its **local** community, it is **globally** accepted as a trusted node.
 - Otherwise, a locally distrusted entity is regarded as untrustworthy in the entire network.
-
 ### Shared secrets
-
 It uses RSA asymmetric keys for encryption mechanism. A Global secret key (SK) and the corresponding Public Key (PK), the **SK** is **distributed** among the nodes, any **`k`** **nodes** holding a **partial secret** form a distributed Certificate Authority. 
 **SK is used to sign certificates** for all nodes in the network. A certificate signed by SK can be verifies by the well-know public key **PK**. 
 Each node has a part of the secret:

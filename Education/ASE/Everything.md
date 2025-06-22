@@ -274,7 +274,6 @@ DMA->CTRL = START;
 		Fast data transfer between microcontrollers and peripherals
 	I2C:
 		Communication with multiple low-speed peripherals
-		
 4. What signals make up the interface?
 	**R:**
 	RS232:
@@ -414,12 +413,36 @@ To debug on oscilloscope, place the trigger in the **descending flange** in the 
 | Complexity       | Low            | Low            | Medium              |
 
 
+# Aula 7
 
+## Questions
 
+• What is an ADC?
+**R:** 
+• What is a DAC?
+**R:**
+• What is a continuous signal?
+**R:**
+• What is a discrete signal?
+**R:**
+• What is the sampling process in analog-to-digital conversion?
+**R:** 
+• What is the quantization process in analog-to-digital conversion?
+**R:** 
+• What is the reconstruction process in digital-to-analog conversion?
+**R:** 
+• What is the sampling rate of ADCs/DACs?
+**R:** 
+• What is the bit resolution of ADCs/DACs?
+**R:** 
+• What is the Nyquist frequency? What is aliasing?
+**R:** 
+• What is the reference voltage of ADCs and DACs?
+**R:** 
+• How does a Successive Approximation Register (SAR) ADC work?
+**R:** 
 
-
-
-
+## 
 
 
 
