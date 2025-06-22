@@ -2,15 +2,19 @@
   "recentFiles": [
     {
       "basename": "Everything",
-      "path": "Education/ASE/Everything.md"
+      "path": "Education/RSA/Everything.md"
+    },
+    {
+      "basename": "RSA_Test",
+      "path": "Education/RSA/RSA_Test.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "RSA_Test",
-      "path": "Education/RSA/RSA_Test.md"
+      "basename": "Everything",
+      "path": "Education/ASE/Everything.md"
     },
     {
       "basename": "ADCs",
@@ -23,10 +27,6 @@
     {
       "basename": "Project",
       "path": "Education/ASE/Project.md"
-    },
-    {
-      "basename": "Everything",
-      "path": "Education/RSA/Everything.md"
     },
     {
       "basename": "Tests",

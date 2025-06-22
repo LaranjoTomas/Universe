@@ -186,6 +186,8 @@ TCP CUBIC is a modern congestion control algorithm optimized for high-speed netw
 - Does not rely on RTT for cwnd growth.
 - Better suited for lossy, high-delay environments (P2P).
 - Gradual growth and aggressive probing improve performance over large paths.
+
+
 ## TCP VEGAS
 ### Overview
 TCP Vegas is a **delay-based** congestion control algorithm. Unlike loss-based variants, it tries to detect congestion **before** packet loss occurs, and instantly it decreases the window size. So, **TCP Vegas** **handles the congestion without any packet loss** occuring.
@@ -210,6 +212,10 @@ TCP Vegas is a **delay-based** congestion control algorithm. Unlike loss-based v
 - Handles congestion **without packet loss**.
 - Smoother network behavior.
 - Better suited for stable but variable-delay environments.
+
+TCP Vegas is designed to **sense congestion** in the network **before any packet loss occurs**. This proactive approach aims to **handle congestion without actual packet loss** by instantly decreasing the window size
+
+**TCP Vegas would perform well in stable wire-line networks where the RTT is consistent and predictable.**
 ## QUIC
 
 QUIC is a modern transport protocol built over **UDP** with integrated **TLS** and **multiplexing** features. 
@@ -243,6 +249,8 @@ Can be used to improve TCP performance in wireless and ad-hoc networks, specific
 - **Buffering at Intermediate Nodes:** When a route failure is detected, intermediate nodes buffer the pending packets that were in transit. This prevents immediate packet loss that would otherwise occur if packets were simply dropped.
 - **Adjusting Retransmission Timeout (RTO):** Simultaneously, the TCP sender doubles its retransmission timeout (RTO) value. This allows more time for a new path to be found before unnecessary retransmissions are triggered.
 - **Path Re-discovery:** The system makes use of special messages, such as localized query and reply, which are modified to carry TCP connection and segment information, to find a new path.
+
+TCP-BuS is explicitly designed to improve TCP performance in **wireless and ad-hoc networks where route failures are common**. The sources note that 6G will feature p2p relationships, which often imply ad-hoc network characteristics where route failures can occur
 ## QoS in UDP
 ### **IntServ-Like** Mechanisms
 - Resource reservation protocol estimates and reserves resources at each node on the path.
@@ -265,7 +273,6 @@ Can be used to improve TCP performance in wireless and ad-hoc networks, specific
     - Mobility responsiveness
     - Guaranteeing reserved resources
 Great for ad-hoc networks that need to minimize packet loss in stable connections.
-
 ### **QoS for AODV** 
 - RREQ and RREP are extended with QoS info.
 - Nodes only forward RREQs if they can satisfy QoS requirements.
