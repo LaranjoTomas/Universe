@@ -97,6 +97,17 @@
     "extern",
     "ISRs",
     "MISO",
-    "MOSI"
+    "MOSI",
+    "DACs",
+    "DACs",
+    "DACs",
+    "Vref",
+    "V<sub>ref",
+    "V<sub>ref",
+    "V<sub>ref",
+    "EEPROMs",
+    "δt",
+    "GPIO",
+    "GPIOs"
   ]
 }

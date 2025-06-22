@@ -1,3 +1,19 @@
+# General Concepts
+
+## GPIO
+
+## PWM
+
+## Macros
+
+## UART
+
+## DMA
+
+## DMAC
+
+## EEPROM
+
 
 # Aula 2
 
@@ -418,37 +434,76 @@ To debug on oscilloscope, place the trigger in the **descending flange** in the 
 ## Questions
 
 • What is an ADC?
-**R:** 
+**R:** Analog to Digital Converter, converts a **continuous analog signal** into a **discrete digital value**.
 • What is a DAC?
-**R:**
+**R:** Digital to Analog Converter, performs the inverse operation of an ADC.
 • What is a continuous signal?
-**R:**
+**R:** A signal with a continuous range of amplitudes, where its samples have an infinite number of amplitude levels. 
 • What is a discrete signal?
-**R:**
+**R:** A signal with values defined at specific time intervals, where it's a finite value. (1 or 0 clock)
 • What is the sampling process in analog-to-digital conversion?
-**R:** 
+**R:** Sampling process is the process of measuring the amplitude of a continuous signal at **regular time intervals**.
 • What is the quantization process in analog-to-digital conversion?
-**R:** 
+**R:** Quantization maps each sampled analog value to the nearest level within a finite set of discrete values. (**bit resolution**)
 • What is the reconstruction process in digital-to-analog conversion?
-**R:** 
+**R:** Reconstruction converts discrete digital samples back into a **continuous analog waveform**, using **zero-order hold** or a filter. 
 • What is the sampling rate of ADCs/DACs?
-**R:** 
+**R:** The sampling rate is how many samples per second the converter can process, usually in Hz or MS/s
 • What is the bit resolution of ADCs/DACs?
-**R:** 
-• What is the Nyquist frequency? What is aliasing?
-**R:** 
+**R:** **Bit Resolution** defines the **number of levels** the signal can be quantized into, an **n-bit ADC** can represent $2^n$ levels. 
+• What is the Nyquist frequency? What is Aliasing?
+**R:** **Nyquist frequency** is always half the sampling rate. **Aliasing** occurs when the signal contains frequencies **above the Nyquist limit**, causing them to be **misinterpreted** as lower frequencies in the digital domain. Using antialiasing filters before the ADC will remove the high-frequency components.
 • What is the reference voltage of ADCs and DACs?
-**R:** 
+**R:** **Reference Voltage** defines the input range of an ADC or output range of a DAC. For ADC, analog input is mapped to digital values between 0 and V<sub>ref</sub> (voltage of the ADC). For DAC, digital input is converted to analog voltage between 0 and V<sub>ref</sub>.
+Example: A 3.3V V<sub>ref</sub> with 10-bit ADC gives ≈ **3.22 mV per step**.
 • How does a Successive Approximation Register (SAR) ADC work?
-**R:** 
+**R:** **SAR ADC** converts an analog signal to digital by **binary search**:
+1. Compares input voltage with a **DAC-generated reference**.
+2. Starts from the **most significant bit (MSB)**.
+3. Sets each bit based on comparison, updating DAC value at each step.
+4. After **n steps**, the n-bit digital value is obtained.
 
-## 
+## ESP32-C3 Analog-to-Digital Converters (ADCs)
 
+The ESP32-C3 microcontroller incorporates Analog-to-Digital Converters (ADCs) to convert continuous analog signals into discrete digital values
+- **Number of ADCs and Channels:** The ESP32-C3 implements **multiple ADCs** and provides **several ADC input channels**
+- **Operating Modes:** ESP32 ADCs support two main modes of operation
+	- **One-shot mode:** This mode generates a **one-time alarm** based on a configured alarm value (t). This is used for single acquisitions, such as reading a potentiometer value or an analog temperature sensor. 
+	- **Continuous mode:** This mode generates **periodic alarms** based on an alarm period (δt). It is suitable for acquiring continuous signals, like a sinusoidal signal, and sending "chunks" of samples for plotting.
+- **Voltage Determination:** To determine the **voltage applied to the ADC from the digital sample value**, it's crucial to understand the reference voltage (Vref) of the ADC. For an **n-bit ADC**, the analog input is mapped to digital values between 0 and Vref. For example, a 3.3V Vref with a 10-bit ADC provides approximately **3.22 mV per step**.
 
+## ESP32-C3 Digital-to-Analog Converter (DAC) Functionality
 
+**The ESP32-C3 does not provide native DACs**. However, similar functionality can be implemented using other peripherals:
+- **GPIOs with Delta-Sigma Modulator:** One method to achieve DAC-like functionality is by utilizing General Purpose Input/Output (GPIO) pins in conjunction with a Delta-Sigma Modulator.
+- **PWM Generators:** A common and effective way to simulate DAC functionality on the ESP32-C3 is by using its **Pulse Width Modulation (PWM) generators**.
+	- The ESP32 has **six independent PWM generators** (channels) and **four independent timers** that support fractional clock division
+	- These PWM generators allow for **automatic duty cycle fading**, enabling smooth transitions without direct CPU involvement, and can trigger interrupts upon fade completion
+	- The **adjustable phase of the PWM signal** output and support for **PWM output in low-power** **(Light-sleep) mode** are also notable features
+	- The **maximum PWM** resolution is 14 bits
 
+# Aula 8
 
-
+• What are real-time systems? Are “real-time” and “fast” synonymous?
+• What is a deadline, and a deadline miss, in real-time systems?
+• What is the difference between hard and soft real-time systems?
+• How severe is missing a deadline in a hard real-time system? And in a soft real-time system?
+• What is a Real-time Operating System (RTOS)?
+• What distinguishes a RTOS from a general-purpose operating system?
+• Which services and abstractions are typically provided by a RTOS?
+• What are the pros and cons of an RTOS-based system (compared to a standalone/bare-metal system)?
+• Name (list) a few examples of RTOSs (free, academic, commercial).
+• What are RTOS tasks?
+• What is the role of RTOS scheduler?
+• What are the typical task states in a RTOS?
+• What is the purpose of task priorities?
+• What is the RTOS tick?
+• What are RTOS timers?
+• What is a shared variable?
+• Why is mutual exclusion of access to shared variables important?
+• What are critical sections (in the code)?
+• What are queues?
+• What are semaphores and mutexes?
 
 
 
