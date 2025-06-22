@@ -1,20 +1,126 @@
 # General Concepts
 
+## Microcontroller vs Microprocessor
+
+### ### **Microcontroller (MCU)**
+A **microcontroller** is a compact, integrated chip designed to perform **specific control tasks**. It combines a **CPU**, **memory** (RAM and flash), and **peripherals** (timers, UART, GPIO, ADC, etc.) all within a **single chip**.
+- **Designed for embedded applications** (e.g., appliances, sensors, automation)
+- Often runs a single-purpose program
+- Optimized for **low power consumption** and **real-time control**
+- Examples: **AVR (ATmega328)**, **PIC**, **STM32**, **ESP32**
+
+**Used in:**
+- IoT devices
+- Home automation
+- Robotics and sensors
+- Consumer electronics
+
+### ### **Microprocessor (MPU)**
+A **microprocessor** is a general-purpose CPU chip that requires **external components** such as RAM, ROM, and I/O controllers to function. It is designed for **higher performance and flexibility**, capable of running complex operating systems like Linux or Windows.
+- Used in **computers, smartphones, and high-level computing devices**
+- Focuses on **processing power**, not integrated peripherals
+- Supports multitasking, virtual memory, complex software stacks
+- Examples: **Intel x86**, **AMD Ryzen**, **ARM Cortex-A**
+
+**Used in:**
+- Desktop and laptop computers
+- Mobile phones
+- Embedded Linux systems
+- Industrial control systems with complex user interfaces
+
 ## GPIO
+
+GPIOs are one of the most fundamental interfaces in embedded systems. They allow the microcontroller to **interact with the outside world** by configuring individual pins as either **inputs** (to read the state of buttons, sensors, etc.) or **outputs** (to control LEDs, relays, etc.). Each GPIO pin can be configured in various electrical modes, such as pull-up, pull-down, or open-drain, depending on the circuit’s needs. The simplicity of GPIO makes it a foundational element in nearly every embedded application.
+### GPIO Electrical Configurations: Pull-Up, Pull-Down, and Open-Drain
+When configuring a GPIO pin as **input** or **output**, it’s important to understand how its **electrical state** behaves. That’s where these terms come in:
+#### **Pull-Up Resistor**
+A **pull-up** resistor connects the input pin to **Vcc (logic high)** through a high resistance (internally or externally). It ensures that the pin reads **HIGH (1)** when nothing else is actively driving it.
+- Prevents **floating inputs** (which could randomly read 0 or 1)
+- Common in button circuits, where pressing the button pulls the pin to GND
+
+#### **Pull-Down Resistor**
+A **pull-down** resistor connects the input pin to **GND (logic low)** through a high resistance. It ensures the pin reads **LOW (0)** when not actively driven.
+- Less common than pull-up in microcontrollers
+- Ensures a known state when no signal is applied
+
+#### **Open-Drain (or Open-Collector)**
+In **open-drain mode**, the GPIO **can only pull the line LOW** — it cannot drive it HIGH. To allow the line to go high, an **external pull-up resistor** is used.
+- Useful for **bus sharing** (e.g., I2C lines), where multiple devices can pull the line low without conflicting
+- Allows **safe multi-device communication**
+- Can be used for **wired-AND** logic
 
 ## PWM
 
+**Pulse Width Modulation** is a technique used to simulate **analog output** using a digital signal. It works by rapidly toggling a pin between HIGH and LOW states, where the **duty cycle**—the proportion of time the signal is HIGH in one cycle—determines the average voltage. By adjusting this duty cycle, PWM can be used to control devices that respond to varying power levels.
+
+**Used in:**
+- LED brightness control
+- Motor speed and direction control
+- Generating analog-like signals for DAC-less audio or sensor actuation
+
+Most microcontrollers have dedicated **PWM hardware timers**, and some offer features like **automatic fading** or **phase adjustment** for more advanced applications.
+
 ## Macros
 
+Macros are **preprocessor directives** used to define constants, reusable code snippets, or hardware-specific register manipulations. They are processed by the compiler before actual compilation starts, meaning macros don’t consume memory or execution time themselves.
+
+They are especially useful in embedded systems to define register addresses, bit positions, or operations that are reused frequently. For example:
+
+```c
+define LED_PIN 13
+define TOGGLE_BIT(PORT, BIT) ((PORT) ^= (1 << BIT))
+```
+
+While macros can simplify code and make it more readable, they lack type checking and can lead to unexpected behavior if not carefully used. Unlike functions, macros don’t generate real code—they just perform textual substitution.
+
+**Macros** in C/C++ are handled entirely by the **preprocessor**, **before** the actual compilation of your code so they are **not stored in the memory**. 
 ## UART
 
+UART is a widely used **asynchronous serial communication protocol**, ideal for low-speed data exchange between a microcontroller and peripherals like GPS modules, Bluetooth modules, or computers. It requires only two main lines: **TX (transmit)** and **RX (receive)**.
+
+UART sends data in structured frames containing a **start bit**, **data bits**, an optional **parity bit**, and one or more **stop bits**. Since it is asynchronous, both sides must agree on a **baud rate** (e.g., 9600, 115200 bps).
+
+It is a popular choice for:
+- Debugging via serial monitors
+- Communication with GPS, GSM, or Wi-Fi modules
+- Bootloaders and firmware flashing
+
+Many microcontrollers offer multiple UARTs with configurable options such as hardware flow control and DMA support for high-speed transfers.
 ## DMA
 
+**DMA (Direct Memory Access)** is a hardware feature that allows data to be transferred between **memory and peripherals** (or between two memory locations) **without CPU involvement**. This is especially important in high-performance or real-time applications where the CPU must remain free to handle critical tasks.
+
+For example, a DMA controller can automatically move a large block of data from an ADC into a memory buffer without the CPU needing to copy each byte. This drastically reduces CPU overhead and improves data throughput.
+
+**Used in:**
+- Transferring audio samples
+- Capturing sensor data streams
+- Sending large data blocks via SPI, I2C, or UART
+
+DMA also supports interrupts to signal transfer completion, allowing the CPU to respond only when needed.
 ## DMAC
 
+The **DMA Controller (DMAC)** is the logic unit responsible for managing **multiple DMA channels**. It handles the setup of data transfers, including:
+- Source and destination addresses
+- Transfer size
+- Data width
+- Direction (read/write)
+
+It also manages **channel priority** when multiple transfers are requested simultaneously. Advanced DMACs can chain multiple transfers or trigger actions on peripheral events (e.g., start DMA transfer when a timer overflows).
+
+In many microcontrollers, the DMAC operates semi-autonomously and can be configured via register programming or hardware abstraction layers (HAL).
 ## EEPROM
 
+EEPROM is a type of **non-volatile memory** that retains data even when power is lost. It is often used in embedded systems to store **configuration settings**, **calibration data**, **serial numbers**, or **user preferences** that need to persist between resets or power cycles.
 
+EEPROM allows **byte-level read and write**, unlike flash memory which requires block-level erasure. However, it has a limited number of **write cycles** (typically 100,000 or fewer), so frequent updates should be carefully managed to avoid premature wear.
+
+**Used in:**
+- Saving device state or settings across restarts
+- Storing unique identifiers or product information
+- Logging small amounts of data over time
+
+Some microcontrollers include internal EEPROM, while others require external EEPROM chips via I2C or SPI.
 # Aula 2
 
 ## What is the purpose of the CMake tool?
