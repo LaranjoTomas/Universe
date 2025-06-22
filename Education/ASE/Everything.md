@@ -182,7 +182,7 @@ Ninja is widely used in modern development workflows, especially in projects whe
 # Aula 3
 
 ## C/C++ Compilation Flow
-![[image-1.png]]
+![[image-1 3.png]]
 
 ## C/C++ Primitives Types
 
@@ -208,7 +208,7 @@ Ninja is widely used in modern development workflows, especially in projects whe
 - **Classes (C++ only):** Classes can encapsulate data and functions together
 
 
-![[image-2.png]]
+![[image-2 2.png]]
 
 ```c
 void f()

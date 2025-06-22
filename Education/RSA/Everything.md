@@ -332,7 +332,7 @@ Partial Key Systems are cryptographic schemes where **each participant holds onl
 ## Diffie-Hellman Key Exchange
 - Establishes a shared session key over public channels.
 - Based on agreed `p` and `g`, users compute and exchange values to derive the same session key.
-![[image.png]]
+![[image 9.png]]
 
 ## RSA (Rivest-Shamir-Adleman) Public-Key Encryption
 - Each user generates public/private key pairs.
