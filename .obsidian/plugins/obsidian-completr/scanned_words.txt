@@ -3009,6 +3009,10 @@ tick
 ticks
 tolerable
 touchscreen
+timeframe
+tolerate
+timekeeping
+touch
 Statistic
 SlRvb
 Story
@@ -5988,6 +5992,13 @@ Storing
 Starts
 Sigma
 Sensors
+Suspended
+Sleep
+SSID
+Station
+STA
+SoftAP
+Simultaneous
 moc
 modified
 my
@@ -9020,6 +9031,10 @@ mutexes
 mitigates
 milliseconds
 medical
+misses
+misused
+mDNS
+mbedTLS
 Root
 Rectangular
 Relationships
@@ -11901,6 +11916,10 @@ Resistor
 RTOS
 RTOSs
 Releases
+RIOT
+RTC
+Revisited
+RISC
 created
 cssclasses
 customize
@@ -15536,6 +15555,7 @@ converter
 conjunction
 cons
 compensating
+connecting
 hide
 hosted
 heading
@@ -18247,6 +18267,7 @@ hops
 handshake
 hazards
 hashes
+heat
 properties
 png
 page
@@ -21464,6 +21485,11 @@ pros
 periodicity
 press
 prioritized
+predictability
+preemptive
+powered
+paused
+provisioning
 ITS
 In
 Included
@@ -24331,6 +24357,8 @@ Involvement
 Interrupt
 Intel
 Industrial
+Inactive
+Identifier
 Theme
 The
 Themes
@@ -27131,6 +27159,9 @@ Timer
 Timers
 Transfers
 Tickless
+ThreadX
+Timeouts
+Trigger
 by
 better
 br
@@ -30173,6 +30204,11 @@ behaves
 brightness
 baud
 bare
+buffering
+blinking
+battery
+band
+beacon
 for
 fonts
 files
@@ -33204,6 +33240,7 @@ flange
 friendly
 firmware
 flashing
+failing
 Obsidian
 Other
 Outline
@@ -36064,6 +36101,7 @@ Obter
 Opcionalmente
 Operates
 Occasional
+Orientation
 Vault
 VB
 Vv
@@ -38831,6 +38869,7 @@ Void
 Visibility
 Very
 Vcc
+VxWorks
 Guide
 Graph
 Gee
@@ -41673,6 +41712,7 @@ Generators
 GPIO
 GPIOs
 GND
+GPOS
 Check
 Checkboxes
 Callouts
@@ -44711,6 +44751,10 @@ Compares
 Converters
 Clean
 Capabilities
+ChibiOS
+Commercial
+Capacitive
+Connects
 out
 on
 of
@@ -47402,6 +47446,7 @@ outra
 oscilloscope
 observations
 offer
+occasional
 Publish
 Pills
 Positions
@@ -53229,6 +53274,10 @@ DMACs
 Determination
 Delta
 Deterministic
+Determinism
+Disabling
+Deep
+DHCP
 experience
 enlarges
 either
@@ -56601,6 +56650,10 @@ erasure
 effective
 exceto
 existiria
+exception
+enqueued
+energy
+environmental
 Allows
 Already
 Adjustments
@@ -59496,6 +59549,8 @@ ATmega
 Aqui
 Attempts
 Acquire
+Academic
+Azure
 you
 your
 yt
@@ -65056,6 +65111,7 @@ lculos
 lado
 logger
 literaly
+life
 and
 are
 across
@@ -68293,6 +68349,10 @@ acquiring
 abstractions
 academic
 automotive
+avionics
+anatomy
+adequate
+actuators
 icon
 in
 if
@@ -71262,6 +71322,8 @@ incorporates
 intelligent
 impossiveis
 imposs
+interrupted
+inheritance
 used
 using
 upon
@@ -74246,6 +74308,8 @@ unsigned
 union
 unlike
 unblocks
+unpredictable
+unused
 No
 Navigation
 NzZj
@@ -82894,6 +82958,10 @@ drastically
 drone
 datagrams
 deadlines
+degraded
+determinism
+differs
+dequeued
 snippets
 spans
 smaller
@@ -86383,6 +86451,10 @@ semaphores
 schedules
 semaphore
 signaling
+stimuli
+simultaneous
+supply
+spectrum
 vault
 vn
 vY
@@ -92410,6 +92482,7 @@ resets
 resemble
 robotics
 routine
+robin
 work
 with
 within
@@ -95148,6 +95221,7 @@ wire
 wear
 waveform
 wake
+waking
 Embed
 Edges
 Embeded
@@ -97975,6 +98049,10 @@ EEPROMs
 Evaluates
 Electrical
 EEPROM
+Erika
+Enterprise
+Everything
+Espressif
 Kanban
 KD
 KuTyw
@@ -103541,6 +103619,7 @@ Full
 Frame
 Focuses
 FreeRTOS
+Free
 Light
 Larger
 Line
@@ -106278,6 +106357,8 @@ LSB
 LOW
 Less
 LCD
+Longest
+LwIP
 Heading
 Horizontal
 Headings
@@ -109058,6 +109139,8 @@ Half
 HIGH
 HAL
 Handshake
+Hibernation
+Hosting
 Underline
 Ue
 Uy
@@ -111723,6 +111806,7 @@ Usar
 Unions
 UART
 UARTs
+ULP
 Metadata
 Move
 Main
@@ -114460,6 +114544,8 @@ Missing
 MCUs
 Multitasking
 Modular
+Mutexes
+Modem
 Zoom
 ZTz
 ZW
@@ -117185,6 +117271,7 @@ ZQz
 ZzM
 ZGTna
 Zyd
+Zephyr
 Blockquotes
 Bullet
 Bzj
@@ -120015,6 +120102,8 @@ Baud
 Bus
 Bayesian
 Bootloaders
+Boot
+BSSID
 Wider
 Wrapping
 WQQ
@@ -122793,6 +122882,9 @@ Watchdog
 Wastes
 Word
 Wiring
+Wake
+WLAN
+WPA
 Quotation
 Query
 Qss
@@ -125357,6 +125449,7 @@ Qual
 Qualquer
 QUIC
 Quais
+QNX
 YiTXtXML
 YResolution
 YU
@@ -136388,6 +136481,7 @@ gravados
 grafana
 generator
 generators
+gating
 qtt
 qa
 qY
