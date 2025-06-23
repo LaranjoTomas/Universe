@@ -5,16 +5,16 @@
       "path": "Education/ASE/Everything.md"
     },
     {
-      "basename": "Everything",
-      "path": "Education/RSA/Everything.md"
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
     },
     {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
+      "basename": "Everything",
+      "path": "Education/RSA/Everything.md"
     },
     {
       "basename": "ADCs",

@@ -379,7 +379,7 @@ DMA->CTRL = START;
 |Polling|High|Simple, predictable tasks|Easy to implement|CPU wasted in waiting loop|
 |Interrupt|Medium|Asynchronous events|Efficient, responsive|Requires careful ISR handling|
 |DMA|Low|Large data transfers|High performance, low CPU load|Complex setup, limited support|
-# Aula 6
+# Aula 6 & 7
 
 ## Autonomous Study Questions
 
@@ -535,7 +535,7 @@ To debug on oscilloscope, place the trigger in the **descending flange** in the 
 | Complexity       | Low            | Low            | Medium              |
 
 
-# Aula 7
+# Aula 8
 
 ## Questions
 
@@ -588,29 +588,451 @@ The ESP32-C3 microcontroller incorporates Analog-to-Digital Converters (ADCs) to
 	- The **adjustable phase of the PWM signal** output and support for **PWM output in low-power** **(Light-sleep) mode** are also notable features
 	- The **maximum PWM** resolution is 14 bits
 
-# Aula 8
+# Aula 9 & 10
+
+## Questions
 
 • What are real-time systems? Are “real-time” and “fast” synonymous?
+**R:** A **real-time system** is one in which the **correctness of operations depends not only on logical results** but also on **timing constraints**. These systems must **guarantee a response within specific time bounds** to external stimuli or events.
+
 • What is a deadline, and a deadline miss, in real-time systems?
+**R:** 
+- A **deadline** is the maximum time allowed for a task or system to complete a specific operation.
+- A **deadline miss** occurs when a system fails to complete the task within that timeframe.
+
 • What is the difference between hard and soft real-time systems?
+**R:** 
+- A **hard real-time system** is one where **missing a deadline is considered a system failure**. The timing constraints must always be met, without exception.
+- A **soft real-time system** allows for **occasional deadline misses**. The system can tolerate some delays without failing, though performance may degrade
+
 • How severe is missing a deadline in a hard real-time system? And in a soft real-time system?
+**R:** 
+- In a **hard real-time system**, missing a deadline can have **catastrophic consequences**, such as system failure or safety risks.
+- In a **soft real-time system**, missing a deadline typically results in **reduced performance or degraded quality of service**, but the system continues to function.
+
 • What is a Real-time Operating System (RTOS)?
+**R:** An **RTOS** is an operating system specifically designed to run **tasks within predictable timing constraints**. It provides mechanisms for **scheduling**, **synchronization**, **inter-task communication**, and **resource sharing**, all optimized for time determinism.
+
 • What distinguishes a RTOS from a general-purpose operating system?
+**R:** A **Real-Time Operating System (RTOS)** differs from a **General-Purpose Operating System (GPOS)** in terms of **predictability**, **timing guarantees**, and **system behavior**.
+1. **Determinism**
+    - An RTOS provides **predictable and bounded response times** to external events.
+    - A GPOS focuses on maximizing average throughput or resource usage, but without guaranteeing how long a task will take to start or finish.
+2. **Task Scheduling**
+    - RTOS uses **priority-based preemptive scheduling**, ensuring high-priority tasks execute as soon as they're ready.
+    - GPOS typically uses **fair-share scheduling** (e.g., round-robin, multi-level queues) to balance responsiveness across users and tasks.
+3. **Latency and Jitter**
+    - RTOS is optimized for **low latency** and **minimal jitter** (timing variation).
+    - GPOS may have high or unpredictable latency, due to background services, user processes, and I/O buffering.
+4. **Resource Usage**
+    - RTOS is **lightweight**, designed to run on **resource-constrained systems** (e.g., microcontrollers).
+    - GPOS (like Linux or Windows) requires **more memory and processing power**, and is often unsuitable for real-time constraints.
+5. **Interrupt Handling**
+    - In RTOS, **interrupts are handled quickly** and can often trigger real-time tasks directly.
+    - In GPOS, interrupt response is delayed by scheduling policies and system overhead.
+6. **Use Case Orientation**
+    - RTOS is built for **embedded systems**, **safety-critical**, or **time-sensitive applications** (e.g., robotics, automotive, avionics).
+    - GPOS is built for **general computing** needs (e.g., desktop applications, file systems, multitasking environments).
+
 • Which services and abstractions are typically provided by a RTOS?
+**R:**
+- **Task/thread creation and management**
+- **Preemptive scheduler**
+- **Task priorities**
+- **Timers and tick control**
+- **Semaphores and mutexes**
+- **Queues/message passing**
+- **Event flags**
+- **Memory management**
+
 • What are the pros and cons of an RTOS-based system (compared to a standalone/bare-metal system)?
+**R:**
+#### Pros:
+- Deterministic behavior
+- Efficient multitasking
+- Clean separation of tasks
+- Built-in synchronization and communication mechanisms
+####  Cons:
+- More complex than bare-metal
+- Requires more memory and CPU
+- Can introduce bugs like race conditions or deadlocks if misused
+
 • Name (list) a few examples of RTOSs (free, academic, commercial).
+**R:** 
+- **Free (Open-source):**
+    - FreeRTOS
+    - Zephyr RTOS
+    - RIOT OS
+- **Academic:**
+    - ChibiOS
+    - Erika Enterprise
+- **Commercial:**
+    - VxWorks
+    - ThreadX (Azure RTOS)
+    - QNX
+
 • What are RTOS tasks?
+**R:** **Tasks** (or threads) are independent sequences of execution managed by the RTOS. Each task typically performs one logical function of the system.
+
 • What is the role of RTOS scheduler?
+**R:** The **scheduler** decides which task to run next based on:
+- Task **priority**
+- Task **state** (ready, blocked, etc.)
+- Scheduling policy (preemptive, round-robin, etc.)
+
 • What are the typical task states in a RTOS?
+**R:** 
+- **Ready:** Can run when given CPU time
+- **Running:** Currently executing
+- **Blocked:** Waiting for an event (e.g., delay, semaphore)
+- **Suspended:** Inactive until resumed
+
 • What is the purpose of task priorities?
+**R:** Task **priorities** allow more critical tasks to **preempt** lower-priority ones. Ensures that **time-sensitive operations** are handled first.
+
 • What is the RTOS tick?
+**R:** The **tick** is a periodic interrupt (e.g., every 1 ms) that drives the RTOS timekeeping. It's used for:
+- Task delays (e.g., `vTaskDelay()`)
+- Timeouts
+- Scheduling decisions
+
 • What are RTOS timers?
+**R:** **RTOS timers** allow scheduling actions in the future without blocking tasks. Types:
+- **One-shot:** Trigger once after delay
+- **Periodic:** Trigger repeatedly at fixed intervals
+Useful for:
+- Sensor sampling
+- LED blinking
+- Timeout handling
+
 • What is a shared variable?
+**R:** A **shared variable** is a memory location accessed by multiple tasks or ISRs. Example: a shared counter, or sensor data buffer.
+
 • Why is mutual exclusion of access to shared variables important?
+**R:** Without **mutual exclusion**, simultaneous access to shared variables can cause **race conditions**, leading to corrupted or inconsistent data.
+
 • What are critical sections (in the code)?
+**R:** **Critical sections** are code regions that access shared resources and **must not be interrupted** or accessed by multiple tasks simultaneously. Protected using:
+- **Disabling interrupts**
+- **Semaphores or mutexes**
+
 • What are queues?
+**R:** **Queues** allow tasks to safely exchange data. Data is sent (enqueued) by one task and received (dequeued) by another, ensuring **safe communication** between tasks or from ISRs.
+
 • What are semaphores and mutexes?
+**R:** 
+#### **Semaphores**
+- Used for **synchronization** (e.g., signaling between tasks or from ISR to task)
+- Types:
+    - **Binary semaphore:** Acts like a flag
+    - **Counting semaphore:** Can track multiple events
+#### **Mutexes**
+- Used for **mutual exclusion**
+- Only one task can hold the mutex at a time
+- Prevents race conditions
+- Often supports **priority inheritance** to avoid **priority inversion**
+
+## FreeRTOS functions 
+### **xTaskCreate(...)**
+Creates a new task and schedules it for execution.
+```c
+BaseType_t xTaskCreate(
+    TaskFunction_t pvTaskCode,    // Task function (void(void*))
+    const char * const pcName,    // Task name (for debugging)
+    uint16_t usStackDepth,        // Stack size in words
+    void *pvParameters,           // Parameter passed to the task
+    UBaseType_t uxPriority,       // Task priority
+    TaskHandle_t *pxCreatedTask   // (Optional) Task handle
+);
+```
+- **allocates** a Task Control Block and stack from the heap
+- Use `xTaskCreateStatic()` to avoid dynamic allocation
+### **vTaskDelay(...)**
+Delays the calling task for a specified number of tick periods.
+```c
+void vTaskDelay(TickType_t xTicksToDelay);
+```
+- The task is **blocked** for `xTicksToDelay` ticks
+- Use `pdMS_TO_TICKS(ms)` to convert milliseconds to ticks
+
+### **xTaskDelayUntil(...)**
+Provides periodic task execution based on a fixed time interval.
+```c
+BaseType_t xTaskDelayUntil(
+    TickType_t *pxPreviousWakeTime,
+    TickType_t xTimeIncrement
+);
+```
+- Ensures **consistent periodicity**, compensating for previous delays
+
+### **xTimerCreate(...)**
+Creates a software timer.
+```c
+TimerHandle_t xTimerCreate(
+    const char * const pcTimerName,
+    TickType_t xTimerPeriod,
+    UBaseType_t uxAutoReload,
+    void *pvTimerID,
+    TimerCallbackFunction_t pxCallbackFunction
+);
+```
+- Allocates memory for timer and control structure
+
+### **xTimerStart(...)**
+Starts or restarts a software timer.
+```c
+BaseType_t xTimerStart(
+    TimerHandle_t xTimer,
+    TickType_t xTicksToWait
+);
+```
+- Must be called before the timer can run
+
+### **xQueueCreate(...)**
+Creates a queue to hold a fixed number of items of fixed size.
+```c
+QueueHandle_t xQueueCreate(
+    UBaseType_t uxQueueLength,
+    UBaseType_t uxItemSize
+);
+```
+- Two memory blocks are allocated: control structure and storage area
+
+### **xQueueSend(...)**
+Sends (copies) an item to the **back** of the queue.
+```c
+BaseType_t xQueueSend(
+    QueueHandle_t xQueue,
+    const void *pvItemToQueue,
+    TickType_t xTicksToWait
+);
+```
+- Blocks for space if the queue is full
+- Use `xQueueSendFromISR()` inside ISRs
+
+### **xQueueReceive(...)**
+Receives (copies) an item from the **front** of the queue.
+```c
+BaseType_t xQueueReceive(
+    QueueHandle_t xQueue,
+    void *pvBuffer,
+    TickType_t xTicksToWait
+);
+```
+- Removes the item from the queue
+- Use `xQueueReceiveFromISR()` in ISRs
+
+### **vSemaphoreCreateBinary(...)**
+Creates a binary semaphore.
+```c
+SemaphoreHandle_t xSemaphoreCreateBinary(void);
+```
+- Allocates memory automatically
+- Useful for simple signaling between tasks or from ISRs
+### **xSemaphoreTake(...)**
+Attempts to acquire the semaphore.
+```c
+BaseType_t xSemaphoreTake(
+    SemaphoreHandle_t xSemaphore,
+    TickType_t xTicksToWait
+);
+```
+- Can block the calling task until the semaphore becomes available
+
+### **xSemaphoreGive(...)**
+Releases the semaphore.
+```c
+BaseType_t xSemaphoreGive(SemaphoreHandle_t xSemaphore);
+```
+- Typically unblocks a task waiting on the semaphore
 
 
+| Function                 | Purpose                        |
+| ------------------------ | ------------------------------ |
+| `xTaskCreate`            | Create and schedule a new task |
+| `vTaskDelay`             | Delay a task by ticks          |
+| `xTaskDelayUntil`        | Periodic task delay            |
+| `xTimerCreate`           | Create a software timer        |
+| `xTimerStart`            | Start/restart the timer        |
+| `xQueueCreate`           | Create a message queue         |
+| `xQueueSend`             | Send an item to a queue        |
+| `xQueueReceive`          | Receive an item from a queue   |
+| `vSemaphoreCreateBinary` | Create binary semaphore        |
+| `xSemaphoreTake`         | Acquire semaphore              |
+| `xSemaphoreGive`         | Release semaphore              |
+
+## ## Basics of Real-Time Systems
+### What is a Real-Time System?
+A **real-time system** is a system that must respond to inputs or events **within a guaranteed time limit**. The correctness depends not only on **logical results**, but also on **timing**.
+- **Hard real-time**: Missing a deadline leads to system failure (e.g., medical devices, automotive braking).
+- **Soft real-time**: Occasional missed deadlines are tolerable (e.g., audio streaming, robotics).
+
+## RTOS: Real-Time Operating System
+An **RTOS** is an operating system designed to manage tasks with **strict timing constraints** and **predictable scheduling**.
+### Main Features
+- **Preemptive multitasking** with priority-based scheduling
+- **Deterministic behavior** (predictable task switching)
+- **Task management** (create, delete, suspend, resume tasks)
+- **Inter-task communication** (queues, semaphores, mutexes)
+- **Timers and delays**
+- **ISR (interrupt service routine) integration**
+### Advantages
+- Precise timing and responsiveness
+- Clean and modular application structure
+- Scalability: from small MCUs to complex applications
+- Easier debugging and maintenance with task isolation
+### Limitations
+- More **RAM/ROM usage** than bare-metal code
+- Steeper learning curve than simple loops or interrupts
+- Requires careful design to avoid **deadlocks**, **priority inversion**, or **race conditions**
+
+## FreeRTOS: Capabilities and Programming
+**FreeRTOS** is a widely used, open-source RTOS designed for **microcontrollers and small embedded systems**. It is lightweight, portable, and supports many MCU architectures.
+### Capabilities
+- **Multitasking**: tasks with priorities, blocking, and cooperative scheduling
+- **Queues & Semaphores**: for synchronization and communication
+- **Software timers**: schedule future actions
+- **Tickless idle**: power-saving mode
+- **ISR-safe functions** for real-time interaction
+- Modular and portable (used in STM32, ESP32, ARM Cortex, etc.)
+### Typical FreeRTOS Programming Flow
+1. **Create tasks** using `xTaskCreate()`
+2. Use **queues**, **semaphores**, or **mutexes** to share data
+3. Implement delays with `vTaskDelay()` or `xTaskDelayUntil()`
+4. Handle external events via **interrupts**
+5. Start the kernel with `vTaskStartScheduler()`
+
+## Using FreeRTOS in Sensor-Based and Interactive Systems
+FreeRTOS is ideal for systems that need to **read sensors**, **respond to user input**, and **manage multiple operations in parallel**. Here's how it's typically applied:
+### Sensors
+- A **dedicated task** periodically reads sensors (e.g., temperature, motion)
+- Task uses `vTaskDelay()` or `xTaskDelayUntil()` for consistent sampling
+- Data is sent to other tasks via **queues**
+### User Interaction
+- Another task handles **input (e.g., buttons, touchscreen)** or **outputs (e.g., displays)**
+- Interrupts (e.g., button press) can **give semaphores** to wake tasks immediately
+- Tasks manage user feedback (e.g., updating LEDs, displays)
+### Example System
+- **Task 1:** Reads temperature sensor every 500ms
+- **Task 2:** Monitors a push-button and sends commands via queue
+- **Task 3:** Updates an LCD display with the latest reading
+- **Task 4:** Communicates via UART/WiFi (e.g., ESP32 + FreeRTOS)
+
+Each task operates independently, and communication between tasks is **safe, non-blocking, and prioritized**.
 
 
+# Aula 11
+
+## Questions
+
+• Why is power management critical in modern computing and embedded systems?
+• How is the power consumption affected by the supply voltage and operating frequency of the system?
+• Which power modes are predefined in ESP32 and the corresponding features?
+• How is a reduced power management mode entered in ESP32?
+• What are the typical wake-up sources in ESP32?
+
+## Microcontroller Power Management Basics
+### Why Power Management?
+Power management is crucial in embedded systems, especially for **battery-powered** or **energy-constrained** devices. Efficient power usage extends battery life, reduces heat, and enables always-on features with minimal drain.
+Common techniques include:
+- **Dynamic frequency scaling**
+- **Peripheral and clock gating**
+- **Sleep/standby modes**
+- **Disabling unused modules (ADC, UART, etc.)**
+- **Using interrupts instead of polling**
+
+## ESP32 Power Modes
+The **ESP32** is a dual-core MCU with integrated Wi-Fi and Bluetooth, and it offers several power modes to balance performance and energy efficiency. These modes allow the chip to **reduce consumption drastically** when full processing power is not needed.
+### 1. **Active Mode**
+- CPU(s) fully running
+- Wi-Fi/Bluetooth on or off depending on task
+- Power usage: ~160–260 mA (depending on use)
+### 2. **Modem Sleep**
+- CPU active
+- Wi-Fi and Bluetooth are off or in standby
+- Used during tasks that don’t require network access
+**Power consumption:** ~3–20 mA  
+**Ideal for:** periodic Wi-Fi transmission with idle computation in between
+### 3. **Light Sleep**
+- CPU paused
+- Most peripherals paused
+- RTC controller and memory remain powered
+- Wake-up via timer, GPIO, touch sensor, or ULP (Ultra Low Power) core
+**Power consumption:** ~0.8–2 mA  
+**Use case:** periodic tasks with fast wake-up and low latency requirements
+### 4. **Deep Sleep**
+- CPU and RAM are powered off
+- RTC memory and ULP core are active
+- Only RTC peripherals (e.g., timer, GPIO, touch) can trigger wake-up
+- Boot from scratch after waking
+**Power consumption:** ~10–150 µA  
+**Ideal for:** sensors that report data every few minutes/hours
+Wake-up sources:
+- Timer
+- GPIO (external interrupts)
+- ULP
+- Capacitive touch
+### 5. **Hibernation**
+- Everything except RTC timer is powered off
+- Only timer wake-up possible
+- Longest battery life, but full reboot on wake
+**Power consumption:** ~2–8 µA  
+**Best for:** ultra-low-power long-sleep applications (e.g., environmental monitoring)
+
+# Aula 12
+
+## Questions
+
+• How are WiFi networks organized? What is the “anatomy” of a WiFi network?
+• What are the frequency bands used in WiFi?
+• What are the capabilities of each WiFi version?
+• What are the purposes, advantages and constraints of ISM bands?
+• What are the protocols/services/applications that share the RF spectrum bands with WiFi?
+• Is WiFi adequate for safety-critical applications?
+• What WiFi version is supported by ESP32-C3?
+• Which WiFi networking APIs are provided with ESP/IDF?
+• What are the restrictions on using WiFi and BLE simultaneously in an ESP32- C3 SoC?
+
+## Wi-Fi-Based Concepts (Revisited)
+### What is Wi-Fi?
+**Wi-Fi** is a wireless communication standard based on **IEEE 802.11**, commonly used for local area networking (WLAN). It enables devices to exchange data over radio waves, typically in the **2.4 GHz or 5 GHz bands**.
+### Key Concepts:
+- **SSID (Service Set Identifier):** The name of the wireless network.
+- **BSSID:** The MAC address of the Access Point (AP).
+- **Modes of Operation:**
+    - **Station (STA):** Connects to an Access Point.
+    - **Access Point (AP):** Creates its own Wi-Fi network.
+    - **SoftAP + STA:** ESP acts as both an access point and station.
+- **Security Protocols:** WPA2, WPA3, WEP
+- **IP Assignment:**
+    - **Static IP**
+    - **DHCP (Dynamic Host Configuration Protocol)**
+### Typical Wi-Fi Use in Embedded Devices:
+- Connecting to the internet to send sensor data
+- Hosting a local web interface for configuration
+- Receiving remote commands from a mobile app or server
+## Wi-Fi Capabilities of ESP32-C3
+
+The **ESP32-C3** is a low-power, low-cost Wi-Fi & Bluetooth LE microcontroller from Espressif, based on a **single-core RISC-V processor**. It is optimized for secure IoT and supports **Wi-Fi in the 2.4 GHz band**.
+### Core Wi-Fi Features:
+- **IEEE 802.11 b/g/n support (2.4 GHz)**
+- Up to **150 Mbps** PHY throughput
+- Supports both **Station (STA)** and **Soft Access Point (SoftAP)** modes
+- **Simultaneous SoftAP + STA mode** supported (ideal for device provisioning)
+- **Wi-Fi Protected Access (WPA/WPA2/WPA3-Personal)** security support
+- **TCP/IP stack** fully integrated (via LwIP)
+- **IPv4 and IPv6** support
+- **DHCP client and server**
+- **mDNS**, **HTTP/HTTPS**, **MQTT**, **WebSocket**, etc., supported via software libraries
+### Additional Features:
+- **Power-Saving Modes:**
+    - **Modem sleep** for low-power networking
+    - Wake-up on Wi-Fi events (e.g., beacon receive)
+- **Wi-Fi provisioning via Bluetooth LE** also supported
+- **TLS/SSL support** for secure communication (via mbedTLS)
+- Fully compatible with **ESP-IDF** and **Arduino** environments
+### Use Cases with ESP32-C3:
+- IoT sensor nodes connecting to the cloud
+- Smart home devices with a web interface
+- Wi-Fi-controlled actuators (e.g., smart relays)
+- Devices acting as a Wi-Fi access point for configuration or communication with nearby clients (e.g., phones)
