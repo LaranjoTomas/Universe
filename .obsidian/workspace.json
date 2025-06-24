@@ -24,22 +24,6 @@
             }
           },
           {
-            "id": "0c3db5015cc4bf23",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/ASE/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          },
-          {
             "id": "b18aef95eefca0a2",
             "type": "leaf",
             "pinned": true,
@@ -303,6 +287,47 @@
       "obsidian-memos:Thino": false,
       "periodic-notes:Open today": false
     }
+  },
+  "floating": {
+    "id": "d8519b3b7d839a44",
+    "type": "floating",
+    "children": [
+      {
+        "id": "ddcd1095bf80dd24",
+        "type": "window",
+        "children": [
+          {
+            "id": "5e987f9c897ae377",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "0c3db5015cc4bf23",
+                "type": "leaf",
+                "pinned": true,
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Education/ASE/Everything.md",
+                    "mode": "source",
+                    "source": false
+                  },
+                  "pinned": true,
+                  "icon": "lucide-file",
+                  "title": "Everything"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": -995,
+        "y": 47,
+        "width": 600,
+        "height": 600,
+        "maximize": true,
+        "zoom": 1.5
+      }
+    ]
   },
   "active": "0c3db5015cc4bf23",
   "lastOpenFiles": [
