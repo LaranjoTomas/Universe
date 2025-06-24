@@ -24,9 +24,8 @@
             }
           },
           {
-            "id": "18c1f8c507953601",
+            "id": "b18aef95eefca0a2",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -34,7 +33,6 @@
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Everything"
             }
@@ -290,7 +288,7 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "18c1f8c507953601",
+  "active": "b18aef95eefca0a2",
   "lastOpenFiles": [
     "0-HOME.md",
     "Education/ASE/Everything.md",

@@ -2,7 +2,7 @@
 
 ## Microcontroller vs Microprocessor
 
-### ### **Microcontroller (MCU)**
+### **Microcontroller (MCU)**
 A **microcontroller** is a compact, integrated chip designed to perform **specific control tasks**. It combines a **CPU**, **memory** (RAM and flash), and **peripherals** (timers, UART, GPIO, ADC, etc.) all within a **single chip**.
 - **Designed for embedded applications** (e.g., appliances, sensors, automation)
 - Often runs a single-purpose program
@@ -15,7 +15,7 @@ A **microcontroller** is a compact, integrated chip designed to perform **specif
 - Robotics and sensors
 - Consumer electronics
 
-### ### **Microprocessor (MPU)**
+### **Microprocessor (MPU)**
 A **microprocessor** is a general-purpose CPU chip that requires **external components** such as RAM, ROM, and I/O controllers to function. It is designed for **higher performance and flexibility**, capable of running complex operating systems like Linux or Windows.
 - Used in **computers, smartphones, and high-level computing devices**
 - Focuses on **processing power**, not integrated peripherals
@@ -271,7 +271,7 @@ void some_function() {
     - **Target mode**: one-time alarm at `t`
     - **Period mode**: recurring alarms every `δt`
 - **Three comparators** generate **independent interrupts** based on `t` or `δt`
-## Timer Group – ESP32 (General Purpose Timers)
+## Timer Group – ESP32 GPT (General Purpose Timers)
 - **16-bit clock prescaler**: configurable from **2 to 65,536**
 - **54-bit time-base counter**: supports **incrementing or decrementing**
 - **Real-time counter readout** available
