@@ -24,17 +24,19 @@
             }
           },
           {
-            "id": "b18aef95eefca0a2",
+            "id": "0c3db5015cc4bf23",
             "type": "leaf",
             "pinned": true,
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/ASE-Schematic.md"
+                "file": "Education/ASE/Everything.md",
+                "mode": "source",
+                "source": false
               },
               "pinned": true,
-              "icon": "excalidraw-icon",
-              "title": "ASE-Schematic"
+              "icon": "lucide-file",
+              "title": "Everything"
             }
           }
         ],
@@ -135,8 +137,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -288,56 +289,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "floating": {
-    "id": "d8519b3b7d839a44",
-    "type": "floating",
-    "children": [
-      {
-        "id": "ddcd1095bf80dd24",
-        "type": "window",
-        "children": [
-          {
-            "id": "5e987f9c897ae377",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "0c3db5015cc4bf23",
-                "type": "leaf",
-                "pinned": true,
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "Education/ASE/Everything.md",
-                    "mode": "source",
-                    "source": false
-                  },
-                  "pinned": true,
-                  "icon": "lucide-file",
-                  "title": "Everything"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": -995,
-        "y": 47,
-        "width": 600,
-        "height": 600,
-        "maximize": true,
-        "zoom": 1.5
-      }
-    ]
-  },
   "active": "0c3db5015cc4bf23",
   "lastOpenFiles": [
-    "Excalidraw/ASE-Schematic.md",
+    "imgs/xVjTHlMHgMUM.jpg",
     "Education/ASE/Everything.md",
-    "Pasted Image 20250624180115_080.png",
+    "Excalidraw/ASE-Schematic.md",
+    "imgs/Pasted Image 20250624180115_080.png",
     "0-HOME.md",
-    "52f3c108ce395fd3368b4568.png",
-    "image.png",
-    "xVjTHlMHgMUM.jpg",
+    "imgs/52f3c108ce395fd3368b4568.png",
+    "imgs/image 10.png",
     "Education/RSA/RSA_Test.md",
     "Education/RSA/Everything.md",
     "imgs/image-2 2.png",

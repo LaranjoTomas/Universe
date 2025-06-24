@@ -5,6 +5,10 @@
       "path": "Education/ASE/Everything.md"
     },
     {
+      "basename": "xVjTHlMHgMUM",
+      "path": "imgs/xVjTHlMHgMUM.jpg"
+    },
+    {
       "basename": "ASE-Schematic",
       "path": "Excalidraw/ASE-Schematic.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "cooperating_process",
       "path": "imgs/cooperating_process.png"
-    },
-    {
-      "basename": "Indep_process",
-      "path": "imgs/Indep_process.png"
     }
   ],
   "omittedPaths": [],
