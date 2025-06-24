@@ -1071,3 +1071,258 @@ The **ESP32-C3** is a low-power, low-cost Wi-Fi & Bluetooth LE microcontroller f
 - Smart home devices with a web interface
 - Wi-Fi-controlled actuators (e.g., smart relays)
 - Devices acting as a Wi-Fi access point for configuration or communication with nearby clients (e.g., phones)
+
+# Questions
+
+Com base no desenho dizer qual é o dutycycle e a frequência 
+![[image.png]]
+
+Frequência é o número de ciclos completos que ocorrem em um segundo. Tempo do inicio de um pico (peak) até ao inicio do próximo pico. Este é o periodo T. Frequência f seria o inverso dele.
+
+Qual a gama que representa valores com 16 bits 
+**R:**
+Para numeros sem sinal a resposta é (2 ^ 16) - 1 = 0 a 65535  
+Para números com sinal a resposta seria: -(2 ^ (16 -1)) a 2^(16-1) - 1= -32768 a 32767
+
+Código de ponteiro em c 
+**R:** Em c, um pontei é uma variável que armazena o endereço de memória de outra variável. Elas apontam para valores de outras variáveis que podem estar em qualquer parte da memória, e serem guardadas conforme a sua alocação quando criada. É eficiente, alocação dinâmica de memória dependem de ponteiros, permite que funções modifiquem os valores das variáveis passadas como argumentos.
+
+O que é sistema embutido e diferença com sistema computacional 
+**R:** Um **sistema embutido** é um sistema computacional dedicado a uma tarefa específica, com hardware e software otimizados, muitas vezes com restrições de tempo real. Um **sistema computacional geral** é versátil, executa várias tarefas e tem mais recursos (como num PC). O embutido é fixo e eficiente, única ou dedicada função; o geral é flexível e mais pesado, múltiplas funções.
+
+O que são pinos multiplexados e quais são 2 pinos que não o são? 
+**Pinos multiplexados** são pinos de entrada/saída (I/O) de um microcontrolador que podem ter **várias funções diferentes**, dependendo da configuração. Isso permite maior flexibilidade com menos pinos físicos. Dois pinos que tipicamente não são multiplexados são os de alimentação ou ground (VCC e GND) e pins de reset.
+
+**ESP32 em específico**
+No **ESP32-C3**, dois pinos **não multiplexados** (ou seja, têm função fixa) são:
+- **GPIO0** – usado para modo de boot.
+- **GPIO19** – ligado ao cristal de 32 kHz, reservado internamente.
+
+Pergunta enorme para desenhar o esquema do sistema dos 3 módulos (medição humidade, ventoinha) 
+
+
+## Tc74 : 
+Descrever a main 
+```c
+void app_main(void)
+{
+    i2c_master_bus_handle_t busHandle;
+    i2c_master_dev_handle_t sensorHandle;
+    uint8_t temperature;
+    
+    led_init(LED_OUTPUT_IO, DUTY_CYCLE_RES);
+    
+    tc74_init(&busHandle, &sensorHandle, TC74_A1_SENSOR_ADDR,
+              TC74_SDA_IO, TC74_SCL_IO, TC74_SCL_DFLT_FREQ_HZ);
+
+    tc74_wakeup(sensorHandle);
+    
+    tc74_read_temp_after_cfg(sensorHandle, &temperature);
+  
+    while ((temperature >= TEMP_MIN) && (temperature <= TEMP_MAX))
+    {
+        printf("\nTemperature: %d ºC", temperature);
+        set_led_duty_cycle(TEMP_MIN, TEMP_MAX, temperature, DUTY_CYCLE_RES);
+        
+        vTaskDelay(100 / portTICK_PERIOD_MS);
+        tc74_read_temp_after_temp(sensorHandle, &temperature);
+    }
+ 
+    printf("\nError - Temperature out of range: %d ºC\n", temperature);
+    
+    tc74_free(busHandle, sensorHandle);
+}
+```
+Exemplo de uma main que usa apenas TC74. 
+
+Descrever a set_duty_cycle 
+
+Desenhar o diagrama desse circuito (tc74 esp32 e led) 
+
+## Última página: 
+Calcular o duty-cycle se a temperatura lida for 0x1E 
+0x1E = 30 decimal
+**LM335:** Para saber a temperatura lida e o duty-cycle seria necessário mais informação 0x1E é um valor intermedio digital, seria necessária a voltagem lida pelo LM335 para poder usar a sua fórmula de conversão para Kelvin ($T_{K} = \frac{V_{out}}{10mVperºK}$).
+Por exemplo, 25ºC é 298,15K que corresponderia a 2.98V.
+
+**TC74:** Dá uma temperatura no 8-bit digital world via I2C. Está em complemento para dois o que significa que como 0x1E (0001 1110) é o raw 8bit em celsius seria 30ºC (decimal). Conta é assim: $0*2^7 + 0*2^6 + 0*2^5 + 1*2^4 + 1*2^3 + 1*2^2 + 1*2^1 + 0*2^0 = 0 + 0 + 0 + 16 + 8 + 4 + 2 + 0 = 30ºC$
+
+**BME280:** Mais ou menos a mesma coisa que TC74 mas pode dar via SPI ou I2C. A sua temperatura é um floating-point value em celsius que se obtem depois de processar o digital data. Em vez de 8-bit ele usa 20-bits e uma função especifica para compensar isto.
+```c
+int32_t bme280_compensate_temperature(int32_t adc_T, bme280_calib_t *calib) 
+{ 
+int32_t var1, var2, T; 
+var1 = ((((adc_T >> 3) - ((int32_t)calib->dig_T1 << 1))) * ((int32_t)calib->dig_T2)) >> 11; 
+var2 = (((((adc_T >> 4) - ((int32_t)calib->dig_T1)) * ((adc_T >> 4) - ((int32_t)calib->dig_T1))) >> 12) * ((int32_t)calib->dig_T3)) >> 14; 
+t_fine = var1 + var2; 
+T = (t_fine * 5 + 128) >> 8; 
+return T; 
+}
+```
+Neste caso `adc_t` seria a leitura da temperatura do adc de 20 bits. `calib` é uma struct que contém os coeficientes de calibração do sensor. `T_fine` é o valor de compensação, e T final é a temperatura compensadad em graus Celsius multiplicada por 100
+
+
+Código da função tc74 is temperature ready
+```c
+bool tc74_is_temperature_ready(i2c_master_dev_handle_t sensorHandle)
+{
+    uint8_t command = TC74_COMMAND_RWCR;
+    uint8_t cnfgReg;
+    
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),
+                                                &cnfgReg, sizeof(cnfgReg), -1));
+    return (cnfgReg & TC74_READY_MASK);
+}
+```
+Código da função tc74 wakeup
+```c
+void tc74_wakeup(i2c_master_dev_handle_t sensorHandle)
+{
+    uint8_t buffer[2] = {TC74_COMMAND_RWCR, 0x00};
+    
+    ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, buffer, sizeof(buffer), -1));
+}
+```
+Código da função tc74 free
+```c
+void tc74_free(i2c_master_bus_handle_t busHandle, i2c_master_dev_handle_t sensorHandle)
+{
+    ESP_ERROR_CHECK(i2c_master_bus_rm_device(sensorHandle));
+    ESP_ERROR_CHECK(i2c_del_master_bus(busHandle));
+}
+```
+Código da função tc74 init (não sai plsplspls)
+```c
+void tc74_init(i2c_master_bus_handle_t* pBusHandle,
+               i2c_master_dev_handle_t* pSensorHandle,
+               uint8_t sensorAddr, int sdaPin, int sclPin, uint32_t clkSpeedHz)
+{
+    i2c_master_bus_config_t i2cMasterCfg = {
+        .clk_source = I2C_CLK_SRC_DEFAULT,
+        .i2c_port = I2C_NUM_0,
+        .scl_io_num = sclPin,
+        .sda_io_num = sdaPin,
+        .glitch_ignore_cnt = 7,
+        .flags.enable_internal_pullup = true,
+    };
+
+    ESP_ERROR_CHECK(i2c_new_master_bus(&i2cMasterCfg, pBusHandle));
+
+    i2c_device_config_t i2cDevCfg = {
+        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
+        .device_address = sensorAddr,
+        .scl_speed_hz = clkSpeedHz,
+    };
+
+    ESP_ERROR_CHECK(i2c_master_bus_add_device(*pBusHandle, &i2cDevCfg, pSensorHandle));
+}
+```
+Código da função tc74 wakeup_and_read_temp
+```c
+void tc74_wakeup_and_read_temp(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
+{
+    tc74_wakeup(sensorHandle);
+    while (!tc74_is_temperature_ready(sensorHandle));
+    tc74_read_temp_after_cfg(sensorHandle, pTemp);
+}
+```
+Código da função tc74 standby 
+```c
+void tc74_standy(i2c_master_dev_handle_t sensorHandle)
+{
+    uint8_t buffer[2] = {TC74_COMMAND_RWCR, TC74_STANDBY_MASK};
+    
+    ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, buffer, sizeof(buffer), -1));
+}
+```
+Código da função tc74 read_temp_after_config 
+```c
+void tc74_read_temp_after_cfg(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
+{
+    uint8_t command = TC74_COMMAND_RTR;
+    
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),
+                                                pTemp, sizeof(*pTemp), -1));
+}
+```
+Código da função tc74 read_temp_after_temp
+```c
+void tc74_read_temp_after_temp(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
+{
+    ESP_ERROR_CHECK(i2c_master_receive(sensorHandle, pTemp, sizeof(*pTemp), -1));
+}
+```
+
+
+
+Código da função bme280 free
+```c
+esp_err_t bme280_free(i2c_master_bus_handle_t busHandle,i2c_master_dev_handle_t sensorHandle) {
+    ESP_ERROR_CHECK(i2c_master_bus_rm_device(sensorHandle));
+    ESP_ERROR_CHECK(i2c_del_master_bus(busHandle));
+    return ESP_OK;
+}
+```
+
+Código da função bme280 read chip id
+```c
+esp_err_t bme280_read_chip_id(i2c_master_dev_handle_t sensorHandle,
+                              uint8_t *chip_id) {
+    uint8_t reg = BME280_REG_CHIP_ID;
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &reg, sizeof(reg), chip_id, sizeof(*chip_id), -1));
+    return ESP_OK;
+}
+```
+
+Código da função bme280 read raw temp
+```c
+esp_err_t bme280_read_raw_temp(i2c_master_dev_handle_t sensorHandle,uint32_t *raw_temp) {
+    uint8_t reg = BME280_REG_TEMP_MSB, buf[3];
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &reg, sizeof(reg), buf, sizeof(buf), -1));
+    *raw_temp = ((uint32_t)buf[0] << 12) | ((uint32_t)buf[1] << 4) | (buf[2] >> 4);
+    return ESP_OK;
+}
+```
+
+Código da função bme280 read_raw_pressure
+```c
+esp_err_t bme280_read_raw_pressure(i2c_master_dev_handle_t sensorHandle,uint32_t *raw_pressure) {
+    uint8_t reg = BME280_REG_PRESS_MSB, buf[3];
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &reg, sizeof(reg), buf, sizeof(buf), -1));
+    *raw_pressure = ((uint32_t)buf[0] << 12) | ((uint32_t)buf[1] << 4) | (buf[2] >> 4);
+    return ESP_OK;
+}
+```
+
+Código da função bme280 read_raw_humidity
+```c
+esp_err_t bme280_read_raw_humidity(i2c_master_dev_handle_t sensorHandle,
+                                   uint16_t *raw_humidity) {
+    uint8_t reg = BME280_REG_HUM_MSB, buf[2];
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &reg, sizeof(reg), buf, sizeof(buf), -1));
+    *raw_humidity = ((uint16_t)buf[0] << 8) | buf[1];
+    return ESP_OK;
+}
+```
+
+Código da função bme280 configure
+```c
+esp_err_t bme280_configure(i2c_master_dev_handle_t sensorHandle) {
+    uint8_t data1[2] = {0xF2, 0x01};
+    uint8_t data2[2] = {0xF5, 0xA0};
+    uint8_t data3[2] = {0xF4, 0x27};
+    ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, data1, sizeof(data1), -1));
+    ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, data2, sizeof(data2), -1));
+    ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, data3, sizeof(data3), -1));
+    return ESP_OK;
+}
+```
+
+
+Tens depois as funções compensate e de calibração do sensor. Supostamente diferente para os sensores.
+
+
+
+
+
+
