@@ -1075,7 +1075,14 @@ The **ESP32-C3** is a low-power, low-cost Wi-Fi & Bluetooth LE microcontroller f
 # Questions
 
 Com base no desenho dizer qual é o dutycycle e a frequência 
-![[image.png]]
+![[52f3c108ce395fd3368b4568.png]]
+
+10 x 100 picosegundos = 1000 pico = 1ms = 1kHz, esta seria a frequência.
+
+O duty cycle é calculado com ($\frac{t_{on}}{t} * 100$), o tempo que está a 1 (high) a dividir pelo tempo total times 100 para dar uma percentagem.
+
+t = 14, tempo total     t_on = 7, tempo high   logo $\frac{7}{14}*100 = 50 \%$
+
 
 Frequência é o número de ciclos completos que ocorrem em um segundo. Tempo do inicio de um pico (peak) até ao inicio do próximo pico. Este é o periodo T. Frequência f seria o inverso dele.
 
