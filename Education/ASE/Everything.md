@@ -926,11 +926,27 @@ Each task operates independently, and communication between tasks is **safe, non
 ## Questions
 
 • Why is power management critical in modern computing and embedded systems?
-• How is the power consumption affected by the supply voltage and operating frequency of the system?
-• Which power modes are predefined in ESP32 and the corresponding features?
-• How is a reduced power management mode entered in ESP32?
-• What are the typical wake-up sources in ESP32?
+Permite prolongar a autonomia em dispositivos alimentados a bateria, reduzir aquecimento e aumentar a eficiência, especialmente em sistemas embutidos que passam muito tempo inativos.
 
+• How is the power consumption affected by the supply voltage and operating frequency of the system?
+O consumo de energia é aproximadamente proporcional a **V²·f** (tensão ao quadrado vezes frequência). Logo, aumentar a frequência ou a tensão aumenta bastante o consumo.
+
+• Which power modes are predefined in ESP32 and the corresponding features?
+- **Active mode**: CPU em funcionamento.
+    
+- **Modem-sleep**: CPU ativa, WiFi/Bluetooth desligados.
+    
+- **Light-sleep**: CPU em pausa, RAM mantida, wake-up rápido.
+    
+- **Deep-sleep**: CPU e RAM desligadas, só RTC funciona.
+    
+- **Hibernation**: tudo desligado, apenas um wake-up possível (pino ou temporizador)
+
+• How is a reduced power management mode entered in ESP32?
+Através de chamadas à API do ESP-IDF (ex: `esp_light_sleep_start()` ou `esp_deep_sleep_start()`), após configurar as condições de wake-up.
+
+• What are the typical wake-up sources in ESP32?
+Temporizador RTC, toque em GPIO, UART, WiFi (em light-sleep), Bluetooth, sensores internos (ex: ULP), ou sinal externo em pino configurado.
 ## Microcontroller Power Management Basics
 ### Why Power Management?
 Power management is crucial in embedded systems, especially for **battery-powered** or **energy-constrained** devices. Efficient power usage extends battery life, reduces heat, and enables always-on features with minimal drain.
@@ -984,15 +1000,34 @@ Wake-up sources:
 ## Questions
 
 • How are WiFi networks organized? What is the “anatomy” of a WiFi network?
-• What are the frequency bands used in WiFi?
-• What are the capabilities of each WiFi version?
-• What are the purposes, advantages and constraints of ISM bands?
-• What are the protocols/services/applications that share the RF spectrum bands with WiFi?
-• Is WiFi adequate for safety-critical applications?
-• What WiFi version is supported by ESP32-C3?
-• Which WiFi networking APIs are provided with ESP/IDF?
-• What are the restrictions on using WiFi and BLE simultaneously in an ESP32- C3 SoC?
+**WiFi Organization:** Redes WiFi são estruturadas em **infraestrutura** (com AP e estações) ou **ad hoc** (peer-to-peer). Um AP (Access Point) gere a rede, e os dispositivos ligam-se como **estações (STA)**.
 
+• What are the frequency bands used in WiFi?
+**Frequência:** WiFi opera nas bandas **ISM de 2.4 GHz** e **5 GHz** (dependendo da norma).
+
+• What are the capabilities of each WiFi version?
+**Modos ESP32:**
+- **Station (STA):** liga-se a um AP.
+- **SoftAP:** atua como AP para outras estações.
+- **ESP-NOW:** comunicação direta entre dispositivos sem AP, com baixa latência e overhead.
+
+• What are the purposes, advantages and constraints of ISM bands?
+**ISM Bands:** Bandas **sem licença** (ex: 2.4 GHz), usadas por WiFi, Bluetooth, Zigbee, micro-ondas, etc. Vantagens: uso livre; Limitações: partilha e interferência.
+
+• What are the protocols/services/applications that share the RF spectrum bands with WiFi?
+**Partilha de Espectro:** WiFi partilha bandas com **Bluetooth, Zigbee, micro-ondas** e outros dispositivos ISM → pode haver interferência.
+
+• Is WiFi adequate for safety-critical applications?
+**WiFi e Segurança Crítica:** WiFi **não é adequado** para aplicações de tempo real ou segurança crítica devido a latência variável e interferência.
+
+• What WiFi version is supported by ESP32-C3?
+**ESP32-C3:** Suporta **WiFi 4 (802.11n)** apenas em **2.4 GHz**, com modos STA, SoftAP e ESP-NOW.
+
+• Which WiFi networking APIs are provided with ESP/IDF?
+**APIs ESP-IDF:** Fornece APIs para configuração WiFi, gestão de eventos, scan de redes, modo STA/AP, ESP-NOW e gestão de energia.
+
+• What are the restrictions on using WiFi and BLE simultaneously in an ESP32- C3 SoC?
+**WiFi + BLE (ESP32-C3):** Partilham o **mesmo rádio** (2.4 GHz), logo não funcionam **simultaneamente** em alta performance. O uso concorrente requer alternância ou compromissos em desempenho.
 ## Wi-Fi-Based Concepts (Revisited)
 ### What is Wi-Fi?
 **Wi-Fi** is a wireless communication standard based on **IEEE 802.11**, commonly used for local area networking (WLAN). It enables devices to exchange data over radio waves, typically in the **2.4 GHz or 5 GHz bands**.
