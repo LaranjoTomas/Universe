@@ -1175,21 +1175,20 @@ bool tc74_is_temperature_ready(i2c_master_dev_handle_t sensorHandle)
 {
     uint8_t command = TC74_COMMAND_RWCR;
     uint8_t cnfgReg;
-    
-    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),
-                                                &cnfgReg, sizeof(cnfgReg), -1));
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),&cnfgReg, sizeof(cnfgReg), -1));
     return (cnfgReg & TC74_READY_MASK);
 }
 ```
+
 Código da função tc74 wakeup
 ```c
 void tc74_wakeup(i2c_master_dev_handle_t sensorHandle)
 {
     uint8_t buffer[2] = {TC74_COMMAND_RWCR, 0x00};
-    
     ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, buffer, sizeof(buffer), -1));
 }
 ```
+
 Código da função tc74 free
 ```c
 void tc74_free(i2c_master_bus_handle_t busHandle, i2c_master_dev_handle_t sensorHandle)
@@ -1198,6 +1197,7 @@ void tc74_free(i2c_master_bus_handle_t busHandle, i2c_master_dev_handle_t sensor
     ESP_ERROR_CHECK(i2c_del_master_bus(busHandle));
 }
 ```
+
 Código da função tc74 init (não sai plsplspls)
 ```c
 void tc74_init(i2c_master_bus_handle_t* pBusHandle,
@@ -1224,6 +1224,7 @@ void tc74_init(i2c_master_bus_handle_t* pBusHandle,
     ESP_ERROR_CHECK(i2c_master_bus_add_device(*pBusHandle, &i2cDevCfg, pSensorHandle));
 }
 ```
+
 Código da função tc74 wakeup_and_read_temp
 ```c
 void tc74_wakeup_and_read_temp(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
@@ -1233,6 +1234,7 @@ void tc74_wakeup_and_read_temp(i2c_master_dev_handle_t sensorHandle, uint8_t* pT
     tc74_read_temp_after_cfg(sensorHandle, pTemp);
 }
 ```
+
 Código da função tc74 standby 
 ```c
 void tc74_standy(i2c_master_dev_handle_t sensorHandle)
@@ -1242,16 +1244,16 @@ void tc74_standy(i2c_master_dev_handle_t sensorHandle)
     ESP_ERROR_CHECK(i2c_master_transmit(sensorHandle, buffer, sizeof(buffer), -1));
 }
 ```
+
 Código da função tc74 read_temp_after_config 
 ```c
 void tc74_read_temp_after_cfg(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
 {
     uint8_t command = TC74_COMMAND_RTR;
-    
-    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),
-                                                pTemp, sizeof(*pTemp), -1));
+    ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &command, sizeof(command),pTemp, sizeof(*pTemp), -1));
 }
 ```
+
 Código da função tc74 read_temp_after_temp
 ```c
 void tc74_read_temp_after_temp(i2c_master_dev_handle_t sensorHandle, uint8_t* pTemp)
@@ -1273,8 +1275,7 @@ esp_err_t bme280_free(i2c_master_bus_handle_t busHandle,i2c_master_dev_handle_t 
 
 Código da função bme280 read chip id
 ```c
-esp_err_t bme280_read_chip_id(i2c_master_dev_handle_t sensorHandle,
-                              uint8_t *chip_id) {
+esp_err_t bme280_read_chip_id(i2c_master_dev_handle_t sensorHandle,uint8_t *chip_id) {
     uint8_t reg = BME280_REG_CHIP_ID;
     ESP_ERROR_CHECK(i2c_master_transmit_receive(sensorHandle, &reg, sizeof(reg), chip_id, sizeof(*chip_id), -1));
     return ESP_OK;

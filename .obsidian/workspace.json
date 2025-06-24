@@ -24,8 +24,9 @@
             }
           },
           {
-            "id": "b18aef95eefca0a2",
+            "id": "0c3db5015cc4bf23",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -33,8 +34,23 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Everything"
+            }
+          },
+          {
+            "id": "b18aef95eefca0a2",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/ASE-Schematic.md"
+              },
+              "pinned": true,
+              "icon": "excalidraw-icon",
+              "title": "ASE-Schematic"
             }
           }
         ],
@@ -288,13 +304,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "b18aef95eefca0a2",
+  "active": "0c3db5015cc4bf23",
   "lastOpenFiles": [
+    "Excalidraw/ASE-Schematic.md",
+    "Education/ASE/Everything.md",
+    "Pasted Image 20250624180115_080.png",
+    "0-HOME.md",
     "52f3c108ce395fd3368b4568.png",
     "image.png",
     "xVjTHlMHgMUM.jpg",
-    "0-HOME.md",
-    "Education/ASE/Everything.md",
     "Education/RSA/RSA_Test.md",
     "Education/RSA/Everything.md",
     "imgs/image-2 2.png",
@@ -308,8 +326,6 @@
     "imgs/image 7.png",
     "Education/CLE/Tests.md",
     "imgs/image 6.png",
-    "imgs/image-1 2.png",
-    "imgs/image-2 1.png",
     "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
     "Education/CLE/Everything.md",
     "Education/CLE/Questions.md",
@@ -325,7 +341,6 @@
     "Education/SD/Written Exam Type.md",
     "Education/SRC/Exams.md",
     "Excalidraw/SRC_1.md",
-    "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",

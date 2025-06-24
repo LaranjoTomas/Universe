@@ -5,6 +5,10 @@
       "path": "Education/ASE/Everything.md"
     },
     {
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "Indep_process",
       "path": "imgs/Indep_process.png"
-    },
-    {
-      "basename": "Test_preemptiveness_1",
-      "path": "imgs/Test_preemptiveness_1.png"
     }
   ],
   "omittedPaths": [],
