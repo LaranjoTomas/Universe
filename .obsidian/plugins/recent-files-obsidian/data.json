@@ -1,8 +1,76 @@
 {
   "recentFiles": [
     {
+      "basename": "Edgar_Thesis",
+      "path": "Projects/AM2R/Edgar_Thesis.md"
+    },
+    {
+      "basename": "Cláudio_Thesis",
+      "path": "Projects/AM2R/Cláudio_Thesis.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
+      "basename": "TASKS ON 15.03.2025",
+      "path": "Projects/OWL/TASKS/TASKS ON 15.03.2025.md"
+    },
+    {
+      "basename": "TASKS ON 14.03.2025",
+      "path": "Projects/OWL/TASKS/TASKS ON 14.03.2025.md"
+    },
+    {
+      "basename": "Documentation",
+      "path": "Projects/OWL/Documentation.md"
+    },
+    {
+      "basename": "Utils",
+      "path": "Projects/OWL/Backend/Utils.md"
+    },
+    {
+      "basename": "Server DB",
+      "path": "Projects/OWL/Backend/Server DB.md"
+    },
+    {
+      "basename": "Backend documentation",
+      "path": "Projects/OWL/Backend/Backend documentation.md"
+    },
+    {
+      "basename": "Peer-to-Peer System and Networks",
+      "path": "Education/RSA/Peer-to-Peer System and Networks.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/RSA/Everything.md"
+    },
+    {
       "basename": "Everything",
       "path": "Education/ASE/Everything.md"
+    },
+    {
+      "basename": "ADCs",
+      "path": "Education/ASE/ADCs.md"
+    },
+    {
+      "basename": "Starting",
+      "path": "Projects/AM2R/Starting.md"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
+    },
+    {
+      "basename": "2-PROJECTS",
+      "path": "2-PROJECTS.md"
+    },
+    {
+      "basename": "1-TASKS",
+      "path": "1-TASKS.md"
+    },
+    {
+      "basename": "C2",
+      "path": "DOCUMENTS/C2.pdf"
     },
     {
       "basename": "xVjTHlMHgMUM",
@@ -13,20 +81,8 @@
       "path": "Excalidraw/ASE-Schematic.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
-    },
-    {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
-    },
-    {
-      "basename": "Everything",
-      "path": "Education/RSA/Everything.md"
-    },
-    {
-      "basename": "ADCs",
-      "path": "Education/ASE/ADCs.md"
     },
     {
       "basename": "WIFI",
@@ -129,76 +185,16 @@
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
     },
     {
-      "basename": "README",
-      "path": "README.md"
-    },
-    {
       "basename": "3-BOOKS",
       "path": "imgs/3-BOOKS.md"
-    },
-    {
-      "basename": "1-TASKS",
-      "path": "1-TASKS.md"
     },
     {
       "basename": "Singleton",
       "path": "Dev/Python/Modules/Singleton.md"
     },
     {
-      "basename": "2-PROJECTS",
-      "path": "2-PROJECTS.md"
-    },
-    {
       "basename": "Cristian’s Method_decomposition",
       "path": "imgs/Cristian’s Method_decomposition.png"
-    },
-    {
-      "basename": "Cristian's Method",
-      "path": "imgs/Cristian's Method.png"
-    },
-    {
-      "basename": "Addressing_Space_A_SD",
-      "path": "imgs/Addressing_Space_A_SD.png"
-    },
-    {
-      "basename": "Addressing_Space_B_Sd",
-      "path": "imgs/Addressing_Space_B_Sd.png"
-    },
-    {
-      "basename": "itertools",
-      "path": "Dev/Python/Modules/itertools.md"
-    },
-    {
-      "basename": "publisher-subscriber_model",
-      "path": "imgs/publisher-subscriber_model.png"
-    },
-    {
-      "basename": "server_replication",
-      "path": "imgs/server_replication.png"
-    },
-    {
-      "basename": "Figure_1",
-      "path": "imgs/Figure_1.png"
-    },
-    {
-      "basename": "rocky_beach_2",
-      "path": "imgs/rocky_beach_2.png"
-    },
-    {
-      "basename": "Hoare_monitor",
-      "path": "imgs/Hoare_monitor.png"
-    },
-    {
-      "basename": "header 1",
-      "path": "imgs/header 1.png"
-    },
-    {
-      "basename": "Critical_region_SD",
-      "path": "imgs/Critical_region_SD.png"
-    },
-    {
-      "basename": "cooperating_process",
-      "path": "imgs/cooperating_process.png"
     }
   ],
   "omittedPaths": [],
