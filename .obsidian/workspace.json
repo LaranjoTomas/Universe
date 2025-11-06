@@ -24,37 +24,21 @@
             }
           },
           {
-            "id": "4eae5154e2b8ea34",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projects/AM2R/Cláudio_Thesis.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Cláudio_Thesis"
-            }
-          },
-          {
-            "id": "107e483bd1be0f51",
+            "id": "99c231658a9914ed",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projects/AM2R/Edgar_Thesis.md",
+                "file": "Projects/AM2R/Tiago_Thesis.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Edgar_Thesis"
+              "title": "Tiago_Thesis"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -277,7 +261,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:Create new base": false,
+      "periodic-notes:Open today": false,
       "graph:Open graph view": false,
       "switcher:Open quick switcher": true,
       "canvas:Create new canvas": false,
@@ -300,19 +284,19 @@
       "widgets:Add widget": false,
       "github-sync:Sync with Remote": false,
       "obsidian-excalidraw-plugin:New drawing": false,
-      "obsidian-memos:Thino": false,
-      "periodic-notes:Open today": false
+      "obsidian-memos:Thino": false
     }
   },
-  "active": "107e483bd1be0f51",
+  "active": "99c231658a9914ed",
   "lastOpenFiles": [
-    "Projects/AM2R/Cláudio_Thesis.md",
+    "0-HOME.md",
+    "Projects/AM2R/Tiago_Thesis.md",
     "Projects/AM2R/Edgar_Thesis.md",
+    "Projects/AM2R/Cláudio_Thesis.md",
     "Machine Learning.md",
     "TFLite.md",
     "imgs/claudio_informationAggregator_thesis.png",
     "ITS-G5.md",
-    "0-HOME.md",
     "Projects/IPSA/IPSA Documentation.md",
     "Projects/IPSA/bugs/YFinance.md",
     "Projects/OWL/TASKS/TASKS ON 15.03.2025.md",
@@ -342,7 +326,6 @@
     "imgs/image-2 2.png",
     "imgs/image-1 3.png",
     "Education/ASE/WIFI.md",
-    "Education/ASE/Project.md",
     "imgs/image 9.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
