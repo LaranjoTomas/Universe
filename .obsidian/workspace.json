@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "f7a48556798d1f41",
+            "id": "f5a547efa675bb0e",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -37,6 +37,22 @@
               "pinned": true,
               "icon": "lucide-file",
               "title": "Everything"
+            }
+          },
+          {
+            "id": "864b069b5d096086",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/FAA/FAA_Model.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "FAA_Model"
             }
           }
         ],
@@ -291,11 +307,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "f7a48556798d1f41",
+  "active": "f5a547efa675bb0e",
   "lastOpenFiles": [
-    "Education/CLE/Everything.md",
+    "Education/FAA/FAA_Model.md",
     "Education/FAA/Everything.md",
     "0-HOME.md",
+    "Education/CLE/Everything.md",
     "Education/FAA",
     "Projects/AM2R/Edgar_Thesis.md",
     "Projects/AM2R/Cláudio_Thesis.md",
@@ -328,7 +345,6 @@
     "imgs/Pasted Image 20250624180115_080.png",
     "imgs/52f3c108ce395fd3368b4568.png",
     "imgs/image 10.png",
-    "Education/RSA/RSA_Test.md",
     "imgs/image-2 2.png",
     "imgs/image-1 3.png",
     "imgs/image 9.png",
