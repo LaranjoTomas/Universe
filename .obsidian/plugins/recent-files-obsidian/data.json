@@ -1,16 +1,24 @@
 {
   "recentFiles": [
     {
+      "basename": "Everything",
+      "path": "Education/FAA/Everything.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/CLE/Everything.md"
+    },
+    {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Edgar_Thesis",
       "path": "Projects/AM2R/Edgar_Thesis.md"
     },
     {
       "basename": "Cláudio_Thesis",
       "path": "Projects/AM2R/Cláudio_Thesis.md"
-    },
-    {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
     },
     {
       "basename": "TASKS ON 15.03.2025",
@@ -111,10 +119,6 @@
     {
       "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
       "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-    },
-    {
-      "basename": "Everything",
-      "path": "Education/CLE/Everything.md"
     },
     {
       "basename": "Questions",

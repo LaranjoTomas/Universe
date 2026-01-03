@@ -24,37 +24,23 @@
             }
           },
           {
-            "id": "4eae5154e2b8ea34",
+            "id": "f7a48556798d1f41",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projects/AM2R/Cláudio_Thesis.md",
+                "file": "Education/FAA/Everything.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Cláudio_Thesis"
-            }
-          },
-          {
-            "id": "107e483bd1be0f51",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projects/AM2R/Edgar_Thesis.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Edgar_Thesis"
+              "title": "Everything"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -151,7 +137,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -304,15 +291,18 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "107e483bd1be0f51",
+  "active": "f7a48556798d1f41",
   "lastOpenFiles": [
-    "Projects/AM2R/Cláudio_Thesis.md",
+    "Education/CLE/Everything.md",
+    "Education/FAA/Everything.md",
+    "0-HOME.md",
+    "Education/FAA",
     "Projects/AM2R/Edgar_Thesis.md",
+    "Projects/AM2R/Cláudio_Thesis.md",
     "Machine Learning.md",
     "TFLite.md",
     "imgs/claudio_informationAggregator_thesis.png",
     "ITS-G5.md",
-    "0-HOME.md",
     "Projects/IPSA/IPSA Documentation.md",
     "Projects/IPSA/bugs/YFinance.md",
     "Projects/OWL/TASKS/TASKS ON 15.03.2025.md",
@@ -341,8 +331,6 @@
     "Education/RSA/RSA_Test.md",
     "imgs/image-2 2.png",
     "imgs/image-1 3.png",
-    "Education/ASE/WIFI.md",
-    "Education/ASE/Project.md",
     "imgs/image 9.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
@@ -351,7 +339,6 @@
     "Education/SRC",
     "Education/SD",
     "Education/RSA",
-    "Education/CLE",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
