@@ -24,23 +24,7 @@
             }
           },
           {
-            "id": "f5a547efa675bb0e",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/FAA/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          },
-          {
-            "id": "864b069b5d096086",
+            "id": "574dc5c969e8c807",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -57,6 +41,28 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "a05818eb3f76e94f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b53c4a34590282f4",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/FAA/Everything.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Everything"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -307,13 +313,16 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "f5a547efa675bb0e",
+  "active": "574dc5c969e8c807",
   "lastOpenFiles": [
-    "Education/FAA/FAA_Model.md",
-    "Untitled.md",
+    "imgs/faa_ques8_image.png",
+    "imgs/Faa_resp_ex6.png",
+    "imgs/faa_exercise_6.png",
     "Education/FAA/Everything.md",
-    "Projects/AM2R/Tiago_Thesis.md",
+    "Untitled.md",
+    "Education/FAA/FAA_Model.md",
     "0-HOME.md",
+    "Projects/AM2R/Tiago_Thesis.md",
     "Education/CLE/Everything.md",
     "Education/FAA",
     "Projects/AM2R/Edgar_Thesis.md",
@@ -338,7 +347,6 @@
     "imgs/claudio_architecture_thesis.png",
     "Projects/AM2R/Starting.md",
     "README.md",
-    "2-PROJECTS.md",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
@@ -346,8 +354,6 @@
     "imgs/52f3c108ce395fd3368b4568.png",
     "imgs/image 10.png",
     "imgs/image-2 2.png",
-    "imgs/image-1 3.png",
-    "imgs/image 9.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",
