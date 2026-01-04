@@ -1,4 +1,7 @@
-#FAA 
+---
+tags:
+  - "#FAA"
+---
 
 **Machine Learning Fundamentals (L1)**
 

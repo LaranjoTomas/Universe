@@ -17,15 +17,6 @@
       "key": "H"
     }
   ],
-  "theme:switch": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "T"
-    }
-  ],
   "app:toggle-left-sidebar": [
     {
       "modifiers": [
@@ -51,6 +42,32 @@
         "Shift"
       ],
       "key": "V"
+    }
+  ],
+  "editor:save-file": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "S"
+    }
+  ],
+  "workspace:next-tab": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "PageDown"
+    }
+  ],
+  "editor:open-link-in-new-leaf": [],
+  "markdown:add-metadata-property": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "."
     }
   ]
 }

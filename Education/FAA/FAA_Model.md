@@ -1,4 +1,7 @@
-#FAA 
+---
+tags:
+  - "#FAA"
+---
 
 **Q1. Which of these is a reasonable definition of machine learning?**
 **R:** ML is the field of study that gives computers the ability to learn without being explicitly programmed.
@@ -69,4 +72,16 @@ Linear Regression is generally unsuitable for classification tasks, especially b
  and Susceptible to outliers. Regression is specifically designed for classification using sigmoid function to bound outputs between 0 and 1, facilitating probabilistic interpretation and minimizing a specialized convex cost function. Even when data is not linearly separable, logistic regression is the theoretically superior choice over standard linear regression for classification problems.
 
 **"The positive and negative examples cannot be separated using a straight line. So, gradient descent will fail to converge."**
-The ability of the data to be linearly seperable **does not** determine the convergence of Gradient Descent for Logistic Regression. This uses a **convex** cost function $J(\theta)$. Because the cost function is convex, gradient Descent
+The ability of the data to be linearly separable **does not** determine the convergence of Gradient Descent for Logistic Regression. This uses a **convex** cost function $J(\theta)$. Because the cost function is convex, gradient descent is mathematically guaranteed to converge to the global minimum, regardless of whether a perfect straight line can separate the training examples. If the data is not linearly separable, the minimum cost will simply be greater than zero, but convergence will still always occur.
+
+**Q9**
+**For logistic regression, the gradient is given by $\frac{∂}{∂θ_{}j}​J(θ)=\frac{1}{m}​\\sum^{m}_{i=1}=​(hθ​(x^i)−y^i)x^j_{i}​$. Which of these is a correct gradient descent update for logistic regression with a learning rate of α? Check all that apply.**
+**R:**
+- $θ:=θ−α\frac{1}{m}​ \sum^{m}_{i=1}(hθ​(x^i)−y^i)x^i$
+The goal of the gradient descent update is to replace the parameter vector θ by moving it against the direction of the gradient.$$θ:=θ−α⋅∇J(θ) $$The expression above is the **vectorized form** of the gradient update rule of logistic regression. It uses the learning rate alpha to step away from the calculated gradient.
+
+**Option 1** is incorrect because while mathematically equivalent if expanded, the general and common vectorized form uses $h_\theta(x^i)$. Also, the position of the $x^i$ outside the summation structure is incorrect.
+
+**Option 2** is incorrect because it replaces the logistic regression hypothesis with the unsquashed linear prediction $\theta^T_{x}$. Using $\theta^T_{x}$ would be the gradient update for linear regression (mean squared error) not logistic regression (Log Loss).
+
+**Option 4** Similar to option 2, this update uses the lienar prediction $\theta^T_{x}$ instead of the hupothesis. This error term is characteristic of Linear regression not of logic regression.

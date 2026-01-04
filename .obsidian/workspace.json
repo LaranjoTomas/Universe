@@ -136,7 +136,8 @@
               "title": "Recent Files"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "33993677f81e3933",
@@ -159,8 +160,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -315,12 +315,13 @@
   },
   "active": "574dc5c969e8c807",
   "lastOpenFiles": [
+    "Education/FAA/Everything.md",
+    "Education/FAA/FAA_Model.md",
+    "image.png",
     "imgs/faa_ques8_image.png",
     "imgs/Faa_resp_ex6.png",
     "imgs/faa_exercise_6.png",
-    "Education/FAA/Everything.md",
     "Untitled.md",
-    "Education/FAA/FAA_Model.md",
     "0-HOME.md",
     "Projects/AM2R/Tiago_Thesis.md",
     "Education/CLE/Everything.md",
@@ -352,8 +353,6 @@
     "imgs/xVjTHlMHgMUM.jpg",
     "imgs/Pasted Image 20250624180115_080.png",
     "imgs/52f3c108ce395fd3368b4568.png",
-    "imgs/image 10.png",
-    "imgs/image-2 2.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",
