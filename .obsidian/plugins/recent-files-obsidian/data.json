@@ -9,6 +9,10 @@
       "path": "Education/FAA/FAA_Model.md"
     },
     {
+      "basename": "Untitled",
+      "path": "Untitled.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -195,10 +199,6 @@
     {
       "basename": "3-BOOKS",
       "path": "imgs/3-BOOKS.md"
-    },
-    {
-      "basename": "Singleton",
-      "path": "Dev/Python/Modules/Singleton.md"
     }
   ],
   "omittedPaths": [],

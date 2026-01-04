@@ -48,39 +48,39 @@ Machine learning (ML) is the field of study that gives computers the ability to 
 
 • **Model (Hypothesis):** Uses the **sigmoid function** $g(z)=\frac{1}{(1+e−z)}$ to constrain output between 0 and 1, interpreting it as the probability $P(y=1∣x;\theta)$.
 
-• **Cost Function:** **Binary Cross-Entropy** or **Log Loss** is used to ensure the cost function J(theta) is convex, facilitating efficient optimization [30, 31].
+• **Cost Function:** **Binary Cross-Entropy** or **Log Loss** is used to ensure the cost function J(theta) is convex, facilitating efficient optimization.
 
-• **Decision Boundary:** Defined by thetaTx=0 (for a decision threshold of 0.5) [32].
+• **Decision Boundary:** Defined by thetaTx=0 (for a decision threshold of 0.5).
 
-• **Nonlinearly Separable Data:** Use polynomial features (e.g., x_12,x_1x_2) to map the original space to a higher-dimensional feature space where data may be linearly separable [32, 33].
+• **Nonlinearly Separable Data:** Use polynomial features (e.g., x_12,x_1x_2) to map the original space to a higher-dimensional feature space where data may be linearly separable.
 
-• **Multiclass Classification:** Handled using the **One-versus-all** strategy, training a binary classifier for each class [34, 35].
+• **Multiclass Classification:** Handled using the **One-versus-all** strategy, training a binary classifier for each class.
 
 **Support Vector Machines (SVM) (L5)**
 
-• **Objective:** SVM is a **Large Margin Classifier** that seeks a decision boundary (hyperplane) maximizing the distance (**margin**) to the closest training examples (**support vectors**) [36, 37].
+• **Objective:** SVM is a **Large Margin Classifier** that seeks a decision boundary (**hyperplane**) maximizing the distance (**margin**) to the closest training examples (**support vectors**).
 
-• **Cost Function:** A modified version of the regularized logistic regression cost, optimized to minimize classification error and maximize the margin [36, 37].
+• **Cost Function:** A modified version of the regularized logistic regression cost, optimized to minimize classification error and maximize the margin.
 
-    ◦ Hyperparameter C controls the penalty for misclassified training examples (equivalent to 1/lambda). Large C means fitting training data closely (low bias, high variance); Small C means prioritizing larger margin (high bias, low variance) [37, 38].
+   ◦ Hyperparameter C controls the penalty for misclassified training examples (equivalent to $\frac{1}{\lambda}$); Large C means fitting training data closely (low bias, high variance); Small C means prioritizing larger margin (high bias, low variance).
 
-• **Kernel Trick (Nonlinear SVM):** Used to classify nonlinearly separable data by implicitly mapping the input space into a higher-dimensional feature space where a linear separation is possible [39].
+• **Kernel Trick (Nonlinear SVM):** Used to classify nonlinearly separable data by implicitly mapping the input space into a higher-dimensional feature space where a linear separation is possible.
 
-    ◦ **Gaussian Radial Basis Function (RBF) Kernel** is commonly used, acting as a similarity metric [39, 40].
+   ◦ **Gaussian Radial Basis Function (RBF) Kernel** is commonly used, acting as a similarity metric.
 
-    ◦ Hyperparameter sigma (or gamma=1/sigma) controls the kernel spread. Small sigma leads to less smooth features (low bias, high variance); Large sigma leads to smoother features (high bias, low variance) [38].
+   ◦ Hyperparameter sigma (or gamma=1/sigma) controls the kernel spread. Small sigma leads to less smooth features (low bias, high variance); Large sigma leads to smoother features (high bias, low variance).
 
 **Model Evaluation and Validation (L5, L6)**
 
-• **Data Split:** Datasets should be split into **Training set** (for learning parameters), **Cross Validation (CV)/Development (Dev) set** (for selecting model and hyperparameters), and **Test set** (for final unbiased evaluation) [41, 42].
+• **Data Split:** Datasets should be split into **Training set** (for learning parameters), **Cross Validation (CV)/Development (Dev) set** (for selecting model and hyperparameters), and **Test set** (for final unbiased evaluation).
 
-• **K-Fold Cross Validation:** Divides the training data into K subsets (folds), using K−1 for training and the remaining one for validation iteratively. The final validation error is averaged over K trainings [43].
+• **K-Fold Cross Validation:** Divides the training data into K subsets (folds), using K−1 for training and the remaining one for validation iteratively. The final validation error is averaged over K trainings.
 
 • **Bias vs. Variance Diagnosis (L6):**
 
-    ◦ **High Bias (Underfitting):** Training error (E_train) and CV error (E_CV) are both high [25].
+   ◦ **High Bias (Underfitting):** Training error (E_train) and CV error (E_CV) are both high [25].
 
-    ◦ **High Variance (Overfitting):** E_train is low, but E_CV is significantly higher [25].
+   ◦ **High Variance (Overfitting):** E_train is low, but E_CV is significantly higher [25].
 
 • **Performance Metrics:** Based on the **Confusion Matrix** (True Positives, False Negatives, etc.) [44].
 
