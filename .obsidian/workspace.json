@@ -24,7 +24,23 @@
             }
           },
           {
-            "id": "574dc5c969e8c807",
+            "id": "dfa7a9cbac620cd5",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/FAA/Everything.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Everything"
+            }
+          },
+          {
+            "id": "c9bff54591d8f882",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -40,29 +56,7 @@
             }
           }
         ],
-        "currentTab": 1
-      },
-      {
-        "id": "a05818eb3f76e94f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "b53c4a34590282f4",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/FAA/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          }
-        ]
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -160,7 +154,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -313,16 +308,16 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "574dc5c969e8c807",
+  "active": "c9bff54591d8f882",
   "lastOpenFiles": [
-    "Education/FAA/Everything.md",
     "Education/FAA/FAA_Model.md",
+    "Education/FAA/Everything.md",
+    "0-HOME.md",
     "image.png",
     "imgs/faa_ques8_image.png",
     "imgs/Faa_resp_ex6.png",
     "imgs/faa_exercise_6.png",
     "Untitled.md",
-    "0-HOME.md",
     "Projects/AM2R/Tiago_Thesis.md",
     "Education/CLE/Everything.md",
     "Education/FAA",

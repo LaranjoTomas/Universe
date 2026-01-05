@@ -85,3 +85,53 @@ The goal of the gradient descent update is to replace the parameter vector θ by
 **Option 2** is incorrect because it replaces the logistic regression hypothesis with the unsquashed linear prediction $\theta^T_{x}$. Using $\theta^T_{x}$ would be the gradient update for linear regression (mean squared error) not logistic regression (Log Loss).
 
 **Option 4** Similar to option 2, this update uses the lienar prediction $\theta^T_{x}$ instead of the hupothesis. This error term is characteristic of Linear regression not of logic regression.
+
+**Q10**
+**Which of the following statements are true? Check all that apply**
+**R:**
+**Correct**
+- **The cost function** J(θ) **for logistic regression trained with $m≥1$ examples is always greater than or equal to zero.**  The cost function for logistic regression is designed such that the cost so always non-negative.
+- **The sigmoid function** $g(z)=\frac{1}{1+e^{-z}}$​ **is never greater than one** (>1). The sigmoid function is the hypothesis model for logistic regression, and its output is mathematically constrained to values between 0 and 1.
+
+**Wrong**
+- **For logistic regression, sometimes gradient descent will converge to a local minimum (and fail to find the global minimum). This is the reason we prefer more advanced optimization algorithms such as fminunc (conjugate gradient/BFGS /L-BFGS/etc).** The specialized cost function used in logistic regression (Log Ross) so mathematically designed to be a convex function, which always guarantees a convergence to the global minimum, not just a local minimum.
+- **Linear regression always works well for classification if you classify by using a threshold on the prediction made by linear regression.** It's generally unsuitable for classification because the output is unbounded, can be bigger than 1 or lower than 0. Making probabilistic interpretation necessary for classification. This is the reason logistic regression uses the sigmoid function to overcome these limitations by bounding between 0 and 1. The question would be right if it was Logistic regression rather than linear.
+
+**Q11**
+**Supposed you train a logistic classifier $h_{\theta}(x) = g(\theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2})$. Suppose $\theta_{0} = - 6, \theta_{1} = 1, \theta_{2} = 0$. Which of the following figures represents the decision boundary found by your classifier?**
+
+**R:** Correct choice is the second figure, vertical boundary at x=6 and y=1 on the right. The decision boundary is defined where the argument to the sigmoid is zero, $\theta_{0} + \theta_{1}x_{1} + \theta_{2}x_{2}=0$. Substituting the given values yields $-6 + 1x_1 + 0x_{2} = 0$, resulting in $x_1 = 6$. Since $\theta_{1}=1$, any point where $x_1 \textgreater 6$ results in a positive z and thus a prediction of y=1.
+
+**Q12**
+**You are training a classification model with logistic regression. Which of the following statements are true? Check all that apply.**
+**R:** 
+- **Adding a new feature to the model always results in equal or better performance on the training set.** Adding a feature generally provides the model with greater complexity and flexibility, enabling it to fit the current training data more closely.
+- **Introducing regularization to the model always results in equal or better performance on examples not in the training set.** Regularization is explicitly used to combat overfitting, by penalizing large parameter values $\theta$, it aims to improve the model's ability to generalize to new, unseen examples not the ones in the training set or already seen.
+
+**Wrong**
+- **Adding many new features to the model helps prevent overfitting on the training set.** Adding new features typically increases the complexity of the model, which makes it more likely to fit noise and suffer from overfitting. That is why we use regularization or feature selection
+- **Introducing regularization to the model always results in equal or better performance on the training set.** Regularization works by increasing the cost function by penalizing the magnitude of the $\theta$. This intentional constraint results in a model with higher bias and reduced variance, meaning that while it typically performs better on unseen data, and usually results in a worse fit on the training set.
+
+**Q13 (lambda - the regularization parameter)**
+**Suppose you ran logistic regression twice, once with $\lambda=0$, and once with $\lambda=1$. One of the times, you got parameters $\theta = \begin{matrix}74.81;44.05\end{matrix}$, and the other time you got $\theta = \begin{matrix}1.37;0.51\end{matrix}$. However, you forgot which value of $\lambda$ corresponds to which value of $\theta$. Which one do you think corresponds to $\lambda=1$?**
+**R:** $\theta = \begin{matrix}1.37;0.51\end{matrix}$ 
+Regularization works by adding a penalty term, proportional to $\lambda$, to the cost function to **shrink the model parameters** toward zero. When $\lambda = 0$, the model is optimized purely for fitting the training data without regularization, allowing the parameters to take on larger magnitudes if needed. When $\lambda=1$, regularization was applied and the optimization minimizes the prediction error and the magnitude of the parameters.
+
+**Q14**
+**Which of the following statements about regularization are true? Check all that apply.**
+**R:** **Consider a classification problem. Adding regularization may cause your classifier to incorrectly classify some training examples (which it had correctly classified when not using regularization, i.e. when λ=0).** Regularization sacrifices fit to the training data to gain better generalization.
+**Wrong**
+- **Using too large a value of** λ **can cause your hypothesis to overfit the data; this can be avoided by reducing λ.** Increasing the $\lambda$ combats overfitting by forcing parameter magnitudes to decrease. Using large values of $\lambda$ leads to underfitting because the models becomes simple.
+- **Because logistic regression outputs values $0≤hθ​(x)≤1$, its range of output values can only be "shrunk" slightly by regularization anyway, so regularization is generally not helpful for it.** Regularization directly penalizes the size of the $\theta$ not the direct output range of the sigmoid function. It's used to prevent overfitting when complex models or many features are used.
+- **Using a very large value of** λ **cannot hurt the performance of your hypothesis; the only reason we do not set** λ **to be too large is to avoid numerical problems.** The bigger the value of lambda, the more severely it penalizes complexity of the model, leading to underfitting. This of course hurts the performance by increasing bias and can results in the model failing to properly learn the trend.
+
+**Q15**
+**In which one of the following figures do you think the hypothesis has overfit the training set?** 
+**R:** The first figure, with the line changing course for each dot. This symbolizes the complexity of the model (overfitting), capturing noise and fitting every single training example perfectly.
+
+**Q16**
+**In which one of the following figures do you think the hypothesis has underfit the training set?**
+**R:** The first figure. It shows a simple, gentle curve compared to the second figure which shows that this model is too simple (underfitting) and fails to capture the fundamental trend of the training data.
+
+**Q17**
+**The formula for the Gaussian Kernel is given by similarity  **
