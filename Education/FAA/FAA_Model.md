@@ -134,4 +134,6 @@ Regularization works by adding a penalty term, proportional to $\lambda$, to the
 **R:** The first figure. It shows a simple, gentle curve compared to the second figure which shows that this model is too simple (underfitting) and fails to capture the fundamental trend of the training data.
 
 **Q17**
-**The formula for the Gaussian Kernel is given by similarity  **
+**The formula for the Gaussian Kernel is given by similarity $(x,l^1) = \exp(\frac{||x-l^1||^2}{2\sigma^2})$. The figure below shows a plot of $f_1 = similarity(x, l^1)$ when $\sigma^2 = 1$ **
+Which of the following is a plot of $f_1$, when $\sigma^2 = 0.25$**
+**R:** Picture of the left with a sharper, narrower peak. The parameter sigma^2 controls the spread of the Gaussian kernel. If sigma is decreased, the kernel function dictates that similarity value must drop off much faster as the distance increases. The results in a sharper, narrower peak centered at the landmark l^1. 
