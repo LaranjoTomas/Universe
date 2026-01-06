@@ -15792,6 +15792,7 @@ constraint
 combats
 capturing
 centered
+centroid
 hide
 hosted
 heading
@@ -18524,6 +18525,7 @@ hypothesis
 hupothesis
 hurt
 hurts
+hyperparameter
 properties
 png
 page
@@ -47975,6 +47977,7 @@ oBg
 oNqq
 oOqq
 oWD
+optima
 Publish
 Pills
 Positions
@@ -57276,6 +57279,7 @@ erss
 eEQ
 effectiveness
 expanded
+evaluated
 Allows
 Already
 Adjustments

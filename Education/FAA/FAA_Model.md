@@ -149,3 +149,10 @@ Which of the following is a plot of $f_1$, when $\sigma^2 = 0.25$**
 **Q20**
 **Which of the following is the recommended way to initialize k-means?**
 **R:** ****Pick** k **distinct random integers** i1​,...,ik​ **from** {1,...,m}**. Set** μ1​=x(i1​),μ2​=x(i2​),...,μk​=x(ik​)**.***  The K-means algorithm is sensitive to its initial choice of cluster centroids and may converge to a local minimum. The recommended initialization strategy to avoid poor local optima is to select K initial cluster centroids that correspond directly to K **distinct training examples** chosen randomly from the dataset of **m** examples.
+
+**Q21**
+**Which of the following are good/recommended applications of PCA? Select all that apply.**
+**R:** 
+- **To reduce the dimension of the input data so as to speed up a learning algorithm.** Yes. Fewer dimensions often mean faster training and less computation.
+- **To compress the data so it takes up less computer memory / disk space** Yes. PCA can reduce storage by keeping only the most important components.
+- **To visualize high-dimensional data (by choosing k = 2 or k = 3)** Yes. PCA is commonly used for 2D or 3D visualization.
