@@ -141,3 +141,11 @@ Which of the following is a plot of $f_1$, when $\sigma^2 = 0.25$**
 **Q18**
 **Suppose you are trying to decide among a few different choices of kernel and are also choosing parameters such as C, $\sigma^2$, etc. How should you make the choice?**
 **R:** Choose whatever performs best on the cross-validation data. To choose a hyperparameter (like kernel type) or to select the best model, the performance must be evaluated on the **Cross-validation** set.
+
+**Q19**
+**Suppose you run k-means using k=3 and k=5. You find that the cost function J is much higher for k=5 than for k=3. What can you conclude?**
+**R:** **In the run with k=5, k-means got stuck in a bad local minimum. You should try re-running k-means with multiple random initializations.** The goal of K-means clustering algorithm is to minimize the distortion cost function J, which measure the average squared distance of each example to its assigned cluster centroid. 
+
+**Q20**
+**Which of the following is the recommended way to initialize k-means?**
+**R:** ****Pick** k **distinct random integers** i1​,...,ik​ **from** {1,...,m}**. Set** μ1​=x(i1​),μ2​=x(i2​),...,μk​=x(ik​)**.***  The K-means algorithm is sensitive to its initial choice of cluster centroids and may converge to a local minimum. The recommended initialization strategy to avoid poor local optima is to select K initial cluster centroids that correspond directly to K **distinct training examples** chosen randomly from the dataset of **m** examples.
