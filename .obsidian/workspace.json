@@ -24,23 +24,7 @@
             }
           },
           {
-            "id": "dfa7a9cbac620cd5",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/FAA/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          },
-          {
-            "id": "c9bff54591d8f882",
+            "id": "8ae9f62f067f2680",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -54,9 +38,25 @@
               "icon": "lucide-file",
               "title": "FAA_Model"
             }
+          },
+          {
+            "id": "949ab58d4e4e7b8f",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Education/FAA/Everything.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Everything"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -308,10 +308,10 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "c9bff54591d8f882",
+  "active": "8ae9f62f067f2680",
   "lastOpenFiles": [
-    "Education/FAA/FAA_Model.md",
     "Education/FAA/Everything.md",
+    "Education/FAA/FAA_Model.md",
     "0-HOME.md",
     "image.png",
     "imgs/faa_ques8_image.png",

@@ -137,3 +137,7 @@ Regularization works by adding a penalty term, proportional to $\lambda$, to the
 **The formula for the Gaussian Kernel is given by similarity $(x,l^1) = \exp(\frac{||x-l^1||^2}{2\sigma^2})$. The figure below shows a plot of $f_1 = similarity(x, l^1)$ when $\sigma^2 = 1$ **
 Which of the following is a plot of $f_1$, when $\sigma^2 = 0.25$**
 **R:** Picture of the left with a sharper, narrower peak. The parameter sigma^2 controls the spread of the Gaussian kernel. If sigma is decreased, the kernel function dictates that similarity value must drop off much faster as the distance increases. The results in a sharper, narrower peak centered at the landmark l^1. 
+
+**Q18**
+**Suppose you are trying to decide among a few different choices of kernel and are also choosing parameters such as C, $\sigma^2$, etc. How should you make the choice?**
+**R:** Choose whatever performs best on the cross-validation data. To choose a hyperparameter (like kernel type) or to select the best model, the performance must be evaluated on the **Cross-validation** set.

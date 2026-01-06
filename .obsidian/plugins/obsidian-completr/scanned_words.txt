@@ -6077,6 +6077,7 @@ Softmax
 Szz
 Seff
 STTDjj
+Substituting
 moc
 modified
 my
@@ -9150,6 +9151,7 @@ mHNJd
 mEs
 mvEQ
 mathematically
+magnitudes
 Root
 Rectangular
 Relationships
@@ -12067,6 +12069,7 @@ Represent
 RRRBC
 RRRh
 RDFGS
+Ross
 created
 cssclasses
 customize
@@ -15783,6 +15786,12 @@ cSF
 cGbcc
 crops
 characteristic
+conjugate
+combat
+constraint
+combats
+capturing
+centered
 hide
 hosted
 heading
@@ -18513,6 +18522,8 @@ hyperplane
 harmonic
 hypothesis
 hupothesis
+hurt
+hurts
 properties
 png
 page
@@ -21792,6 +21803,10 @@ pwwGAA
 patients
 plane
 problematic
+penalizing
+proportional
+purely
+penalizes
 ITS
 In
 Included
@@ -30581,6 +30596,8 @@ belonging
 becoming
 beginbmatrix
 bLo
+bigger
+bounding
 for
 fonts
 files
@@ -33642,6 +33659,8 @@ farming
 figures
 fall
 fIN
+fminunc
+forcing
 Obsidian
 Other
 Outline
@@ -50945,6 +50964,7 @@ Propose
 PKHHHHHHHHH
 PQv
 Predicting
+Picture
 Depreciated
 Download
 Dark
@@ -65779,6 +65799,7 @@ latent
 lBK
 lawsuits
 lienar
+landmark
 and
 are
 across
@@ -69064,6 +69085,7 @@ adult
 alphafrac
 aZv
 awa
+anyway
 icon
 in
 if
@@ -72070,6 +72092,7 @@ infringement
 incorrectly
 inches
 interpreted
+intentional
 used
 using
 upon
@@ -75071,6 +75094,7 @@ unsupervised
 underfit
 undersampling
 unsquashed
+unbounded
 No
 Navigation
 NzZj
@@ -83790,6 +83814,8 @@ dng
 defend
 drug
 disease
+decreased
+dictates
 snippets
 spans
 smaller
@@ -87342,6 +87368,11 @@ suggests
 stacked
 suffering
 summation
+suffer
+sacrifices
+shrunk
+severely
+symbolizes
 vault
 vn
 vY
@@ -96172,6 +96203,7 @@ win
 wiggly
 whatever
 wjG
+worse
 Embed
 Edges
 Embeded
@@ -121214,6 +121246,7 @@ BPTT
 Baaa
 BCCAD
 BQWY
+BFGS
 Wider
 Wrapping
 WQQ
@@ -124005,6 +124038,7 @@ Worlds
 Wheeler
 Would
 Weighted
+Wrong
 Quotation
 Query
 Qss
@@ -137640,6 +137674,7 @@ gSJa
 gfb
 groupings
 grouping
+gentle
 qtt
 qa
 qY
