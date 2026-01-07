@@ -15793,6 +15793,7 @@ combats
 capturing
 centered
 centroid
+calculation
 hide
 hosted
 heading
@@ -47978,6 +47979,7 @@ oNqq
 oOqq
 oWD
 optima
+octave
 Publish
 Pills
 Positions
@@ -53868,6 +53870,7 @@ Duc
 DFf
 Drr
 Dimensionality
+Dimensionally
 experience
 enlarges
 either
@@ -69090,6 +69093,8 @@ alphafrac
 aZv
 awa
 anyway
+activations
+approximation
 icon
 in
 if
@@ -80481,6 +80486,7 @@ nonlinearly
 normalization
 narrower
 nLyyy
+numerically
 download
 depending
 does

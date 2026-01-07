@@ -177,3 +177,9 @@ $$\frac{ 4.060602 - 3.940598}{0.02} $$
 $$ \frac{0.120004}{0.02}$$
 $6.0002$ 
 
+**Q24**
+**Is it true that the KNN classifier needs the training set during the test phase? Justify your answer.**
+**R:** k-NN is a non-parametric classifier that needs the training sett during the test phase. To classify a new record during the test phase, the algorithm must: compute the distance (similarity) from the new record to **all labeled records** in the training set. Identify the k nearest neighbors based on this calculated distance. Assign the class label of the new record based on the **majority label** of those k nearest neighbors. It relies entirely on the stored training data to make predictions, rather than learned parameters.
+
+**Q25**
+**Supposed you ran gradient**
