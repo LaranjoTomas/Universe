@@ -156,3 +156,24 @@ Which of the following is a plot of $f_1$, when $\sigma^2 = 0.25$**
 - **To reduce the dimension of the input data so as to speed up a learning algorithm.** Yes. Fewer dimensions often mean faster training and less computation.
 - **To compress the data so it takes up less computer memory / disk space** Yes. PCA can reduce storage by keeping only the most important components.
 - **To visualize high-dimensional data (by choosing k = 2 or k = 3)** Yes. PCA is commonly used for 2D or 3D visualization.
+
+**Q22**
+**You have the following neural network. You'd like to compute the activations of the hidden layer $\alpha^2 E R^3$. One way to do so is the following octave code:** 
+![[FAA_Q22_octaveCode.png]]
+**You want to have a vectorized implementation of this. Which of the following implementations correctly compute $\alpha_{2}$? Check all that apply.**
+**R:** **a2 = sigmoid (Theta1 * x);** 
+The goal is to compute the activations of layer 2 ($\alpha^2$) based on the input layer x (layer 1) and the parameter matrix $\theta$ labeled theta1 in the code. Based on the diagram, layer 1 has 3 inputs (the bias unit + 1, x1, and x2). If the input vector x includes the bias unit, its size is 3x1. The matrix $\theta$ maps these inputs to the 3 units in Layer2, and the code states its size is 3x3. 
+The calculation for the weighted input $z^2$ before the activation function is performed using matrix multiplication: $$z^2 = \theta^{(1)}x$$
+Dimensionally: $(3*3) * (3*1) = 3*1$
+
+The final activation is achieved by applying the sigmoid function element-wise to the weighted sum: $$ a^2 = sigmoid(z^2) = sigmoid(\theta^1)x $$
+The option a2= sigmoid ($\theta^1$ * x)
+
+**Q23**
+**Let $J(\theta) = 2*\theta^3 + 2$. Let $\theta=1$ and $e=0.01$. Use the formula $\frac{J(\theta+e) - J(\theta-e)}{2e}$ to numerically compute an approximation to the derivative at $\theta=1$. What value do you get? (when $\theta=1$, the true/exact derivative is $\frac{dJ(\theta)}{d\theta} = 6$.)**
+**R:** $$\frac{J(1+0.01) - J(1-0.01)}{2*0.01}$$
+$$\frac{(2*1.01^3 + 2) - (2*0.99^3 + 2)}{0.02}$$
+$$\frac{ 4.060602 - 3.940598}{0.02} $$
+$$ \frac{0.120004}{0.02}$$
+$6.0002$ 
+
