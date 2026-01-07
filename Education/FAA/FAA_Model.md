@@ -182,4 +182,9 @@ $6.0002$
 **R:** k-NN is a non-parametric classifier that needs the training sett during the test phase. To classify a new record during the test phase, the algorithm must: compute the distance (similarity) from the new record to **all labeled records** in the training set. Identify the k nearest neighbors based on this calculated distance. Assign the class label of the new record based on the **majority label** of those k nearest neighbors. It relies entirely on the stored training data to make predictions, rather than learned parameters.
 
 **Q25**
-**Supposed you ran gradient**
+**Supposed you ran gradient descent three times, with different values for the parameter learning rate $\alpha=0.01, \alpha=0.1, \alpha=1$, and got the following three plots (A, B and C)**
+**R:** **A is with α=0.1, B is with α=0.01, C is with α=1** Alpha dictates the step size taken during gradient descent as it attempts to minimize the cost function $J(\theta)$. Plot C diverges, which happens when learning rate is too large. Plot B is a slow convergence, which indicates a very small learning rate resulting in small steps. Plot A has an efficient convergence, which can only lead to the last value of alpha.
+
+**Q26**
+**Check all that apply regarding the typical characteristics of the back-propagation algorithm**
+**R:** 
