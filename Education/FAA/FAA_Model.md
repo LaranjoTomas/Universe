@@ -202,3 +202,23 @@ Reinforcement Learning is listed as a machine learning approach.
 
 **Q28**
 **Which of the following statements regarding Softmax Regression (SR) are true? Check all that apply.**
+**R:** **Softmax Regression is a supervised learning algorithm**. Softmax Regression is used for classification problems, which fall under the category of **Supervised Learning**
+**Softmax Regression is more suitable than Logistic Regression for mutually exclusive classes** Softmax Layers are designed to estimate the probability that an example belongs to each of the k classes. In contrast, **Logistic Regression** is natively a **binary classifier**, and when adapted for multiple classes (multiclass classification), it typically requires training separate models using the **One-versus-all** approach
+
+#### Wrong
+**Softmax Regression is a binary classifier:** This is false. Logistic regression is a binary classifier (outputting a probability between 0 and 1 for one class). The Softmax Layer is used to handle **multiple classes** (k outputs), estimating the probability for each class k
+**The gradient descent cannot be applied for Softmax Regression:** This is false. Softmax Regression uses gradient-based learning methods to minimize its cost function. Gradient descent is a common iterative algorithm used to update parameters in classification models like Logistic Regression and Neural Networks (which often use a final Softmax layer)
+
+**Q29. Suppose you have m=14 examples with n=3 features. What are the dimensions of the data matrix X, the output
+y and the vector of parameters θ when you implement it .**
+**R:** A. X is 14x4, y is 14x1,θ is 4x1
+ m=14 corresponds to the number of rows in the data matrix X therefore X will have 14 rows and y will have 14 rows.
+ 
+ The number of original features is n=3. When implementing models like linear or logistic regression, a constant feature ($x_{0}=1$) the **bias unit**, which is added to the feature vector x.
+ 
+ The feature vector x for a single example is typically defined as a column vector with n+1 dimensions. (3+1)
+ The data matrix X organizes these m examples as rows, meaning X will have m rows and n+1 columns. X = 14 x 4
+
+**The output vector $y$(labels)** holds the label/target value for each of the m examples. Assuming a single target variable, $y$ is a column vector with m rows. $y:14*1$
+
+**Parameter Vector $\theta$(weights)** must correspond to the number of columns (features) in data matrix X including the bias term $\theta_0$ $$(n+1)*1 = (3+1)*1 = 4 * 1$$
