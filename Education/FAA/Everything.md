@@ -174,3 +174,28 @@ Machine learning (ML) is the field of study that gives computers the ability to 
    ◦ **Content-Based:** Uses known item features ($x(i)$) and user parameters ($\theta(j)$) to predict ratings via linear regression.
 
    ◦ **Collaborative Filtering:** Based on the idea that similar users like similar things. It simultaneously learns both the latent item features X and user parameters theta by minimizing a single cost function. **Mean normalization** is often applied as a preprocessing step.
+
+The backpropagation algorithm, officially known as the **Error Backpropagation algorithm**, is the core learning mechanism used to train Neural Networks (NNs). It efficiently computes the gradients required to update all network parameters (weights, Θ) to minimize the chosen cost function J(Θ)
+
+### I. General Learning Procedure (NNs)
+
+The process involves a continuous loop of calculating outputs (forward pass) and adjusting errors backwards (backward pass) for all training examples
+1. **Initialization:** The NN parameters (Θ(l)) are typically **randomly initialized** to break symmetry, preventing all neurons from learning the same activations
+2. **Forward Propagation (Feedforward):** For each training example, the features are fed forward through the network to compute the weighted inputs (z(l)) and the resulting activations (a(l)) in each layer, culminating in the network's final output (hΘ​(x))
+3. **Output Error Calculation:** The error signal is first calculated at the final output layer (L) by finding the difference between the actual output a(L) and the true target value yk​. This is defined as the error term δ for the output layer: $$δk(L)​=(ak(L)​−yk​)$$
+4. **Error Backpropagation (Backward Pass):** The error terms (δ(l)) are propagated backwards from the output layer through the hidden layers
+. This involves calculating an error term for each node in the hidden layers that quantifies how much that node was "responsible" for the final output error
+	◦ For a hidden layer l (e.g., l=2), the error term is computed using the error term from the next layer (δ(l+1)), the transposed weight matrix from the current layer (Θ(l+1)), and the derivative of the activation function (g′)
+$$δ(l)=(Θ(l))Tδ(l+1).∗g′(z(l))$$
+II. Gradient Calculation and Parameter Update
+Once the error terms (δ) are calculated, they are used to compute the accumulated gradients (Δ) and update the weight matrices (Θ)
+5. **Accumulate Gradient:** The gradients from individual training examples (i) are accumulated
+6. **Compute Final Gradient:** The final unregularized gradient is computed by averaging the accumulated errors Δ over all m examples
+
+$$∂Θij(l)​∂​J(Θ)=Dij(l)​=m1​Δij(l)​$$
+3. **Apply Regularization:** If regularization is used, the penalty term (λ) is added to the gradient for j≥1: $$∂Θij(l)​∂​J(Θ)=Dij(l)​=m1​Δij(l)​+mλ​Θij(l)$$​(for j≥1)
+4. **Update Parameters:** The parameters are updated iteratively using the computed gradient and the learning rate (α): $$Θij(l)​:=Θij(l)​−αDij(l)$$​
+III. Specialization for Sequence Models
+For Recurrent Neural Networks (RNNs), which handle sequences over time steps, the training algorithm that performs this process is known as **Backpropagation Through Time (BPTT)**
+• BPTT involves a forward pass from the first time step to the last (t=1 to Tx​), computing predictions and the total cost Jall​
+• The backward propagation then occurs from the last time step (y⟨Tx​⟩) back to the first (y⟨1⟩) to compute the gradients and update the parameters

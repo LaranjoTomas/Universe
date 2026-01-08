@@ -187,4 +187,18 @@ $6.0002$
 
 **Q26**
 **Check all that apply regarding the typical characteristics of the back-propagation algorithm**
-**R:** 
+**R:** **It can be stacked into poor local minima.** 
+
+#### Wrong
+**It does not require labeled data.** It's listed under supervised learning, therefore requires labeled data.
+**It is very slow in networks with multiple hidden layers.** The primary challenge noted for deep learning is the need for massive computational resources. I didn't find anything that could be of use in the slides to better answer why this is "wrong" It's just not in there, and therefore I'm not putting it has a correct answer.
+**It cannot be applied to multilayer perceptron.*** Error backpropagation algorithm is the core learning process used to train **neural networks**. Multilayer perceptrons are a type of neural networks and are explicitly listed as an architecture related to deep learning.
+
+**Q27**
+**Which of the following ML architectures are related with deep learning? Check all that apply.**
+**R:** Multilayer perceptron; Convolution Neural Network (CNN); **Sparse Stacked Autoencoder**(?)
+#### Wrong
+Reinforcement Learning is listed as a machine learning approach.
+
+**Q28**
+**Which of the following statements regarding Softmax Regression (SR) are true? Check all that apply.**
