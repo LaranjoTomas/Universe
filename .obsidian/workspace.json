@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "9ca46e080310712a",
+            "id": "5ab410fa798e6544",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -40,7 +40,7 @@
             }
           },
           {
-            "id": "74518a122abdc8ff",
+            "id": "085677daca9cdf8e",
             "type": "leaf",
             "pinned": true,
             "state": {
@@ -56,7 +56,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -307,12 +307,13 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "9ca46e080310712a",
+  "active": "085677daca9cdf8e",
   "lastOpenFiles": [
-    "Education/FAA/Everything.md",
     "Education/FAA/FAA_Model.md",
-    "imgs/FAA_Q22_octaveCode.png",
+    "Education/FAA/Everything.md",
+    "imgs/image 11.png",
     "0-HOME.md",
+    "imgs/FAA_Q22_octaveCode.png",
     "imgs/faa_ques8_image.png",
     "imgs/Faa_resp_ex6.png",
     "imgs/faa_exercise_6.png",
@@ -346,7 +347,6 @@
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
     "imgs/Pasted Image 20250624180115_080.png",
-    "imgs/52f3c108ce395fd3368b4568.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",

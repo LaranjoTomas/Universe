@@ -68,8 +68,7 @@ Dimensionality reduction techniques like principal component Analysis (PCA) are 
 - **Adding polynomial features (e.g., instead using** $hθ​(x)=g(θ_{0}+θ_{1}​x_{1}1+θ_{2}​x_{2}​+θ_{3}​x^{2}_{1}​+θ_{4}​x_{1}1x_{2}​+θ_{5}​x^2_{2}​)$ **could increase how well we can fit the training data.** Adding higher-order polynomial features maps the input data into a higher-dimensional space, which allows the logistic regression model to learn a more complex, non-linear decision boundary in the original $x_1-x_2$ plane. This increase in complexity typically allows the hypothesis to fit the observed training data points better, increasing training set performance.
 #### Extra
 **"Because the positive and negative examples cannot be separated using a straight line, linear regression will perform as well as logistic regression on this data"**
-Linear Regression is generally unsuitable for classification tasks, especially binary classification where the labels are {0,1}. Linear regression models output continuous values ($h_{\theta}(x)$) is not bounded by 0 and 1, which makes interpreting the output as a probability problematic
- and Susceptible to outliers. Regression is specifically designed for classification using sigmoid function to bound outputs between 0 and 1, facilitating probabilistic interpretation and minimizing a specialized convex cost function. Even when data is not linearly separable, logistic regression is the theoretically superior choice over standard linear regression for classification problems.
+Lack of linear separability does **not** cause gradient descent to fail. Gradient descent still converges because the cost function is convex. It just converges to a solution with **non-zero training error**.
 
 **"The positive and negative examples cannot be separated using a straight line. So, gradient descent will fail to converge."**
 The ability of the data to be linearly separable **does not** determine the convergence of Gradient Descent for Logistic Regression. This uses a **convex** cost function $J(\theta)$. Because the cost function is convex, gradient descent is mathematically guaranteed to converge to the global minimum, regardless of whether a perfect straight line can separate the training examples. If the data is not linearly separable, the minimum cost will simply be greater than zero, but convergence will still always occur.
@@ -80,11 +79,11 @@ The ability of the data to be linearly separable **does not** determine the conv
 - $θ:=θ−α\frac{1}{m}​ \sum^{m}_{i=1}(hθ​(x^i)−y^i)x^i$
 The goal of the gradient descent update is to replace the parameter vector θ by moving it against the direction of the gradient.$$θ:=θ−α⋅∇J(θ) $$The expression above is the **vectorized form** of the gradient update rule of logistic regression. It uses the learning rate alpha to step away from the calculated gradient.
 
-**Option 1** is incorrect because while mathematically equivalent if expanded, the general and common vectorized form uses $h_\theta(x^i)$. Also, the position of the $x^i$ outside the summation structure is incorrect.
+**Option 1** is incorrect because while mathematically equivalent if expanded, the general and common vectorized form uses $h_\theta(x^i)$. The position of the Y and X is outside the Sum.
 
 **Option 2** is incorrect because it replaces the logistic regression hypothesis with the unsquashed linear prediction $\theta^T_{x}$. Using $\theta^T_{x}$ would be the gradient update for linear regression (mean squared error) not logistic regression (Log Loss).
 
-**Option 4** Similar to option 2, this update uses the lienar prediction $\theta^T_{x}$ instead of the hupothesis. This error term is characteristic of Linear regression not of logic regression.
+**Option 4** Similar to option 2, this update uses the linear prediction $\theta^T_{x}$ instead of the hypothesis. This error term is characteristic of Linear regression, not of logic regression.
 
 **Q10**
 **Which of the following statements are true? Check all that apply**
@@ -94,7 +93,7 @@ The goal of the gradient descent update is to replace the parameter vector θ by
 - **The sigmoid function** $g(z)=\frac{1}{1+e^{-z}}$​ **is never greater than one** (>1). The sigmoid function is the hypothesis model for logistic regression, and its output is mathematically constrained to values between 0 and 1.
 
 **Wrong**
-- **For logistic regression, sometimes gradient descent will converge to a local minimum (and fail to find the global minimum). This is the reason we prefer more advanced optimization algorithms such as fminunc (conjugate gradient/BFGS /L-BFGS/etc).** The specialized cost function used in logistic regression (Log Ross) so mathematically designed to be a convex function, which always guarantees a convergence to the global minimum, not just a local minimum.
+- **For logistic regression, sometimes gradient descent will converge to a local minimum (and fail to find the global minimum). This is the reason we prefer more advanced optimization algorithms such as fminunc (conjugate gradient/BFGS /L-BFGS/etc).** The specialized cost function used in logistic regression (Log Loss) so mathematically designed to be a convex function, which always guarantees a convergence to the global minimum, not just a local minimum. The more advanced algorithms aren't used cause of the previous statement, they are used because they often have a faster gradient descent, better convergence. More complex,etc...
 - **Linear regression always works well for classification if you classify by using a threshold on the prediction made by linear regression.** It's generally unsuitable for classification because the output is unbounded, can be bigger than 1 or lower than 0. Making probabilistic interpretation necessary for classification. This is the reason logistic regression uses the sigmoid function to overcome these limitations by bounding between 0 and 1. The question would be right if it was Logistic regression rather than linear.
 
 **Q11**
@@ -209,12 +208,13 @@ Reinforcement Learning is listed as a machine learning approach.
 **Softmax Regression is a binary classifier:** This is false. Logistic regression is a binary classifier (outputting a probability between 0 and 1 for one class). The Softmax Layer is used to handle **multiple classes** (k outputs), estimating the probability for each class k
 **The gradient descent cannot be applied for Softmax Regression:** This is false. Softmax Regression uses gradient-based learning methods to minimize its cost function. Gradient descent is a common iterative algorithm used to update parameters in classification models like Logistic Regression and Neural Networks (which often use a final Softmax layer)
 
+
 **Q29. Suppose you have m=14 examples with n=3 features. What are the dimensions of the data matrix X, the output
-y and the vector of parameters θ when you implement it .**
+y and the vector of parameters θ when you implement it.**
 **R:** A. X is 14x4, y is 14x1,θ is 4x1
- m=14 corresponds to the number of rows in the data matrix X therefore X will have 14 rows and y will have 14 rows.
+ m=14 corresponds to the number of rows in the data matrix $X$ therefore $X$ will have 14 rows and $y$ will have 14 rows.
  
- The number of original features is n=3. When implementing models like linear or logistic regression, a constant feature ($x_{0}=1$) the **bias unit**, which is added to the feature vector x.
+ The number of original features is n=3. When implementing models like linear or logistic regression, a constant feature ($x_{0}=1$) the **bias unit**, which is added to the feature vector $x$.
  
  The feature vector x for a single example is typically defined as a column vector with n+1 dimensions. (3+1)
  The data matrix X organizes these m examples as rows, meaning X will have m rows and n+1 columns. X = 14 x 4
@@ -222,3 +222,58 @@ y and the vector of parameters θ when you implement it .**
 **The output vector $y$(labels)** holds the label/target value for each of the m examples. Assuming a single target variable, $y$ is a column vector with m rows. $y:14*1$
 
 **Parameter Vector $\theta$(weights)** must correspond to the number of columns (features) in data matrix X including the bias term $\theta_0$ $$(n+1)*1 = (3+1)*1 = 4 * 1$$
+**Q30**
+**Propose a solution to treat the problem of class unbalanced data. (as many as u can remember)**
+**R:** 
+**Re-sampling Methods:** This involves adjusting the training set balance by either increasing the presence of the minority class or decreasing the presence of the majority class
+These methods include:
+    ◦ **Oversampling** (of the minority class)
+    ◦ **Under-sampling** (of the majority class)
+
+**Weighted Loss Functions:** Using a modified cost calculation, such as the **Weighted Binary Cross Entropy Loss**. This function incorporates weights (wp​ and wn​) calculated based on the proportion of negative and positive examples in the total dataset, thereby assigning a greater penalty for misclassifying the minority class examples.
+
+**Alternative Performance Metrics:** When dealing with highly unbalanced data, metrics like **Accuracy** can be misleading
+It is recommended to use more reliable metrics to select the model and threshold, such as:
+    ◦ **F1-Score** (weighted average of Precision and Recall)
+    ◦ **Precision** and **Recall** separately
+    ◦ **Balanced Accuracy** (average of Recall and Specificity)
+
+
+_________________
+
+# TAA model
+
+**Q1**
+**Suppose you are running a company, and want to develop learning algorithms to address the following two problems:**
+**Problem1: Predict the age of the person, on the basis of a given picture**
+**Problem2: Predict if the tumor is malignant or benign, based on a skin image of tumor.**
+Should you treat these as classification or as regression problems:
+
+**R:** C. Treat Problem 1 as a regression problem, Problem 2 as a classification problem
+
+**Q2**
+**What is the first step you should take when start on a new ML problem?**
+**R:** C. Search for references.
+
+**Q3**
+With training set 
+(x,y):(2,1);(3,1.5);(4,2);(0,0)
+**a) Apply a linear regression model $h_{\theta}(x)=\theta_{0}+\theta_{1}x$ . What are the values of theta0 and theta1 that you expect to get after running gradient descent on this model? (Linear regression will be able to fit this data perfectly.**
+**R:** E. theta0=0, theta1 = 0.5$$0 + 0.5*2=1$$
+**b) For the values of theta0 and theta1 obtained in a), compute $h_{\theta}(7)$.**
+**R:** $0+0.5*7= 3.5$.  (7, 3.5) would be the set values
+
+**Q4**
+**Which of the following statements are true? Check all that apply.**
+**R:** A. C.
+
+**Q5**
+**Which of the following is a good way to select the number of the principal components?**
+**R:** B.
+
+**Q6**
+**You have trained an anomaly detection system for fraud detection, to flags anomalies when p(x) is less than epsilon. However, on the cross-validation set it is missing many fraudulent transactions (i.e., failing to flag them as anomalies). What should you do?**
+**R:** B.
+
+**Q7**
+**Which of the figures corresponds to a high bias**

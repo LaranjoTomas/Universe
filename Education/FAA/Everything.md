@@ -117,7 +117,7 @@ Machine learning (ML) is the field of study that gives computers the ability to 
 
    ◦ It uses **Laplace correction** if the likelihood of a feature value is zero, preventing the entire probability product from becoming zero.
 
-• **Decision Tree (DT) Classifier (L7):** Classifies data by splitting nodes based on features. The best feature split is chosen by maximizing **Information Gain** (or Gain Ratio), typically measured by minimizing node **Entropy** or **Gini Index** (measures of node impurity). **Pruning** (post-pruning preferred) is used to prevent overfitting.
+• **Decision Tree (DT) Classifier (L7):** Classifies data by splitting nodes based on features. The best feature split is chosen by maximizing **Information Gain** (or Gain Ratio), typically measured by minimizing node **Entropy** or **Gini Index** (measures of node **impurity**). **Pruning** (post-pruning preferred) is used to prevent overfitting.
 
 **Unsupervised Learning Algorithms (L8)**
 
@@ -199,3 +199,100 @@ III. Specialization for Sequence Models
 For Recurrent Neural Networks (RNNs), which handle sequences over time steps, the training algorithm that performs this process is known as **Backpropagation Through Time (BPTT)**
 • BPTT involves a forward pass from the first time step to the last (t=1 to Tx​), computing predictions and the total cost Jall​
 • The backward propagation then occurs from the last time step (y⟨Tx​⟩) back to the first (y⟨1⟩) to compute the gradients and update the parameters
+
+## Sequence Models Motivation and Architecture
+1. Handling Sequence Data
+Sequence models are essential for processing data where the inputs (x) or outputs (y), or both, are ordered sequences, which often have **variable lengths**
+• **Applications:** Key examples include speech recognition, machine translation, sentiment classification, DNA sequence analysis, and video activity recognition
+• **NLP Notation:** In Natural Language Processing (NLP), each word is represented by a vector based on a predefined vocabulary. This is commonly done using **one-hot encoding**, where a word's vector dimension matches the dictionary size, with a single entry set to '1' at the word's index
+• **Standard NN Limitations:** A standard Neural Network cannot effectively handle sequences because inputs and outputs can have different lengths, leading to a potentially high input dimension and too many trainable parameters if mapped directly
+2. Recurrent Neural Networks (RNN)
+RNNs address sequential dependency by introducing a recurrent connection:
+• **Operation:** The sequence is processed word-by-word (one time step per word). At each time step t, the RNN cell takes the current input (x⟨t⟩) and the activation/hidden state from the previous step (a⟨t−1⟩) to compute the current activation (a⟨t⟩)
+. This structure passes previous results forward, giving the model **context**
+• **Parameter Sharing:** A crucial feature is that the model uses the **same set of weights** (Waa​, Wax​, Wya​) across all time steps, reducing the total number of parameters
+• **Uni-Directional Limitation:** Basic RNNs are "uni-directional," meaning the prediction at time t uses information only from earlier steps (t′≤t) but not from later parts of the sequence. **Bidirectional RNNs (BRNN)** are designed to overcome this by using future information
+## RNN Training and Challenges
+1. Backpropagation Through Time (BPTT)
+The algorithm used to train RNNs is called **Backpropagation Through Time (BPTT)**
+• **Forward Pass:** The forward propagation runs from the first time step to the last (t=1 to Tx​) to compute all predictions (y^​⟨t⟩) and the total cost (Jall​)
+• **Backward Pass:** The backward propagation computes gradients by starting at the last time step (y^​⟨Tx​⟩) and propagating backward through all previous time steps (y^​⟨1⟩) to update the RNN parameters
+2. The Vanishing Gradient Problem and Solutions
+Standard RNNs struggle to capture relationships between distant elements in a long sequence, often suffering from **short-term memory**
+• **Cause:** This is due to the **vanishing gradient problem**, where gradients passed back through many time steps become very small. When gradients are tiny, the parameters associated with earlier layers/time steps stop learning
+• **Solutions: LSTM and GRU:** **Long Short-Term Memory (LSTM)** networks (1997) and **Gated Recurrent Units (GRU)** (2014) mitigate the vanishing gradient problem
+. These architectures use internal mechanisms to retain or forget information over long sequences.
+• **Memory Cell and Gates:** Both architectures feature a **memory cell** (c⟨t⟩) to store information and **gates** (which use sigmoid activation, outputting values between 0 and 1) to control the flow of information
+    ◦ **GRU Unit:** A simplification of LSTM, primarily using an **update gate** (Γu​) to decide whether to update the current memory state or keep the old value
+    ◦ **LSTM Unit:** Considered more powerful, featuring three distinct gates: the **forget gate** (Γf​) (decides what information to discard from the previous step), the **update gate** (Γi​), and the **output gate** (Γo​) (determines the next hidden state)
+## RNN Architectures for Diverse Tasks
+RNNs can be structured according to the relationship between the input sequence length (Tx​) and the output sequence length (Ty​)
+• **Many-to-Many (**Tx​=Ty​**):** Used where every input step requires a corresponding output, such as in Name Entity Recognition
+• **Many-to-One:** Takes a long input sequence and produces a single output, such as in Sentiment Analysis (analyzing a sentence to produce one sentiment score)
+• **One-to-Many:** Takes a single input and generates a sequence output, such as in music generation
+• **Many-to-Many (**Tx​=Ty​**):** Used when the input and output lengths differ, such as in machine translation (which uses an encoder-decoder structure)
+IV. Time Series Forecasting
+Time Series (TS) data is a collection of samples recorded at a sequence of time intervals, and forecasting involves predicting future trends or anomalies based on past samples
+. TS forecasting problems often use Many-to-One or Many-to-Many RNN architectures
+3. Time Series Properties and Decomposition
+TS data may exhibit:
+• **Stationarity:** When the mean and variance remain constant over time
+• **Seasonality:** Predictable variations that occur at specific time frames (e.g., daily, weekly)
+Time series data Y(t) showing seasonality can be separated into three additive components: Y(t)=S(t)+T(t)+R(t)
+• T(t): **Trend** (estimated via the rolling mean)
+• S(t): **Seasonal component**
+• R(t): **Remaining component**
+4. Classical Forecasting Models
+Traditional methods, typically benchmarked against more complex DL models, include:
+• **Naïve Model:** Forecast equals the last observed value: Y^(t+h∣t)=Y(t)
+• **Seasonal Naïve (SNaïve) Model:** Used for seasonal data, the forecast equals the value from the previous seasonal period: Y^(t+h∣t)=Y(t+h−T)
+• **Exponential Smoothing:** Calculates the forecast as a weighted average of past observations, with weights decreasing exponentially further back in time
+• **ARIMA (Auto-Regressive Integrated Moving Average):** A linear model combining auto-regressive (past values of TS) and moving average (past forecast errors) components, sometimes integrated with differencing to handle non-stationary signals
+. The seasonal version is SARIMA
+5. Deep Learning for Time Series
+Modern multivariate prediction models leverage deep recurrent architectures, typically using the LSTM or GRU cell structures, due to their ability to capture long-range temporal dependencies
+
+----------
+# Questions from the Zoom call
+
+**Class imbalance problem.** 
+![[image 11.png]]
+ngl, I didn't understand anything of the question from the student (mic is up someone's cavity) and the teacher just read the slide over and over again until the student said yes. 
+Trainable parameters are different from these weights, these ones only give more importance to the less represented class related to the number of samples (both negative and positive). 
+
+**Error Analysis for Anomaly Detection**
+
+
+
+-------
+
+**Different Models (Architectures)**
+Different models are needed because they excel at solving different types of tasks (T). For instance, some models are specialized for problems where the output is a real number (**Regression**) while others are for discrete categories (**Classification**).
+
+**Supervised Learning**
+Necessary when we have historical **labeled data** (examples with the "correct answer") and the goal is to predict that answer for new, unseen inputs.
+
+**Unsupervised Learning**
+Necessary when we have **unlabeled data** and the goal is to automatically discover inherent patterns, structure, or groupings within that data (e.g., clustering or dimensionality reduction).
+
+**Hypothesis (hθ​(x))** 
+This is the mathematical formula or model structure chosen to define how the input features relate to the output, serving as the basis for prediction.
+
+**Parameters (θ or W)**
+These are the internal variables that the learning algorithm adjusts during training to minimize the error and make accurate predictions.
+
+**Cost Functions (J(θ))**
+Essential for measuring the **error** (or loss) between the model's predictions and the true target values for all training examples. Minimizing this function is the **goal** of the learning process.
+
+**Hyperparameters**
+Necessary because they control the internal workings and complexity of the learning process itself, rather than being learned directly from the data.
+
+**Gradient Descent**
+Necessary as the core iterative **optimization algorithm** used to efficiently adjust model parameters (θ) toward the values that minimize the cost function (J(θ)).
+
+**Regularization (λ)**
+Crucial for addressing the problem of **overfitting** (high variance) by adding a penalty term to the cost function, thus shrinking the magnitude of model parameters toward zero and improving the model’s ability to generalize to new data.
+
+**Cross-Validation (CV) Set**
+Necessary for **selecting** the best model architecture or the optimal set of hyperparameters (like λ) chosen from several candidates, ensuring that the selected parameters generalize well beyond the training data.
+

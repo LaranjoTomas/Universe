@@ -3052,6 +3052,10 @@ treatment
 tailor
 treatments
 theoretically
+teacher
+tumour
+trainable
+tumor
 Statistic
 SlRvb
 Story
@@ -6078,6 +6082,15 @@ Szz
 Seff
 STTDjj
 Substituting
+Specialization
+Sum
+Should
+Sentiment
+Stationarity
+Seasonality
+Seasonal
+Smoothing
+SARIMA
 moc
 modified
 my
@@ -9152,6 +9165,14 @@ mEs
 mvEQ
 mathematically
 magnitudes
+multilayer
+misclassifying
+mic
+malignat
+mitigate
+music
+multivariate
+malignant
 Root
 Rectangular
 Relationships
@@ -12070,6 +12091,10 @@ RRRBC
 RRRh
 RDFGS
 Ross
+RNNs
+Recognition
+Remaining
+Regressive
 created
 cssclasses
 customize
@@ -15794,6 +15819,11 @@ capturing
 centered
 centroid
 calculation
+calculating
+culminating
+cavity
+converges
+candidates
 hide
 hosted
 heading
@@ -21810,6 +21840,9 @@ penalizing
 proportional
 purely
 penalizes
+putting
+perceptrons
+propagating
 ITS
 In
 Included
@@ -27530,6 +27563,11 @@ TTTX
 TRT
 TNN
 TYe
+Trainable
+Treat
+Takes
+Trend
+Traditional
 by
 better
 br
@@ -30601,6 +30639,11 @@ beginbmatrix
 bLo
 bigger
 bounding
+backpropagation
+backwards
+basis
+benign
+benchmarked
 for
 fonts
 files
@@ -33664,6 +33707,7 @@ fall
 fIN
 fminunc
 forcing
+featuring
 Obsidian
 Other
 Outline
@@ -36545,6 +36589,7 @@ OHII
 Olo
 ONNn
 Option
+Oversampling
 Vault
 VB
 Vv
@@ -39324,6 +39369,7 @@ VPNs
 VEML
 Visualization
 Variance
+Vanishing
 Guide
 Graph
 Gee
@@ -42179,6 +42225,7 @@ Gini
 Gated
 GRU
 GGGh
+Gates
 Check
 Checkboxes
 Callouts
@@ -45260,6 +45307,11 @@ Cptv
 CTT
 CSx
 Cbx
+Crucial
+Cause
+Cell
+Considered
+Classical
 out
 on
 of
@@ -47980,6 +48032,7 @@ oOqq
 oWD
 optima
 octave
+officially
 Publish
 Pills
 Positions
@@ -53871,6 +53924,9 @@ DFf
 Drr
 Dimensionality
 Dimensionally
+DNA
+Directional
+Diverse
 experience
 enlarges
 either
@@ -57283,6 +57339,7 @@ eEQ
 effectiveness
 expanded
 evaluated
+encoder
 Allows
 Already
 Adjustments
@@ -60210,6 +60267,9 @@ AIv
 Asdd
 ALp
 Also
+Accumulate
+Alternative
+ARIMA
 you
 your
 yt
@@ -65807,6 +65867,7 @@ lBK
 lawsuits
 lienar
 landmark
+listed
 and
 are
 across
@@ -69095,6 +69156,11 @@ awa
 anyway
 activations
 approximation
+averaging
+assigning
+aren
+analyzing
+additive
 icon
 in
 if
@@ -75104,6 +75170,8 @@ underfit
 undersampling
 unsquashed
 unbounded
+unregularized
+uni
 No
 Navigation
 NzZj
@@ -77809,6 +77877,7 @@ Naaa
 NDHH
 NWQQ
 Nrr
+Notation
 need
 near
 ns
@@ -83827,6 +83896,11 @@ disease
 decreased
 dictates
 diverges
+didn
+dictionary
+directional
+decoder
+differencing
 snippets
 spans
 smaller
@@ -87385,6 +87459,20 @@ shrunk
 severely
 symbolizes
 sett
+slides
+someone
+slide
+separability
+shrinking
+skin
+speech
+sentiment
+struggle
+simplification
+sentence
+seasonality
+seasonal
+stationary
 vault
 vn
 vY
@@ -90215,6 +90303,8 @@ vanishing
 vectorized
 vhx
 voY
+vocabulary
+variations
 re
 right
 rdf
@@ -93468,6 +93558,11 @@ reasonable
 ran
 rdd
 rNN
+relate
+recognition
+recurrent
+recorded
+regressive
 work
 with
 within
@@ -96216,6 +96311,7 @@ wiggly
 whatever
 wjG
 worse
+wrong
 Embed
 Edges
 Embeded
@@ -99070,6 +99166,7 @@ Eddd
 EQNO
 ECw
 Extra
+Entity
 Kanban
 KD
 KuTyw
@@ -104675,6 +104772,7 @@ Filters
 FAA
 Figure
 FXT
+Forecast
 Light
 Larger
 Line
@@ -107442,6 +107540,7 @@ Laplace
 Lua
 Lfff
 Lehh
+Lack
 Heading
 Horizontal
 Headings
@@ -110238,6 +110337,7 @@ HLLL
 HCb
 HfH
 HJJb
+Hyperparameters
 Underline
 Ue
 Uy
@@ -115678,6 +115778,7 @@ Metrics
 Means
 Multilayer
 MlLiu
+Moving
 Zoom
 ZTz
 ZW
@@ -121259,6 +121360,9 @@ Baaa
 BCCAD
 BQWY
 BFGS
+Backward
+Balanced
+BRNN
 Wider
 Wrapping
 WQQ
@@ -124051,6 +124155,7 @@ Wheeler
 Would
 Weighted
 Wrong
+Waa
 Quotation
 Query
 Qss
@@ -137687,6 +137792,7 @@ gfb
 groupings
 grouping
 gentle
+gate
 qtt
 qa
 qY
@@ -140497,6 +140603,7 @@ quartiles
 qTUUEK
 qTQQAS
 quantity
+quantifies
 jQ
 jB
 ja
@@ -150963,6 +151070,7 @@ JzBB
 Jxyy
 JIIQK
 JNa
+Jall
 ümi
 üv
 üs
