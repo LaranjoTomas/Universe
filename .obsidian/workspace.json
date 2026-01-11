@@ -24,39 +24,21 @@
             }
           },
           {
-            "id": "5ab410fa798e6544",
+            "id": "9502719766b893ef",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/FAA/FAA_Model.md",
+                "file": "Education/TPJ/Everything.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "FAA_Model"
-            }
-          },
-          {
-            "id": "085677daca9cdf8e",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/FAA/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Everything"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -307,12 +289,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "085677daca9cdf8e",
+  "active": "9502719766b893ef",
   "lastOpenFiles": [
-    "Education/FAA/FAA_Model.md",
-    "Education/FAA/Everything.md",
-    "imgs/image 11.png",
+    "Education/TPJ/Everything.md",
+    "Education/Untitled.md",
+    "Education/TPJ",
     "0-HOME.md",
+    "Education/FAA/Everything.md",
+    "Education/FAA/FAA_Model.md",
+    "imgs/image 11.png",
     "imgs/FAA_Q22_octaveCode.png",
     "imgs/faa_ques8_image.png",
     "imgs/Faa_resp_ex6.png",
@@ -342,7 +327,6 @@
     "Education/ASE/ADCs.md",
     "imgs/claudio_architecture_thesis.png",
     "Projects/AM2R/Starting.md",
-    "README.md",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
@@ -353,7 +337,6 @@
     "Excalidraw",
     "Education/SRC",
     "Education/SD",
-    "Education/RSA",
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "Untitled.canvas",
