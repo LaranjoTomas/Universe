@@ -22,10 +22,16 @@ Core Principles:
 	• **Informational Cohesion** (representing set of data and operations) is highly desirable, 
 	• **Procedural Cohesion** tasks that need to be done in specific order
 	• **Temporal Cohesion** tasks that need to be executed around the same time
-	• **Logical Cohesion** 
+	• **Logical Cohesion** selects which task to perform in each case
 	• **Coincidental Cohesion** (grouped by chance) is not desirable
 • **Coupling**: The "separation of concerns" where objects do not directly modify each other’s internal states
-• **Message coupling** is preferred over **Content coupling** (relying on internal details)
+	• **Content Coupling** module modifies or relies on internal details of another 
+	• **Control Coupling** module controls the flow of control in another
+	• **Data Coupling** module passes data to another (no info about internal structure)
+	• **Stamp Coupling** module uses only part of the other's state
+	• **Common Coupling** modules share a common data structure
+	• **External Coupling** module depends on external resources
+	• **Message Coupling** modules communicate with each other through messages (preferred over **Content coupling**)
 • **Encapsulation**: Information hiding via **Getters and Setters** to protect implementation details
 • **Abstraction**: Thinking in generalized concepts (e.g., a "Game Console" vs. a specific "PS5")
 • **Inheritance**: Creating class hierarchies (Superclasses/Subclasses) to reduce code redundancy (DRY principle)
