@@ -57,6 +57,29 @@ Patterns provide reusable solutions to common development problems
 • **Moore vs. Mealy Machines**:
     ◦ **Moore**: Output depends only on the current state; often results in one clock cycle of delay
     ◦ **Mealy**: Output depends on current state _and_ input; reacts faster (same clock cycle)
+
+## Physics & Collision Detection (P6)
+Based on **Newton’s Laws of Motion** (Inertia, F=ma, Action/Reaction)
+**Collision** happens when the shapes of two bodies intersect, or when the distance between the shapes falls below a small tolerance.
+Collision Detection Phases
+1. **Broad Phase**: Finds _potentially_ colliding pairs using simple volumes. The **Axis-Aligned Bounding Box (AABB)** is common because it is computationally cheap
+2. **Narrow Phase**: A refinement step to determine actual intersection and compute contact points
+    ◦ **Separating Axis Theorem (SAT)**: Two convex shapes do not intersect if there is an axis where their projections do not overlap
+    ◦ **GJK Algorithm**: Computes distance between convex shapes and identifies closest points
+Advanced Concepts
+• **Convex Hull**: The smallest convex shape containing a concave object
+• **Continuous Collision Detection**: Used to prevent **Tunneling** (fast objects passing through obstacles between frames) by computing the **Time of Impact (tc​)**
+## Network Programming
+Essential for multiplayer experiences and DLC delivery
+• **IP Protocol**: Provides a "cloud" interface for hosts to communicate regardless of physical hardware
+• **Addressing**: Classes A, B, and C are **Unicast** (one-to-one). Class D is for **Multicast** (one-to-many)
+• **Transport Protocols**:
+    ◦ **TCP**: Connection-oriented, reliable (re-transmits lost packets), but slower
+    ◦ **UDP**: Stateless, not reliable, but much faster; ideal for real-time games
+• **Sockets**: The interface between an application and the network. **SOCK_STREAM** is used for TCP; **SOCK_DGRAM** for UDP
+• **Optimization**: Use binary protocols for efficiency and send only the differences between states to save bandwidth
+
+**Analogy for Understanding Patterns**: If building a game is like running a restaurant, the **Game Loop** is the kitchen's clock, the **Objects** are the ingredients, **Cohesion** is keeping the dessert tools away from the meat cleavers, and **Design Patterns** are the standard recipes that ensure every dish is consistent and easy to prepare.
 ## Game Engines & Architecture
 
 A game engine is a platform for team-based product building, composed of several top-level systems
@@ -88,26 +111,3 @@ Traditionally one of the main research topics in AI (e.g., IBM DeepBlue, AlphaGo
     ◦ **Monte-Carlo Tree Search (MCTS)**: Decision-making based on searching combinatorial trees
     ◦ **A***: An informed search that minimizes path cost (Actual Cost + Heuristic)
     ◦ **Neural Networks**: Self-adaptive structures capable of modeling complex real-world scenarios by learning from training data
-## Physics & Collision Detection
-Based on **Newton’s Laws of Motion** (Inertia, F=ma, Action/Reaction)
-Collision Detection Phases
-1. **Broad Phase**: Finds _potentially_ colliding pairs using simple volumes. The **Axis-Aligned Bounding Box (AABB)** is common because it is computationally cheap
-2. **Narrow Phase**: A refinement step to determine actual intersection and compute contact points
-    ◦ **Separating Axis Theorem (SAT)**: Two convex shapes do not intersect if there is an axis where their projections do not overlap
-    ◦ **GJK Algorithm**: Computes distance between convex shapes and identifies closest points
-Advanced Concepts
-• **Convex Hull**: The smallest convex shape containing a concave object
-• **Continuous Collision Detection**: Used to prevent **Tunneling** (fast objects passing through obstacles between frames) by computing the **Time of Impact (**tc​**)**
-## Network Programming
-Essential for multiplayer experiences and DLC delivery
-• **IP Protocol**: Provides a "cloud" interface for hosts to communicate regardless of physical hardware
-• **Addressing**: Classes A, B, and C are **Unicast** (one-to-one). Class D is for **Multicast** (one-to-many)
-• **Transport Protocols**:
-    ◦ **TCP**: Connection-oriented, reliable (re-transmits lost packets), but slower
-    ◦ **UDP**: Stateless, not reliable, but much faster; ideal for real-time games
-• **Sockets**: The interface between an application and the network. **SOCK_STREAM** is used for TCP; **SOCK_DGRAM** for UDP
-• **Optimization**: Use binary protocols for efficiency and send only the differences between states to save bandwidth
-
-**Analogy for Understanding Patterns**: If building a game is like running a restaurant, the **Game Loop** is the kitchen's clock, the **Objects** are the ingredients, **Cohesion** is keeping the dessert tools away from the meat cleavers, and **Design Patterns** are the standard recipes that ensure every dish is consistent and easy to prepare.
-
-## 

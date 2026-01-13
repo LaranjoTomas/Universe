@@ -157,6 +157,7 @@
     "Tx",
     "over",
     "ByteCode",
-    "bytecode"
+    "bytecode",
+    "NDFA"
   ]
 }
