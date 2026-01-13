@@ -35,7 +35,8 @@ Core Principles:
 • **Encapsulation**: Information hiding via **Getters and Setters** to protect implementation details
 • **Abstraction**: Thinking in generalized concepts (e.g., a "Game Console" vs. a specific "PS5")
 • **Inheritance**: Creating class hierarchies (Superclasses/Subclasses) to reduce code redundancy (DRY principle)
-## Game Programming Patterns
+## Game Programming Patterns (P4)
+
 Patterns provide reusable solutions to common development problems
 • **Command**: Encapsulates a request as an object, allowing for **Undo/Redo** and dynamic input mapping
 • **Flyweight**: Efficiently supports large numbers of objects (e.g., a forest of trees) by sharing common data and keeping only unique parameters (position, tint) per instance
@@ -44,8 +45,18 @@ Patterns provide reusable solutions to common development problems
 • **Singleton**: Ensures a class has only one instance with a global access point
 • **State**: Allows an object to change behavior when its internal state changes (Finite State Machines)
 • **Game Loop**: The core of a game, processing input, updating game state, and rendering frames
+• **ByteCode**: Data over code, it transforms behaviors from code into data creating a VM that interprets and executes bytecode 
 • **Component**: Allows a single entity to span multiple domains (Input, Physics, Graphics) without coupling them
+• **Event Queue**: Stores notifications and request in FIFO order. Sends notification, and the request processor then processes items from the queue. Can be directly handled or routed. Decouples the sender from receiver.
 • **Service Locator**: Provides a global access point to a service (e.g., audio) without coupling the user to the concrete implementation
+
+## Automata Theory & FSM (P5)
+**Finite State Machines (FSM)** are abstract devices following a predetermined sequence of operations
+• **Deterministic Finite Automaton (DFA)**: Each input leads to exactly one state
+• **Non-Deterministic (NDFA)**: An input can lead to multiple possible state combinations
+• **Moore vs. Mealy Machines**:
+    ◦ **Moore**: Output depends only on the current state; often results in one clock cycle of delay
+    ◦ **Mealy**: Output depends on current state _and_ input; reacts faster (same clock cycle)
 ## Game Engines & Architecture
 
 A game engine is a platform for team-based product building, composed of several top-level systems
@@ -87,13 +98,6 @@ Collision Detection Phases
 Advanced Concepts
 • **Convex Hull**: The smallest convex shape containing a concave object
 • **Continuous Collision Detection**: Used to prevent **Tunneling** (fast objects passing through obstacles between frames) by computing the **Time of Impact (**tc​**)**
-## Automata Theory & FSM
-**Finite State Machines (FSM)** are abstract devices following a predetermined sequence of operations
-• **Deterministic Finite Automaton (DFA)**: Each input leads to exactly one state
-• **Non-Deterministic (NDFA)**: An input can lead to multiple possible state combinations
-• **Moore vs. Mealy Machines**:
-    ◦ **Moore**: Output depends only on the current state; often results in one clock cycle of delay
-    ◦ **Mealy**: Output depends on current state _and_ input; reacts faster (same clock cycle)
 ## Network Programming
 Essential for multiplayer experiences and DLC delivery
 • **IP Protocol**: Provides a "cloud" interface for hosts to communicate regardless of physical hardware

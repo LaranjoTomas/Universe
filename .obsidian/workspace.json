@@ -24,7 +24,7 @@
             }
           },
           {
-            "id": "9502719766b893ef",
+            "id": "0b4207710729eaa3",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -93,16 +93,6 @@
             }
           },
           {
-            "id": "091741322f9c461a",
-            "type": "leaf",
-            "state": {
-              "type": "recent-files",
-              "state": {},
-              "icon": "clock",
-              "title": "Recent Files"
-            }
-          },
-          {
             "id": "8a55a172e443128f",
             "type": "leaf",
             "state": {
@@ -112,7 +102,8 @@
               "title": "Recent Files"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "33993677f81e3933",
@@ -289,12 +280,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "9502719766b893ef",
+  "active": "0b4207710729eaa3",
   "lastOpenFiles": [
+    "0-HOME.md",
     "Education/TPJ/Everything.md",
     "Education/Untitled.md",
     "Education/TPJ",
-    "0-HOME.md",
     "Education/FAA/Everything.md",
     "Education/FAA/FAA_Model.md",
     "imgs/image 11.png",
