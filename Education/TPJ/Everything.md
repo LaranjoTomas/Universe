@@ -78,8 +78,22 @@ Essential for multiplayer experiences and DLC delivery
     ◦ **UDP**: Stateless, not reliable, but much faster; ideal for real-time games
 • **Sockets**: The interface between an application and the network. **SOCK_STREAM** is used for TCP; **SOCK_DGRAM** for UDP
 • **Optimization**: Use binary protocols for efficiency and send only the differences between states to save bandwidth
-
+	- Use **UDP** whenever possible
+	- Use **TCP** when reliability is required
+	- Use **Multicast** whenever possible (better synchronization)
 **Analogy for Understanding Patterns**: If building a game is like running a restaurant, the **Game Loop** is the kitchen's clock, the **Objects** are the ingredients, **Cohesion** is keeping the dessert tools away from the meat cleavers, and **Design Patterns** are the standard recipes that ensure every dish is consistent and easy to prepare.
+## Artificial Intelligence in Games
+Traditionally one of the main research topics in AI (e.g., IBM DeepBlue, AlphaGo)
+• **Applications**:
+    ◦ **NPCs**: Creating believable movement, reactions, and companions
+    ◦ **Design**: Procedural Content Generation (PCG) and Difficulty Estimation
+• **Problem Solving Agents**: Defined by an **Initial State**, **Operators** (actions), and a **Successor Function** to explore the **State Space**
+• **Key Algorithms**:
+    ◦ **Minimax**: Maximizer tries to get the highest score; Minimizer tries for the lowest
+    ◦ **Monte-Carlo Tree Search (MCTS)**: Decision-making based on searching combinatorial trees
+    ◦ **A***: An informed search that minimizes path cost (Actual Cost + Heuristic)
+    ◦ **Neural Networks**: Self-adaptive structures capable of modeling complex real-world scenarios by learning from training data
+
 ## Game Engines & Architecture
 
 A game engine is a platform for team-based product building, composed of several top-level systems
@@ -100,14 +114,35 @@ Engine Systems:
 • **Scene Graph**: A hierarchical data structure specifying relationships between game objects
 • **Rendering Engine**: Converts 3D wireframe models into 2D images using a GPU
 • **Physics Engine**: CPU-based simulation of physical concepts (fluids, soft bodies, fracturing)
-## Artificial Intelligence in Games
-Traditionally one of the main research topics in AI (e.g., IBM DeepBlue, AlphaGo)
-• **Applications**:
-    ◦ **NPCs**: Creating believable movement, reactions, and companions
-    ◦ **Design**: Procedural Content Generation (PCG) and Difficulty Estimation
-• **Problem Solving Agents**: Defined by an **Initial State**, **Operators** (actions), and a **Successor Function** to explore the **State Space**
-• **Key Algorithms**:
-    ◦ **Minimax**: Maximizer tries to get the highest score; Minimizer tries for the lowest
-    ◦ **Monte-Carlo Tree Search (MCTS)**: Decision-making based on searching combinatorial trees
-    ◦ **A***: An informed search that minimizes path cost (Actual Cost + Heuristic)
-    ◦ **Neural Networks**: Self-adaptive structures capable of modeling complex real-world scenarios by learning from training data
+
+----------
+## Questions
+**Q1 "You are trying to make a new online game in Africa, they have bad connection speed. Which protocols would you use and why?"**
+**R:** For a game in a region with poor connection speeds, the primary goals are minimizing bandwidth and reducing latency. Based on this the optimal protocol would be UDP over TCP. UDP is stateless and faster because it does not require the overhead of connection management or the re-transmission of lost packets, which can cause significant lag on slow connections. With binary-based protocols rather than text-based to ensure higher efficiency and less fragmentation. 
+
+**Q2 "You are tasked with developing a game for a modern low-end smartphone. Which era of game history provides the best lessons for dealing with its constraints, and why?"**
+**R:** The era of early mobile era would be ideal to deal with these constraints, it required developers to overcome challenges like limited  CPU, restricted memory and low resolution screens. Which have resurfaced as challenges for modern mobile battery life and hardware limitations.
+
+**Q3 "Your lead programmer complains that changing the 'Player Health' variable from an integer to a float caused errors in 50 different files. Which OOP principle was violated, and how would you fix it?"**
+**R:** This is an **encapsulation** failure. To fix this, you should use **Getter and Setter functions**. This hides the internal data type from the rest of the program, so changes to the variable type only require updating the internal logic of the object rather than every reference in the code.
+
+**Q4 "Your game features a massive forest with 20,000 unique trees, but the game crashes due to memory exhaustion. Which design pattern should you implement to fix this?"**
+**R:** This would be **flyweight pattern**. These patterns shared heavy data across all instances, keeping only unique parameters in individual objects.
+
+**Q5 "You are designing a stealth game where a guard must find the most efficient path to a player's last known location. Which algorithm would you use and what is its formula?"**
+**R:** The algorithm to use would be A*. It minimizes the **Path Cost**, which is calculated as the **Actual Cost from Source + Heuristic Cost to Destination**.
+
+**Q6 "In your FPS game, players complain that bullets sometimes pass through thin walls without hitting them when the frame rate is low. What is this phenomenon called and how do you solve it?"**
+**R:** This is called **Tunneling**. It happens because discrete collision detection only checks for overlaps at specific time steps. The solution is **Continuous Collision Detection**, which calculates the exact **Time of Impact** between frames.
+
+**Q7 "For a high-speed fighting game requiring frame-perfect responses, would you implement a Moore or a Mealy machine for the character states? Why?"**
+**R:** Mealy Machine would be optimal for this case. It has a faster reaction time and the output depends on both the current state and the input allowing same clock cycle response.
+
+**Q8 "Your team is building a lightweight, open-source 2D platformer intended to run in a web browser. Which engine or library would you choose and why?"**
+**R:** The engine to build an open-source 2D platformer intended to run in a web browser would be Godot.
+
+**Q9 "You are developing a feature for your MMORPG where players can trade rare items and gold in a secure marketplace. Which transport protocol (TCP or UDP) would you use for the trade transaction system, and what specific characteristics of that protocol justify your choice?"**
+**R:** For the marketplace security or trading system, **TCP (Transmission Control Protocol)** would be better. While it is slower than UDP, its specific characteristics make it the only suitable choice for sensitive data like player inventory or currency transactions. Its reliable so it guarantees data is delivered without loss, the data integrity to ensure no duplication.
+
+**Q10 "Your game has multiple types of enemies (Goblins, Orcs, and Dragons). They all have 'Health' and a 'TakeDamage' function, but you have written the same damage code in three different files. Which OOP principle should you use to organize this, and why?"**
+**R:** Inheritance should be used, by creating a **superclass** that contains the shared "Health" and "Takedamage" behavior the subclasses of enemies can inherit these properties.

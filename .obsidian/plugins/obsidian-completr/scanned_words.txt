@@ -3058,6 +3058,8 @@ trainable
 tumor
 tint
 transmits
+transforms
+tasked
 Statistic
 SlRvb
 Story
@@ -6104,6 +6106,7 @@ Solving
 SOCK
 STREAM
 Stamp
+Setter
 moc
 modified
 my
@@ -15853,6 +15856,9 @@ colliding
 cheap
 concave
 cleavers
+complains
+complain
+calculates
 hide
 hosted
 heading
@@ -18587,6 +18593,8 @@ hurt
 hurts
 hyperparameter
 hierarchies
+heavy
+hitting
 properties
 png
 page
@@ -21880,6 +21888,8 @@ protect
 prototypical
 projections
 predetermined
+players
+phenomenon
 ITS
 In
 Included
@@ -30699,6 +30709,8 @@ became
 brought
 bodies
 believable
+bytecode
+bullets
 for
 fonts
 files
@@ -33766,6 +33778,8 @@ featuring
 forest
 fluids
 fracturing
+fragmentation
+flyweight
 Obsidian
 Other
 Outline
@@ -42295,6 +42309,7 @@ Grouping
 Getters
 Godot
 GDScript
+Getter
 Check
 Checkboxes
 Callouts
@@ -48115,6 +48130,7 @@ oWD
 optima
 octave
 officially
+overlaps
 Publish
 Pills
 Positions
@@ -51110,6 +51126,7 @@ Physics
 Proprietary
 Procedural
 PCG
+Player
 Depreciated
 Download
 Dark
@@ -54023,6 +54040,7 @@ Difficulty
 DFA
 DLC
 DGRAM
+Decouples
 experience
 enlarges
 either
@@ -57437,6 +57455,8 @@ expanded
 evaluated
 encoder
 electromechanical
+era
+exhaustion
 Allows
 Already
 Adjustments
@@ -60379,6 +60399,7 @@ AABB
 Automata
 Automaton
 Analogy
+Africa
 you
 your
 yt
@@ -65977,6 +65998,8 @@ lawsuits
 lienar
 landmark
 listed
+lag
+lessons
 and
 are
 across
@@ -72282,6 +72305,7 @@ interpreted
 intentional
 interchangeable
 ingredients
+interprets
 used
 using
 upon
@@ -87603,6 +87627,8 @@ stationary
 span
 simulation
 shapes
+smartphone
+screens
 vault
 vn
 vY
@@ -93700,6 +93726,7 @@ refinement
 reacts
 restaurant
 recipes
+resurfaced
 work
 with
 within
@@ -96450,6 +96477,7 @@ wjG
 worse
 wrong
 wireframe
+walls
 Embed
 Edges
 Embeded
@@ -121537,6 +121565,7 @@ Behaviors
 Blueprints
 Broad
 Bounding
+ByteCode
 Wider
 Wrapping
 WQQ
@@ -137970,6 +137999,7 @@ grouping
 gentle
 gate
 graphics
+guard
 qtt
 qa
 qY

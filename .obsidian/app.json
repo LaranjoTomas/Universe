@@ -158,6 +158,8 @@
     "over",
     "ByteCode",
     "bytecode",
-    "NDFA"
+    "NDFA",
+    "DGRAM",
+    "TakeDamage"
   ]
 }
