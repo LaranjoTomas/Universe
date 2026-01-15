@@ -115,6 +115,44 @@ Engine Systems:
 • **Rendering Engine**: Converts 3D wireframe models into 2D images using a GPU
 • **Physics Engine**: CPU-based simulation of physical concepts (fluids, soft bodies, fracturing)
 
+## Game Engines (P9)
+**Game engines** are made of top level systems built as: **Application Hierarchy**, **Scene (or view)** of **Actors**, and components of those actors.
+
+• **Multiple Meanings**: The term is applied to various technologies, including **Application Engines** (like React Native), **Rendering Engines** without complex logic (like NVIDIA Falcor), and full **Frameworks** such as Unreal, Unity, or Godot
+• **The Layered Approach**: A game engine acts as a platform where a team contributes to building a product through a layered hierarchy of hardware, drivers, OS, external libraries, and core systems
+### Top-Level Systems & Design Patterns
+Modern engines are composed of several architectural designs often used in combination
+### Actor Design Pattern
+• **Structure**: Systems are built as an application hierarchy consisting of a **Scene** containing **Actors**
+• **Components**: These actors are collections of view components, meshes, image textures, audio, and logic controllers
+• **Building Models**:
+    ◦ **Classical Hierarchies**: Uses inheritance to share functionality instantly, though it can lead to the "Diamond Problem" or endless inheritance chains
+    ◦ **Entity Component System (ECS)**: Entities hold components (data) which are processed by high-level systems (rendering, physics). This promotes **Data Oriented Design**, grouping similar data to reduce CPU cache misses
+### Singleton Pattern in Engines
+• **Access**: Enables any system to immediately access data through a single controlling instance
+• **Trade-offs**: While engines like **Unity** make heavy use of them for ease of use, they make it difficult to track dependencies or perform unit testing
+Middleware & Subscriber Pattern
+• **Extensibility**: Keeps the core engine small, allowing middleware to fill gaps in state (e.g., GUI state, OS window data)
+• **Mechanics**: Follows a **subscriber design pattern** where actors subscribe to middleware to access application state
+• **Pros/Cons**: It leads to more isolated, cleaner code but introduces technical overhead and subscription costs (O(N)) for engineers
+### Core Engine Components
+A complete game engine is a collection of specialized sub-engines and systems
+• **Rendering Engine**: Converts 3D wireframe models into 2D images using the **GPU**. It handles features like shadows, reflections (RT), global illumination, and depth-of-field
+• **Physics Engine**: Simulates physical concepts using the **CPU**, feeding results back to the renderer. It manages fluid/cloth simulations, vehicle damage, and building destruction
+• **Game Sound**: Implements immersive audio through environment music, music, and dialogues
+• **In-Game Scripting**: Uses very high-level languages to allow for flexible game design
+• **Artificial Intelligence**: Provides the "illusion of intelligence" in NPCs using heuristics
+• **Networking**: Creates multiplayer experiences via protocols like **TCP** and **UDP** (Unicast/Multicast)
+### Scene Graph
+The scene graph is the primary data structure used to specify relationships between game objects
+• **Structure**: A hierarchy of **nodes** where the "World" node branches into lights, cameras, and groups
+• **Functionality**:
+    ◦ **Rendering**: Organizes objects, so the program can easily access data for on-screen rendering
+    ◦ **Management**: Helps programmers understand the hierarchy and assists in efficient **memory management**
+• **Visual Hierarchy Example**:
+    ◦ **World** → Light/Camera/Group
+    ◦ **Group** → Individual Meshes
+
 ----------
 ## Questions
 **Q1 "You are trying to make a new online game in Africa, they have bad connection speed. Which protocols would you use and why?"**
@@ -145,4 +183,17 @@ Engine Systems:
 **R:** For the marketplace security or trading system, **TCP (Transmission Control Protocol)** would be better. While it is slower than UDP, its specific characteristics make it the only suitable choice for sensitive data like player inventory or currency transactions. Its reliable so it guarantees data is delivered without loss, the data integrity to ensure no duplication.
 
 **Q10 "Your game has multiple types of enemies (Goblins, Orcs, and Dragons). They all have 'Health' and a 'TakeDamage' function, but you have written the same damage code in three different files. Which OOP principle should you use to organize this, and why?"**
-**R:** Inheritance should be used, by creating a **superclass** that contains the shared "Health" and "Takedamage" behavior the subclasses of enemies can inherit these properties.
+**R:** Inheritance should be used, by creating a **superclass** that contains the shared "Health" and "Takedamage" behaviour the subclasses of enemies can inherit these properties.
+
+**Q11 "You want to implement a 'killcam' or 'replay' feature in your shooter game where the last 5 seconds of player actions can be re-played or reversed. Which design pattern is most suitable for this?"**
+**R:** The command Pattern, by aggregating apart every player request as an **object**, you can store these in a list or queue to re-run the sequence of actions for a replay.
+
+**Q12 "You are optimizing a physics simulation with 1,000 moving objects. Testing every object against every other object is causing a massive performance drop. What is this complexity called, and how do you fix it?"**
+**R:** The complexity is $O(n^2)$. To fix this, you must implement a **Broad Phase** using **AABB**. This allows the engine to quickly exclude pairs that are certainly not colliding.
+
+**Q13 "In a hierarchical game world, how does the engine keep track of which objects are 'children' of others (e.g., a sword attached to a character's hand)? Which data structure is used?"**
+**R:** The engine uses a **Scene Graph**. This data structure specifies the **relationships and hierarchy** between objects using nodes, allowing the program to access data easily for rendering and memory management. 
+
+**Q14 "You are creating a companion NPC that helps the player navigate through a complex, destructible environment in real-time. Why would you choose a Neural Network over a classic Finite State Machine for this NPC?"**
+
+**R:** Neural Network are self-adaptive and mimic the human "brain's" structure, allowing them to model complex real-world scenarios by learning from training data. A pre-programmed FSM cant adapt well to game environments that change in real-time while NNs can.

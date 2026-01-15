@@ -26,6 +26,7 @@
           {
             "id": "431bda8be5b72ed0",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -33,6 +34,7 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Everything"
             }
@@ -282,9 +284,10 @@
   },
   "active": "431bda8be5b72ed0",
   "lastOpenFiles": [
-    "Education/FAA/Everything.md",
+    "Physics Engine.md",
     "0-HOME.md",
     "Education/TPJ/Everything.md",
+    "Education/FAA/Everything.md",
     "Education/Untitled.md",
     "Education/TPJ",
     "Education/FAA/FAA_Model.md",
@@ -317,7 +320,6 @@
     "Education/ASE/Everything.md",
     "Education/ASE/ADCs.md",
     "imgs/claudio_architecture_thesis.png",
-    "Projects/AM2R/Starting.md",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",

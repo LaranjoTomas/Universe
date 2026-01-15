@@ -5,12 +5,16 @@
       "path": "Education/TPJ/Everything.md"
     },
     {
-      "basename": "Everything",
-      "path": "Education/FAA/Everything.md"
+      "basename": "Physics Engine",
+      "path": "Physics Engine.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/FAA/Everything.md"
     },
     {
       "basename": "FAA_Model",
@@ -195,10 +199,6 @@
     {
       "basename": "Работа с регулярными выражениями",
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
-    },
-    {
-      "basename": "3-BOOKS",
-      "path": "imgs/3-BOOKS.md"
     }
   ],
   "omittedPaths": [],
