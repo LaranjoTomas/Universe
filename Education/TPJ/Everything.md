@@ -91,7 +91,7 @@ Traditionally one of the main research topics in AI (e.g., IBM DeepBlue, AlphaGo
 • **Key Algorithms**:
     ◦ **Minimax**: Maximizer tries to get the highest score; Minimizer tries for the lowest
     ◦ **Monte-Carlo Tree Search (MCTS)**: Decision-making based on searching combinatorial trees
-    ◦ **A***: An informed search that minimizes path cost (Actual Cost + Heuristic)
+    ◦ **A star**: An informed search that minimizes path cost (Actual Cost + Heuristic)
     ◦ **Neural Networks**: Self-adaptive structures capable of modeling complex real-world scenarios by learning from training data
 
 ## Game Engines & Architecture
@@ -180,7 +180,7 @@ The scene graph is the primary data structure used to specify relationships betw
 **R:** The engine to build an open-source 2D platformer intended to run in a web browser would be Godot.
 
 **Q9 "You are developing a feature for your MMORPG where players can trade rare items and gold in a secure marketplace. Which transport protocol (TCP or UDP) would you use for the trade transaction system, and what specific characteristics of that protocol justify your choice?"**
-**R:** For the marketplace security or trading system, **TCP (Transmission Control Protocol)** would be better. While it is slower than UDP, its specific characteristics make it the only suitable choice for sensitive data like player inventory or currency transactions. Its reliable so it guarantees data is delivered without loss, the data integrity to ensure no duplication.
+**R:** For the marketplace security or trading system, **TCP (Transmission Control Protocol)** would be better. While it is slower than UDP, its specific characteristics make it the only suitable choice for sensitive data like player inventory or currency transactions. Its reliable so it guarantees data is delivered without loss, and data integrity to ensure no duplication.
 
 **Q10 "Your game has multiple types of enemies (Goblins, Orcs, and Dragons). They all have 'Health' and a 'TakeDamage' function, but you have written the same damage code in three different files. Which OOP principle should you use to organize this, and why?"**
 **R:** Inheritance should be used, by creating a **superclass** that contains the shared "Health" and "Takedamage" behaviour the subclasses of enemies can inherit these properties.

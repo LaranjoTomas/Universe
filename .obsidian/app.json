@@ -166,6 +166,8 @@
     "killcam",
     "AABB",
     "Falcor",
-    "Unicast"
+    "Unicast",
+    "Astar",
+    " Falco"
   ]
 }

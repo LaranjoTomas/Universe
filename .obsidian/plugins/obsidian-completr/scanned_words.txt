@@ -1926,7 +1926,6 @@ tie
 thread
 threads
 there
-take
 then
 takes
 therefore
@@ -60431,6 +60430,7 @@ Automaton
 Analogy
 Africa
 Actors
+Actor
 you
 your
 yt
