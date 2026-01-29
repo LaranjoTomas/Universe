@@ -1,28 +1,16 @@
 {
   "recentFiles": [
     {
-      "basename": "Everything",
-      "path": "Education/TPJ/Everything.md"
+      "basename": "Starting",
+      "path": "Projects/AM2R/Starting.md"
     },
     {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
     {
-      "basename": "Physics Engine",
-      "path": "Physics Engine.md"
-    },
-    {
-      "basename": "Everything",
-      "path": "Education/FAA/Everything.md"
-    },
-    {
-      "basename": "FAA_Model",
-      "path": "Education/FAA/FAA_Model.md"
-    },
-    {
-      "basename": "Everything",
-      "path": "Education/CLE/Everything.md"
+      "basename": "Tiago_Thesis",
+      "path": "Projects/AM2R/Tiago_Thesis.md"
     },
     {
       "basename": "Edgar_Thesis",
@@ -71,10 +59,6 @@
     {
       "basename": "ADCs",
       "path": "Education/ASE/ADCs.md"
-    },
-    {
-      "basename": "Starting",
-      "path": "Projects/AM2R/Starting.md"
     },
     {
       "basename": "README",
@@ -131,6 +115,10 @@
     {
       "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
       "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
+    },
+    {
+      "basename": "Everything",
+      "path": "Education/CLE/Everything.md"
     },
     {
       "basename": "Questions",
@@ -199,6 +187,18 @@
     {
       "basename": "Работа с регулярными выражениями",
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
+    },
+    {
+      "basename": "3-BOOKS",
+      "path": "imgs/3-BOOKS.md"
+    },
+    {
+      "basename": "Singleton",
+      "path": "Dev/Python/Modules/Singleton.md"
+    },
+    {
+      "basename": "Cristian’s Method_decomposition",
+      "path": "imgs/Cristian’s Method_decomposition.png"
     }
   ],
   "omittedPaths": [],

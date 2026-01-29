@@ -24,43 +24,21 @@
             }
           },
           {
-            "id": "517e0d26f64a3ab6",
+            "id": "5b6aa98f6c5aca39",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Education/TPJ/Everything.md",
+                "file": "Projects/AM2R/Starting.md",
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "Everything"
+              "title": "Starting"
             }
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "5de0b3703b9a9a3f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "e20d749a531ff258",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Education/TPJ/Everything.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Everything"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -115,6 +93,16 @@
             }
           },
           {
+            "id": "091741322f9c461a",
+            "type": "leaf",
+            "state": {
+              "type": "recent-files",
+              "state": {},
+              "icon": "clock",
+              "title": "Recent Files"
+            }
+          },
+          {
             "id": "8a55a172e443128f",
             "type": "leaf",
             "state": {
@@ -124,8 +112,7 @@
               "title": "Recent Files"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "33993677f81e3933",
@@ -148,8 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -302,24 +288,21 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e20d749a531ff258",
+  "active": "5b6aa98f6c5aca39",
   "lastOpenFiles": [
     "0-HOME.md",
-    "Education/TPJ/Everything.md",
+    "imgs/image 11.png",
+    "imgs/faa_ques8_image.png",
+    "imgs/faa_exercise_6.png",
+    "imgs/Faa_resp_ex6.png",
+    "imgs/FAA_Q22_octaveCode.png",
     "Physics Engine.md",
-    "Education/FAA/Everything.md",
-    "Education/Untitled.md",
+    "Education/TPJ/Everything.md",
     "Education/TPJ",
     "Education/FAA/FAA_Model.md",
-    "imgs/image 11.png",
-    "imgs/FAA_Q22_octaveCode.png",
-    "imgs/faa_ques8_image.png",
-    "imgs/Faa_resp_ex6.png",
-    "imgs/faa_exercise_6.png",
-    "Untitled.md",
-    "Projects/AM2R/Tiago_Thesis.md",
-    "Education/CLE/Everything.md",
+    "Education/FAA/Everything.md",
     "Education/FAA",
+    "Projects/AM2R/Tiago_Thesis.md",
     "Projects/AM2R/Edgar_Thesis.md",
     "Projects/AM2R/Cláudio_Thesis.md",
     "Machine Learning.md",
@@ -340,6 +323,8 @@
     "Education/ASE/Everything.md",
     "Education/ASE/ADCs.md",
     "imgs/claudio_architecture_thesis.png",
+    "Projects/AM2R/Starting.md",
+    "README.md",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
