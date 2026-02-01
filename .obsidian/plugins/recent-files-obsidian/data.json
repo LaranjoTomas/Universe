@@ -1,12 +1,44 @@
 {
   "recentFiles": [
     {
+      "basename": "0-HOME",
+      "path": "0-HOME.md"
+    },
+    {
       "basename": "Starting",
       "path": "Projects/AM2R/Starting.md"
     },
     {
-      "basename": "0-HOME",
-      "path": "0-HOME.md"
+      "basename": "haptic_task",
+      "path": "Excalidraw/haptic_task.md"
+    },
+    {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
+    },
+    {
+      "basename": "SD_Exam stuff",
+      "path": "Excalidraw/SD_Exam stuff.md"
+    },
+    {
+      "basename": "SD_SCHEMA",
+      "path": "Excalidraw/SD_SCHEMA.md"
+    },
+    {
+      "basename": "SRC_1",
+      "path": "Excalidraw/SRC_1.md"
+    },
+    {
+      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
+    },
+    {
+      "basename": "blank_breadboard",
+      "path": "imgs/blank_breadboard.png"
+    },
+    {
+      "basename": "README",
+      "path": "README.md"
     },
     {
       "basename": "Tiago_Thesis",
@@ -61,10 +93,6 @@
       "path": "Education/ASE/ADCs.md"
     },
     {
-      "basename": "README",
-      "path": "README.md"
-    },
-    {
       "basename": "2-PROJECTS",
       "path": "2-PROJECTS.md"
     },
@@ -113,10 +141,6 @@
       "path": "imgs/image-2 1.png"
     },
     {
-      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-    },
-    {
       "basename": "Everything",
       "path": "Education/CLE/Everything.md"
     },
@@ -127,14 +151,6 @@
     {
       "basename": "Written Examination",
       "path": "Education/CLE/Written Examination.md"
-    },
-    {
-      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
-    },
-    {
-      "basename": "Untitled",
-      "path": "Excalidraw/Untitled.md"
     },
     {
       "basename": "Summary",
@@ -177,28 +193,12 @@
       "path": "Education/SRC/Exams.md"
     },
     {
-      "basename": "SRC_1",
-      "path": "Excalidraw/SRC_1.md"
-    },
-    {
-      "basename": "SD_Exam stuff",
-      "path": "Excalidraw/SD_Exam stuff.md"
-    },
-    {
       "basename": "Работа с регулярными выражениями",
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
     },
     {
       "basename": "3-BOOKS",
       "path": "imgs/3-BOOKS.md"
-    },
-    {
-      "basename": "Singleton",
-      "path": "Dev/Python/Modules/Singleton.md"
-    },
-    {
-      "basename": "Cristian’s Method_decomposition",
-      "path": "imgs/Cristian’s Method_decomposition.png"
     }
   ],
   "omittedPaths": [],
