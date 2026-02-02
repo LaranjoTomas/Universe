@@ -1926,7 +1926,6 @@ tie
 thread
 threads
 there
-take
 then
 takes
 therefore
@@ -3040,6 +3039,7 @@ trends
 tuned
 tuning
 truly
+trabalhos
 Statistic
 SlRvb
 Story
@@ -9114,6 +9114,7 @@ meter
 mounted
 manufacturers
 motivation
+mostrar
 Root
 Rectangular
 Relationships
@@ -12023,6 +12024,7 @@ Reducing
 Rodrigues
 Receiver
 Range
+Rotas
 created
 cssclasses
 customize
@@ -15721,6 +15723,9 @@ cable
 cargo
 confirming
 confinement
+colocado
+causa
+ciclistas
 hide
 hosted
 heading
@@ -18446,6 +18451,7 @@ holes
 hyperparameters
 housed
 harsh
+haptic
 properties
 png
 page
@@ -21710,6 +21716,7 @@ poorly
 pedestrian
 propose
 prioritization
+planeamento
 ITS
 In
 Included
@@ -24601,6 +24608,7 @@ IMU
 Implementing
 Intelligent
 Immunity
+IOT
 Theme
 The
 Themes
@@ -30484,6 +30492,9 @@ bicycle
 bumper
 backbone
 bitwise
+beneficios
+baixou
+bicicleta
 for
 fonts
 files
@@ -33537,6 +33548,7 @@ feeding
 fusion
 fundamentally
 faulty
+feito
 Obsidian
 Other
 Outline
@@ -50799,6 +50811,8 @@ PCB
 Pothole
 Precision
 Prioritization
+Possiveis
+Possivel
 Depreciated
 Download
 Dark
@@ -57097,6 +57111,8 @@ electrified
 encode
 effectiveness
 electrically
+evitar
+enrico
 Allows
 Already
 Adjustments
@@ -65602,6 +65618,7 @@ laboratory
 luminosity
 lanes
 labeling
+lidar
 and
 are
 across
@@ -68879,6 +68896,7 @@ achievements
 adapting
 automobiles
 arbitration
+alertas
 icon
 in
 if
@@ -83575,6 +83593,7 @@ demanding
 distinguish
 destructive
 differential
+deveria
 snippets
 spans
 smaller
@@ -87112,6 +87131,7 @@ sector
 saturation
 superiority
 saturated
+sons
 vault
 vn
 vY
@@ -89935,6 +89955,7 @@ vcZLaG
 vous
 vision
 validates
+vibra
 re
 right
 rdf
@@ -93179,6 +93200,7 @@ resulted
 refining
 recommendations
 resistant
+rcio
 work
 with
 within
