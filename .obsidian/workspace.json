@@ -22,8 +22,21 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "57fa82f3ad069b75",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/haptic_task.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "haptic_task"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -120,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -285,15 +297,15 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "57fa82f3ad069b75",
   "lastOpenFiles": [
+    "0-HOME.md",
     "Projects/AM2R/Starting.md",
     "Excalidraw/haptic_task.md",
     "Excalidraw/RSA.md",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/SRC_1.md",
-    "0-HOME.md",
     "Excalidraw/Untitled.md",
     "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
