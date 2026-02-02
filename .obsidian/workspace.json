@@ -35,8 +35,7 @@
               "title": "haptic_task"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -297,11 +296,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "57fa82f3ad069b75",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Untitled.md",
+    "Excalidraw/haptic_task.md",
     "0-HOME.md",
     "Projects/AM2R/Starting.md",
-    "Excalidraw/haptic_task.md",
     "Excalidraw/RSA.md",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/SD_SCHEMA.md",
@@ -333,7 +333,6 @@
     "Projects/IPSA/bugs/YFinance.md",
     "Projects/OWL/TASKS/TASKS ON 15.03.2025.md",
     "Projects/OWL/TASKS/TASKS ON 14.03.2025.md",
-    "Projects/OWL/Documentation.md",
     "imgs/claudio_dataPersistence_thesis.png",
     "imgs/claudio_architecture_thesis.png",
     "DOCUMENTS/C2.pdf",

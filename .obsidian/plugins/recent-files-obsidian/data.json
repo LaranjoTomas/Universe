@@ -1,12 +1,12 @@
 {
   "recentFiles": [
     {
-      "basename": "haptic_task",
-      "path": "Excalidraw/haptic_task.md"
-    },
-    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "haptic_task",
+      "path": "Excalidraw/haptic_task.md"
     },
     {
       "basename": "Starting",
@@ -195,10 +195,6 @@
     {
       "basename": "Работа с регулярными выражениями",
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
-    },
-    {
-      "basename": "3-BOOKS",
-      "path": "imgs/3-BOOKS.md"
     }
   ],
   "omittedPaths": [],
