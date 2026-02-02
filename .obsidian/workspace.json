@@ -34,8 +34,21 @@
               "icon": "excalidraw-icon",
               "title": "haptic_task"
             }
+          },
+          {
+            "id": "e188a6572363d567",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/haptic_task.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "haptic_task"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -296,11 +309,11 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "e188a6572363d567",
   "lastOpenFiles": [
+    "0-HOME.md",
     "Untitled.md",
     "Excalidraw/haptic_task.md",
-    "0-HOME.md",
     "Projects/AM2R/Starting.md",
     "Excalidraw/RSA.md",
     "Excalidraw/SD_Exam stuff.md",
