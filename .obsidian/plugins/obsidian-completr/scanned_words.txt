@@ -3135,6 +3135,8 @@ transforms
 tall
 telling
 torque
+transceivers
+tracked
 Statistic
 SlRvb
 Story
@@ -6229,6 +6231,7 @@ Sound
 Spot
 Strain
 Surveillance
+Sketches
 moc
 modified
 my
@@ -9363,6 +9366,9 @@ marcados
 mara
 mask
 meters
+motorVelocity
+multiPCB
+manufacturing
 Root
 Rectangular
 Relationships
@@ -12358,6 +12364,7 @@ Rotas
 Redu
 Roubo
 Rider
+README
 created
 cssclasses
 customize
@@ -16151,6 +16158,7 @@ clip
 ciclista
 capacete
 coming
+cargoBike
 hide
 hosted
 heading
@@ -18931,6 +18939,8 @@ hruOr
 haptic
 helmets
 helmet
+heartRateSensor
+hrCAN
 properties
 png
 page
@@ -22279,6 +22289,9 @@ positives
 parking
 prioritizes
 parked
+pothole
+parsing
+pcbESP
 ITS
 In
 Included
@@ -25227,6 +25240,7 @@ IlXUQ
 Interview
 IeFcLdMY
 IOT
+Individual
 Theme
 The
 Themes
@@ -28116,6 +28130,8 @@ TFHww
 ThZo
 TVjG
 Theft
+TWAIController
+TFLite
 by
 better
 br
@@ -31253,6 +31269,8 @@ baixou
 bicicleta
 brutos
 bruscos
+bikeDisplayFirmware
+backCombo
 for
 fonts
 files
@@ -34377,6 +34395,7 @@ falsos
 funcionar
 fusing
 face
+functionalTests
 Obsidian
 Other
 Outline
@@ -40169,6 +40188,7 @@ Vibrating
 Voter
 Vigil
 Vulner
+VCS
 Guide
 Graph
 Gee
@@ -43082,6 +43102,9 @@ GQUl
 GloV
 Gpqh
 Green
+Gyro
+GNSS
+Gerber
 Check
 Checkboxes
 Callouts
@@ -46216,6 +46239,10 @@ Consci
 Confidence
 Cell
 Caution
+CANReceiver
+CANSender
+COCO
+CAMOutputs
 out
 on
 of
@@ -52049,6 +52076,7 @@ Peso
 Proximity
 Physiological
 Perimeter
+Placeholder
 Depreciated
 Download
 Dark
@@ -58466,6 +58494,7 @@ estacionada
 esquerda
 excels
 echoes
+exampleMotor
 Allows
 Already
 Adjustments
@@ -61437,6 +61466,7 @@ Alcance
 Assist
 Anti
 Accelerometers
+Assembly
 you
 your
 yt
@@ -67195,6 +67225,15 @@ lidos
 lula
 limiar
 lights
+lightmobie
+lightSensor
+loadCellSensor
+logicAnalyser
+luxUART
+lux
+lidarCAN
+lidarUART
+luxCAN
 and
 are
 across
@@ -70551,6 +70590,8 @@ aceler
 ativado
 autim
 aviso
+assets
+analyzer
 icon
 in
 if
@@ -73624,6 +73665,8 @@ inclina
 impactos
 identificar
 inclines
+inference
+integrations
 used
 using
 upon
@@ -76703,6 +76746,8 @@ uwi
 ultrass
 ultrapassar
 uploaded
+ultraSonicSensor
+ultrasonic
 No
 Navigation
 NzZj
@@ -79458,6 +79503,7 @@ NSu
 Nxt
 NKR
 NZKÜ
+NPZ
 need
 near
 ns
@@ -85632,6 +85678,13 @@ determinado
 drasticamente
 direita
 direito
+decoder
+dbc
+diagrams
+drivers
+demo
+drill
+dsl
 snippets
 spans
 smaller
@@ -89251,6 +89304,8 @@ sincronizados
 struggle
 surfaces
 sharp
+sketches
+suites
 vault
 vn
 vY
@@ -92156,6 +92211,7 @@ verticais
 vermelho
 viseira
 visor
+visualization
 re
 right
 rdf
@@ -98295,6 +98351,7 @@ wNq
 wxvmAk
 whj
 weaknesses
+weightSensor
 Embed
 Edges
 Embeded
@@ -101223,6 +101280,7 @@ Encaminhamento
 Energia
 Estrada
 Energy
+EAGLE
 Kanban
 KD
 KuTyw
@@ -103985,6 +104043,7 @@ KfM
 KpY
 KyE
 Kmrysu
+KiCad
 Features
 Folder
 File
@@ -106960,6 +107019,7 @@ Fusion
 Filtragem
 Fidelity
 Fatigue
+Focused
 Light
 Larger
 Line
@@ -109775,6 +109835,8 @@ LeA
 LIT
 LLhb
 LightMobie
+Lighting
+Lux
 Heading
 Horizontal
 Headings
@@ -112608,6 +112670,7 @@ HIy
 HwVk
 HNd
 Heatmap
+Helper
 Underline
 Ue
 Uy
@@ -118146,6 +118209,7 @@ Morto
 Mapeamento
 Mapa
 Mensagem
+MCP
 Zoom
 ZTz
 ZW
@@ -123850,6 +123914,7 @@ Booth
 Buracos
 Bike
 Blind
+BCycleIoTModule
 Wider
 Wrapping
 WQQ
@@ -126732,6 +126797,7 @@ Wua
 WJmWJl
 WmXD
 Wave
+Workspace
 Quotation
 Query
 Qss
@@ -140708,6 +140774,7 @@ glass
 glare
 grass
 gaze
+gitkeep
 qtt
 qa
 qY
@@ -146200,6 +146267,8 @@ jaS
 jIBL
 jkKV
 jOvy
+jCOM
+joblib
 knmOD
 kae
 kX

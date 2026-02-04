@@ -24,31 +24,21 @@
             }
           },
           {
-            "id": "57fa82f3ad069b75",
+            "id": "9cc884e3bb55b3c0",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/haptic_task.md"
+                "file": "Projects/AM2R/AM2R-Workspace-Overview.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "excalidraw-icon",
-              "title": "haptic_task"
-            }
-          },
-          {
-            "id": "e188a6572363d567",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/haptic_task.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "haptic_task"
+              "icon": "lucide-file",
+              "title": "AM2R-Workspace-Overview"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -145,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -309,11 +300,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e188a6572363d567",
+  "active": "9cc884e3bb55b3c0",
   "lastOpenFiles": [
+    "Excalidraw/haptic_task.md",
+    "Projects/AM2R/AM2R-Workspace-Overview.md",
     "0-HOME.md",
     "Untitled.md",
-    "Excalidraw/haptic_task.md",
     "Projects/AM2R/Starting.md",
     "Excalidraw/RSA.md",
     "Excalidraw/SD_Exam stuff.md",
@@ -345,7 +337,6 @@
     "Projects/IPSA/IPSA Documentation.md",
     "Projects/IPSA/bugs/YFinance.md",
     "Projects/OWL/TASKS/TASKS ON 15.03.2025.md",
-    "Projects/OWL/TASKS/TASKS ON 14.03.2025.md",
     "imgs/claudio_dataPersistence_thesis.png",
     "imgs/claudio_architecture_thesis.png",
     "DOCUMENTS/C2.pdf",
