@@ -1,16 +1,20 @@
 {
   "recentFiles": [
     {
+      "basename": "Rasberry Pi Workspace",
+      "path": "Projects/AM2R/Rasberry Pi Workspace.md"
+    },
+    {
       "basename": "AM2R-Workspace-Overview",
       "path": "Projects/AM2R/AM2R-Workspace-Overview.md"
     },
     {
-      "basename": "haptic_task",
-      "path": "Excalidraw/haptic_task.md"
-    },
-    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "haptic_task",
+      "path": "Excalidraw/haptic_task.md"
     },
     {
       "basename": "Starting",
@@ -195,10 +199,6 @@
     {
       "basename": "Exams",
       "path": "Education/SRC/Exams.md"
-    },
-    {
-      "basename": "Работа с регулярными выражениями",
-      "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
     }
   ],
   "omittedPaths": [],
