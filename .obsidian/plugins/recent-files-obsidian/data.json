@@ -5,12 +5,12 @@
       "path": "Projects/AM2R/Rasberry Pi Workspace.md"
     },
     {
-      "basename": "AM2R-Workspace-Overview",
-      "path": "Projects/AM2R/AM2R-Workspace-Overview.md"
-    },
-    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
+    },
+    {
+      "basename": "AM2R-Workspace-Overview",
+      "path": "Projects/AM2R/AM2R-Workspace-Overview.md"
     },
     {
       "basename": "haptic_task",
