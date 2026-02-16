@@ -14,13 +14,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projects/AM2R/Starting.md",
+                "file": "0-HOME.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "Starting"
+              "title": "0-HOME"
             }
           }
         ]
@@ -275,9 +275,9 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "0-HOME.md",
     "Projects/AM2R/Starting.md",
     "Untitled.md",
-    "0-HOME.md",
     "imgs/blank_breadboard.png",
     "Excalidraw/haptic_task.md",
     "Excalidraw/SD_SCHEMA.md",
