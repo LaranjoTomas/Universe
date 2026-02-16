@@ -14,29 +14,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "0-HOME.md",
+                "file": "Projects/AM2R/Starting.md",
                 "mode": "source",
                 "source": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "0-HOME"
-            }
-          },
-          {
-            "id": "3d76552004a66c33",
-            "type": "leaf",
-            "state": {
-              "type": "excalidraw",
-              "state": {
-                "file": "Excalidraw/SD_SCHEMA.md"
-              },
-              "icon": "excalidraw-icon",
-              "title": "SD_SCHEMA"
+              "title": "Starting"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -286,15 +273,19 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "3d76552004a66c33",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "Projects/AM2R/Starting.md",
+    "Untitled.md",
+    "0-HOME.md",
+    "imgs/blank_breadboard.png",
+    "Excalidraw/haptic_task.md",
+    "Excalidraw/SD_SCHEMA.md",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/RSA.md",
     "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
     "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
     "Excalidraw/ASE-Schematic.md",
-    "0-HOME.md",
-    "Projects/AM2R/Starting.md",
     "imgs/image 11.png",
     "imgs/faa_ques8_image.png",
     "imgs/faa_exercise_6.png",
@@ -319,15 +310,11 @@
     "Projects/OWL/TASKS/TASKS ON 14.03.2025.md",
     "Projects/OWL/Documentation.md",
     "Projects/OWL/Backend/Utils.md",
-    "Projects/OWL/Backend/Server DB.md",
-    "Projects/OWL/Backend/Backend documentation.md",
     "imgs/claudio_dataPersistence_thesis.png",
-    "Education/RSA/Peer-to-Peer System and Networks.md",
     "imgs/claudio_architecture_thesis.png",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
-    "imgs/Pasted Image 20250624180115_080.png",
     "Excalidraw/Scripts/Downloaded",
     "Excalidraw/Scripts",
     "Templates",
