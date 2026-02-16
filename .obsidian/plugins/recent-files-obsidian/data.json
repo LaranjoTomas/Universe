@@ -1,6 +1,30 @@
 {
   "recentFiles": [
     {
+      "basename": "SD_SCHEMA",
+      "path": "Excalidraw/SD_SCHEMA.md"
+    },
+    {
+      "basename": "SD_Exam stuff",
+      "path": "Excalidraw/SD_Exam stuff.md"
+    },
+    {
+      "basename": "RSA",
+      "path": "Excalidraw/RSA.md"
+    },
+    {
+      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
+    },
+    {
+      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
+      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
+    },
+    {
+      "basename": "ASE-Schematic",
+      "path": "Excalidraw/ASE-Schematic.md"
+    },
+    {
       "basename": "0-HOME",
       "path": "0-HOME.md"
     },
@@ -81,10 +105,6 @@
       "path": "imgs/xVjTHlMHgMUM.jpg"
     },
     {
-      "basename": "ASE-Schematic",
-      "path": "Excalidraw/ASE-Schematic.md"
-    },
-    {
       "basename": "RSA_Test",
       "path": "Education/RSA/RSA_Test.md"
     },
@@ -113,10 +133,6 @@
       "path": "imgs/image-2 1.png"
     },
     {
-      "basename": "Drawing 2025-06-19 20.27.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md"
-    },
-    {
       "basename": "Everything",
       "path": "Education/CLE/Everything.md"
     },
@@ -127,10 +143,6 @@
     {
       "basename": "Written Examination",
       "path": "Education/CLE/Written Examination.md"
-    },
-    {
-      "basename": "Drawing 2025-06-09 19.42.32.excalidraw",
-      "path": "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md"
     },
     {
       "basename": "Untitled",
@@ -181,24 +193,12 @@
       "path": "Excalidraw/SRC_1.md"
     },
     {
-      "basename": "SD_Exam stuff",
-      "path": "Excalidraw/SD_Exam stuff.md"
-    },
-    {
       "basename": "Работа с регулярными выражениями",
       "path": "Dev/Python/Modules/Работа с регулярными выражениями.md"
     },
     {
       "basename": "3-BOOKS",
       "path": "imgs/3-BOOKS.md"
-    },
-    {
-      "basename": "Singleton",
-      "path": "Dev/Python/Modules/Singleton.md"
-    },
-    {
-      "basename": "Cristian’s Method_decomposition",
-      "path": "imgs/Cristian’s Method_decomposition.png"
     }
   ],
   "omittedPaths": [],

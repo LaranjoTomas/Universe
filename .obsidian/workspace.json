@@ -22,8 +22,21 @@
               "icon": "lucide-file",
               "title": "0-HOME"
             }
+          },
+          {
+            "id": "3d76552004a66c33",
+            "type": "leaf",
+            "state": {
+              "type": "excalidraw",
+              "state": {
+                "file": "Excalidraw/SD_SCHEMA.md"
+              },
+              "icon": "excalidraw-icon",
+              "title": "SD_SCHEMA"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -273,8 +286,13 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "e7a7b303c61786dc",
+  "active": "3d76552004a66c33",
   "lastOpenFiles": [
+    "Excalidraw/SD_Exam stuff.md",
+    "Excalidraw/RSA.md",
+    "Excalidraw/Drawing 2025-06-19 20.27.32.excalidraw.md",
+    "Excalidraw/Drawing 2025-06-09 19.42.32.excalidraw.md",
+    "Excalidraw/ASE-Schematic.md",
     "0-HOME.md",
     "Projects/AM2R/Starting.md",
     "imgs/image 11.png",
@@ -305,11 +323,7 @@
     "Projects/OWL/Backend/Backend documentation.md",
     "imgs/claudio_dataPersistence_thesis.png",
     "Education/RSA/Peer-to-Peer System and Networks.md",
-    "Education/RSA/Everything.md",
-    "Education/ASE/Everything.md",
-    "Education/ASE/ADCs.md",
     "imgs/claudio_architecture_thesis.png",
-    "README.md",
     "DOCUMENTS/C2.pdf",
     "Projects/AM2R",
     "imgs/xVjTHlMHgMUM.jpg",
