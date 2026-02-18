@@ -43,10 +43,10 @@ ssh nap@10.0.22.186
 CAN IDS {'weight': 352079698, 'ultrasonic': 284838243, 'lidar': 150921297, 'camera': 217060194, 'gyro': 285141093, 'accelero': 284169062, 'latitude': 285143911, 'longitude': 285143908, 'heart': 150929505, 'speed': 285143400, 'heading': 301008233, 'lidar_detect': 285139056, 'lux': 150929248}
 ```
 
-### Listen on the specific topic
+### Listen on the all topics
 
 ```bash
-mosquitto_hub -h 127.0.0.1 -p 1883 -t 'rpi/#' -v
+mosquitto_hub -h 127.0.0.1 -p 1883 -t rpi/# -v
 ```
 
 
@@ -60,3 +60,10 @@ make -j$(nproc)
 ```
 
 Abnormal connection may be due to LiDAR being used by the background script which is always running.
+
+## CAM 
+
+Inside the folder .../rpi/CAM
+```bash
+python3 OpenCVTflite.py --model mobilenet_ssd_v2_coco_quant_postprocess.tflite --labels coco_labels.txt
+```

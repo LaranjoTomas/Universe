@@ -3137,6 +3137,7 @@ telling
 torque
 transceivers
 tracked
+trabalhar
 Statistic
 SlRvb
 Story
@@ -61475,6 +61476,7 @@ Anti
 Accelerometers
 Assembly
 Abnormal
+Apartir
 you
 your
 yt
@@ -82269,6 +82271,7 @@ nCt
 ndice
 ngulo
 nuvem
+nesta
 download
 depending
 does
@@ -95543,6 +95546,7 @@ reflective
 recognized
 rider
 rcv
+recolher
 work
 with
 within

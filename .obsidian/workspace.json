@@ -24,8 +24,9 @@
             }
           },
           {
-            "id": "ce7e1f757e44859c",
+            "id": "8c0ad6836d7f3519",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -33,12 +34,27 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Rasberry Pi Workspace"
             }
+          },
+          {
+            "id": "3b5bfeab08efb22b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projects/AM2R/Starting.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Starting"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -299,12 +315,12 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "ce7e1f757e44859c",
+  "active": "3b5bfeab08efb22b",
   "lastOpenFiles": [
-    "Untitled.md",
+    "Projects/AM2R/AM2R-Workspace-Overview.md",
     "Projects/AM2R/Rasberry Pi Workspace.md",
     "0-HOME.md",
-    "Projects/AM2R/AM2R-Workspace-Overview.md",
+    "Untitled.md",
     "Excalidraw/haptic_task.md",
     "Projects/AM2R/Starting.md",
     "Excalidraw/RSA.md",

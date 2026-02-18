@@ -4,7 +4,35 @@ Ler wiki, do edgar, gonçalo silva, tiago rodrigues. claudio sencio
 
 # TO-DO
 
-Apartir da informação que está a ir para o broker local, fazer uma base de dados para depois poder trabalhar nesta. Esta base de dados deve recolher os dados que está a ser enviado para o broker local.
+Apartir da informação que está a ir para o broker local, fazer uma base de dados para depois poder trabalhar nesta. Esta base de dados deve recolher os dados que está a ser enviado para o broker local. (Done)
+
+## Data Logger
+
+To start the data logger:
+
+```bash
+python3 mqtt_data_logger.py &
+```
+
+It is possible to check if it's running with 
+
+```bash
+python3 sensor_query.py sensors
+```
+
+To inspect the data the following commands are possible:
+
+```bash
+python3 sensor_query.py latest # Last 20 readings
+
+python3 sensor_query.py latest 50 heart # Last 50 heart readings
+
+python3 sensor_query.py sensors # List all sensors
+
+python3 sensor_query.py stats lux # Min/max/avg for lux
+
+python3 sensor_query.py time 2 temperature # Last 2 hours of data
+```
 
 ## Possiveis trabalhos / paths
 

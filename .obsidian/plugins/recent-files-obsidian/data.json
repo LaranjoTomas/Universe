@@ -1,6 +1,14 @@
 {
   "recentFiles": [
     {
+      "basename": "Starting",
+      "path": "Projects/AM2R/Starting.md"
+    },
+    {
+      "basename": "AM2R-Workspace-Overview",
+      "path": "Projects/AM2R/AM2R-Workspace-Overview.md"
+    },
+    {
       "basename": "Rasberry Pi Workspace",
       "path": "Projects/AM2R/Rasberry Pi Workspace.md"
     },
@@ -9,16 +17,8 @@
       "path": "0-HOME.md"
     },
     {
-      "basename": "AM2R-Workspace-Overview",
-      "path": "Projects/AM2R/AM2R-Workspace-Overview.md"
-    },
-    {
       "basename": "haptic_task",
       "path": "Excalidraw/haptic_task.md"
-    },
-    {
-      "basename": "Starting",
-      "path": "Projects/AM2R/Starting.md"
     },
     {
       "basename": "RSA",
