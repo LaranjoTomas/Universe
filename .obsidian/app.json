@@ -176,6 +176,7 @@
     "LiDAR",
     "LightMobie",
     "mediamtx",
-    "WiringPi"
+    "WiringPi",
+    "lidartest"
   ]
 }

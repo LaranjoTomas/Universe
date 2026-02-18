@@ -49,3 +49,14 @@ CAN IDS {'weight': 352079698, 'ultrasonic': 284838243, 'lidar': 150921297, 'came
 mosquitto_hub -h 127.0.0.1 -p 1883 -t 'rpi/#' -v
 ```
 
+
+## LiDAR File
+
+In LiDAR_Can the _./lidartest_ executable is runnable. Currently, gives abnormal connection but to run it do this:
+
+```bash
+make clean
+make -j$(nproc)
+```
+
+Abnormal connection may be due to LiDAR being used by the background script which is always running.
