@@ -195,10 +195,6 @@
     {
       "basename": "Written Exam Type",
       "path": "Education/SD/Written Exam Type.md"
-    },
-    {
-      "basename": "Exams",
-      "path": "Education/SRC/Exams.md"
     }
   ],
   "omittedPaths": [],

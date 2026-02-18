@@ -2,6 +2,10 @@
 
 Ler wiki, do edgar, gonçalo silva, tiago rodrigues. claudio sencio
 
+# TO-DO
+
+Apartir da informação que está a ir para o broker local, fazer uma base de dados para depois poder trabalhar nesta. Esta base de dados deve recolher os dados que está a ser enviado para o broker local.
+
 ## Possiveis trabalhos / paths
 
 ### Fusão de sensor LiDAR e ultra sons com os que vem de trás.
