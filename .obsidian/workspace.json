@@ -24,24 +24,9 @@
             }
           },
           {
-            "id": "8c0ad6836d7f3519",
+            "id": "a5a0303d53d11a83",
             "type": "leaf",
             "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projects/AM2R/Rasberry Pi Workspace.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "Rasberry Pi Workspace"
-            }
-          },
-          {
-            "id": "3b5bfeab08efb22b",
-            "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
@@ -49,12 +34,29 @@
                 "mode": "source",
                 "source": false
               },
+              "pinned": true,
               "icon": "lucide-file",
               "title": "Starting"
             }
+          },
+          {
+            "id": "e0cd2cffe1caf64c",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projects/AM2R/AM2R-Workspace-Overview.md",
+                "mode": "source",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "AM2R-Workspace-Overview"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -151,7 +153,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5
+    "width": 262.5,
+    "collapsed": true
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -315,14 +318,14 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "3b5bfeab08efb22b",
+  "active": "a5a0303d53d11a83",
   "lastOpenFiles": [
     "Projects/AM2R/AM2R-Workspace-Overview.md",
-    "Projects/AM2R/Rasberry Pi Workspace.md",
+    "Projects/AM2R/Starting.md",
     "0-HOME.md",
+    "Projects/AM2R/Rasberry Pi Workspace.md",
     "Untitled.md",
     "Excalidraw/haptic_task.md",
-    "Projects/AM2R/Starting.md",
     "Excalidraw/RSA.md",
     "Excalidraw/SD_Exam stuff.md",
     "Excalidraw/SD_SCHEMA.md",

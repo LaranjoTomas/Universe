@@ -34,6 +34,22 @@ python3 sensor_query.py stats lux # Min/max/avg for lux
 python3 sensor_query.py time 2 temperature # Last 2 hours of data
 ```
 
+## CAM sensor
+
+To get fixed images with the sensor execute the followign command:
+
+```bash
+python3 imageCapture.py
+```
+
+The `OpenCVTflite.py` script is to run real-time object detection on frames from the Pi camera using a TensorFlow Lite SSD model. It draws boxes and labels for people/vehicle classes, prints FPS and can show the video window.
+
+```bash
+# To make ti show the video remove "--headless" section
+python3 OpenCVTflite.py --model mobilenet_ssd_v2_coco_quant_postprocess.tflite --labels coco_labels.txt --headless
+```
+
+
 ## Possiveis trabalhos / paths
 
 ### Fusão de sensor LiDAR e ultra sons com os que vem de trás.
@@ -61,16 +77,6 @@ Combinando estes dois sensores é bastante eficaz porque compensam mutuamente as
 - **Mapeamento de Buracos e Qualidade da Estrada (IMU + GPS):** Utilizando a IMU (acelerómetros), é possível detectar impactos verticais bruscos. Estes dados são marcados temporalmente via GPS e enviados para a cloud **LightMobie**. Isto permite criar um "Mapa de Calor" da qualidade das estradas, visível por outros ciclistas nos seus capacetes de AR como um ícone de "Cuidado".
 - **Vigilância Anti-Roubo (Câmara + LiDAR):** Quando a bicicleta está estacionada, o LiDAR passa a funcionar como um "Perímetro Virtual". Se o LiDAR detectar movimento dentro de 30 cm e a câmara identificar um rosto humano que não seja reconhecido como o do proprietário, é ativado um alerta celular e é gravado um clip de X segundos.
 - **VAM (Mensagem de Consciência de Utilizadores Vulneráveis da Via):** A bicicleta utiliza a **câmara** para detectar o olhar do ciclista. Se a câmara identificar que o ciclista está a olhar para a esquerda, mas o **LiDAR traseiro** detectar um autimóvel a ultrapassar pela direita, o sistema V2X envia um alerta para o veículo para reduzir a velocidade, enquanto o capacete de AR faz piscar um aviso vermelho no lado direito da viseira.
-
-
-
-
-
-
-
-
-
-
 ## Intelligent Mobility Services: Data-Driven E-Bike Ecosystem
 
 The fusion of on-board telemetry with V2X connectivity transforms the bicycle into a "Mobile Sensing Node." Below are the architectural possibilities for your thesis.
