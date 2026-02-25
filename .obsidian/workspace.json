@@ -24,9 +24,8 @@
             }
           },
           {
-            "id": "a5a0303d53d11a83",
+            "id": "da10c0b419183e87",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
@@ -34,25 +33,8 @@
                 "mode": "source",
                 "source": false
               },
-              "pinned": true,
               "icon": "lucide-file",
               "title": "Starting"
-            }
-          },
-          {
-            "id": "e0cd2cffe1caf64c",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projects/AM2R/AM2R-Workspace-Overview.md",
-                "mode": "source",
-                "source": false
-              },
-              "pinned": true,
-              "icon": "lucide-file",
-              "title": "AM2R-Workspace-Overview"
             }
           }
         ],
@@ -153,8 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 262.5,
-    "collapsed": true
+    "width": 262.5
   },
   "right": {
     "id": "c3afcab963e39ab3",
@@ -318,11 +299,11 @@
       "periodic-notes:Open today": false
     }
   },
-  "active": "a5a0303d53d11a83",
+  "active": "da10c0b419183e87",
   "lastOpenFiles": [
-    "Projects/AM2R/AM2R-Workspace-Overview.md",
-    "Projects/AM2R/Starting.md",
     "0-HOME.md",
+    "Projects/AM2R/Starting.md",
+    "Projects/AM2R/AM2R-Workspace-Overview.md",
     "Projects/AM2R/Rasberry Pi Workspace.md",
     "Untitled.md",
     "Excalidraw/haptic_task.md",
