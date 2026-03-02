@@ -28,7 +28,7 @@ __export(main_exports, {
   default: () => DNPlugin
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian15 = require("obsidian");
+var import_obsidian17 = require("obsidian");
 
 // src/settings.ts
 var import_obsidian = require("obsidian");
@@ -45,7 +45,10 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.DN_MODAL.open();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Default modal view").setDesc("Select the initial view for this plugin's modal when it opens using its primary ribbon icon.").addDropdown((sel) => {
+    const headingPreferencesGroup = containerEl.createEl("div", { cls: "setting-group" });
+    headingPreferencesGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    const headingPreferencesGroupItems = headingPreferencesGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Default modal view").setDesc("Select the initial view for this plugin's modal when it opens using its primary ribbon icon.").addDropdown((sel) => {
       this.dropdownDefaultView = sel;
       sel.addOption("1", "Dashboard");
       sel.addOption("2", "Navigator");
@@ -65,7 +68,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Date format").setDesc("Select date format.").addDropdown((sel) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Date format").setDesc("Select date format.").addDropdown((sel) => {
       this.dropdownDateFormat = sel;
       sel.addOption("YYYY-MM-DD HH:mm:ss", "YYYY-MM-DD HH:mm:ss");
       sel.addOption("YYYY-MM-DD HH:mm", "YYYY-MM-DD HH:mm");
@@ -88,7 +91,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Font size").setDesc("Select font size in pixels for results and links.").addSlider((sli) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Font size").setDesc("Select font size in pixels for results and links.").addSlider((sli) => {
       this.sliderFontSize = sli;
       let slider_val;
       if (this.plugin.settings.font_size) {
@@ -114,7 +117,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Recent files").setDesc("Dashboard: Number of recent files per category.").addDropdown((sel) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Recent files").setDesc("Dashboard: Number of recent files per category.").addDropdown((sel) => {
       this.dropdownRecentFiles = sel;
       sel.addOption("3", "3");
       sel.addOption("4", "4");
@@ -135,7 +138,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Bookmarks").setDesc("Dashboard: Number of bookmarks to display.").addDropdown((sel) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Bookmarks").setDesc("Dashboard: Number of bookmarks to display.").addDropdown((sel) => {
       this.dropdownBookmarkedFiles = sel;
       sel.addOption("3", "3");
       sel.addOption("4", "4");
@@ -156,7 +159,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Show pie chart panel").setDesc("Dashboard: Displays a pie chart of file types and a count of all files and folders.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Show pie chart panel").setDesc("Dashboard: Displays a pie chart of file types and a count of all files and folders.").addToggle((toggle) => {
       this.togglePieChartModule = toggle;
       toggle.setValue(this.plugin.settings.show_dashboard_piechart).onChange(async (val) => {
         this.plugin.settings.show_dashboard_piechart = val;
@@ -173,7 +176,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Search results layout").setDesc("Navigator: Select search results layout.").addDropdown((sel) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Search results layout").setDesc("Navigator: Select search results layout.").addDropdown((sel) => {
       this.dropdownTableLayout = sel;
       sel.addOption("dn-tbl-default", "Default");
       sel.addOption("dn-tbl-row", "Row striped");
@@ -195,7 +198,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Files per page").setDesc("Navigator: Number of results per page.").addDropdown((sel) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Files per page").setDesc("Navigator: Number of results per page.").addDropdown((sel) => {
       this.dropdownFilesPerPage = sel;
       sel.addOption("10", "10");
       sel.addOption("20", "20");
@@ -217,7 +220,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Remember last search").setDesc("Keeps the search query in the main input field. Turn this off for a fresh, empty search every time.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingPreferencesGroupItems).setName("Remember last search").setDesc("Keeps the search query in the main input field. Turn this off for a fresh, empty search every time.").addToggle((toggle) => {
       this.toggleRememberLastSearch = toggle;
       toggle.setValue(this.plugin.settings.remember_last_search).onChange(async (val) => {
         this.plugin.settings.remember_last_search = val;
@@ -234,10 +237,11 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    const headingColumns1 = containerEl.createEl("div", { cls: "setting-item setting-item-heading" });
-    const headingColumns2 = headingColumns1.createEl("div", { cls: "setting-item setting-item-info" });
-    headingColumns2.createEl("div", { text: "Hidden columns", cls: "setting-item-name" });
-    new import_obsidian.Setting(containerEl).setName("Hide: Ext").setDesc("Navigator: Hide file extension column.").addToggle((toggle) => {
+    const headingColumnsGroup = containerEl.createEl("div", { cls: "setting-group" });
+    const headingColumns1 = headingColumnsGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingColumns1.createEl("div", { text: "Hidden columns", cls: "setting-item-name" });
+    const headingColumnsGroupItems = headingColumnsGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Ext").setDesc("Navigator: Hide file extension column.").addToggle((toggle) => {
       this.toggleHideExtColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_ext).onChange(async (val) => {
         this.plugin.settings.hide_ext = val;
@@ -254,7 +258,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: Path").setDesc("Navigator: Hide path column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Path").setDesc("Navigator: Hide path column.").addToggle((toggle) => {
       this.toggleHidePathColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_path).onChange(async (val) => {
         this.plugin.settings.hide_path = val;
@@ -271,7 +275,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: Size").setDesc("Navigator: Hide size column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Size").setDesc("Navigator: Hide size column.").addToggle((toggle) => {
       this.toggleHideSizeColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_size).onChange(async (val) => {
         this.plugin.settings.hide_size = val;
@@ -288,7 +292,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: Date").setDesc("Navigator: Hide date column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Date").setDesc("Navigator: Hide date column.").addToggle((toggle) => {
       this.toggleHideDateColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_date).onChange(async (val) => {
         this.plugin.settings.hide_date = val;
@@ -305,7 +309,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: Tags").setDesc("Navigator: Hide tags column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Tags").setDesc("Navigator: Hide tags column.").addToggle((toggle) => {
       this.toggleHideTagsColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_tags).onChange(async (val) => {
         this.plugin.settings.hide_tags = val;
@@ -322,7 +326,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: Frontmatter").setDesc("Navigator: Hide frontmatter properties column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: Frontmatter").setDesc("Navigator: Hide frontmatter properties column.").addToggle((toggle) => {
       this.toggleHideFrontmatterColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_frontmatter).onChange(async (val) => {
         this.plugin.settings.hide_frontmatter = val;
@@ -339,7 +343,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: BL (Backlinks)").setDesc("Navigator: Hide backlinks column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: BL (Backlinks)").setDesc("Navigator: Hide backlinks column.").addToggle((toggle) => {
       this.toggleHideBLColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_backlinks).onChange(async (val) => {
         this.plugin.settings.hide_backlinks = val;
@@ -356,7 +360,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Hide: OL (Outgoing links)").setDesc("Navigator: Hide outgoing links column.").addToggle((toggle) => {
+    new import_obsidian.Setting(headingColumnsGroupItems).setName("Hide: OL (Outgoing links)").setDesc("Navigator: Hide outgoing links column.").addToggle((toggle) => {
       this.toggleHideOLColumn = toggle;
       toggle.setValue(this.plugin.settings.hide_outgoing).onChange(async (val) => {
         this.plugin.settings.hide_outgoing = val;
@@ -373,10 +377,11 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    const headingImageThumbnails1 = containerEl.createEl("div", { cls: "setting-item setting-item-heading" });
-    const headingImageThumbnails2 = headingImageThumbnails1.createEl("div", { cls: "setting-item setting-item-info" });
-    headingImageThumbnails2.createEl("div", { text: "Image thumbnails", cls: "setting-item-name" });
-    new import_obsidian.Setting(containerEl).setName("Show image thumbnails").setDesc("Navigator: Activate to show image thumbnails. Deactivate to show image icons.").addToggle((toggle) => {
+    const headingImageThumbnailsGroup = containerEl.createEl("div", { cls: "setting-group" });
+    const headingImageThumbnails1 = headingImageThumbnailsGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingImageThumbnails1.createEl("div", { text: "Image thumbnails", cls: "setting-item-name" });
+    const headingImageThumbnailsGroupItems = headingImageThumbnailsGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian.Setting(headingImageThumbnailsGroupItems).setName("Show image thumbnails").setDesc("Navigator: Activate to show image thumbnails. Deactivate to show image icons.").addToggle((toggle) => {
       this.toggleImageThumbnail = toggle;
       toggle.setValue(this.plugin.settings.image_thumbnail).onChange(async (val) => {
         this.plugin.settings.image_thumbnail = val;
@@ -394,7 +399,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Image thumbnails size").setDesc("Navigator: Adjust image thumbnails size").addSlider((sliderThumbnail) => {
+    new import_obsidian.Setting(headingImageThumbnailsGroupItems).setName("Image thumbnails size").setDesc("Navigator: Adjust image thumbnails size").addSlider((sliderThumbnail) => {
       this.sliderImageThumbnail = sliderThumbnail;
       let slider_val;
       if (this.plugin.settings.thumbnail_size) {
@@ -420,10 +425,11 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    const headingExcludedFilesFolders1 = containerEl.createEl("div", { cls: "setting-item setting-item-heading" });
-    const headingExcludedFilesFolders2 = headingExcludedFilesFolders1.createEl("div", { cls: "setting-item setting-item-info" });
-    headingExcludedFilesFolders2.createEl("div", { text: "Excluded files and folders", cls: "setting-item-name" });
-    new import_obsidian.Setting(containerEl).setName("Excluded file extensions").setDesc("File extensions to exclude, separated by commas.").addText((text) => {
+    const headingExcludedFilesFoldersGroup = containerEl.createEl("div", { cls: "setting-group" });
+    const headingExcludedFilesFolders1 = headingExcludedFilesFoldersGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingExcludedFilesFolders1.createEl("div", { text: "Excluded files and folders", cls: "setting-item-name" });
+    const headingExcludedFilesFoldersGroupItems = headingExcludedFilesFoldersGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian.Setting(headingExcludedFilesFoldersGroupItems).setName("Excluded file extensions").setDesc("File extensions to exclude, separated by commas.").addText((text) => {
       this.textExcludedExtensions = text;
       text.setPlaceholder("File extensions to exclude").setValue(this.plugin.settings.excluded_ext).onChange(async (val) => {
         this.plugin.settings.excluded_ext = val;
@@ -440,7 +446,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Excluded folders").setDesc("List of folder paths to exclude, separated by commas.").addText((text) => {
+    new import_obsidian.Setting(headingExcludedFilesFoldersGroupItems).setName("Excluded folders").setDesc("List of folder paths to exclude, separated by commas.").addText((text) => {
       this.textExcludedFolders = text;
       text.setPlaceholder("Folder paths to exclude").setValue(this.plugin.settings.excluded_path).onChange(async (val) => {
         this.plugin.settings.excluded_path = val;
@@ -457,10 +463,11 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    const headingFileColors1 = containerEl.createEl("div", { cls: "setting-item setting-item-heading" });
-    const headingFileColors2 = headingFileColors1.createEl("div", { cls: "setting-item setting-item-info" });
-    headingFileColors2.createEl("div", { text: "File colors", cls: "setting-item-name" });
-    new import_obsidian.Setting(containerEl).setName("Toggle colored files").setDesc("Turn on/off colored files.").addToggle((toggle) => {
+    const headingFileColorsGroup = containerEl.createEl("div", { cls: "setting-group" });
+    const headingFileColors1 = headingFileColorsGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingFileColors1.createEl("div", { text: "File colors", cls: "setting-item-name" });
+    const headingFileColorsGroupItems = headingFileColorsGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Toggle colored files").setDesc("Turn on/off colored files.").addToggle((toggle) => {
       this.toggleColoredFiles = toggle;
       toggle.setValue(this.plugin.settings.colored_files).onChange(async (val) => {
         this.plugin.settings.colored_files = val;
@@ -479,7 +486,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Notes").setDesc("Color of notes.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Notes").setDesc("Color of notes.").addColorPicker((color) => {
       this.colorCompNotes = color;
       color.setValue(this.plugin.settings.color_notes).onChange(async (val) => {
         this.plugin.settings.color_notes = val;
@@ -498,7 +505,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Canvases").setDesc("Color of canvases.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Canvases").setDesc("Color of canvases.").addColorPicker((color) => {
       this.colorCompCanvas = color;
       color.setValue(this.plugin.settings.color_canvas).onChange(async (val) => {
         this.plugin.settings.color_canvas = val;
@@ -517,7 +524,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Images").setDesc("Color of images.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Images").setDesc("Color of images.").addColorPicker((color) => {
       this.colorCompImages = color;
       color.setValue(this.plugin.settings.color_images).onChange(async (val) => {
         this.plugin.settings.color_images = val;
@@ -536,7 +543,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Videos").setDesc("Color of videos.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Videos").setDesc("Color of videos.").addColorPicker((color) => {
       this.colorCompVideos = color;
       color.setValue(this.plugin.settings.color_videos).onChange(async (val) => {
         this.plugin.settings.color_videos = val;
@@ -555,7 +562,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Audio files").setDesc("Color of audio files.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Audio files").setDesc("Color of audio files.").addColorPicker((color) => {
       this.colorCompAudios = color;
       color.setValue(this.plugin.settings.color_audios).onChange(async (val) => {
         this.plugin.settings.color_audios = val;
@@ -574,7 +581,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: PDF").setDesc("Color of PDF files.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: PDF").setDesc("Color of PDF files.").addColorPicker((color) => {
       this.colorCompPdf = color;
       color.setValue(this.plugin.settings.color_pdf).onChange(async (val) => {
         this.plugin.settings.color_pdf = val;
@@ -593,7 +600,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Bases").setDesc("Color of .base files.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Bases").setDesc("Color of .base files.").addColorPicker((color) => {
       this.colorCompBases = color;
       color.setValue(this.plugin.settings.color_bases).onChange(async (val) => {
         this.plugin.settings.color_bases = val;
@@ -612,7 +619,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
         this.plugin.saveSettings();
       });
     });
-    new import_obsidian.Setting(containerEl).setName("Color: Other files").setDesc("Color of other files.").addColorPicker((color) => {
+    new import_obsidian.Setting(headingFileColorsGroupItems).setName("Color: Other files").setDesc("Color of other files.").addColorPicker((color) => {
       this.colorCompOther = color;
       color.setValue(this.plugin.settings.color_other).onChange(async (val) => {
         this.plugin.settings.color_other = val;
@@ -635,7 +642,7 @@ var DNSettingTab = class extends import_obsidian.PluginSettingTab {
 };
 
 // src/dn.ts
-var import_obsidian7 = require("obsidian");
+var import_obsidian10 = require("obsidian");
 
 // src/utils/format.ts
 function formatFileSize(fileSize) {
@@ -802,7 +809,7 @@ var DNTableManager = class {
 };
 
 // src/dn.ts
-var import_obsidian8 = require("obsidian");
+var import_obsidian11 = require("obsidian");
 
 // src/utils/dntagsuggestions.ts
 var import_obsidian2 = require("obsidian");
@@ -935,8 +942,8 @@ function getOutgoingLinks(file) {
   return Array.from(outgoingLinks);
 }
 
-// src/modals/dnspecialbacklinksmodal.ts
-var import_obsidian5 = require("obsidian");
+// src/modals/filemodals/dnspecialbacklinksmodal.ts
+var import_obsidian6 = require("obsidian");
 
 // src/utils/dnpreviewcomponent.ts
 var import_obsidian4 = require("obsidian");
@@ -963,9 +970,161 @@ var DNPreviewComponent = class extends import_obsidian4.Component {
   }
 };
 
-// src/modals/dnspecialbacklinksmodal.ts
+// src/modals/dnbasemodal.ts
+var import_obsidian5 = require("obsidian");
+
+// src/utils/dnkeyboardnavigation.ts
+var _DNKeyboardNavigation = class {
+  constructor(containerEl) {
+    this.focusableElements = [];
+    this.observer = null;
+    this.previousActiveElement = null;
+    this.containerEl = containerEl;
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.observer = new MutationObserver(() => this.refreshFocusableElements());
+  }
+  /**
+   * Scans the container for focusable elements and filters out hidden/disabled items.
+   */
+  refreshFocusableElements() {
+    if (!this.containerEl || !document.body.contains(this.containerEl))
+      return [];
+    const elements = Array.from(
+      this.containerEl.querySelectorAll(_DNKeyboardNavigation.FOCUSABLE_SELECTOR)
+    );
+    this.focusableElements = elements.filter((el) => {
+      const isVisible = el.offsetParent !== null;
+      const isDisabled = el.disabled === true || el.classList.contains("is-disabled") || el.getAttribute("aria-disabled") === "true";
+      return isVisible && !isDisabled;
+    });
+    return this.focusableElements;
+  }
+  /**
+   * Main navigation
+   */
+  handleKeyDown(evt) {
+    var _a;
+    if (evt.key === "Tab") {
+      const focusable = this.refreshFocusableElements();
+      if (focusable.length === 0)
+        return;
+      const activeElement = document.activeElement;
+      const currentIndex = focusable.indexOf(activeElement);
+      evt.preventDefault();
+      evt.stopPropagation();
+      let nextIndex;
+      if (currentIndex === -1) {
+        nextIndex = evt.shiftKey ? focusable.length - 1 : 0;
+      } else {
+        if (evt.shiftKey) {
+          nextIndex = (currentIndex - 1 + focusable.length) % focusable.length;
+        } else {
+          nextIndex = (currentIndex + 1) % focusable.length;
+        }
+      }
+      (_a = focusable[nextIndex]) == null ? void 0 : _a.focus();
+    }
+    if (evt.key === "Enter") {
+      const active = document.activeElement;
+      if (!active || !this.containerEl.contains(active))
+        return;
+      const nativeHandlers = ["INPUT", "TEXTAREA", "SELECT"];
+      const needsManualClick = !nativeHandlers.includes(active.tagName);
+      if (needsManualClick) {
+        evt.preventDefault();
+        active.click();
+      }
+    }
+  }
+  /**
+   * Activates the listeners and captures the background focus state.
+   */
+  start() {
+    var _a;
+    this.previousActiveElement = document.activeElement;
+    this.refreshFocusableElements();
+    (_a = this.observer) == null ? void 0 : _a.observe(this.containerEl, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class", "disabled", "hidden", "style"]
+    });
+    window.addEventListener("keydown", this.handleKeyDown, true);
+    if (this.focusableElements.length > 0) {
+      this.focusableElements[0].focus();
+    }
+  }
+  /**
+   * Deactivates listeners and restores focus to the background UI.
+   */
+  stop() {
+    var _a;
+    (_a = this.observer) == null ? void 0 : _a.disconnect();
+    window.removeEventListener("keydown", this.handleKeyDown, true);
+    if (this.previousActiveElement && document.body.contains(this.previousActiveElement)) {
+      const el = this.previousActiveElement;
+      setTimeout(() => el.focus(), 50);
+    }
+  }
+};
+var DNKeyboardNavigation = _DNKeyboardNavigation;
+// The selector determines what the "Tab" key can land on
+DNKeyboardNavigation.FOCUSABLE_SELECTOR = [
+  '.dn-modal-container label:has(input[type="checkbox"])',
+  ".dn-modal-container input:not(label input):not([disabled])",
+  ".dn-modal-container textarea:not([disabled])",
+  ".dn-modal-container button:not([disabled])",
+  ".dn-modal-container select:not([disabled])",
+  ".dn-modal-container .search-input-clear-button",
+  '.dn-modal-container a[tabindex]:not([tabindex="-1"])',
+  '.dn-modal-container .dn-saved-search-item:not([tabindex="-1"])',
+  ".dn-modal-container .dn-btn-stats",
+  ".dn-modal-container .dn-btn-next",
+  ".dn-modal-container .dn-btn-prev",
+  ".dn-modal-container .dn-link-file-header",
+  ".dn-modal-container .dn-td-sidebar-container a.tag"
+].join(",");
+
+// src/modals/dnbasemodal.ts
+var DNBaseModal = class extends import_obsidian5.Modal {
+  constructor(app) {
+    super(app);
+  }
+  async onOpen() {
+    this.contentEl.empty();
+    this.contentEl.classList.add("dn-modal-container");
+    this.nav = new DNKeyboardNavigation(this.contentEl);
+    await this.render();
+    this.nav.start();
+    this.nav.refreshFocusableElements();
+  }
+  onClose() {
+    if (this.nav)
+      this.nav.stop();
+    this.contentEl.empty();
+  }
+  /**
+   * Parent (DNModal) uses this to pause itself and open a child.
+   */
+  openSubModal(subModal) {
+    if (this.nav)
+      this.nav.stop();
+    const originalOnClose = subModal.onClose.bind(subModal);
+    subModal.onClose = () => {
+      originalOnClose();
+      if (this.nav) {
+        this.nav.start();
+        this.nav.refreshFocusableElements();
+      }
+      subModal.onClose = originalOnClose;
+    };
+    subModal.open();
+  }
+};
+
+// src/modals/filemodals/dnspecialbacklinksmodal.ts
 var ITEMS_PER_PAGE = 5;
-var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
+var DNSpecialBacklinksModal = class extends DNBaseModal {
   constructor(app, modal, _targetFile) {
     super(app);
     this._previewComponents = [];
@@ -975,14 +1134,13 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
     this._backlinks.sort((a, b) => b.stat.mtime - a.stat.mtime);
     this._dn_modal = modal;
   }
-  onOpen() {
+  render() {
     this.renderContent();
   }
   onClose() {
-    const { contentEl } = this;
+    super.onClose();
     this._previewComponents.forEach((comp) => comp.onunload());
     this._previewComponents = [];
-    contentEl.empty();
   }
   reloadContent() {
     this._backlinks = getBacklinksToFile(this._targetFile);
@@ -1030,6 +1188,7 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
       const previewComponent = new DNPreviewComponent(this.app, contentPreviewEl, backlinkFile);
       this._previewComponents.push(previewComponent);
       previewComponent.onload();
+      fileHeader.setAttribute("tabindex", "0");
       fileHeader.addEventListener("click", (evt) => {
         evt.preventDefault();
         this.app.workspace.openLinkText(backlinkFile.path, this._targetFile.path);
@@ -1037,7 +1196,7 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
         this._dn_modal.close();
       });
       fileHeader.addEventListener("contextmenu", (evt) => {
-        const menu = new import_obsidian5.Menu();
+        const menu = new import_obsidian6.Menu();
         menu.addItem((item) => {
           item.setTitle("Open").setIcon("mouse-pointer-2").onClick(() => {
             this.app.workspace.openLinkText(backlinkFile.path, this._targetFile.path);
@@ -1069,7 +1228,8 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
     const totalPages = Math.ceil(this._backlinks.length / ITEMS_PER_PAGE);
     const paginationDiv = parentEl.createEl("div", { cls: "dn-modal-sticky-pagination" });
     if (totalPages > 0) {
-      const btnReload = paginationDiv.createEl("button", { cls: "dn-btn-next", text: "Reload", title: "Reload content" });
+      const btnReload = paginationDiv.createEl("button", { text: "Reload", title: "Reload content" });
+      btnReload.setAttribute("tabindex", "0");
       btnReload.addEventListener("click", () => {
         this.reloadContent();
       });
@@ -1078,12 +1238,14 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
         cls: "pagination-status"
       });
       const btnPrev = paginationDiv.createEl("button", { cls: "dn-btn-prev", text: "\u25C0", title: "Previous" });
+      btnPrev.setAttribute("tabindex", "0");
       btnPrev.disabled = this._currentPage === 1;
       btnPrev.addEventListener("click", () => {
         this._currentPage -= 1;
         this.renderContent();
       });
       const btnNext = paginationDiv.createEl("button", { cls: "dn-btn-next", text: "\u25B6", title: "Next" });
+      btnNext.setAttribute("tabindex", "0");
       btnNext.disabled = this._currentPage === totalPages;
       btnNext.addEventListener("click", () => {
         this._currentPage += 1;
@@ -1093,10 +1255,10 @@ var DNSpecialBacklinksModal = class extends import_obsidian5.Modal {
   }
 };
 
-// src/modals/dnspecialoutgoinglinksmodal.ts
-var import_obsidian6 = require("obsidian");
+// src/modals/filemodals/dnspecialoutgoinglinksmodal.ts
+var import_obsidian7 = require("obsidian");
 var ITEMS_PER_PAGE2 = 5;
-var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
+var DNSpecialOutgoingLinksModal = class extends DNBaseModal {
   constructor(app, modal, _originFile) {
     super(app);
     this._previewComponents = [];
@@ -1106,14 +1268,13 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
     this._outgoingLinks.sort((a, b) => b.stat.mtime - a.stat.mtime);
     this._dn_modal = modal;
   }
-  onOpen() {
+  render() {
     this.renderContent();
   }
   onClose() {
-    const { contentEl } = this;
+    super.onClose();
     this._previewComponents.forEach((comp) => comp.onunload());
     this._previewComponents = [];
-    contentEl.empty();
   }
   reloadContent() {
     this._outgoingLinks = getOutgoingLinks(this._originFile);
@@ -1161,6 +1322,7 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
       const previewComponent = new DNPreviewComponent(this.app, contentPreviewEl, oLinkFile);
       this._previewComponents.push(previewComponent);
       previewComponent.onload();
+      fileHeader.setAttribute("tabindex", "0");
       fileHeader.addEventListener("click", (evt) => {
         evt.preventDefault();
         this.app.workspace.openLinkText(oLinkFile.path, this._originFile.path);
@@ -1168,7 +1330,7 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
         this._dn_modal.close();
       });
       fileHeader.addEventListener("contextmenu", (evt) => {
-        const menu = new import_obsidian6.Menu();
+        const menu = new import_obsidian7.Menu();
         menu.addItem((item) => {
           item.setTitle("Open").setIcon("mouse-pointer-2").onClick(() => {
             this.app.workspace.openLinkText(oLinkFile.path, this._originFile.path);
@@ -1200,7 +1362,8 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
     const totalPages = Math.ceil(this._outgoingLinks.length / ITEMS_PER_PAGE2);
     const paginationDiv = parentEl.createEl("div", { cls: "dn-modal-sticky-pagination" });
     if (totalPages > 0) {
-      const btnReload = paginationDiv.createEl("button", { cls: "dn-btn-next", text: "Reload", title: "Reload content" });
+      const btnReload = paginationDiv.createEl("button", { text: "Reload", title: "Reload content" });
+      btnReload.setAttribute("tabindex", "0");
       btnReload.addEventListener("click", () => {
         this.reloadContent();
       });
@@ -1209,12 +1372,14 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
         cls: "pagination-status"
       });
       const btnPrev = paginationDiv.createEl("button", { cls: "dn-btn-prev", text: "\u25C0", title: "Previous" });
+      btnPrev.setAttribute("tabindex", "0");
       btnPrev.disabled = this._currentPage === 1;
       btnPrev.addEventListener("click", () => {
         this._currentPage -= 1;
         this.renderContent();
       });
       const btnNext = paginationDiv.createEl("button", { cls: "dn-btn-next", text: "\u25B6", title: "Next" });
+      btnNext.setAttribute("tabindex", "0");
       btnNext.disabled = this._currentPage === totalPages;
       btnNext.addEventListener("click", () => {
         this._currentPage += 1;
@@ -1224,8 +1389,327 @@ var DNSpecialOutgoingLinksModal = class extends import_obsidian6.Modal {
   }
 };
 
+// src/modals/filemodals/dnfiletagsmodal.ts.ts
+var DNFileTagsModal = class extends DNBaseModal {
+  constructor(app, file, helpers) {
+    super(app);
+    this.file = file;
+    this.helpers = helpers;
+  }
+  render() {
+    const { contentEl } = this;
+    contentEl.classList.add("dn-tags-modal");
+    contentEl.createEl("div", {
+      text: "File tags",
+      cls: "setting-item setting-item-heading dn-modal-heading"
+    });
+    this.renderRow(contentEl, "Name: ", this.file.name);
+    this.renderRow(contentEl, "Path: ", getFolderStructure(this.file.path));
+    const tagsDiv = contentEl.createDiv({ cls: "dn-tags-list" });
+    tagsDiv.setAttribute("contenteditable", "true");
+    tagsDiv.setAttribute("spellcheck", "false");
+    const mTags = getTagsPerFile(this.file);
+    if (mTags == null ? void 0 : mTags.trim()) {
+      mTags.split(" ").forEach((tag) => {
+        const tagLine = tagsDiv.createDiv({ cls: "dn-tag-line" });
+        const tagAnchor = tagLine.createEl("a", { cls: "tag", text: tag });
+        tagAnchor.setAttribute("tabindex", "0");
+        tagAnchor.onClickEvent((evt) => {
+          var _a, _b;
+          (_b = (_a = this.helpers).handleTagActions) == null ? void 0 : _b.call(_a, evt, tag);
+          tagAnchor.focus();
+        });
+      });
+    } else {
+      tagsDiv.createEl("span", { text: "No tags" });
+    }
+    const divBottom = contentEl.createDiv({ cls: "dn-div-bottom-properties" });
+    const btnOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
+    btnOpen.setAttribute("tabindex", "0");
+    btnOpen.onClickEvent(() => {
+      var _a, _b;
+      (_b = (_a = this.helpers).dnOpenFile) == null ? void 0 : _b.call(_a, this.file);
+      this.close();
+    });
+    tagsDiv.blur();
+  }
+  renderRow(parent, label, value) {
+    const row = parent.createDiv({ cls: "dn-property-row" });
+    row.createDiv({ text: label, cls: "dn-property-name-sm" });
+    row.createDiv({ text: value, cls: "dn-property-value" });
+  }
+};
+
+// src/modals/filemodals/dnfilefrontmattermodal.ts
+var DNFileFrontmatterModal = class extends DNBaseModal {
+  constructor(app, file, helpers) {
+    super(app);
+    this.file = file;
+    this.helpers = helpers;
+  }
+  render() {
+    const { contentEl } = this;
+    contentEl.classList.add("dn-frontmatter-modal");
+    contentEl.createEl("div", {
+      text: "File frontmatter",
+      cls: "setting-item setting-item-heading dn-modal-heading"
+    });
+    this.renderRow(contentEl, "Name: ", this.file.name);
+    this.renderRow(contentEl, "Path: ", getFolderStructure(this.file.path));
+    const frontmatterDiv = contentEl.createEl("div", { cls: "dn-properties-frontmatter-modal" });
+    frontmatterDiv.setAttribute("contenteditable", "true");
+    frontmatterDiv.setAttribute("spellcheck", "false");
+    const curProps = getPropsPerFile(this.file);
+    if (curProps) {
+      const prop = curProps.split(" \n");
+      for (let i = 0, len = prop.length; i < len; i++) {
+        const fmLink = frontmatterDiv.createEl("a", { text: prop[i], cls: "dn-fproperties" });
+        fmLink.setAttribute("tabindex", "0");
+        fmLink.onClickEvent((evt) => {
+          var _a, _b;
+          if (evt.button === 2) {
+            evt.preventDefault();
+          } else {
+            if (this.helpers.mainInputSearch) {
+              this.helpers.mainInputSearch.value = prop[i];
+            }
+            (_b = (_a = this.helpers).dnModalSearchVault) == null ? void 0 : _b.call(_a, prop[i]);
+            this.close();
+          }
+        });
+        frontmatterDiv.createEl("br");
+      }
+    } else {
+      frontmatterDiv.createEl("span", { text: "No frontmatter" });
+    }
+    contentEl.createEl("br");
+    const divBottom = contentEl.createEl("div", { cls: "dn-div-bottom-properties" });
+    const btnPropsOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
+    btnPropsOpen.onClickEvent(() => {
+      var _a, _b;
+      (_b = (_a = this.helpers).dnOpenFile) == null ? void 0 : _b.call(_a, this.file);
+      this.close();
+    });
+    frontmatterDiv.blur();
+  }
+  renderRow(parent, label, value) {
+    const row = parent.createDiv({ cls: "dn-property-row" });
+    row.createDiv({ text: label, cls: "dn-property-name-sm" });
+    row.createDiv({ text: value, cls: "dn-property-value" });
+  }
+};
+
+// src/modals/filemodals/dnfilepropertiesmodal.ts
+var import_obsidian8 = require("obsidian");
+var DNFilePropertiesModal = class extends DNBaseModal {
+  constructor(app, file, helpers) {
+    super(app);
+    this.file = file;
+    this.helpers = helpers;
+  }
+  render() {
+    const { contentEl } = this;
+    contentEl.classList.add("dn-properties-modal");
+    contentEl.createEl("div", {
+      text: "File properties",
+      cls: "setting-item setting-item-heading dn-modal-heading"
+    });
+    const date_fmt = this.helpers.dateFormat || "YYYY-MM-DD";
+    this.renderRow(contentEl, "Name: ", this.file.name);
+    const rowExt = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowExt.createEl("div", { text: "Extension: ", cls: "dn-property-name" });
+    const rowExtValue = rowExt.createEl("div", { cls: "dn-property-value" });
+    rowExtValue.createEl("span", { text: this.file.extension, cls: "nav-file-tag" });
+    this.renderRow(contentEl, "Path: ", getFolderStructure(this.file.path));
+    contentEl.createEl("br");
+    const rowSize = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowSize.createEl("div", { text: "Size: ", cls: "dn-property-name" });
+    rowSize.createEl("div", { text: formatFileSize(this.file.stat.size) + " bytes" + formatFileSizeKBMB(this.file.stat.size) });
+    contentEl.createEl("br");
+    const rowDateCreated = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowDateCreated.createEl("div", { text: "Created: ", cls: "dn-property-name" });
+    rowDateCreated.createEl("div", { text: (0, import_obsidian8.moment)(this.file.stat.ctime).format(date_fmt) });
+    const rowDateModified = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowDateModified.createEl("div", { text: "Modified: ", cls: "dn-property-name" });
+    rowDateModified.createEl("div", { text: (0, import_obsidian8.moment)(this.file.stat.mtime).format(date_fmt) });
+    contentEl.createEl("br");
+    const rowTags = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowTags.createEl("div", { text: "Tag(s): ", cls: "dn-property-name" });
+    const propTags = rowTags.createEl("div");
+    const curTags = getTagsPerFile(this.file);
+    if (curTags !== "") {
+      const tags = curTags.split(" ");
+      for (let i = 0, len = tags.length; i < len; i++) {
+        const aTagLink = propTags.createEl("a", { text: tags[i], href: tags[i], cls: "tag" });
+        aTagLink.setAttribute("tabindex", "0");
+        aTagLink.onClickEvent((evt) => {
+          var _a, _b;
+          (_b = (_a = this.helpers).handleTagActions) == null ? void 0 : _b.call(_a, evt, tags[i]);
+          aTagLink.focus();
+        });
+      }
+    } else {
+      propTags.createEl("span", { text: "No tags" });
+    }
+    const rowFrontmatter = contentEl.createEl("div", { cls: "dn-property-row" });
+    rowFrontmatter.createEl("div", { text: "Frontmatter: ", cls: "dn-property-name" });
+    const rowFrontmatterValue = rowFrontmatter.createEl("div", { cls: "dn-property-value" });
+    const frontmatterProps = rowFrontmatterValue.createEl("div", { cls: "dn-properties-frontmatter" });
+    frontmatterProps.setAttribute("contenteditable", "true");
+    frontmatterProps.setAttribute("spellcheck", "false");
+    const curProps = getPropsPerFile(this.file);
+    if (curProps) {
+      const prop = curProps.split(" \n");
+      for (let i = 0, len = prop.length; i < len; i++) {
+        const fmLink = frontmatterProps.createEl("a", { text: prop[i], cls: "dn-fproperties" });
+        fmLink.setAttribute("tabindex", "0");
+        fmLink.onClickEvent((evt) => {
+          var _a, _b;
+          if (evt.button === 2) {
+            evt.preventDefault();
+          } else {
+            if (this.helpers.mainInputSearch) {
+              this.helpers.mainInputSearch.value = prop[i];
+            }
+            (_b = (_a = this.helpers).dnModalSearchVault) == null ? void 0 : _b.call(_a, prop[i]);
+            this.close();
+          }
+        });
+        frontmatterProps.createEl("br");
+      }
+    } else {
+      frontmatterProps.createEl("span", { text: "No frontmatter" });
+    }
+    contentEl.createEl("br");
+    const divBottom = contentEl.createEl("div", { cls: "dn-div-bottom-properties" });
+    const btnPropsOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
+    btnPropsOpen.onClickEvent(() => {
+      var _a, _b;
+      (_b = (_a = this.helpers).dnOpenFile) == null ? void 0 : _b.call(_a, this.file);
+      this.close();
+    });
+    frontmatterProps.blur();
+  }
+  renderRow(parent, label, value) {
+    const row = parent.createDiv({ cls: "dn-property-row" });
+    row.createDiv({ text: label, cls: "dn-property-name-sm" });
+    row.createDiv({ text: value, cls: "dn-property-value" });
+  }
+};
+
+// src/modals/filemodals/dnpreviewmodal.ts
+var import_obsidian9 = require("obsidian");
+var DNPreviewModal = class extends DNBaseModal {
+  constructor(app, file, helpers) {
+    super(app);
+    this.isDragging = false;
+    this.file = file;
+    this.helpers = helpers;
+    this.previewComponent = new import_obsidian9.Component();
+  }
+  async onOpen() {
+    super.onOpen();
+    this.prepareFloatingWindow();
+    this.previewComponent.load();
+    this.render();
+  }
+  onClose() {
+    this.previewComponent.unload();
+    super.onClose();
+  }
+  prepareFloatingWindow() {
+    const { modalEl, containerEl } = this;
+    const modalBg = containerEl.querySelector(".modal-bg");
+    if (modalBg)
+      modalBg.style.display = "none";
+    containerEl.style.pointerEvents = "none";
+    modalEl.style.pointerEvents = "auto";
+    modalEl.classList.add("dn-preview");
+  }
+  render() {
+    const { contentEl, modalEl } = this;
+    contentEl.empty();
+    const topStickyBar = contentEl.createEl("div", { cls: "dn-preview-top-bar" });
+    const btnDivClosePreview = topStickyBar.createEl("div", {
+      text: "\u2715",
+      cls: "dn-preview-close-button"
+      // Using the class name from your CSS
+    });
+    btnDivClosePreview.onClickEvent((evt) => {
+      evt.stopPropagation();
+      this.close();
+    });
+    const previewTop = topStickyBar.createEl("div", { cls: "dn-preview-titlebar" });
+    this.renderRow(previewTop, "Name: ", this.file.name);
+    this.renderRow(previewTop, "Path: ", getFolderStructure(this.file.path));
+    const divButtons = topStickyBar.createEl("div", { cls: "dn-div-top-preview-btns" });
+    const btnOpen = divButtons.createEl("button", { text: "Open", cls: "dn-btn-preview-action" });
+    btnOpen.setAttribute("tabindex", "0");
+    btnOpen.onClickEvent(() => {
+      var _a, _b;
+      (_b = (_a = this.helpers).dnOpenFile) == null ? void 0 : _b.call(_a, this.file);
+      this.close();
+    });
+    const btnTab = divButtons.createEl("button", { text: "Open in new tab", cls: "dn-btn-preview-action" });
+    btnTab.setAttribute("tabindex", "0");
+    btnTab.onClickEvent(() => {
+      this.app.workspace.getLeaf("tab").openFile(this.file);
+      this.close();
+    });
+    const btnWindow = divButtons.createEl("button", { text: "Open in new window", cls: "dn-btn-preview-action" });
+    btnWindow.setAttribute("tabindex", "0");
+    btnWindow.onClickEvent(() => {
+      this.app.workspace.getLeaf("window").openFile(this.file);
+      this.close();
+    });
+    const renderContainer = contentEl.createEl("div", { cls: "dn-pr-content" });
+    try {
+      import_obsidian9.MarkdownRenderer.render(
+        this.app,
+        "![[" + (0, import_obsidian9.normalizePath)(this.file.path) + "]]",
+        renderContainer,
+        (0, import_obsidian9.normalizePath)(this.file.path),
+        this.previewComponent
+      );
+    } catch (e) {
+      renderContainer.setText("Preview unavailable.");
+    }
+    this.initDragLogic(previewTop, modalEl);
+  }
+  initDragLogic(handle, target) {
+    const onMouseMove = (e) => {
+      if (!this.isDragging)
+        return;
+      target.style.position = "fixed";
+      target.style.left = `${e.clientX - this.startX}px`;
+      target.style.top = `${e.clientY - this.startY}px`;
+      target.style.margin = "0";
+    };
+    const onMouseUp = () => {
+      this.isDragging = false;
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+    handle.addEventListener("mousedown", (e) => {
+      if (e.button !== 0 || e.target.tagName === "BUTTON")
+        return;
+      this.isDragging = true;
+      const rect = target.getBoundingClientRect();
+      this.startX = e.clientX - rect.left;
+      this.startY = e.clientY - rect.top;
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    });
+  }
+  renderRow(parent, label, value) {
+    const row = parent.createDiv({ cls: "dn-property-row" });
+    row.createDiv({ text: label, cls: "dn-property-name-sm" });
+    row.createDiv({ text: value, cls: "dn-property-value" });
+  }
+};
+
 // src/dn.ts
-var DNModal = class extends import_obsidian7.Modal {
+var DNModal = class extends DNBaseModal {
   constructor(app, plugin, _dataManager) {
     super(app);
     this._dataManager = _dataManager;
@@ -1260,7 +1744,8 @@ var DNModal = class extends import_obsidian7.Modal {
     this.show_dashboard_piechart = true;
     this.remember_last_search = true;
     this.onclose_search = "";
-    this._previewComponent = new import_obsidian7.Component();
+    this._DN_CTX_MENU = null;
+    this.activePreview = null;
     this.tags_sidebar_sorted_by_frequency = false;
     this.tagsCurrentPage = 0;
     this.filteredPrimaryTagNotes = [];
@@ -1269,7 +1754,6 @@ var DNModal = class extends import_obsidian7.Modal {
     this.dnHandleIntersection = (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) {
-          entry.target.removeEventListener("contextmenu", this.dnHandleClick);
           entry.target.removeEventListener("click", this.dnHandleClick);
           entry.target.removeEventListener("dblclick", this.dnHandleDblClick);
         }
@@ -1278,20 +1762,13 @@ var DNModal = class extends import_obsidian7.Modal {
     this.plugin = plugin;
     this.intersectionObserver = new IntersectionObserver(this.dnHandleIntersection);
   }
-  async onOpen() {
+  async render() {
     var _a;
-    const { contentEl } = this;
     this._data = await this._dataManager.getDataCache(
       this.app,
       this.excluded_extensions,
       this.excluded_folders
     );
-    this._previewComponent.load();
-    this._hoverDiv = this.contentEl.createEl("div", { cls: "dn-preview" });
-    this._hoverDiv.addEventListener("click", (evt) => {
-      evt.stopPropagation();
-      evt.stopImmediatePropagation();
-    });
     await this.updateModalData();
     this._bookmarks = await this._dataManager.getBookmarkedVaultFiles(this.app, this.excluded_extensions, this.excluded_folders);
     this._last_opened = this._dataManager.getLastOpenedFiles(this.app);
@@ -1299,14 +1776,11 @@ var DNModal = class extends import_obsidian7.Modal {
     if (leaf !== null) {
       this._leaf = leaf;
     }
-    await this.dnCreateMainUI(contentEl);
+    await this.dnCreateMainUI(this.contentEl);
     this.dnSetView(this.default_view);
     this.dnSetSelectLayoutValue(this.selected_table_layout);
     this.dnSetSelectSortValue(this.selected_sort_value);
     this.dnToggleColoredFiles();
-    this._isDraggingPreview = false;
-    this._hoverDivLeft = "";
-    this._hoverDivTop = "";
     await this.dnLoadSearchOnClose();
     if (this.INPUT_SEARCH.value !== "") {
       this.dnModalSearchVault(this.INPUT_SEARCH.value);
@@ -1532,6 +2006,7 @@ var DNModal = class extends import_obsidian7.Modal {
     this.TAGS_INPUT_SEARCH.spellcheck = false;
     this.BTN_CLEAR_TAGS_INPUT_SEARCH = tagsSearchLeftDiv.createEl("div", { cls: "search-input-clear-button" });
     this.BTN_CLEAR_TAGS_INPUT_SEARCH.setAttribute("aria-label", "Clear search");
+    this.BTN_CLEAR_TAGS_INPUT_SEARCH.setAttribute("tabindex", "0");
     this.BTN_CLEAR_TAGS_INPUT_SEARCH.onClickEvent((evt) => {
       this.clearTagsSearchField();
     });
@@ -1546,7 +2021,7 @@ var DNModal = class extends import_obsidian7.Modal {
         const inputEvent = new Event("input", { bubbles: true });
         this.INPUT_SEARCH.dispatchEvent(inputEvent);
       } else {
-        new import_obsidian7.Notice("Please type a tag or multiple tags to search in Navigator.");
+        new import_obsidian10.Notice("Please type a tag or multiple tags to search in Navigator.");
       }
     });
     const btnTagsSidebar = tagsSearchRightDiv.createEl("button", { cls: "dn-top-btns-search" });
@@ -1576,15 +2051,19 @@ var DNModal = class extends import_obsidian7.Modal {
             this.dnOpenFileAlt(file, evt);
           }
         });
+        tdRecentNoteLink.setAttribute("tabindex", "0");
         tdRecentNoteLink.addEventListener("mouseover", (evt) => this.dnHandleHoverPreview(evt, file));
+        tdRecentNoteLink.addEventListener("contextmenu", (evt) => this.dnGenerateContextMenu(evt, file));
         const tags_per_recent_file = getTagsPerFile(file);
         tagsRecentNoteItem.createEl("br");
         if (tags_per_recent_file !== "") {
           const tdFileTags = tags_per_recent_file.split(" ");
           tdFileTags.forEach((tag) => {
-            tagsRecentNoteItem.createEl("a", { cls: "tag", text: tag, href: tag }).onClickEvent((evt) => {
+            const tagsDashBoardNoteTags = tagsRecentNoteItem.createEl("a", { cls: "tag", text: tag, href: tag });
+            tagsDashBoardNoteTags.onClickEvent((evt) => {
               this.handleTagActionsTagsDashboard(evt, tag);
             });
+            tagsDashBoardNoteTags.setAttribute("tabindex", "0");
           });
         } else {
           tagsRecentNoteItem.createEl("span", { text: "No tags" });
@@ -1592,7 +2071,7 @@ var DNModal = class extends import_obsidian7.Modal {
       });
     }
     this.generateTagsSidebar(this.TAGS_SIDEBAR_EL, this._data.tags);
-    this.TAGS_INPUT_SEARCH.addEventListener("input", (0, import_obsidian7.debounce)(() => this.dnTDSearchTags(this.TAGS_INPUT_SEARCH.value), 300, true));
+    this.TAGS_INPUT_SEARCH.addEventListener("input", (0, import_obsidian10.debounce)(() => this.dnTDSearchTags(this.TAGS_INPUT_SEARCH.value), 300, true));
     this._dnTagSuggestions = new DNTagSuggestions(this.app, this.TAGS_INPUT_SEARCH, this._data.tagNames);
     this._dnMainSearchTagSuggestions = new DNTagSuggestions(this.app, this.INPUT_SEARCH, this._data.tagNames);
   }
@@ -1608,6 +2087,8 @@ var DNModal = class extends import_obsidian7.Modal {
       this.dnModalSearchVault(this.INPUT_SEARCH.value);
       this.INPUT_SEARCH.focus();
     });
+    btn.setAttribute("tabindex", "0");
+    btn.setAttribute("role", "button");
     return btn;
   }
   dnCreateInputSearch(el) {
@@ -1619,6 +2100,7 @@ var DNModal = class extends import_obsidian7.Modal {
     this.INPUT_SEARCH.focus();
     this.BTN_CLEAR_INPUT_SEARCH = searchLeftDiv.createEl("div", { cls: "search-input-clear-button" });
     this.BTN_CLEAR_INPUT_SEARCH.setAttribute("aria-label", "Clear search");
+    this.BTN_CLEAR_INPUT_SEARCH.setAttribute("tabindex", "0");
     this.BTN_CLEAR_INPUT_SEARCH.onClickEvent((evt) => {
       this.clearSearchField();
     });
@@ -1628,30 +2110,31 @@ var DNModal = class extends import_obsidian7.Modal {
     topBtnAddSearch.setAttribute("aria-label", "Save search");
     topBtnAddSearch.setAttribute("data-tooltip-position", "bottom");
     topBtnAddSearch.onClickEvent((evt) => {
-      this.plugin.DN_SAVE_SEARCH_MODAL.open();
+      this.openSubModal(this.plugin.DN_SAVE_SEARCH_MODAL);
     });
     const topBtnSaved = searchRightDiv.createEl("button", { cls: "dn-top-btns-search" });
     topBtnSaved.setAttribute("id", "dn-top-btn-saved");
     topBtnSaved.setAttribute("aria-label", "Saved searches");
     topBtnSaved.setAttribute("data-tooltip-position", "bottom");
     topBtnSaved.onClickEvent((evt) => {
-      this.plugin.DN_SAVED_SEARCHES_MODAL.open();
+      this.openSubModal(this.plugin.DN_SAVED_SEARCHES_MODAL);
     });
     const topBtnQuickDisplayOptions = searchRightDiv.createEl("button", { cls: "dn-top-btns-search" });
     topBtnQuickDisplayOptions.setAttribute("id", "dn-top-btn-table-columns");
     topBtnQuickDisplayOptions.setAttribute("aria-label", "Quick display options");
     topBtnQuickDisplayOptions.setAttribute("data-tooltip-position", "bottom");
     topBtnQuickDisplayOptions.onClickEvent((evt) => {
-      this.plugin.DN_QUICK_DISPLAY_OPTIONS_MODAL.open();
+      this.openSubModal(this.plugin.DN_QUICK_DISPLAY_OPTIONS_MODAL);
     });
     const topBtnInfo = searchRightDiv.createEl("button", { cls: "dn-top-btns-search" });
     topBtnInfo.setAttribute("id", "dn-top-btn-info");
     topBtnInfo.setAttribute("aria-label", "Quick reference/help");
     topBtnInfo.setAttribute("data-tooltip-position", "bottom");
     topBtnInfo.onClickEvent((evt) => {
-      this.plugin.DN_INFO_MODAL.open();
+      this.openSubModal(this.plugin.DN_INFO_MODAL);
     });
-    this.INPUT_SEARCH.addEventListener("input", (0, import_obsidian7.debounce)(() => this.dnModalSearchVault(this.INPUT_SEARCH.value), 300, true));
+    this.INPUT_SEARCH.addEventListener("input", (0, import_obsidian10.debounce)(() => this.dnModalSearchVault(this.INPUT_SEARCH.value), 300, true));
+    this.INPUT_SEARCH.focus();
   }
   clearSearchField() {
     this.INPUT_SEARCH.value = "";
@@ -1669,6 +2152,7 @@ var DNModal = class extends import_obsidian7.Modal {
   }
   async dnModalSearchVault(val) {
     this.dnSetView(2);
+    this.labelDateRangeFilter = "";
     if (val === "") {
       this.BTN_CLEAR_INPUT_SEARCH.style.display = "none";
     } else {
@@ -1737,7 +2221,7 @@ var DNModal = class extends import_obsidian7.Modal {
         });
       } else {
         this._files_results = files.filter((file) => {
-          isMatch = file.name.toLowerCase().includes(excludeParam) || getFolderStructure(file.path).toLowerCase().includes(excludeParam) || (0, import_obsidian8.moment)(file.stat.mtime).format(this.date_format).toLowerCase().includes(excludeParam) || getTagsPerFile(file).toLowerCase().includes(excludeParam) || getPropsPerFile(file).toLowerCase().includes(excludeParam);
+          isMatch = file.name.toLowerCase().includes(excludeParam) || getFolderStructure(file.path).toLowerCase().includes(excludeParam) || (0, import_obsidian11.moment)(file.stat.mtime).format(this.date_format).toLowerCase().includes(excludeParam) || getTagsPerFile(file).toLowerCase().includes(excludeParam) || getPropsPerFile(file).toLowerCase().includes(excludeParam);
           return isExcludeSearch ? !isMatch : isMatch;
         });
       }
@@ -1820,7 +2304,7 @@ var DNModal = class extends import_obsidian7.Modal {
       for (const file of paginatedData) {
         const tr2 = tbody.createEl("tr");
         tr2.addEventListener("contextmenu", (evt) => {
-          this.dnHandleClick(evt, file);
+          this.dnGenerateContextMenu(evt, file);
         });
         tr2.addEventListener("click", (evt) => {
           this.dnHandleClick(evt, file);
@@ -1843,17 +2327,21 @@ var DNModal = class extends import_obsidian7.Modal {
           }
         });
         const td1 = tr2.createEl("td", { cls: "dn-td-name" });
-        td1.createEl("a", { cls: this.dnSetFileIconClass(file.extension), text: file.name }).onClickEvent((evt) => {
+        const tdNameLink = td1.createEl("a", { cls: this.dnSetFileIconClass(file.extension), text: file.name });
+        tdNameLink.onClickEvent((evt) => {
           if (leaf !== null && file !== null) {
             this.dnOpenFileAlt(file, evt);
           }
         });
+        tdNameLink.setAttribute("tabindex", "0");
+        tdNameLink.addEventListener("contextmenu", (evt) => this.dnGenerateContextMenu(evt, file));
         const fExt = file.extension;
         const fSize = formatFileSize(file.stat.size);
-        const fMTime = (0, import_obsidian8.moment)(file.stat.mtime).format(this.date_format);
-        const fCTime = (0, import_obsidian8.moment)(file.stat.ctime).format(this.date_format);
+        const fMTime = (0, import_obsidian11.moment)(file.stat.mtime).format(this.date_format);
+        const fCTime = (0, import_obsidian11.moment)(file.stat.ctime).format(this.date_format);
         const td2 = tr2.createEl("td", { cls: "dn-td-ext" });
-        td2.createEl("a", { cls: "dn-ext", text: fExt, title: fExt }).onClickEvent((evt) => {
+        const tdExtLink = td2.createEl("a", { cls: "dn-ext", text: fExt, title: fExt });
+        tdExtLink.onClickEvent((evt) => {
           if (evt.button === 2) {
             evt.preventDefault();
           } else {
@@ -1861,9 +2349,11 @@ var DNModal = class extends import_obsidian7.Modal {
             this.dnModalSearchVault(this.INPUT_SEARCH.value);
           }
         });
+        tdExtLink.setAttribute("tabindex", "-1");
         const td3 = tr2.createEl("td", { cls: "dn-td-path" });
         const folder_path = getFolderStructure(file.path);
-        td3.createEl("a", { cls: "dn-folder-path", text: folder_path, title: file.path }).onClickEvent((evt) => {
+        const tdPathLink = td3.createEl("a", { cls: "dn-folder-path", text: folder_path, title: file.path });
+        tdPathLink.onClickEvent((evt) => {
           if (evt.button === 2) {
             evt.preventDefault();
           } else {
@@ -1871,6 +2361,7 @@ var DNModal = class extends import_obsidian7.Modal {
             this.dnModalSearchVault(this.INPUT_SEARCH.value + "$");
           }
         });
+        tdPathLink.setAttribute("tabindex", "-1");
         tr2.createEl("td", { text: fSize, title: fSize + " bytes", cls: "dn-td-size" });
         tr2.createEl("td", { text: fMTime, title: fCTime + " - Created\n" + fMTime + " - Modified", cls: "dn-td-date" });
         const tags_per_file = getTagsPerFile(file);
@@ -1879,16 +2370,19 @@ var DNModal = class extends import_obsidian7.Modal {
         if (tags_per_file !== "") {
           const fTags = tags_per_file.split(" ");
           fTags.forEach((tag) => {
-            td6.createEl("a", { cls: "tag", text: tag, href: tag }).onClickEvent((evt) => {
+            const tdTagLink = td6.createEl("a", { cls: "tag", text: tag, href: tag });
+            tdTagLink.onClickEvent((evt) => {
               this.handleTagActions(evt, tag);
             });
+            tdTagLink.setAttribute("tabindex", "-1");
           });
         }
         const td7 = tr2.createEl("td", { cls: "dn-td-frontmatter" });
         if (props_per_file !== "") {
           const fProps = props_per_file.split("\n");
           fProps.forEach((prop) => {
-            td7.createEl("a", { cls: "dn-tag", text: prop, title: props_per_file }).onClickEvent((evt) => {
+            const tdPropsLink = td7.createEl("a", { cls: "dn-tag", text: prop, title: props_per_file });
+            tdPropsLink.onClickEvent((evt) => {
               if (evt.button === 2) {
                 evt.preventDefault();
               } else {
@@ -1896,6 +2390,7 @@ var DNModal = class extends import_obsidian7.Modal {
                 this.dnModalSearchVault(this.INPUT_SEARCH.value);
               }
             });
+            tdPropsLink.setAttribute("tabindex", "-1");
           });
         }
         const backlinks = getBacklinksToFile(file);
@@ -1906,7 +2401,9 @@ var DNModal = class extends import_obsidian7.Modal {
         tr2.createEl("td", { text: num_of_outgoing_links, cls: "dn-td-outgoing-links" });
       }
       paginationContainer.empty();
-      paginationContainer.createEl("div", { cls: "dn-pagination-total-results", text: `File(s): ${f.length} ` });
+      const totalFilesLabel = paginationContainer.createEl("div", { cls: "dn-pagination-total-results", text: `File(s): ${f.length} ` });
+      const dateFilterRangeLabel = totalFilesLabel.createEl("span", { cls: "dn-date-range-filter-label" });
+      dateFilterRangeLabel.setText(this.labelDateRangeFilter ? `${this.labelDateRangeFilter}` : "");
       const rightPagDiv = paginationContainer.createEl("div", { cls: "dn-pagination-current-page", text: `Page ${currentPage} of ${this._total_pages} ` });
       const btnPrev = rightPagDiv.createEl("button", { cls: "dn-btn-prev", text: "\u25C0", title: "Previous" });
       if (currentPage === 1) {
@@ -1992,7 +2489,7 @@ var DNModal = class extends import_obsidian7.Modal {
       tdThumbnail.setAttribute("class", "dn-thumbnail-image dn-thumbnail-props");
       if (this.image_thumbnail) {
         const imgThumb = tdThumbnail.createEl("img");
-        imgThumb.setAttribute("src", this.app.vault.adapter.getResourcePath((0, import_obsidian7.normalizePath)(file.path)));
+        imgThumb.setAttribute("src", this.app.vault.adapter.getResourcePath((0, import_obsidian10.normalizePath)(file.path)));
         imgThumb.setAttribute("loading", "lazy");
       }
     } else if (extensions[file_extension] !== "image" && file_extension in extensions) {
@@ -2253,11 +2750,17 @@ var DNModal = class extends import_obsidian7.Modal {
             this.dnOpenFileAlt(sfile, evt);
           }
         });
+        aLink.setAttribute("tabindex", "0");
         if (sfile.extension !== "md") {
           divF.createEl("span", { cls: "nav-file-tag", text: sfile.extension });
         }
         divF.createEl("br");
-        aLink.addEventListener("mouseover", (evt) => this.dnHandleHoverPreview(evt, sfile));
+        aLink.addEventListener("mouseover", (evt) => {
+          this.dnHandleHoverPreview(evt, sfile);
+        });
+        aLink.addEventListener("contextmenu", (evt) => {
+          this.dnGenerateContextMenu(evt, sfile);
+        });
       });
     }
   }
@@ -2408,9 +2911,28 @@ var DNModal = class extends import_obsidian7.Modal {
     }
   }
   dnGenerateContextMenu(evt, file) {
-    this._DN_CTX_MENU = new import_obsidian7.Menu();
+    evt.preventDefault();
+    evt.stopImmediatePropagation();
+    evt.stopPropagation();
+    if (this._DN_CTX_MENU) {
+      this._DN_CTX_MENU.hide();
+    }
+    const existingMenu = document.querySelector(".menu");
+    if (existingMenu) {
+      document.body.click();
+    }
+    this._DN_CTX_MENU = new import_obsidian10.Menu();
+    const extension = file.extension;
+    const totalLimit = 30;
+    let displayTitle = "";
+    if (file.name.length > totalLimit) {
+      const charsToKeep = Math.max(0, totalLimit - extension.length - 6);
+      displayTitle = `${file.basename.slice(0, charsToKeep)}... (${extension})`;
+    } else {
+      displayTitle = `${file.basename} (${extension})`;
+    }
     this._DN_CTX_MENU.addItem(
-      (item) => item.setTitle("Open").setIcon("mouse-pointer-2").onClick(() => {
+      (item) => item.setTitle(`Open ${displayTitle}`).setIcon("mouse-pointer-2").onClick(() => {
         this.app.workspace.getLeaf(false).openFile(file);
         this.close();
       })
@@ -2443,199 +2965,58 @@ var DNModal = class extends import_obsidian7.Modal {
     this._DN_CTX_MENU.addItem(
       (item) => item.setTitle("Backlinks").setIcon("links-coming-in").onClick(() => {
         const backlinksModal = new DNSpecialBacklinksModal(this.app, this, file);
-        backlinksModal.open();
+        this.openSubModal(backlinksModal);
       })
     );
     this._DN_CTX_MENU.addItem(
       (item) => item.setTitle("Outgoing links").setIcon("links-going-out").onClick(() => {
         const outgoingLinksModal = new DNSpecialOutgoingLinksModal(this.app, this, file);
-        outgoingLinksModal.open();
+        this.openSubModal(outgoingLinksModal);
       })
     );
     this._DN_CTX_MENU.addSeparator();
     this._DN_CTX_MENU.addItem(
       (item) => item.setTitle("File tags").setIcon("tags").onClick(() => {
-        const tagsModal = new import_obsidian7.Modal(this.app);
-        tagsModal.contentEl.setAttribute("class", "dn-tags-modal");
-        tagsModal.contentEl.createEl("div", { text: "File tags", cls: "setting-item setting-item-heading dn-modal-heading" });
-        const rowName = tagsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowName.createEl("div", { text: "Name: ", cls: "dn-property-name-sm" });
-        rowName.createEl("div", { text: file.name, cls: "dn-property-value" });
-        const rowPath = tagsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowPath.createEl("div", { text: "Path: ", cls: "dn-property-name-sm" });
-        rowPath.createEl("div", { text: getFolderStructure(file.path), cls: "dn-property-value" });
-        const tagsDiv = tagsModal.contentEl.createEl("div", { cls: "dn-tags-list" });
-        tagsDiv.setAttribute("contenteditable", "true");
-        tagsDiv.setAttribute("spellcheck", "false");
-        const mTags = getTagsPerFile(file);
-        if (mTags) {
-          const tags_file = mTags.split(" ");
-          tags_file.forEach((tag) => {
-            const tagLineDiv = tagsDiv.createEl("div", { cls: "dn-tag-line" });
-            tagLineDiv.createEl("a", { cls: "tag", text: tag, href: tag }).onClickEvent((evt2) => {
-              this.handleTagActions(evt2, tag);
-            });
-          });
-        } else {
-          tagsDiv.createEl("span", { text: "No tags" });
-        }
-        tagsModal.contentEl.createEl("br");
-        const divBottom = tagsModal.contentEl.createEl("div", { cls: "dn-div-bottom-properties" });
-        const btnPropsOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
-        btnPropsOpen.onClickEvent(() => {
-          tagsModal.close();
-          this.dnOpenFile(file);
+        const tagsModal = new DNFileTagsModal(this.app, file, {
+          handleTagActions: (evt2, tag) => this.handleTagActions(evt2, tag),
+          dnOpenFile: (file2) => this.dnOpenFile(file2)
         });
-        const btnCloseProps = divBottom.createEl("button", { text: "Close", cls: "dn-btn-properties-close" });
-        btnCloseProps.onClickEvent(() => {
-          tagsModal.close();
-        });
-        tagsModal.open();
-        tagsDiv.blur();
+        this.openSubModal(tagsModal);
       })
     );
     this._DN_CTX_MENU.addItem(
       (item) => item.setTitle("File frontmatter").setIcon("text").onClick(() => {
-        const fmModal = new import_obsidian7.Modal(this.app);
-        fmModal.contentEl.setAttribute("class", "dn-frontmatter-modal");
-        fmModal.contentEl.createEl("div", { text: "File frontmatter", cls: "setting-item setting-item-heading dn-modal-heading" });
-        const rowName = fmModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowName.createEl("div", { text: "Name: ", cls: "dn-property-name-sm" });
-        rowName.createEl("div", { text: file.name, cls: "dn-property-value" });
-        const rowPath = fmModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowPath.createEl("div", { text: "Path: ", cls: "dn-property-name-sm" });
-        rowPath.createEl("div", { text: getFolderStructure(file.path), cls: "dn-property-value" });
-        const frontmatterDiv = fmModal.contentEl.createEl("div", { cls: "dn-properties-frontmatter-modal" });
-        frontmatterDiv.setAttribute("contenteditable", "true");
-        frontmatterDiv.setAttribute("spellcheck", "false");
-        const curProps = getPropsPerFile(file);
-        if (curProps) {
-          const prop = curProps.split(" \n");
-          for (let i = 0, len = prop.length; i < len; i++) {
-            frontmatterDiv.createEl("a", { text: prop[i], cls: "dn-fproperties" }).onClickEvent((evt2) => {
-              if (evt2.button === 2) {
-                evt2.preventDefault();
-              } else {
-                fmModal.close();
-                this.INPUT_SEARCH.value = prop[i];
-                this.dnModalSearchVault(this.INPUT_SEARCH.value);
-              }
-            });
-            frontmatterDiv.createEl("br");
-          }
-        } else {
-          frontmatterDiv.createEl("span", { text: "No frontmatter" });
-        }
-        fmModal.contentEl.createEl("br");
-        const divBottom = fmModal.contentEl.createEl("div", { cls: "dn-div-bottom-properties" });
-        const btnPropsOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
-        btnPropsOpen.onClickEvent(() => {
-          fmModal.close();
-          this.dnOpenFile(file);
+        const fmModal = new DNFileFrontmatterModal(this.app, file, {
+          mainInputSearch: this.INPUT_SEARCH,
+          dnModalSearchVault: (val) => this.dnModalSearchVault(val),
+          dnOpenFile: (file2) => this.dnOpenFile(file2)
         });
-        const btnCloseProps = divBottom.createEl("button", { text: "Close", cls: "dn-btn-properties-close" });
-        btnCloseProps.onClickEvent(() => {
-          fmModal.close();
-        });
-        fmModal.open();
-        frontmatterDiv.blur();
+        this.openSubModal(fmModal);
       })
     );
     this._DN_CTX_MENU.addSeparator();
     this._DN_CTX_MENU.addItem(
       (item) => item.setTitle("File properties").setIcon("file-cog").onClick(() => {
-        const filePropsModal = new import_obsidian7.Modal(this.app);
-        filePropsModal.contentEl.setAttribute("class", "dn-properties-modal");
-        filePropsModal.contentEl.createEl("div", { text: "File properties", cls: "setting-item setting-item-heading dn-modal-heading" });
-        const rowName = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowName.createEl("div", { text: "Name: ", cls: "dn-property-name" });
-        rowName.createEl("div", { text: file.name, cls: "dn-property-value" });
-        const rowExt = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowExt.createEl("div", { text: "Extension: ", cls: "dn-property-name" });
-        const rowExtValue = rowExt.createEl("div", { cls: "dn-property-value" });
-        rowExtValue.createEl("span", { text: file.extension, cls: "nav-file-tag" });
-        const rowPath = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowPath.createEl("div", { text: "Path: ", cls: "dn-property-name" });
-        rowPath.createEl("div", { text: getFolderStructure(file.path), cls: "dn-property-value" });
-        filePropsModal.contentEl.createEl("br");
-        const rowSize = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowSize.createEl("div", { text: "Size: ", cls: "dn-property-name" });
-        rowSize.createEl("div", { text: formatFileSize(file.stat.size) + " bytes" + formatFileSizeKBMB(file.stat.size) });
-        filePropsModal.contentEl.createEl("br");
-        const rowDateCreated = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowDateCreated.createEl("div", { text: "Created: ", cls: "dn-property-name" });
-        rowDateCreated.createEl("div", { text: (0, import_obsidian8.moment)(file.stat.ctime).format(this.date_format) });
-        const rowDateModified = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowDateModified.createEl("div", { text: "Modified: ", cls: "dn-property-name" });
-        rowDateModified.createEl("div", { text: (0, import_obsidian8.moment)(file.stat.mtime).format(this.date_format) });
-        filePropsModal.contentEl.createEl("br");
-        const rowTags = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowTags.createEl("div", { text: "Tag(s): ", cls: "dn-property-name" });
-        const propTags = rowTags.createEl("div");
-        const curTags = getTagsPerFile(file);
-        if (curTags !== "") {
-          const tags = curTags.split(" ");
-          for (let i = 0, len = tags.length; i < len; i++) {
-            propTags.createEl("a", { text: tags[i], href: tags[i], cls: "tag" }).onClickEvent((evt2) => {
-              this.handleTagActions(evt2, tags[i]);
-            });
-          }
-        } else {
-          propTags.createEl("span", { text: "No tags" });
-        }
-        const rowFrontmatter = filePropsModal.contentEl.createEl("div", { cls: "dn-property-row" });
-        rowFrontmatter.createEl("div", { text: "Frontmatter: ", cls: "dn-property-name" });
-        const rowFrontmatterValue = rowFrontmatter.createEl("div", { cls: "dn-property-value" });
-        const frontmatterProps = rowFrontmatterValue.createEl("div", { cls: "dn-properties-frontmatter" });
-        frontmatterProps.setAttribute("contenteditable", "true");
-        frontmatterProps.setAttribute("spellcheck", "false");
-        const curProps = getPropsPerFile(file);
-        if (curProps) {
-          const prop = curProps.split(" \n");
-          for (let i = 0, len = prop.length; i < len; i++) {
-            frontmatterProps.createEl("a", { text: prop[i], cls: "dn-fproperties" }).onClickEvent((evt2) => {
-              if (evt2.button === 2) {
-                evt2.preventDefault();
-              } else {
-                filePropsModal.close();
-                this.INPUT_SEARCH.value = prop[i];
-                this.dnModalSearchVault(this.INPUT_SEARCH.value);
-              }
-            });
-            frontmatterProps.createEl("br");
-          }
-        } else {
-          frontmatterProps.createEl("span", { text: "No frontmatter" });
-        }
-        filePropsModal.contentEl.createEl("br");
-        const divBottom = filePropsModal.contentEl.createEl("div", { cls: "dn-div-bottom-properties" });
-        const btnPropsOpen = divBottom.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
-        btnPropsOpen.onClickEvent(() => {
-          filePropsModal.close();
-          this.dnOpenFile(file);
+        const filePropsModal = new DNFilePropertiesModal(this.app, file, {
+          handleTagActions: (evt2, tag) => this.handleTagActions(evt2, tag),
+          dnModalSearchVault: (val) => this.dnModalSearchVault(val),
+          dnOpenFile: (file2) => this.dnOpenFile(file2),
+          mainInputSearch: this.INPUT_SEARCH,
+          dateFormat: this.date_format
         });
-        const btnCloseProps = divBottom.createEl("button", { text: "Close", cls: "dn-btn-properties-close" });
-        btnCloseProps.onClickEvent(() => {
-          filePropsModal.close();
-        });
-        filePropsModal.open();
-        frontmatterProps.blur();
+        this.openSubModal(filePropsModal);
       })
     );
     this._DN_CTX_MENU.showAtMouseEvent(evt);
   }
   dnHandleClick(evt, file) {
-    if (!evt || typeof evt !== "object" || !(file instanceof import_obsidian7.TFile)) {
+    if (!evt || typeof evt !== "object" || !(file instanceof import_obsidian10.TFile)) {
       return;
     }
     this.dnSelectTableRow(evt);
-    if (evt.button === 2) {
-      evt.preventDefault();
-      this.dnGenerateContextMenu(evt, file);
-    }
   }
   dnHandleDblClick(evt, file) {
-    if (!evt || typeof evt !== "object" || !(file instanceof import_obsidian7.TFile)) {
+    if (!evt || typeof evt !== "object" || !(file instanceof import_obsidian10.TFile)) {
       return;
     }
     evt.preventDefault();
@@ -2649,150 +3030,135 @@ var DNModal = class extends import_obsidian7.Modal {
     }
   }
   dnShowPreviewFile(evt, file) {
-    this._hoverDiv.empty();
-    this.modalEl.addEventListener("click", () => {
-      this.dnHidePreview();
-    });
-    const topBar = this._hoverDiv.createEl("div", { cls: "dn-preview-top-bar" });
-    const btnClosePreview = topBar.createEl("div", { cls: "modal-close-button" });
-    btnClosePreview.onClickEvent(() => {
-      this.dnHidePreview();
-    });
-    const previewTop = topBar.createEl("div", "dn-preview-titlebar");
-    const divPreviewName = previewTop.createEl("div", { cls: "dn-property-row" });
-    divPreviewName.createEl("div", { text: "Name: ", cls: "dn-property-name-sm" });
-    divPreviewName.createEl("div", { text: file.name, cls: "dn-property-value" });
-    const divPreviewPath = previewTop.createEl("div", { cls: "dn-property-row" });
-    divPreviewPath.createEl("div", { text: "Path: ", cls: "dn-property-name-sm" });
-    divPreviewPath.createEl("div", { text: getFolderStructure(file.path), cls: "dn-property-value" });
-    const divButtons = topBar.createEl("div", { cls: "dn-div-top-preview-btns" });
-    const btnPreviewOpenFile = divButtons.createEl("button", { text: "Open", cls: "dn-btn-properties-open-file" });
-    btnPreviewOpenFile.onClickEvent(() => {
-      this.dnHidePreview();
-      this.close();
-      this.dnOpenFile(file);
-    });
-    const btnPreviewOpenFileNewTab = divButtons.createEl("button", { text: "Open in new tab", cls: "dn-btn-properties-open-file" });
-    btnPreviewOpenFileNewTab.onClickEvent(() => {
-      this.dnHidePreview();
-      this.close();
-      this.app.workspace.getLeaf("tab").openFile(file);
-    });
-    const btnPreviewOpenFileNewWindow = divButtons.createEl("button", { text: "Open in new window", cls: "dn-btn-properties-open-file" });
-    btnPreviewOpenFileNewWindow.onClickEvent(() => {
-      this.dnHidePreview();
-      this.app.workspace.getLeaf("window").openFile(file);
-    });
-    this._hoverRender = this._hoverDiv.createEl("div", { cls: "dn-pr-content" });
-    try {
-      import_obsidian7.MarkdownRenderer.render(
-        this.app,
-        "![[" + (0, import_obsidian7.normalizePath)(file.path) + "]]",
-        this._hoverRender,
-        (0, import_obsidian7.normalizePath)(file.path),
-        this._previewComponent
-      );
-    } catch (error) {
-      return;
+    if (this.activePreview) {
+      this.activePreview.close();
+      this.activePreview = null;
     }
-    this._hoverDiv.style.display = "block";
-    previewTop.addEventListener("mousedown", (evt2) => this.dnHoverDragOnMouseDown(evt2));
-    this._hoverDiv.addEventListener("mousemove", (evt2) => this.dnHoverDragOnMouseMove(evt2));
-    this._hoverDiv.addEventListener("mouseup", (evt2) => this.dnHoverDragOnMouseUp(evt2));
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const divW = this._hoverDiv.offsetWidth;
-    const divH = this._hoverDiv.offsetHeight;
-    if (this._hoverDivLeft === "") {
-      this._hoverDiv.style.left = ((screenWidth - divW) / 2).toString() + "px";
-      this._hoverDiv.style.top = ((screenHeight - divH) / 2).toString() + "px";
-    }
-    previewTop.removeEventListener("mousedown", (evt2) => this.dnHoverDragOnMouseDown(evt2));
-    this.modalEl.removeEventListener("click", (evt2) => {
-      this.dnHidePreview();
+    this.activePreview = new DNPreviewModal(this.app, file, {
+      dnOpenFile: (f) => this.dnOpenFile(f)
     });
+    this.openSubModal(this.activePreview);
+    const originalOnClose = this.activePreview.onClose.bind(this.activePreview);
+    this.activePreview.onClose = () => {
+      originalOnClose();
+      this.activePreview = null;
+    };
+    this.modalEl.addEventListener("click", () => this.dnHidePreview(), { once: true });
   }
   dnHidePreview() {
-    this._isDraggingPreview = false;
-    this._hoverDiv.style.display = "none";
-    this._hoverDiv.empty();
+    if (this.activePreview) {
+      this.activePreview.close();
+      this.activePreview = null;
+    }
+    this.modalEl.removeEventListener("click", () => this.dnHidePreview());
   }
   dnHandleNormalSearch(rExp, file) {
-    return rExp.test(file.name.toLowerCase()) || rExp.test(getFolderStructure(file.path).toLowerCase()) || rExp.test((0, import_obsidian8.moment)(file.stat.mtime).format(this.date_format)) || rExp.test(getTagsPerFile(file).toLowerCase()) || rExp.test(getPropsPerFile(file).toLowerCase());
+    return rExp.test(file.name.toLowerCase()) || rExp.test(getFolderStructure(file.path).toLowerCase()) || rExp.test((0, import_obsidian11.moment)(file.stat.mtime).format(this.date_format)) || rExp.test(getTagsPerFile(file).toLowerCase()) || rExp.test(getPropsPerFile(file).toLowerCase());
   }
   dnHandleSpecialSearch(search, file) {
-    const mtime = (0, import_obsidian8.moment)(file.stat.mtime);
+    const mtime = (0, import_obsidian11.moment)(file.stat.mtime);
+    this.labelDateRangeFilter = this.generateDateRangeLabel(search);
+    const dateMatch = search.match(/^(?:d|date)\((.*)\)$/);
+    if (dateMatch) {
+      const content = dateMatch[1].trim();
+      if (content.includes("..")) {
+        const parts = content.split("..");
+        if (parts.length !== 2)
+          return false;
+        let startStr = parts[0].trim();
+        let endStr = parts[1].trim();
+        if (startStr === "")
+          startStr = "1970-01-01";
+        if (endStr === "")
+          endStr = "@d";
+        const startDate = this.dnParseDateRange(startStr, false);
+        const endDate = this.dnParseDateRange(endStr, true);
+        if (!startDate || !endDate)
+          return false;
+        return mtime.isBetween(startDate, endDate, "day", "[]");
+      } else {
+        const m = (0, import_obsidian11.moment)(content === "@d" || content === "d" ? (0, import_obsidian11.moment)() : content, ["YYYY-MM-DD", "YYYY-MM", "YYYY"], true);
+        if (!m.isValid())
+          return false;
+        if (content.length === 4)
+          return mtime.isSame(m, "year");
+        if (content.length === 7)
+          return mtime.isSame(m, "month");
+        return mtime.isSame(m, "day");
+      }
+    }
+    this.labelDateRangeFilter = "";
     switch (search) {
       case "d":
       case "day":
       case "today":
-        return mtime.isSame((0, import_obsidian8.moment)(), "day");
+        return mtime.isSame((0, import_obsidian11.moment)(), "day");
       case "d-1":
       case "day-1":
       case "yesterday":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(1, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(1, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-2":
       case "day-2":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(2, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(2, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-3":
       case "day-3":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(3, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(3, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-4":
       case "day-4":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(4, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(4, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-5":
       case "day-5":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(5, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(5, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-6":
       case "day-6":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(6, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(6, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "d-7":
       case "day-7":
       case "w":
       case "week":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(7, "days"), (0, import_obsidian8.moment)(), "day", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(7, "days"), (0, import_obsidian11.moment)(), "day", "[]");
       case "m":
       case "month":
-        return mtime.isSame((0, import_obsidian8.moment)(), "month");
+        return mtime.isSame((0, import_obsidian11.moment)(), "month");
       case "m-1":
       case "month-1":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(1, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(1, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-2":
       case "month-2":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(2, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(2, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-3":
       case "month-3":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(3, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(3, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-4":
       case "month-4":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(4, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(4, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-5":
       case "month-5":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(5, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(5, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-6":
       case "month-6":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(6, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(6, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-7":
       case "month-7":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(7, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(7, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-8":
       case "month-8":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(8, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(8, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-9":
       case "month-9":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(9, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(9, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-10":
       case "month-10":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(10, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(10, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-11":
       case "month-11":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(11, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(11, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "m-12":
       case "month-12":
-        return mtime.isBetween((0, import_obsidian8.moment)().subtract(12, "month"), (0, import_obsidian8.moment)(), "month", "[]");
+        return mtime.isBetween((0, import_obsidian11.moment)().subtract(12, "month"), (0, import_obsidian11.moment)(), "month", "[]");
       case "y":
       case "year":
-        return mtime.isSame((0, import_obsidian8.moment)(), "year");
+        return mtime.isSame((0, import_obsidian11.moment)(), "year");
       case "n":
       case "notes":
         return this._notes.includes(file);
@@ -2833,8 +3199,82 @@ var DNModal = class extends import_obsidian7.Modal {
         return false;
     }
   }
+  dnParseDateRange(part, isEnd) {
+    let m;
+    if (part === "d" || part === "@d") {
+      m = (0, import_obsidian11.moment)();
+    } else {
+      m = (0, import_obsidian11.moment)(part, ["YYYY-MM-DD", "YYYY-MM", "YYYY"], true);
+    }
+    if (!m || !m.isValid())
+      return null;
+    if (isEnd) {
+      if (part.length === 4)
+        return m.endOf("year");
+      if (part.length === 7)
+        return m.endOf("month");
+      return m.endOf("day");
+    } else {
+      if (part.length === 4)
+        return m.startOf("year");
+      if (part.length === 7)
+        return m.startOf("month");
+      return m.startOf("day");
+    }
+  }
+  /**
+   * Date range label
+   * Input: "@d(2025-01..2025-03)" or "@d(2025-10)"
+   * Output: "Jan 1, 2025 → Mar 31, 2025" or "October 2025"
+   * Returns -> "" for non-matching syntax (like usual @d-7 syntax)
+   */
+  generateDateRangeLabel(search) {
+    const dateMatch = search.match(/^(?:d|date)\((.*)\)$/);
+    if (!dateMatch)
+      return "";
+    const content = dateMatch[1].trim();
+    if (content.includes("..")) {
+      const parts = content.split("..");
+      if (parts.length !== 2)
+        return "";
+      const startStr = parts[0].trim();
+      const endStr = parts[1].trim();
+      let startLabel = "Beginning";
+      if (startStr !== "" && startStr !== "1970-01-01") {
+        const mStart = (0, import_obsidian11.moment)(startStr, ["YYYY-MM-DD", "YYYY-MM", "YYYY"], true);
+        if (mStart.isValid()) {
+          startLabel = mStart.startOf("day").format("MMM D, YYYY");
+        }
+      }
+      let endLabel = "Today";
+      if (endStr !== "" && endStr !== "@d" && endStr !== "d") {
+        const mEnd = (0, import_obsidian11.moment)(endStr, ["YYYY-MM-DD", "YYYY-MM", "YYYY"], true);
+        if (mEnd.isValid()) {
+          if (endStr.length === 4)
+            mEnd.endOf("year");
+          else if (endStr.length === 7)
+            mEnd.endOf("month");
+          else
+            mEnd.endOf("day");
+          endLabel = mEnd.format("MMM D, YYYY");
+        }
+      }
+      return `${startLabel} \u2192 ${endLabel}`;
+    }
+    const isToday = content === "@d" || content === "d";
+    const m = isToday ? (0, import_obsidian11.moment)() : (0, import_obsidian11.moment)(content, ["YYYY-MM-DD", "YYYY-MM", "YYYY"], true);
+    if (!m.isValid())
+      return "";
+    if (isToday)
+      return m.format("MMM D, YYYY");
+    if (content.length === 4)
+      return `Year ${m.format("YYYY")}`;
+    if (content.length === 7)
+      return m.format("MMMM YYYY");
+    return m.format("MMM D, YYYY");
+  }
   dnOpenFileAlt(f, evt) {
-    if (!evt || typeof evt !== "object" || !(f instanceof import_obsidian7.TFile)) {
+    if (!evt || typeof evt !== "object" || !(f instanceof import_obsidian10.TFile)) {
       return;
     }
     try {
@@ -2844,9 +3284,6 @@ var DNModal = class extends import_obsidian7.Modal {
         this.app.workspace.getLeaf("tab").openFile(f);
       } else if (evt.button === 0) {
         this.dnOpenFile(f);
-      } else if (evt.button === 2 && !(evt.target instanceof HTMLTableCellElement)) {
-        evt.preventDefault();
-        this.dnGenerateContextMenu(evt, f);
       }
     } catch (er) {
       return;
@@ -2856,33 +3293,7 @@ var DNModal = class extends import_obsidian7.Modal {
     this.app.workspace.getLeaf(false).openFile(file);
     this.close();
   }
-  dnHoverDragOnMouseDown(evt) {
-    evt.stopPropagation();
-    this._isDraggingPreview = true;
-    this.initialX = evt.screenX - this._hoverDiv.offsetLeft;
-    this.initialY = evt.screenY - this._hoverDiv.offsetTop;
-    this.previousX = evt.screenX;
-    this.previousY = evt.screenY;
-  }
-  dnHoverDragOnMouseMove(evt) {
-    evt.stopPropagation();
-    if (this._isDraggingPreview) {
-      const newX = evt.screenX - this.initialX;
-      const newY = evt.screenY - this.initialY;
-      if (Math.abs(evt.screenX - this.previousX) > 5 || Math.abs(evt.screenY - this.previousY) > 5) {
-        this._hoverDiv.style.left = newX + "px";
-        this._hoverDiv.style.top = newY + "px";
-        this.previousX = evt.screenX;
-        this.previousY = evt.screenY;
-      }
-      this._hoverDivLeft = newX + "px";
-      this._hoverDivTop = newY + "px";
-    }
-  }
-  dnHoverDragOnMouseUp(evt) {
-    evt.stopPropagation();
-    this._isDraggingPreview = false;
-  }
+  // TODO: show Preview modal
   handleTagActions(evt, tag) {
     if (evt.button === 2) {
       evt.preventDefault();
@@ -3108,26 +3519,30 @@ var DNModal = class extends import_obsidian7.Modal {
           href: note.path,
           title: `${note.path}
 
-${(0, import_obsidian8.moment)(note.stat.mtime).format(this.date_format)} - Modified
-${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Created`,
+${(0, import_obsidian11.moment)(note.stat.mtime).format(this.date_format)} - Modified
+${(0, import_obsidian11.moment)(note.stat.ctime).format(this.date_format)} - Created`,
           cls: "dn-f-note"
         });
         linkPrimaryTag.setAttribute("data-href", note.path);
+        linkPrimaryTag.setAttribute("tabindex", "0");
         linkPrimaryTag.onClickEvent((evt) => {
           if (this._leaf !== null && note !== null) {
             this.dnOpenFileAlt(note, evt);
           }
         });
         linkPrimaryTag.addEventListener("mouseover", (evt) => this.dnHandleHoverPreview(evt, note));
+        linkPrimaryTag.addEventListener("contextmenu", (evt) => this.dnGenerateContextMenu(evt, note));
       }
     }
     const secondaryTagsDiv = this.TAGS_RESULTS_EL.createEl("div", { cls: "dn-td-secondary-tags-container" });
     for (const [secTag, notesInGroup] of sortedSecondaryTagGroups.entries()) {
       notesInGroup.sort((a, b) => b.stat.mtime - a.stat.mtime);
       const secTagDiv = secondaryTagsDiv.createEl("div", { cls: "dn-td-tag-group-card dn-td-secondary-tag-group" });
-      secTagDiv.createEl("h3", { text: secTag }).onClickEvent((evt) => {
+      const secTagH3Link = secTagDiv.createEl("h3", { text: secTag });
+      secTagH3Link.onClickEvent((evt) => {
         this.handleTagActionsTagsDashboard(evt, secTag);
       });
+      secTagH3Link.setAttribute("tabindex", "0");
       const displayNotes = notesInGroup.slice(0, 5);
       for (const note of displayNotes) {
         const linkSecondaryTag = secTagDiv.createEl("a", {
@@ -3135,17 +3550,19 @@ ${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Crea
           href: note.path,
           title: `${note.path}
 
-${(0, import_obsidian8.moment)(note.stat.mtime).format(this.date_format)} - Modified
-${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Created`,
+${(0, import_obsidian11.moment)(note.stat.mtime).format(this.date_format)} - Modified
+${(0, import_obsidian11.moment)(note.stat.ctime).format(this.date_format)} - Created`,
           cls: "dn-f-note"
         });
         linkSecondaryTag.setAttribute("data-href", note.path);
+        linkSecondaryTag.setAttribute("tabindex", "0");
         linkSecondaryTag.onClickEvent((evt) => {
           if (this._leaf !== null && note !== null) {
             this.dnOpenFileAlt(note, evt);
           }
         });
         linkSecondaryTag.addEventListener("mouseover", (evt) => this.dnHandleHoverPreview(evt, note));
+        linkSecondaryTag.addEventListener("contextmenu", (evt) => this.dnGenerateContextMenu(evt, note));
         secTagDiv.createEl("br");
       }
       if (notesInGroup.length > 5) {
@@ -3163,6 +3580,7 @@ ${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Crea
         });
       }
     }
+    this.TAGS_INPUT_SEARCH.focus();
   }
   _tagsPrevPage() {
     if (this.tagsCurrentPage > 0) {
@@ -3244,11 +3662,9 @@ ${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Crea
     }
   }
   onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
-    this._previewComponent.unload();
+    super.onClose();
     if (this.INPUT_SEARCH && this.INPUT_SEARCH.removeEventListener) {
-      this.INPUT_SEARCH.removeEventListener("input", (0, import_obsidian7.debounce)(() => this.dnModalSearchVault(this.INPUT_SEARCH.value), 300, true));
+      this.INPUT_SEARCH.removeEventListener("input", (0, import_obsidian10.debounce)(() => this.dnModalSearchVault(this.INPUT_SEARCH.value), 300, true));
     }
     this._th1.removeEventListener("dblclick", () => this.dnAlternateSortColumn("name"));
     this._th2.removeEventListener("dblclick", () => this.dnAlternateSortColumn("ext"));
@@ -3258,22 +3674,17 @@ ${(0, import_obsidian8.moment)(note.stat.ctime).format(this.date_format)} - Crea
     this._SELECT_SORT.removeEventListener("change", () => {
       this.dnSortColumnWithSelect();
     });
-    this.TAGS_INPUT_SEARCH.removeEventListener("input", (0, import_obsidian7.debounce)(() => this.dnTDSearchTags(this.TAGS_INPUT_SEARCH.value), 300, true));
-    this._hoverDiv.removeEventListener("mousemove", (evt) => this.dnHoverDragOnMouseMove(evt));
-    this._hoverDiv.removeEventListener("mouseup", (evt) => this.dnHoverDragOnMouseUp(evt));
-    this._hoverDiv.removeEventListener("click", (evt) => {
-      evt.stopPropagation();
-      evt.stopImmediatePropagation();
-    });
+    this.TAGS_INPUT_SEARCH.removeEventListener("input", (0, import_obsidian10.debounce)(() => this.dnTDSearchTags(this.TAGS_INPUT_SEARCH.value), 300, true));
     if (this.intersectionObserver) {
       this.intersectionObserver.disconnect();
     }
     this.dnSaveStateOnClose();
+    this.dnHidePreview();
   }
 };
 
 // src/modals/dnsavesearchmodal.ts
-var import_obsidian9 = require("obsidian");
+var import_obsidian12 = require("obsidian");
 
 // src/utils/helper.ts
 function sanitizeInput(txt) {
@@ -3281,12 +3692,12 @@ function sanitizeInput(txt) {
 }
 
 // src/modals/dnsavesearchmodal.ts
-var DNSaveSearchModal = class extends import_obsidian9.Modal {
+var DNSaveSearchModal = class extends DNBaseModal {
   constructor(app, plugin) {
     super(app);
     this.plugin = plugin;
   }
-  onOpen() {
+  render() {
     const { contentEl } = this;
     contentEl.createEl("div", { text: "Save search", cls: "setting-item setting-item-heading dn-modal-heading" });
     let current_search = this.plugin.DN_MODAL.INPUT_SEARCH.value;
@@ -3307,7 +3718,7 @@ var DNSaveSearchModal = class extends import_obsidian9.Modal {
     const divBottom = contentEl.createEl("div", { cls: "dn-save-button-container" });
     const btnSaveSearch = divBottom.createEl("button", { text: "Save", cls: "mod-cta" });
     const btnCancel = divBottom.createEl("button", { text: "Cancel" });
-    currentSearchInput.addEventListener("input", (0, import_obsidian9.debounce)(() => {
+    currentSearchInput.addEventListener("input", (0, import_obsidian12.debounce)(() => {
       current_search = currentSearchInput.value;
       this.plugin.DN_MODAL.INPUT_SEARCH.value = current_search;
       this.plugin.DN_MODAL.dnModalSearchVault(current_search);
@@ -3316,7 +3727,7 @@ var DNSaveSearchModal = class extends import_obsidian9.Modal {
       const sanitizedDescription = sanitizeInput(descriptionInput.value);
       const query = current_search;
       if (!query) {
-        new import_obsidian9.Notice("Please enter a search.");
+        new import_obsidian12.Notice("Please enter a search.");
         return;
       }
       if (!this.plugin.settings.saved_searches) {
@@ -3333,77 +3744,79 @@ var DNSaveSearchModal = class extends import_obsidian9.Modal {
       };
       this.plugin.settings.saved_searches.push(newSavedSearch);
       await this.plugin.saveSettings();
-      new import_obsidian9.Notice("Search saved successfully!");
+      new import_obsidian12.Notice("Search saved successfully!");
       this.close();
     };
     btnCancel.onclick = () => {
       this.close();
     };
-  }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
+    this.nav.refreshFocusableElements();
   }
 };
 
 // src/modals/dnsavedsearchesmodal.ts
-var import_obsidian11 = require("obsidian");
+var import_obsidian13 = require("obsidian");
 
 // src/modals/dnconfirmmodal.ts
-var import_obsidian10 = require("obsidian");
-var DNConfirmModal = class extends import_obsidian10.Modal {
+var DNConfirmModal = class extends DNBaseModal {
   constructor(app, title, message, btnText, btnCls = "mod-cta") {
     super(app);
+    // Updated type to allow null for safe cleanup
+    this.resolve = null;
     this.title = title;
     this.message = message;
     this.btnText = btnText;
     this.btnCls = btnCls;
-    this.promise = new Promise((resolve) => {
-      this.resolve = resolve;
+    this.promise = new Promise((res) => {
+      this.resolve = res;
     });
   }
   /**
-   * Returns the promise that will resolve with the user's decision (true for confirm, false for cancel).
+   * Public getter to await the user's decision
    */
   get resultPromise() {
     return this.promise;
   }
-  onOpen() {
+  render() {
     const { contentEl } = this;
-    contentEl.empty();
     contentEl.createEl("div", { text: this.title, cls: "setting-item setting-item-heading dn-modal-heading" });
     contentEl.createEl("p", { text: this.message, cls: "dn-confirm-message" });
     const btnContainer = contentEl.createEl("div", { cls: "dn-confirm-button-container" });
     const btnConfirm = btnContainer.createEl("button", { text: this.btnText, cls: this.btnCls });
     btnConfirm.onclick = () => {
-      this.resolve(true);
+      if (this.resolve) {
+        this.resolve(true);
+        this.resolve = null;
+      }
       this.close();
     };
     const btnCancel = btnContainer.createEl("button", { text: "Cancel", cls: "mod-cancel" });
     btnCancel.onclick = () => {
-      this.resolve(false);
+      if (this.resolve) {
+        this.resolve(false);
+        this.resolve = null;
+      }
       this.close();
     };
   }
   onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
     if (this.resolve) {
       this.resolve(false);
+      this.resolve = null;
     }
+    super.onClose();
   }
 };
 
 // src/modals/dnsavedsearchesmodal.ts
-var DNSavedSearchesModal = class extends import_obsidian11.Modal {
+var DNSavedSearchesModal = class extends DNBaseModal {
   constructor(app, plugin) {
     super(app);
     this.textToFilter = "";
     this.plugin = plugin;
   }
-  onOpen() {
+  render() {
     const { contentEl } = this;
-    contentEl.empty();
     contentEl.createEl("div", { text: "Saved searches", cls: "setting-item setting-item-heading dn-modal-heading" });
     const filterDiv = contentEl.createEl("div", { cls: "dn-filter-container" });
     this._INPUT_FILTER = filterDiv.createEl("input", {
@@ -3414,25 +3827,20 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
     this._INPUT_FILTER.spellcheck = false;
     this.CLEAR_INPUT_FILTER = filterDiv.createEl("div", { cls: "search-input-clear-button" });
     this.CLEAR_INPUT_FILTER.setAttribute("aria-label", "Clear search");
+    this.CLEAR_INPUT_FILTER.setAttribute("tabindex", "0");
     this.CLEAR_INPUT_FILTER.addEventListener("click", () => {
       this._INPUT_FILTER.value = "";
       this.textToFilter = "";
       this.renderSavedSearches();
+      this._INPUT_FILTER.focus();
     });
     this._INPUT_FILTER.value = this.textToFilter;
-    this._INPUT_FILTER.addEventListener("input", (0, import_obsidian11.debounce)(() => {
+    this._INPUT_FILTER.addEventListener("input", (0, import_obsidian13.debounce)(() => {
       this.textToFilter = this._INPUT_FILTER.value.toLowerCase();
       this.renderSavedSearches();
     }, 300, true));
     this.savedSearchContainer = contentEl.createEl("div", { cls: "dn-saved-search-list" });
     this.renderSavedSearches();
-    const divBtnClose = contentEl.createEl("div", { cls: "dn-div-modal-bottom" });
-    const btnClose = divBtnClose.createEl("button", { text: "Close", cls: "dn-btn-properties-close" });
-    btnClose.onclick = () => this.close();
-  }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
   }
   renderSavedSearches() {
     this.savedSearchContainer.empty();
@@ -3453,11 +3861,13 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
     if (filteredSearches.length === 0) {
       const message = this.textToFilter === "" ? "No saved searches." : "No searches match your filter.";
       this.savedSearchContainer.createEl("p", { text: message, cls: "dn-no-searches-message" });
-      return;
+    } else {
+      filteredSearches.forEach((item) => {
+        this.renderSearchEntry(item);
+      });
     }
-    filteredSearches.forEach((item) => {
-      this.renderSearchEntry(item);
-    });
+    if (this.nav)
+      this.nav.refreshFocusableElements();
   }
   /**
    * Renders a saved search entry.
@@ -3465,14 +3875,16 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
    */
   renderSearchEntry(item) {
     const divSearchItem = this.savedSearchContainer.createEl("div", { cls: "dn-saved-search-item" });
+    divSearchItem.setAttribute("tabindex", "0");
     divSearchItem.createEl("div", { text: item.query, cls: "dn-saved-search-query" });
     divSearchItem.createEl("div", { text: item.description, cls: "dn-saved-search-description" });
     divSearchItem.addEventListener("click", () => {
       if (this.plugin.DN_MODAL && this.plugin.DN_MODAL.INPUT_SEARCH) {
         this.plugin.DN_MODAL.INPUT_SEARCH.value = item.query;
         this.plugin.DN_MODAL.dnModalSearchVault(this.plugin.DN_MODAL.INPUT_SEARCH.value);
+        this.close();
       } else {
-        new import_obsidian11.Notice("Search input not found.");
+        new import_obsidian13.Notice("Search input not found.");
       }
     });
     divSearchItem.addEventListener("dblclick", () => {
@@ -3481,7 +3893,7 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
         this.plugin.DN_MODAL.dnModalSearchVault(this.plugin.DN_MODAL.INPUT_SEARCH.value);
         this.close();
       } else {
-        new import_obsidian11.Notice("Search input not found.");
+        new import_obsidian13.Notice("Search input not found.");
       }
     });
     const divActions = divSearchItem.createEl("div", { cls: "dn-saved-search-actions" });
@@ -3490,7 +3902,7 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
     btnDeleteSearch.onclick = async (evt) => {
       evt.stopPropagation();
       const confirmModal = new DNConfirmModal(this.app, "Delete search", "Are you sure you want to delete this saved search?", "Delete", "mod-warning");
-      confirmModal.open();
+      this.openSubModal(confirmModal);
       const confirmed = await confirmModal.resultPromise;
       if (confirmed) {
         const initialLength = this.plugin.settings.saved_searches.length;
@@ -3499,10 +3911,10 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
         );
         if (this.plugin.settings.saved_searches.length < initialLength) {
           await this.plugin.saveSettings();
-          new import_obsidian11.Notice("Saved search deleted.");
+          new import_obsidian13.Notice("Saved search deleted.");
           this.renderSavedSearches();
         } else {
-          new import_obsidian11.Notice("Error: Could not find search to delete.");
+          new import_obsidian13.Notice("Error: Could not find search to delete.");
         }
       }
     };
@@ -3510,16 +3922,16 @@ var DNSavedSearchesModal = class extends import_obsidian11.Modal {
 };
 
 // src/modals/dninfomodal.ts
-var import_obsidian12 = require("obsidian");
-var DNInfoModal = class extends import_obsidian12.Modal {
+var import_obsidian14 = require("obsidian");
+var DNInfoModal = class extends DNBaseModal {
   constructor(app) {
     super(app);
     this._markdownContent = `
-### Dashboard navigator quick reference
+## Quick reference
 
 The **Dashboard navigator** search allows you to quickly access and filter specific files within your vault. Quickly find notes, images, canvases, audios, videos, PDFs, and more with simple commands.
 
-#### Basic commands
+### Basic commands
 
 - \`@notes\`: Lists all **notes**.
 - \`@images\`: Lists all **images**.
@@ -3531,14 +3943,14 @@ The **Dashboard navigator** search allows you to quickly access and filter speci
 - \`@bases\`: Lists all **.base** files.
 - \`@bookmarks\`: Lists all **bookmarked** files.
 
-#### Advanced filtering with search terms
+### Advanced filtering with search terms
 
 You can combine the basic commands with search terms to narrow down your results:
 
 * \`@notes #tag1\`: Lists **notes** with the tag \`#tag1\`.
 * \`@notes desired_word #tag2\`: Lists **notes** with \`desired_word\` and \`#tag2\`.
 
-#### Search filters shorthands
+### Search filters shorthands
 
 - \`@n\` = \`@notes\`
 - \`@i\` = \`@images\`
@@ -3550,7 +3962,7 @@ You can combine the basic commands with search terms to narrow down your results
 - \`@bb\` = \`@bases\`
 - \`@bm\` = \`@bookmarks\`
 
-#### Date filters and shorthands
+### Date filters and shorthands
 
 For quick filtering by date ranges, use the following date filters or the respective shorthands:
 
@@ -3574,36 +3986,91 @@ For quick filtering by date ranges, use the following date filters or the respec
 **Current year:**
 - \`@y\` or \`@year\`
 
-Example:
+**Example**:
 
 To filter for data from the current month and the previous month, you would use \`@m-1\`.
 
-#### Combining search terms, file types and date filters
+### Combining search terms, file types and date filters
 
 You can combine search terms, file types (one per search) and date filters for more precise results:
 
 - \`@notes #tag1 @month\`: Lists **notes** with the tag \`tag1\` created/modified this month (*Shorthand*: \`@n #tag1 @m\`).
+
 - \`@images @week\`: Lists **images** added this week (*Shorthand*: \`@i @w\`).
 
-#### Quoted search
+### Smart date range filtering
+
+Dashboard Navigator supports advanced calendar-based filtering using the \`@date(..)\` or \`@d(..)\` syntax. This feature allows you to "zoom" into specific years, months, or custom time windows.
+
+#### Specific periods
+
+Target a specific block of time without needing ranges:
+
+- **Yearly view**: \`@d(2025)\` \u2014 Filters all files modified in the year 2025.
+
+- **Monthly view**: \`@d(2025-10)\` \u2014 Filters files modified during October 2025.
+
+- **Daily view**: \`@d(2026-02-15)\` \u2014 Filters files modified on that specific day.
+
+#### Custom date ranges
+
+Use the \`..\` delimiter (\`double-dot\`) to define a **start** and **end** point. The parser is boundary-aware, expanding the dates to include the full period.
+
+- **Fixed range**: \`@d(2024..2025)\`(Includes everything from **Jan 1, 2024**, to **Dec 31, 2025**)
+
+- **Mixed precision**: \`@d(2025-01..2025-06-15)\` (From the **start of January** until the **end of June 15th**)
+
+
+#### Open-ended ranges
+
+Leave **one side of the delimiter empty** to create "infinite" boundaries:
+
+- **From date until today**: \`@d(2025-01-01..)\` (**Everything** from **Jan 1, 2025** until **today**)
+
+- **Archival view**: \`@d(..2023)\`(**Everything** modified **from the beginning** of time until the **final second of 2023**)
+
+#### Date range: Format and syntax
+
+- **Date format**: Use the ISO standard (YYYY-MM-DD) for specific dates.
+
+- **Strict syntax**: **Exactly one range delimiter** \`..\` is required for ranges. Inputs like \`@d(2024..2025..2026)\` are **ignored**.
+
+**Pro tip**: For relative offsets (like "Last 7 days"), use the standard shortcuts like \`@d-7\` or \`@w\` - no parentheses.
+
+#### Special date filter label
+
+When a **date range filter is active**, a clear indicator (label) appears in the Navigator view. This makes it easy to see exactly which time window is applied and quickly refine your search.
+
+#### Use Date Range Filter with Other Existing Filters
+
+- The date range filter works seamlessly with other **Dashboard Navigator filters**. You can combine it with \`@notes\` (to target only notes), \`@images\`, \`@bases\`, also add **Tags** and **Frontmatter** (multi-layered search). You can build simple to complex queries in order to easily find specific files in your vault. It allows for highly specific, multi-layered and incredibly fast searches.
+
+**Examples**:
+
+- Combine with **file type**: \`@notes @d(2024..)\` or \`@n @d(2024..)\` (**All notes modified** from **2024** to **now**).
+
+- Combine with **tags**: \`#work #wip @d(2025-10)\` (Notes with tags \`#work\` AND \`#wip\` modified during **Oct 2025**).
+
+
+### Quoted search
 
 - **Specific quoted search**: Search for specific sentences in frontmatter metadata or for specific filename using double or single quotes. For example, \`"this is the description of a note"\`.
 
-#### Additional tips
+### Additional tips
 
 * **Case sensitivity:** Search terms are **case-insensitive**.
 
 * **Multiple commands:** You can use **multiple commands in a single query**, separated by spaces.
 
-#### Excluding results
+### Excluding results
 
 To exclude specific content from your search results, you can use the \`!\` exclamation point followed by the text, tag or folder you want to exclude. This will remove any items that match the exclusion term.
 
-Example:
+**Example**:
 
 - \`@notes #work #pending !#urgent\`: This will list **all notes** tagged with \`#work\` and \`#pending\` except those tagged with \`#urgent\`.
 
-#### Combining exclusions with other filters
+### Combining exclusions with other filters
 
 You can combine exclusions with other filters, such as tags and date, to further refine your search:
 
@@ -3613,7 +4080,7 @@ You can combine exclusions with other filters, such as tags and date, to further
 
 By effectively using exclusions, you can tailor your searches to your specific needs and quickly find the information you're looking for.
 
-#### Frontmatter metadata search
+### Frontmatter metadata search
     
 To search for specific frontmatter metadata, use the following syntax:
 
@@ -3621,17 +4088,17 @@ To search for specific frontmatter metadata, use the following syntax:
 
 - Property match (all notes with this property): \`'name_of_the_property:'\`
 
-Example: \`'task:'\` or \`'created:'\`
+**Example**: \`'task:'\` or \`'created:'\`
 
 - Search for the value in one metadata property: \`'task:' value\` or \`'task:' 'This is a sentence to match'\`. The sentence to match can be in single or double quotes
 
-Example: \`'task:' 'create pdf'\`
+**Example**: \`'task:' 'create pdf'\`
 
 **2. Search by property and value:**
 
 - Exact match: \`'name_of_the_property: value'\`
 
-Example: \`'topic: javascript'\`
+**Example**: \`'topic: javascript'\`
 
 **Tips:**
 
@@ -3639,13 +4106,13 @@ Example: \`'topic: javascript'\`
 
 - You can use the context menu (navigator view or dashboard view to open the **Frontmatter** or **File properties** modal). Click on the desired frontmatter metadata to quickly search for an exact match within your notes.
 
-#### Bookmarks
+### Bookmarks
 
 New **bookmarks** command (Navigator view - search): \`@bookmarks\` or \`@bm\` as its shorthand. This command will **list all bookmarked files** in Navigator view, so you can sort them by file name, extension, folder, date, search for tags and frontmatter.
 
 - You can search for the file categories using the additional \`@bookmarks\`or \`@bm\` filter to identify which ones are bookmarked, e.g. \`@notes @bm\` (notes that are bookmarked) or \`@images @bm\`(images in your bookmarks).
 
-#### Tag actions
+### Tag actions
 
 You can quickly filter your search results by interacting with **tags** directly within the **Navigator view**, **File Properties modal**, or **Tags modal**. These actions let you include or exclude tags from your current search query.
 
@@ -3653,15 +4120,17 @@ You can quickly filter your search results by interacting with **tags** directly
 
 1. A \`Shift + left-click\` on a tag toggles between these states:
 
-* **Add tag:** This adds the tag to your search query. You'll **only see results that have this tag.** (e.g., \`#tag\`)
-* **Remove tag:** This removes the tag from your search query. The tag will **no longer filter your results**.
+- **Add tag:** This adds the tag to your search query. You'll **only see results that have this tag.** (e.g., \`#tag\`)
 
-**\`Ctrl + left-click\`: Toggle tag exclusion command**
+- **Remove tag:** This removes the tag from your search query. The tag will **no longer filter your results**.
+
+- \`Ctrl + left-click\`: Toggle tag exclusion command**
 
 2. A **Ctrl + left-click** on a tag toggles between these states, specifically managing an *exclusion command*:
 
-* **Add exclusion command:** This adds a command to your search query to **exclude** the tag. You'll **only see results that *do NOT* have this tag.** (e.g., \`!#tag\`)
-* **Remove exclusion command:** This removes the exclusion command for that tag from your search query. The tag will **no longer filter your results by exclusion**.
+- **Add exclusion command:** This adds a command to your search query to **exclude** the tag. You'll **only see results that *do NOT* have this tag.** (e.g., \`!#tag\`)
+
+- **Remove exclusion command:** This removes the exclusion command for that tag from your search query. The tag will **no longer filter your results by exclusion**.
 
 ### Sort files
 
@@ -3729,17 +4198,17 @@ You can hide the following columns:
 
 - You can also save the tags search using \`@tags\` with a description (saved searches window). When clicking on the saved search option it will open the saved query directly in **Tags** dashboard view.
 
-#### **Tags dashboard commands**
+#### Tags dashboard commands
 
 These commands work on the tags displayed in the **recent notes & tags** section, the **secondary tags** displayed in the main **Tags** dashboard, and within the tags list in the **tags sidebar**.
 
-  - \`Left-click\`: Change the selected secondary tag into a primary tag, making it the main focus of your view.
+- \`Left-click\`: Change the selected secondary tag into a primary tag, making it the main focus of your view.
 
-  - \`Shift + click\`: Add this tag to your current search using an AND condition. For example, if your search is \`#article\`, holding \`Shift\` and \`clicking\` on \`#status\` will change your search to \`#article #status\`(notes with tags **#article** AND **#status**).
+- \`Shift + click\`: Add this tag to your current search using an AND condition. For example, if your search is \`#article\`, holding \`Shift\` and \`clicking\` on \`#status\` will change your search to \`#article #status\`(notes with tags **#article** AND **#status**).
 
-  - \`Ctrl + click\`: Exclude this clicked secondary tag. This is useful for filtering out results that contain a specific tag.
+- \`Ctrl + click\`: Exclude this clicked secondary tag. This is useful for filtering out results that contain a specific tag.
 
-  - \`Ctrl + middle-click\`: Quickly clear your tag search and start fresh. This removes all tags from your search query, allowing you to reset your view with a single click.
+- \`Ctrl + middle-click\`: Quickly clear your tag search and start fresh. This removes all tags from your search query, allowing you to reset your view with a single click.
 
 ### Excluded file extensions
 
@@ -3756,6 +4225,7 @@ These commands work on the tags displayed in the **recent notes & tags** section
 ### Colored files
 
 - Select custom colors for files in the dashboard and navigator views. 
+
 - These colors will be reflected in the piechart graph, making it easier to identify and track different file types. To activate this feature, go to **plugin settings** and **toggle colored files**.
 
 ### Colored tags support
@@ -3763,12 +4233,12 @@ These commands work on the tags displayed in the **recent notes & tags** section
 - If the theme being used supports colored tags or if you are using custom CSS snippet to color tags, the **tags** column and **file properties** window will show colored tags accordingly.
 
 `;
-    this._mdComponent = new import_obsidian12.Component();
+    this._mdComponent = new import_obsidian14.Component();
   }
-  onOpen() {
+  render() {
     const { contentEl } = this;
     const markdownContainer = contentEl.createEl("div", { cls: "dn-info-modal" });
-    import_obsidian12.MarkdownRenderer.render(
+    import_obsidian14.MarkdownRenderer.render(
       this.app,
       this._markdownContent,
       markdownContainer,
@@ -3776,100 +4246,47 @@ These commands work on the tags displayed in the **recent notes & tags** section
       this._mdComponent
     );
   }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
-  }
 };
 
 // src/modals/dnquickdisplayoptionsmodal.ts
-var import_obsidian13 = require("obsidian");
-var DNQuickDisplayOptionsModal = class extends import_obsidian13.Modal {
+var import_obsidian15 = require("obsidian");
+var DNQuickDisplayOptionsModal = class extends DNBaseModal {
   constructor(app, plugin) {
     super(app);
     this.plugin = plugin;
   }
-  onOpen() {
+  render() {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.createEl("div", { text: "Navigator view: Quick display options", cls: "setting-item setting-item-heading dn-modal-heading" });
-    contentEl.createEl("div", { text: "Hidden columns", cls: "setting-item setting-item-heading" });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Ext").addToggle((toggle) => {
-      this.toggleHideExtColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_ext).onChange(async (val) => {
-        this.plugin.settings.hide_ext = val;
-        this.plugin.dnUpdateHideColumn("ext", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
+    const headingHiddenColumnsGroup = contentEl.createEl("div", { cls: "setting-group" });
+    const headingHiddenColumns1 = headingHiddenColumnsGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingHiddenColumns1.createEl("div", { text: "Hidden columns", cls: "setting-item-name" });
+    const headingHiddenColumnsGroupItems = headingHiddenColumnsGroup.createEl("div", { cls: "setting-items" });
+    const createHideToggle = (name, settingKey, columnKey) => {
+      new import_obsidian15.Setting(headingHiddenColumnsGroupItems).setName(`Hide: ${name}`).addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings[settingKey]).onChange(async (val) => {
+          this.plugin.settings[settingKey] = val;
+          this.plugin.dnUpdateHideColumn(columnKey, val);
+          await this.plugin.saveSettings();
+          await this.plugin.DN_MODAL.dnRedrawResultsTable();
+        });
       });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Path").addToggle((toggle) => {
-      this.toggleHidePathColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_path).onChange(async (val) => {
-        this.plugin.settings.hide_path = val;
-        this.plugin.dnUpdateHideColumn("path", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Size").addToggle((toggle) => {
-      this.toggleHideSizeColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_size).onChange(async (val) => {
-        this.plugin.settings.hide_size = val;
-        this.plugin.dnUpdateHideColumn("size", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Date").addToggle((toggle) => {
-      this.toggleHideDateColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_date).onChange(async (val) => {
-        this.plugin.settings.hide_date = val;
-        this.plugin.dnUpdateHideColumn("date", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Tags").addToggle((toggle) => {
-      this.toggleHideTagsColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_tags).onChange(async (val) => {
-        this.plugin.settings.hide_tags = val;
-        this.plugin.dnUpdateHideColumn("tags", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: Frontmatter").addToggle((toggle) => {
-      this.toggleHideFrontmatterColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_frontmatter).onChange(async (val) => {
-        this.plugin.settings.hide_frontmatter = val;
-        this.plugin.dnUpdateHideColumn("frontmatter", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: BL (backlinks)").addToggle((toggle) => {
-      this.toggleHideBLColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_backlinks).onChange(async (val) => {
-        this.plugin.settings.hide_backlinks = val;
-        this.plugin.dnUpdateHideColumn("backlinks", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    new import_obsidian13.Setting(contentEl).setName("Hide: OL (outgoing links)").addToggle((toggle) => {
-      this.toggleHideOLColumn = toggle;
-      toggle.setValue(this.plugin.settings.hide_outgoing).onChange(async (val) => {
-        this.plugin.settings.hide_outgoing = val;
-        this.plugin.dnUpdateHideColumn("outgoing", val);
-        await this.plugin.saveSettings();
-        await this.plugin.DN_MODAL.dnRedrawResultsTable();
-      });
-    });
-    contentEl.createEl("div", { text: "Activate toggles to hide columns. Deactivate to show.", cls: "dn-table-column-description" });
+    };
+    createHideToggle("Ext", "hide_ext", "ext");
+    createHideToggle("Path", "hide_path", "path");
+    createHideToggle("Size", "hide_size", "size");
+    createHideToggle("Date", "hide_date", "date");
+    createHideToggle("Tags", "hide_tags", "tags");
+    createHideToggle("Frontmatter", "hide_frontmatter", "frontmatter");
+    createHideToggle("BL (backlinks)", "hide_backlinks", "backlinks");
+    createHideToggle("OL (outgoing links)", "hide_outgoing", "outgoing");
+    headingHiddenColumnsGroupItems.createEl("div", { text: "Activate toggles to hide columns. Deactivate to show.", cls: "dn-table-column-description" });
     contentEl.createEl("br");
-    contentEl.createEl("div", { text: "Image thumbnails", cls: "setting-item setting-item-heading" });
-    new import_obsidian13.Setting(contentEl).setName("Show image thumbnails").setDesc("Activate to show image thumbnails. Deactivate to show image icons.").addToggle((toggle) => {
+    const headingImageThumbnailsGroup = contentEl.createEl("div", { cls: "setting-group" });
+    const headingImageThumbnails1 = headingImageThumbnailsGroup.createEl("div", { cls: "setting-item setting-item-heading" });
+    headingImageThumbnails1.createEl("div", { text: "Image thumbnails", cls: "setting-item-name" });
+    const headingImageThumbnailsGroupItems = headingImageThumbnailsGroup.createEl("div", { cls: "setting-items" });
+    new import_obsidian15.Setting(headingImageThumbnailsGroupItems).setName("Show image thumbnails").setDesc("Activate to show image thumbnails. Deactivate to show image icons.").addToggle((toggle) => {
       this.toggleImageThumbnail = toggle;
       toggle.setValue(this.plugin.settings.image_thumbnail).onChange(async (val) => {
         this.plugin.settings.image_thumbnail = val;
@@ -3878,14 +4295,9 @@ var DNQuickDisplayOptionsModal = class extends import_obsidian13.Modal {
         await this.plugin.DN_MODAL.dnRedrawResultsTable();
       });
     });
-    new import_obsidian13.Setting(contentEl).setName("Image thumbnails size").setDesc("Adjust image thumbnails size in pixels.").addSlider((sli) => {
+    new import_obsidian15.Setting(headingImageThumbnailsGroupItems).setName("Image thumbnails size").setDesc("Adjust image thumbnails size in pixels.").addSlider((sli) => {
       this.sliderImageThumbnail = sli;
-      let slider_val;
-      if (this.plugin.settings.thumbnail_size) {
-        slider_val = this.plugin.settings.thumbnail_size;
-      } else {
-        slider_val = 82;
-      }
+      const slider_val = this.plugin.settings.thumbnail_size || 82;
       sli.setDynamicTooltip();
       sli.setLimits(50, 500, 1);
       sli.setValue(slider_val);
@@ -3896,14 +4308,10 @@ var DNQuickDisplayOptionsModal = class extends import_obsidian13.Modal {
       });
     });
   }
-  onClose() {
-    const { contentEl } = this;
-    contentEl.empty();
-  }
 };
 
 // src/data/dndatamanager.ts
-var import_obsidian14 = require("obsidian");
+var import_obsidian16 = require("obsidian");
 
 // src/utils/dnbookmarks.ts
 function getBookmarkedFiles(bookmarksJson) {
@@ -3971,9 +4379,9 @@ var DNDataManager = class {
       tagNames: []
     };
     for (const absF of allLoadedAbstractFiles) {
-      if (absF instanceof import_obsidian14.TFile) {
+      if (absF instanceof import_obsidian16.TFile) {
         data.all_files.push(absF);
-      } else if (absF instanceof import_obsidian14.TFolder && !absF.isRoot()) {
+      } else if (absF instanceof import_obsidian16.TFolder && !absF.isRoot()) {
         data.folders.push(absF);
       }
     }
@@ -4040,7 +4448,7 @@ var DNDataManager = class {
   async generateHash(allAbstractFiles, excludedExtensions, excludedFolders) {
     let stringToHash = "";
     for (const file of allAbstractFiles) {
-      if (file instanceof import_obsidian14.TFile && file.stat) {
+      if (file instanceof import_obsidian16.TFile && file.stat) {
         stringToHash += `${file.path}|${file.stat.mtime}|`;
       } else {
         stringToHash += `${file.path}|`;
@@ -4060,7 +4468,7 @@ var DNDataManager = class {
     const lastOpenPaths = app.workspace.getLastOpenFiles();
     for (const path of lastOpenPaths) {
       const file = app.vault.getAbstractFileByPath(path);
-      if (file instanceof import_obsidian14.TFile) {
+      if (file instanceof import_obsidian16.TFile) {
         lo_files.push(file);
       }
     }
@@ -4074,7 +4482,7 @@ var DNDataManager = class {
       if (Array.isArray(bookmarkPaths)) {
         for (const path of bookmarkPaths) {
           const file = app.vault.getAbstractFileByPath(path);
-          if (file instanceof import_obsidian14.TFile) {
+          if (file instanceof import_obsidian16.TFile) {
             const isExcludedExtension = excludedExtensions.includes(file.extension.toLowerCase());
             const isExcludedFolder = excludedFolders.some((folder) => file.path.startsWith(folder));
             if (!isExcludedExtension && !isExcludedFolder) {
@@ -4176,7 +4584,7 @@ var DEFAULT_SETTINGS = {
   onclose_search: "",
   saved_searches: []
 };
-var DNPlugin = class extends import_obsidian15.Plugin {
+var DNPlugin = class extends import_obsidian17.Plugin {
   async onload() {
     await this.loadSettings();
     this._DN_DATA_MANAGER = new DNDataManager();

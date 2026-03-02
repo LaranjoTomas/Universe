@@ -4151,6 +4151,76 @@ function transition_out(block, local, detach2, callback) {
 function ensure_array_like(array_like_or_iterator) {
   return (array_like_or_iterator == null ? void 0 : array_like_or_iterator.length) !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
 }
+function outro_and_destroy_block(block, lookup) {
+  transition_out(block, 1, 1, () => {
+    lookup.delete(block.key);
+  });
+}
+function update_keyed_each(old_blocks, dirty, get_key, dynamic, ctx, list, lookup, node, destroy, create_each_block6, next, get_context) {
+  let o = old_blocks.length;
+  let n = list.length;
+  let i = o;
+  const old_indexes = {};
+  while (i--) old_indexes[old_blocks[i].key] = i;
+  const new_blocks = [];
+  const new_lookup = /* @__PURE__ */ new Map();
+  const deltas = /* @__PURE__ */ new Map();
+  const updates = [];
+  i = n;
+  while (i--) {
+    const child_ctx = get_context(ctx, list, i);
+    const key = get_key(child_ctx);
+    let block = lookup.get(key);
+    if (!block) {
+      block = create_each_block6(key, child_ctx);
+      block.c();
+    } else if (dynamic) {
+      updates.push(() => block.p(child_ctx, dirty));
+    }
+    new_lookup.set(key, new_blocks[i] = block);
+    if (key in old_indexes) deltas.set(key, Math.abs(i - old_indexes[key]));
+  }
+  const will_move = /* @__PURE__ */ new Set();
+  const did_move = /* @__PURE__ */ new Set();
+  function insert2(block) {
+    transition_in(block, 1);
+    block.m(node, next);
+    lookup.set(block.key, block);
+    next = block.first;
+    n--;
+  }
+  while (o && n) {
+    const new_block = new_blocks[n - 1];
+    const old_block = old_blocks[o - 1];
+    const new_key = new_block.key;
+    const old_key = old_block.key;
+    if (new_block === old_block) {
+      next = new_block.first;
+      o--;
+      n--;
+    } else if (!new_lookup.has(old_key)) {
+      destroy(old_block, lookup);
+      o--;
+    } else if (!lookup.has(new_key) || will_move.has(new_key)) {
+      insert2(new_block);
+    } else if (did_move.has(old_key)) {
+      o--;
+    } else if (deltas.get(new_key) > deltas.get(old_key)) {
+      did_move.add(new_key);
+      insert2(new_block);
+    } else {
+      will_move.add(old_key);
+      o--;
+    }
+  }
+  while (o--) {
+    const old_block = old_blocks[o];
+    if (!new_lookup.has(old_block.key)) destroy(old_block, lookup);
+  }
+  while (n) insert2(new_blocks[n - 1]);
+  run_all(updates);
+  return new_blocks;
+}
 
 // node_modules/svelte/src/runtime/internal/spread.js
 function get_spread_update(levels, updates) {
@@ -4725,6 +4795,12 @@ var createColumnStores = (settingsStore) => {
 function isColumnTag(input, columnTagTableStore) {
   return input in get_store_value(columnTagTableStore);
 }
+var createCollapsedColumnsStore = (settingsStore) => {
+  return derived([settingsStore], ([settings]) => {
+    var _a;
+    return new Set((_a = settings.collapsedColumns) != null ? _a : []);
+  });
+};
 
 // src/ui/components/column.svelte
 var import_obsidian5 = require("obsidian");
@@ -4913,6 +4989,13 @@ function instance2($$self, $$props, $$invalidate) {
     });
     menu.addSeparator();
     menu.addItem((i) => {
+      if (task.isCancelled) {
+        i.setTitle(`Restore task`).onClick(() => taskActions.restoreTasks([task.id]));
+      } else {
+        i.setTitle(`Cancel task`).onClick(() => taskActions.cancelTasks([task.id]));
+      }
+    });
+    menu.addItem((i) => {
       i.setTitle(`Archive task`).onClick(() => taskActions.archiveTasks([task.id]));
     });
     menu.addItem((i) => {
@@ -5079,242 +5162,71 @@ var icon_default = Icon;
 
 // src/ui/components/task.svelte
 var import_obsidian4 = require("obsidian");
-
-// src/ui/selection/task_selection_store.ts
-var taskSelectionStore = writable(/* @__PURE__ */ new Map());
-function toggleTaskSelection(taskId) {
-  taskSelectionStore.update((map) => {
-    const current = map.get(taskId) || false;
-    map.set(taskId, !current);
-    return new Map(map);
-  });
-}
-function isTaskSelected(taskId, selectionMap) {
-  return selectionMap.get(taskId) || false;
-}
-function clearTaskSelections() {
-  taskSelectionStore.set(/* @__PURE__ */ new Map());
-}
-function getSelectedTaskCount(taskIds, selectionMap) {
-  return taskIds.filter((id) => selectionMap.get(id) || false).length;
-}
-
-// src/ui/components/task.svelte
 function add_css3(target) {
-  append_styles(target, "svelte-1d22sh4", '.task.svelte-1d22sh4.svelte-1d22sh4{background-color:var(--background-secondary-alt);border-radius:var(--radius-m);border:var(--border-width) solid var(--background-modifier-border);cursor:grab}.task.is-dragging.svelte-1d22sh4.svelte-1d22sh4{opacity:0.15}.task.svelte-1d22sh4 .task-row.svelte-1d22sh4{padding:var(--size-4-2);display:flex;gap:var(--size-4-1);align-items:center}.task.svelte-1d22sh4 .task-row .task-row-left.svelte-1d22sh4{display:flex;align-items:center;flex-shrink:0}.task.svelte-1d22sh4 .task-row .task-row-content.svelte-1d22sh4{flex:1;min-width:0}.task.svelte-1d22sh4 .task-row .task-row-content textarea.svelte-1d22sh4{cursor:text;background-color:var(--color-base-25);width:100%}.task.svelte-1d22sh4 .task-row .task-row-content .content-preview.svelte-1d22sh4{min-height:1.5rem;display:flex;flex-direction:column;justify-content:center}.task.svelte-1d22sh4 .task-row .task-row-content .content-preview.svelte-1d22sh4:focus-within{box-shadow:0 0 0 3px var(--background-modifier-border-focus)}.task.svelte-1d22sh4 .task-row .task-row-right.svelte-1d22sh4{display:flex;align-items:center;flex-shrink:0}.task.svelte-1d22sh4 .icon-button.svelte-1d22sh4{display:flex;justify-content:center;align-items:center;width:24px;height:24px;padding:0;border:none;background:transparent;cursor:pointer;border-radius:var(--radius-s);transition:opacity 0.2s ease;position:relative;box-shadow:none}.task.svelte-1d22sh4 .icon-button.svelte-1d22sh4:hover,.task.svelte-1d22sh4 .icon-button.svelte-1d22sh4:active{background:transparent;box-shadow:none}.task.svelte-1d22sh4 .icon-button.svelte-1d22sh4:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.task.svelte-1d22sh4 .icon-button .default-icon.svelte-1d22sh4,.task.svelte-1d22sh4 .icon-button .hover-icon.svelte-1d22sh4{position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.2s ease}.task.svelte-1d22sh4 .icon-button .hover-icon.svelte-1d22sh4{opacity:0}.task.svelte-1d22sh4 .icon-button.mark-done:hover .hover-icon.svelte-1d22sh4{opacity:1}.task.svelte-1d22sh4 .icon-button.mark-done:hover .hover-icon.svelte-1d22sh4 svg{color:var(--interactive-accent)}.task.svelte-1d22sh4 .icon-button.mark-done:hover .default-icon.svelte-1d22sh4{opacity:0}.task.svelte-1d22sh4 .icon-button.mark-done.is-done .default-icon.svelte-1d22sh4 svg{opacity:1;color:var(--icon-color)}.task.svelte-1d22sh4 .icon-button.bulk-select .default-icon.svelte-1d22sh4,.task.svelte-1d22sh4 .icon-button.bulk-select .hover-icon.svelte-1d22sh4{position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.2s ease}.task.svelte-1d22sh4 .icon-button.bulk-select .hover-icon.svelte-1d22sh4{opacity:0}.task.svelte-1d22sh4 .icon-button.bulk-select:hover .hover-icon.svelte-1d22sh4{opacity:1}.task.svelte-1d22sh4 .icon-button.bulk-select:hover .hover-icon.svelte-1d22sh4 svg{color:var(--interactive-accent)}.task.svelte-1d22sh4 .icon-button.bulk-select:hover .default-icon.svelte-1d22sh4{opacity:0}.task.svelte-1d22sh4 .icon-button.bulk-select.is-selected .default-icon.svelte-1d22sh4 svg{opacity:1;color:var(--icon-color)}.task.svelte-1d22sh4 .task-footer.svelte-1d22sh4{border-top:var(--border-width) solid var(--background-modifier-border);padding:var(--size-4-2);padding-top:var(--size-4-1)}.task.svelte-1d22sh4 .task-footer .go-to-file-button.svelte-1d22sh4{display:flex;align-items:center;justify-content:flex-start;gap:var(--size-2-1);width:100%;padding:0;border:none;background:transparent;cursor:pointer;text-align:left;box-shadow:none;transition:opacity 0.2s ease;border-radius:var(--radius-s)}.task.svelte-1d22sh4 .task-footer .go-to-file-button.svelte-1d22sh4:hover{background:transparent;box-shadow:none}.task.svelte-1d22sh4 .task-footer .go-to-file-button.svelte-1d22sh4:hover svg{opacity:1 !important;color:var(--interactive-accent)}.task.svelte-1d22sh4 .task-footer .go-to-file-button:hover .file-path.svelte-1d22sh4{color:var(--interactive-accent)}.task.svelte-1d22sh4 .task-footer .go-to-file-button.svelte-1d22sh4:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.task.svelte-1d22sh4 .task-footer .go-to-file-button .file-path.svelte-1d22sh4{margin:0;font-size:var(--font-ui-smaller);color:var(--text-muted);transition:color 0.2s ease;overflow-wrap:anywhere;white-space:normal;flex:1;min-width:0;line-height:1.3}.task.svelte-1d22sh4 .task-tags.svelte-1d22sh4{display:flex;flex-wrap:wrap;gap:var(--size-4-1) var(--size-2-1);padding:var(--size-4-2) var(--size-2-2);padding-top:0}.task-row-content *{word-break:break-word;margin:0}.task-row-content img{max-width:100%;max-height:160px;object-fit:contain}.task-row-content code{white-space:pre-wrap}.task-row-content input[type="checkbox"]{pointer-events:none}');
+  append_styles(target, "svelte-a4aiw4", '.task.svelte-a4aiw4.svelte-a4aiw4{background-color:var(--background-secondary-alt);border-radius:var(--radius-m);border:var(--border-width) solid var(--background-modifier-border);cursor:grab}.task.is-dragging.svelte-a4aiw4.svelte-a4aiw4{opacity:0.15}.task.is-selected.svelte-a4aiw4.svelte-a4aiw4{border-color:var(--interactive-accent);background-color:color-mix(in srgb, var(--interactive-accent) 8%, var(--background-secondary-alt))}.task.svelte-a4aiw4 .task-row.svelte-a4aiw4{padding:var(--size-4-2);padding-inline-start:calc(var(--size-4-2) + 8px);display:flex;gap:var(--size-4-1);align-items:flex-start}.task.svelte-a4aiw4 .task-row .task-row-left.svelte-a4aiw4{display:flex;align-items:center;flex-shrink:0}.task.svelte-a4aiw4 .task-row .task-row-content.svelte-a4aiw4{flex:1;min-width:0}.task.svelte-a4aiw4 .task-row .task-row-content textarea.svelte-a4aiw4{cursor:text;background-color:var(--color-base-25);width:100%}.task.svelte-a4aiw4 .task-row .task-row-content .content-preview.svelte-a4aiw4{min-height:1.5rem}.task.svelte-a4aiw4 .task-row .task-row-content .content-preview.svelte-a4aiw4:focus-within{box-shadow:0 0 0 3px var(--background-modifier-border-focus)}.task.svelte-a4aiw4 .task-row .task-row-right.svelte-a4aiw4{display:flex;align-items:center;flex-shrink:0}.task.is-selection-mode.svelte-a4aiw4 .task-row .task-row-left.svelte-a4aiw4{width:0;flex:0 0 0;overflow:visible;z-index:1}.task.is-selection-mode.svelte-a4aiw4 .select-task.svelte-a4aiw4{transform:translateX(calc(var(--size-4-2) * -1))}.task.svelte-a4aiw4 .icon-button.svelte-a4aiw4{display:flex;justify-content:center;align-items:center;width:24px;height:24px;padding:0;border:none;background:transparent;cursor:pointer;border-radius:var(--radius-s);transition:opacity 0.2s ease;box-shadow:none}.task.svelte-a4aiw4 .icon-button.svelte-a4aiw4:hover,.task.svelte-a4aiw4 .icon-button.svelte-a4aiw4:active{background:transparent;box-shadow:none}.task.svelte-a4aiw4 .icon-button.svelte-a4aiw4:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.task.svelte-a4aiw4 .icon-button.select-task.svelte-a4aiw4:hover svg{opacity:0.8 !important;color:var(--interactive-accent)}.task.svelte-a4aiw4 .icon-button.select-task.is-selected.svelte-a4aiw4 svg{color:var(--interactive-accent)}.task.svelte-a4aiw4 .task-footer.svelte-a4aiw4{border-top:var(--border-width) solid var(--background-modifier-border);padding:var(--size-4-2);padding-top:var(--size-4-1)}.task.svelte-a4aiw4 .task-footer .go-to-file-button.svelte-a4aiw4{display:flex;align-items:center;justify-content:flex-start;gap:var(--size-2-1);width:100%;padding:0;border:none;background:transparent;cursor:pointer;text-align:left;box-shadow:none;transition:opacity 0.2s ease;border-radius:var(--radius-s)}.task.svelte-a4aiw4 .task-footer .go-to-file-button.svelte-a4aiw4:hover{background:transparent;box-shadow:none}.task.svelte-a4aiw4 .task-footer .go-to-file-button.svelte-a4aiw4:hover svg{opacity:1 !important;color:var(--interactive-accent)}.task.svelte-a4aiw4 .task-footer .go-to-file-button:hover .file-path.svelte-a4aiw4{color:var(--interactive-accent)}.task.svelte-a4aiw4 .task-footer .go-to-file-button.svelte-a4aiw4:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.task.svelte-a4aiw4 .task-footer .go-to-file-button .file-path.svelte-a4aiw4{margin:0;font-size:var(--font-ui-smaller);color:var(--text-muted);transition:color 0.2s ease;overflow-wrap:anywhere;white-space:normal;flex:1;min-width:0;line-height:1.3}.task.svelte-a4aiw4 .task-tags.svelte-a4aiw4{display:flex;flex-wrap:wrap;gap:var(--size-4-1) var(--size-2-1);padding:var(--size-4-2) var(--size-2-2);padding-top:0}.task-row-content img{max-width:100%;max-height:160px;object-fit:contain}.task-row-content code{white-space:pre-wrap}.task-row-content .content-preview,.task-row-content .content-preview > ul,.task-row-content .content-preview > ul > li,.task-row-content .content-preview > ul > li > p{margin:0}.task .task-row-content .content-preview > ul{padding-left:var(--size-4-4, 16px)}.task-row-content .content-preview .task-list-item{min-width:0;word-break:break-word}.task-row-content input.task-nested-checkbox{pointer-events:none}.task-row-content .content-preview .task-list-item > input[type="checkbox"]{margin-right:var(--size-2-2);transform:translateY(2px)}.task-row-content .content-preview .task-list-item > *:not(input[type="checkbox"]){min-width:0}');
 }
 function get_each_context(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[33] = list[i];
+  child_ctx[34] = list[i];
   return child_ctx;
 }
-function create_else_block_1(ctx) {
+function create_if_block_3(ctx) {
   let button;
-  let span0;
-  let icon0;
-  let t;
-  let span1;
-  let icon1;
+  let icon;
   let button_aria_label_value;
-  let button_aria_pressed_value;
   let button_title_value;
   let current;
   let mounted;
   let dispose;
-  icon0 = new icon_default({
-    props: {
-      name: (
-        /*task*/
-        ctx[0].done ? "lucide-circle-check" : "lucide-circle"
-      ),
-      size: 18,
-      opacity: 0.5
-    }
-  });
-  icon1 = new icon_default({
-    props: {
-      name: "lucide-circle-check",
-      size: 18,
-      opacity: 1
-    }
-  });
-  return {
-    c() {
-      button = element("button");
-      span0 = element("span");
-      create_component(icon0.$$.fragment);
-      t = space();
-      span1 = element("span");
-      create_component(icon1.$$.fragment);
-      attr(span0, "class", "default-icon svelte-1d22sh4");
-      attr(span1, "class", "hover-icon svelte-1d22sh4");
-      attr(button, "class", "icon-button mark-done svelte-1d22sh4");
-      attr(button, "aria-label", button_aria_label_value = /*task*/
-      ctx[0].done ? "Mark as incomplete" : "Move to Done");
-      attr(button, "aria-pressed", button_aria_pressed_value = /*task*/
-      ctx[0].done);
-      attr(button, "title", button_title_value = /*task*/
-      ctx[0].done ? "Mark as incomplete" : "Move to Done");
-      attr(button, "tabindex", "0");
-      toggle_class(
-        button,
-        "is-done",
-        /*task*/
-        ctx[0].done
-      );
-    },
-    m(target, anchor) {
-      insert(target, button, anchor);
-      append(button, span0);
-      mount_component(icon0, span0, null);
-      append(button, t);
-      append(button, span1);
-      mount_component(icon1, span1, null);
-      current = true;
-      if (!mounted) {
-        dispose = [
-          listen(
-            button,
-            "click",
-            /*click_handler_1*/
-            ctx[23]
-          ),
-          listen(
-            button,
-            "keydown",
-            /*keydown_handler_1*/
-            ctx[24]
-          )
-        ];
-        mounted = true;
-      }
-    },
-    p(ctx2, dirty) {
-      const icon0_changes = {};
-      if (dirty[0] & /*task*/
-      1) icon0_changes.name = /*task*/
-      ctx2[0].done ? "lucide-circle-check" : "lucide-circle";
-      icon0.$set(icon0_changes);
-      if (!current || dirty[0] & /*task*/
-      1 && button_aria_label_value !== (button_aria_label_value = /*task*/
-      ctx2[0].done ? "Mark as incomplete" : "Move to Done")) {
-        attr(button, "aria-label", button_aria_label_value);
-      }
-      if (!current || dirty[0] & /*task*/
-      1 && button_aria_pressed_value !== (button_aria_pressed_value = /*task*/
-      ctx2[0].done)) {
-        attr(button, "aria-pressed", button_aria_pressed_value);
-      }
-      if (!current || dirty[0] & /*task*/
-      1 && button_title_value !== (button_title_value = /*task*/
-      ctx2[0].done ? "Mark as incomplete" : "Move to Done")) {
-        attr(button, "title", button_title_value);
-      }
-      if (!current || dirty[0] & /*task*/
-      1) {
-        toggle_class(
-          button,
-          "is-done",
-          /*task*/
-          ctx2[0].done
-        );
-      }
-    },
-    i(local) {
-      if (current) return;
-      transition_in(icon0.$$.fragment, local);
-      transition_in(icon1.$$.fragment, local);
-      current = true;
-    },
-    o(local) {
-      transition_out(icon0.$$.fragment, local);
-      transition_out(icon1.$$.fragment, local);
-      current = false;
-    },
-    d(detaching) {
-      if (detaching) {
-        detach(button);
-      }
-      destroy_component(icon0);
-      destroy_component(icon1);
-      mounted = false;
-      run_all(dispose);
-    }
-  };
-}
-function create_if_block_3(ctx) {
-  let button;
-  let span0;
-  let icon0;
-  let t;
-  let span1;
-  let icon1;
-  let current;
-  let mounted;
-  let dispose;
-  icon0 = new icon_default({
+  icon = new icon_default({
     props: {
       name: (
         /*isSelected*/
-        ctx[9] ? "lucide-check-square" : "lucide-square"
+        ctx[5] ? "lucide-check-square" : "lucide-square"
       ),
       size: 18,
       opacity: (
         /*isSelected*/
-        ctx[9] ? 1 : 0.5
+        ctx[5] ? 1 : 0.5
       )
-    }
-  });
-  icon1 = new icon_default({
-    props: {
-      name: "lucide-check-square",
-      size: 18,
-      opacity: 1
     }
   });
   return {
     c() {
       button = element("button");
-      span0 = element("span");
-      create_component(icon0.$$.fragment);
-      t = space();
-      span1 = element("span");
-      create_component(icon1.$$.fragment);
-      attr(span0, "class", "default-icon svelte-1d22sh4");
-      attr(span1, "class", "hover-icon svelte-1d22sh4");
-      attr(button, "class", "icon-button bulk-select svelte-1d22sh4");
-      attr(button, "aria-label", "Select for bulk actions");
+      create_component(icon.$$.fragment);
+      attr(button, "class", "icon-button select-task svelte-a4aiw4");
+      attr(button, "role", "checkbox");
+      attr(button, "aria-label", button_aria_label_value = /*isSelected*/
+      ctx[5] ? "Deselect for bulk actions" : "Select for bulk actions");
       attr(
         button,
-        "aria-pressed",
+        "aria-checked",
         /*isSelected*/
-        ctx[9]
+        ctx[5]
       );
-      attr(button, "title", "Select for bulk actions");
+      attr(button, "title", button_title_value = /*isSelected*/
+      ctx[5] ? "Deselect for bulk actions" : "Select for bulk actions");
       attr(button, "tabindex", "0");
       toggle_class(
         button,
         "is-selected",
         /*isSelected*/
-        ctx[9]
+        ctx[5]
       );
     },
     m(target, anchor) {
       insert(target, button, anchor);
-      append(button, span0);
-      mount_component(icon0, span0, null);
-      append(button, t);
-      append(button, span1);
-      mount_component(icon1, span1, null);
+      mount_component(icon, button, null);
       current = true;
       if (!mounted) {
         dispose = [
-          listen(
-            button,
-            "click",
-            /*click_handler*/
-            ctx[21]
-          ),
+          listen(button, "click", function() {
+            if (is_function(
+              /*onToggleSelection*/
+              ctx[6]
+            )) ctx[6].apply(this, arguments);
+          }),
           listen(
             button,
             "keydown",
@@ -5325,51 +5237,59 @@ function create_if_block_3(ctx) {
         mounted = true;
       }
     },
-    p(ctx2, dirty) {
-      const icon0_changes = {};
+    p(new_ctx, dirty) {
+      ctx = new_ctx;
+      const icon_changes = {};
       if (dirty[0] & /*isSelected*/
-      512) icon0_changes.name = /*isSelected*/
-      ctx2[9] ? "lucide-check-square" : "lucide-square";
+      32) icon_changes.name = /*isSelected*/
+      ctx[5] ? "lucide-check-square" : "lucide-square";
       if (dirty[0] & /*isSelected*/
-      512) icon0_changes.opacity = /*isSelected*/
-      ctx2[9] ? 1 : 0.5;
-      icon0.$set(icon0_changes);
+      32) icon_changes.opacity = /*isSelected*/
+      ctx[5] ? 1 : 0.5;
+      icon.$set(icon_changes);
       if (!current || dirty[0] & /*isSelected*/
-      512) {
+      32 && button_aria_label_value !== (button_aria_label_value = /*isSelected*/
+      ctx[5] ? "Deselect for bulk actions" : "Select for bulk actions")) {
+        attr(button, "aria-label", button_aria_label_value);
+      }
+      if (!current || dirty[0] & /*isSelected*/
+      32) {
         attr(
           button,
-          "aria-pressed",
+          "aria-checked",
           /*isSelected*/
-          ctx2[9]
+          ctx[5]
         );
       }
       if (!current || dirty[0] & /*isSelected*/
-      512) {
+      32 && button_title_value !== (button_title_value = /*isSelected*/
+      ctx[5] ? "Deselect for bulk actions" : "Select for bulk actions")) {
+        attr(button, "title", button_title_value);
+      }
+      if (!current || dirty[0] & /*isSelected*/
+      32) {
         toggle_class(
           button,
           "is-selected",
           /*isSelected*/
-          ctx2[9]
+          ctx[5]
         );
       }
     },
     i(local) {
       if (current) return;
-      transition_in(icon0.$$.fragment, local);
-      transition_in(icon1.$$.fragment, local);
+      transition_in(icon.$$.fragment, local);
       current = true;
     },
     o(local) {
-      transition_out(icon0.$$.fragment, local);
-      transition_out(icon1.$$.fragment, local);
+      transition_out(icon.$$.fragment, local);
       current = false;
     },
     d(detaching) {
       if (detaching) {
         detach(button);
       }
-      destroy_component(icon0);
-      destroy_component(icon1);
+      destroy_component(icon);
       mounted = false;
       run_all(dispose);
     }
@@ -5383,25 +5303,25 @@ function create_else_block(ctx) {
     c() {
       div = element("div");
       attr(div, "role", "button");
-      attr(div, "class", "content-preview markdown-rendered svelte-1d22sh4");
+      attr(div, "class", "content-preview markdown-rendered svelte-a4aiw4");
       attr(div, "tabindex", "0");
     },
     m(target, anchor) {
       insert(target, div, anchor);
-      ctx[26](div);
+      ctx[24](div);
       if (!mounted) {
         dispose = [
           listen(
             div,
             "mouseup",
             /*handleFocus*/
-            ctx[16]
+            ctx[17]
           ),
           listen(
             div,
             "keypress",
             /*handleOpenKeypress*/
-            ctx[13]
+            ctx[14]
           )
         ];
         mounted = true;
@@ -5412,7 +5332,7 @@ function create_else_block(ctx) {
       if (detaching) {
         detach(div);
       }
-      ctx[26](null);
+      ctx[24](null);
       mounted = false;
       run_all(dispose);
     }
@@ -5428,30 +5348,30 @@ function create_if_block_2(ctx) {
       textarea = element("textarea");
       textarea.value = textarea_value_value = /*task*/
       ctx[0].content.replaceAll("<br />", "\n");
-      attr(textarea, "class", "svelte-1d22sh4");
+      attr(textarea, "class", "svelte-a4aiw4");
       toggle_class(
         textarea,
         "editing",
         /*isEditing*/
-        ctx[5]
+        ctx[7]
       );
     },
     m(target, anchor) {
       insert(target, textarea, anchor);
-      ctx[25](textarea);
+      ctx[23](textarea);
       if (!mounted) {
         dispose = [
           listen(
             textarea,
             "keypress",
             /*handleKeypress*/
-            ctx[12]
+            ctx[13]
           ),
           listen(
             textarea,
             "blur",
             /*handleContentBlur*/
-            ctx[11]
+            ctx[12]
           ),
           listen(textarea, "input", onInput)
         ];
@@ -5465,12 +5385,12 @@ function create_if_block_2(ctx) {
         textarea.value = textarea_value_value;
       }
       if (dirty[0] & /*isEditing*/
-      32) {
+      128) {
         toggle_class(
           textarea,
           "editing",
           /*isEditing*/
-          ctx2[5]
+          ctx2[7]
         );
       }
     },
@@ -5478,7 +5398,7 @@ function create_if_block_2(ctx) {
       if (detaching) {
         detach(textarea);
       }
-      ctx[25](null);
+      ctx[23](null);
       mounted = false;
       run_all(dispose);
     }
@@ -5513,12 +5433,12 @@ function create_if_block_1(ctx) {
       t0 = space();
       span = element("span");
       t1 = text(t1_value);
-      attr(span, "class", "file-path svelte-1d22sh4");
-      attr(button, "class", "go-to-file-button svelte-1d22sh4");
+      attr(span, "class", "file-path svelte-a4aiw4");
+      attr(button, "class", "go-to-file-button svelte-a4aiw4");
       attr(button, "aria-label", "Go to file");
       attr(button, "title", "Go to file");
       attr(button, "tabindex", "0");
-      attr(div, "class", "task-footer svelte-1d22sh4");
+      attr(div, "class", "task-footer svelte-a4aiw4");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -5533,14 +5453,14 @@ function create_if_block_1(ctx) {
           listen(
             button,
             "click",
-            /*click_handler_2*/
-            ctx[27]
+            /*click_handler*/
+            ctx[25]
           ),
           listen(
             button,
             "keydown",
-            /*keydown_handler_2*/
-            ctx[28]
+            /*keydown_handler_1*/
+            ctx[26]
           )
         ];
         mounted = true;
@@ -5586,7 +5506,7 @@ function create_if_block(ctx) {
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
-      attr(div, "class", "task-tags svelte-1d22sh4");
+      attr(div, "class", "task-tags svelte-a4aiw4");
     },
     m(target, anchor) {
       insert(target, div, anchor);
@@ -5634,7 +5554,7 @@ function create_each_block(ctx) {
   let span1;
   let t1_value = (
     /*tag*/
-    ctx[33] + ""
+    ctx[34] + ""
   );
   let t1;
   let t2;
@@ -5659,7 +5579,7 @@ function create_each_block(ctx) {
     p(ctx2, dirty) {
       if (dirty[0] & /*task*/
       1 && t1_value !== (t1_value = /*tag*/
-      ctx2[33] + "")) set_data(t1, t1_value);
+      ctx2[34] + "")) set_data(t1, t1_value);
     },
     d(detaching) {
       if (detaching) {
@@ -5672,8 +5592,6 @@ function create_fragment4(ctx) {
   let div4;
   let div3;
   let div0;
-  let current_block_type_index;
-  let if_block0;
   let t0;
   let div1;
   let t1;
@@ -5685,25 +5603,18 @@ function create_fragment4(ctx) {
   let current;
   let mounted;
   let dispose;
-  const if_block_creators = [create_if_block_3, create_else_block_1];
-  const if_blocks = [];
+  let if_block0 = (
+    /*isSelectionMode*/
+    ctx[4] && create_if_block_3(ctx)
+  );
   function select_block_type(ctx2, dirty) {
     if (
-      /*isInSelectionMode*/
-      ctx2[4]
-    ) return 0;
-    return 1;
-  }
-  current_block_type_index = select_block_type(ctx, [-1, -1]);
-  if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-  function select_block_type_1(ctx2, dirty) {
-    if (
       /*isEditing*/
-      ctx2[5]
+      ctx2[7]
     ) return create_if_block_2;
     return create_else_block;
   }
-  let current_block_type = select_block_type_1(ctx, [-1, -1]);
+  let current_block_type = select_block_type(ctx, [-1, -1]);
   let if_block1 = current_block_type(ctx);
   taskmenu = new task_menu_default({
     props: {
@@ -5727,14 +5638,14 @@ function create_fragment4(ctx) {
   );
   let if_block3 = (
     /*shouldconsolidateTags*/
-    ctx[10] && create_if_block(ctx)
+    ctx[11] && create_if_block(ctx)
   );
   return {
     c() {
       div4 = element("div");
       div3 = element("div");
       div0 = element("div");
-      if_block0.c();
+      if (if_block0) if_block0.c();
       t0 = space();
       div1 = element("div");
       if_block1.c();
@@ -5745,26 +5656,39 @@ function create_fragment4(ctx) {
       if (if_block2) if_block2.c();
       t3 = space();
       if (if_block3) if_block3.c();
-      attr(div0, "class", "task-row-left svelte-1d22sh4");
-      attr(div1, "class", "task-row-content svelte-1d22sh4");
-      attr(div2, "class", "task-row-right svelte-1d22sh4");
-      attr(div3, "class", "task-row svelte-1d22sh4");
-      attr(div4, "class", "task svelte-1d22sh4");
+      attr(div0, "class", "task-row-left svelte-a4aiw4");
+      attr(div1, "class", "task-row-content svelte-a4aiw4");
+      attr(div2, "class", "task-row-right svelte-a4aiw4");
+      attr(div3, "class", "task-row svelte-a4aiw4");
+      attr(div4, "class", "task svelte-a4aiw4");
       attr(div4, "role", "group");
       attr(div4, "draggable", div4_draggable_value = !/*isEditing*/
-      ctx[5]);
+      ctx[7]);
       toggle_class(
         div4,
         "is-dragging",
         /*isDragging*/
-        ctx[8]
+        ctx[10]
+      );
+      toggle_class(
+        div4,
+        "is-selected",
+        /*isSelectionMode*/
+        ctx[4] && /*isSelected*/
+        ctx[5]
+      );
+      toggle_class(
+        div4,
+        "is-selection-mode",
+        /*isSelectionMode*/
+        ctx[4]
       );
     },
     m(target, anchor) {
       insert(target, div4, anchor);
       append(div4, div3);
       append(div3, div0);
-      if_blocks[current_block_type_index].m(div0, null);
+      if (if_block0) if_block0.m(div0, null);
       append(div3, t0);
       append(div3, div1);
       if_block1.m(div1, null);
@@ -5782,40 +5706,43 @@ function create_fragment4(ctx) {
             div4,
             "dragstart",
             /*handleDragStart*/
-            ctx[14]
+            ctx[15]
           ),
           listen(
             div4,
             "dragend",
             /*handleDragEnd*/
-            ctx[15]
+            ctx[16]
           )
         ];
         mounted = true;
       }
     },
     p(ctx2, dirty) {
-      let previous_block_index = current_block_type_index;
-      current_block_type_index = select_block_type(ctx2, dirty);
-      if (current_block_type_index === previous_block_index) {
-        if_blocks[current_block_type_index].p(ctx2, dirty);
-      } else {
+      if (
+        /*isSelectionMode*/
+        ctx2[4]
+      ) {
+        if (if_block0) {
+          if_block0.p(ctx2, dirty);
+          if (dirty[0] & /*isSelectionMode*/
+          16) {
+            transition_in(if_block0, 1);
+          }
+        } else {
+          if_block0 = create_if_block_3(ctx2);
+          if_block0.c();
+          transition_in(if_block0, 1);
+          if_block0.m(div0, null);
+        }
+      } else if (if_block0) {
         group_outros();
-        transition_out(if_blocks[previous_block_index], 1, 1, () => {
-          if_blocks[previous_block_index] = null;
+        transition_out(if_block0, 1, 1, () => {
+          if_block0 = null;
         });
         check_outros();
-        if_block0 = if_blocks[current_block_type_index];
-        if (!if_block0) {
-          if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx2);
-          if_block0.c();
-        } else {
-          if_block0.p(ctx2, dirty);
-        }
-        transition_in(if_block0, 1);
-        if_block0.m(div0, null);
       }
-      if (current_block_type === (current_block_type = select_block_type_1(ctx2, dirty)) && if_block1) {
+      if (current_block_type === (current_block_type = select_block_type(ctx2, dirty)) && if_block1) {
         if_block1.p(ctx2, dirty);
       } else {
         if_block1.d(1);
@@ -5861,7 +5788,7 @@ function create_fragment4(ctx) {
       }
       if (
         /*shouldconsolidateTags*/
-        ctx2[10]
+        ctx2[11]
       ) {
         if (if_block3) {
           if_block3.p(ctx2, dirty);
@@ -5875,17 +5802,36 @@ function create_fragment4(ctx) {
         if_block3 = null;
       }
       if (!current || dirty[0] & /*isEditing*/
-      32 && div4_draggable_value !== (div4_draggable_value = !/*isEditing*/
-      ctx2[5])) {
+      128 && div4_draggable_value !== (div4_draggable_value = !/*isEditing*/
+      ctx2[7])) {
         attr(div4, "draggable", div4_draggable_value);
       }
       if (!current || dirty[0] & /*isDragging*/
-      256) {
+      1024) {
         toggle_class(
           div4,
           "is-dragging",
           /*isDragging*/
-          ctx2[8]
+          ctx2[10]
+        );
+      }
+      if (!current || dirty[0] & /*isSelectionMode, isSelected*/
+      48) {
+        toggle_class(
+          div4,
+          "is-selected",
+          /*isSelectionMode*/
+          ctx2[4] && /*isSelected*/
+          ctx2[5]
+        );
+      }
+      if (!current || dirty[0] & /*isSelectionMode*/
+      16) {
+        toggle_class(
+          div4,
+          "is-selection-mode",
+          /*isSelectionMode*/
+          ctx2[4]
         );
       }
     },
@@ -5906,7 +5852,7 @@ function create_fragment4(ctx) {
       if (detaching) {
         detach(div4);
       }
-      if_blocks[current_block_type_index].d();
+      if (if_block0) if_block0.d();
       if_block1.d();
       destroy_component(taskmenu);
       if (if_block2) if_block2.d();
@@ -5922,9 +5868,6 @@ function onInput(e) {
 }
 function instance4($$self, $$props, $$invalidate) {
   let shouldconsolidateTags;
-  let isSelected;
-  let $taskSelectionStore;
-  component_subscribe($$self, taskSelectionStore, ($$value) => $$invalidate(20, $taskSelectionStore = $$value));
   let { app } = $$props;
   let { task } = $$props;
   let { taskActions } = $$props;
@@ -5932,9 +5875,13 @@ function instance4($$self, $$props, $$invalidate) {
   let { showFilepath } = $$props;
   let { consolidateTags } = $$props;
   let { displayColumn } = $$props;
-  let { isInSelectionMode = false } = $$props;
+  let { isSelectionMode = false } = $$props;
+  let { isSelected = false } = $$props;
+  let { onToggleSelection = () => {
+  } } = $$props;
+  let { selectedTaskIds = [] } = $$props;
   function handleContentBlur() {
-    $$invalidate(5, isEditing = false);
+    $$invalidate(7, isEditing = false);
     const content = textAreaEl == null ? void 0 : textAreaEl.value;
     if (!content) return;
     const updatedContent = content.replaceAll("\n", "<br />");
@@ -5947,35 +5894,80 @@ function instance4($$self, $$props, $$invalidate) {
   }
   function handleOpenKeypress(e) {
     if (e.key === "Enter" || e.key === " ") {
-      handleFocus();
+      handleFocus(e);
     }
   }
-  let isDragging = false;
   let isEditing = false;
+  let isDragging = false;
   function handleDragStart(e) {
     handleContentBlur();
-    $$invalidate(8, isDragging = true);
-    isDraggingStore.set({ fromColumn: displayColumn });
+    $$invalidate(10, isDragging = true);
+    const taskIds = isSelectionMode && isSelected && selectedTaskIds.length > 0 ? selectedTaskIds : [task.id];
+    isDraggingStore.set({
+      fromColumn: displayColumn,
+      draggedTaskIds: taskIds
+    });
     if (e.dataTransfer) {
       e.dataTransfer.setData("text/plain", task.id);
       e.dataTransfer.dropEffect = "move";
     }
+    if (taskIds.length > 1 && e.dataTransfer) {
+      const ghost = document.createElement("div");
+      ghost.textContent = `Moving ${taskIds.length} tasks`;
+      ghost.style.cssText = [
+        "position:fixed",
+        "top:-9999px",
+        "left:-9999px",
+        "padding:6px 12px",
+        "background:var(--background-secondary-alt)",
+        "border:1px solid var(--background-modifier-border)",
+        "border-radius:var(--radius-m)",
+        "font-size:var(--font-ui-small)",
+        "color:var(--text-normal)",
+        "box-shadow:var(--shadow-s)",
+        "white-space:nowrap"
+      ].join(";");
+      document.body.appendChild(ghost);
+      e.dataTransfer.setDragImage(ghost, 0, 0);
+      setTimeout(() => document.body.removeChild(ghost), 0);
+    }
   }
   function handleDragEnd() {
-    $$invalidate(8, isDragging = false);
+    $$invalidate(10, isDragging = false);
     isDraggingStore.set(null);
   }
   let textAreaEl;
   let previewContainerEl;
   let markdownComponent;
-  function handleFocus(e) {
+  const interactiveTagNames = /* @__PURE__ */ new Set(["a", "button", "input", "select", "textarea", "label", "summary", "details"]);
+  function eventHasInteractiveTarget(e) {
     const path = (e == null ? void 0 : e.composedPath()) || [];
+    const currentTarget = e == null ? void 0 : e.currentTarget;
     for (const element2 of path) {
-      if (element2 instanceof HTMLElement && element2.tagName.toLowerCase() === "a") {
-        return;
+      if (!(element2 instanceof HTMLElement)) {
+        continue;
+      }
+      if (currentTarget instanceof HTMLElement && element2 === currentTarget) {
+        continue;
+      }
+      if (interactiveTagNames.has(element2.tagName.toLowerCase())) {
+        return true;
+      }
+      if (element2.isContentEditable) {
+        return true;
+      }
+      const role = element2.getAttribute("role");
+      if (role === "button" || role === "checkbox" || role === "link") {
+        return true;
       }
     }
-    $$invalidate(5, isEditing = true);
+    return false;
+  }
+  function handleFocus(e) {
+    if (eventHasInteractiveTarget(e)) {
+      return;
+    }
+    $$invalidate(7, isEditing = true);
     setTimeout(
       () => {
         textAreaEl == null ? void 0 : textAreaEl.focus();
@@ -5983,17 +5975,22 @@ function instance4($$self, $$props, $$invalidate) {
       100
     );
   }
-  async function renderMarkdown() {
+  function renderTaskMarkdown() {
+    const contentWithBlockLink = (task.content + (task.blockLink ? ` ^${task.blockLink}` : "")).replaceAll("<br />", "\n");
+    const indentedContinuationLines = contentWithBlockLink.replaceAll("\n", "\n  ");
+    return `- [${task.displayStatus}] ${indentedContinuationLines}`;
+  }
+  async function renderMarkdown(selectionMode) {
     if (!previewContainerEl) return;
     if (markdownComponent) {
       markdownComponent.unload();
     }
     previewContainerEl.empty();
     markdownComponent = new import_obsidian4.Component();
-    const contentToRender = (task.content + (task.blockLink ? ` ^${task.blockLink}` : "")).replaceAll("<br />", "\n");
+    const contentToRender = renderTaskMarkdown();
     await import_obsidian4.MarkdownRenderer.render(app, contentToRender, previewContainerEl, task.path, markdownComponent);
     setupLinkHandlers();
-    postProcessRenderedContent();
+    postProcessRenderedContent(selectionMode);
   }
   function setupLinkHandlers() {
     if (!previewContainerEl) return;
@@ -6023,18 +6020,50 @@ function instance4($$self, $$props, $$invalidate) {
       });
     });
   }
-  function postProcessRenderedContent() {
+  function postProcessRenderedContent(selectionMode) {
     if (!previewContainerEl) return;
+    function stopPropagation(e) {
+      e.stopPropagation();
+    }
+    function handlePrimaryCheckboxClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      void taskActions.toggleDone(task.id);
+    }
     previewContainerEl.querySelectorAll("a:not(.internal-link)").forEach((a) => {
       const anchor = a;
       anchor.target = "_blank";
       anchor.rel = "noopener noreferrer";
-      anchor.addEventListener("click", (e) => e.stopPropagation());
-      anchor.addEventListener("keypress", (e) => e.stopPropagation());
+      anchor.addEventListener("click", stopPropagation);
+      anchor.addEventListener("keypress", stopPropagation);
     });
-    previewContainerEl.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
-      const el = cb;
-      el.disabled = true;
+    const checkboxes = Array.from(previewContainerEl.querySelectorAll('input[type="checkbox"]'));
+    const [primaryCheckbox, ...nestedCheckboxes] = checkboxes;
+    if (primaryCheckbox) {
+      primaryCheckbox.classList.add("task-primary-checkbox");
+      primaryCheckbox.addEventListener("mousedown", stopPropagation);
+      primaryCheckbox.addEventListener("mouseup", stopPropagation);
+      primaryCheckbox.addEventListener("keypress", stopPropagation);
+      if (selectionMode) {
+        primaryCheckbox.disabled = true;
+        primaryCheckbox.tabIndex = -1;
+        primaryCheckbox.style.visibility = "hidden";
+        primaryCheckbox.setAttribute("aria-hidden", "true");
+        primaryCheckbox.addEventListener("click", stopPropagation);
+      } else {
+        primaryCheckbox.disabled = false;
+        primaryCheckbox.style.removeProperty("visibility");
+        primaryCheckbox.removeAttribute("aria-hidden");
+        primaryCheckbox.setAttribute("aria-label", task.done ? "Mark as incomplete" : "Mark as complete");
+        primaryCheckbox.addEventListener("click", handlePrimaryCheckboxClick);
+      }
+    }
+    nestedCheckboxes.forEach((checkbox) => {
+      checkbox.classList.add("task-nested-checkbox");
+      checkbox.disabled = true;
+      checkbox.tabIndex = -1;
+      checkbox.addEventListener("click", stopPropagation);
+      checkbox.addEventListener("keypress", stopPropagation);
     });
     previewContainerEl.querySelectorAll("iframe, audio, video").forEach((el) => {
       el.remove();
@@ -6045,72 +6074,63 @@ function instance4($$self, $$props, $$invalidate) {
       markdownComponent.unload();
     }
   });
-  const click_handler = () => toggleTaskSelection(task.id);
   const keydown_handler = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      toggleTaskSelection(task.id);
-    }
-  };
-  const click_handler_1 = () => taskActions.toggleDone(task.id);
-  const keydown_handler_1 = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      taskActions.toggleDone(task.id);
+      onToggleSelection();
     }
   };
   function textarea_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       textAreaEl = $$value;
-      $$invalidate(6, textAreaEl);
+      $$invalidate(8, textAreaEl);
     });
   }
   function div_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       previewContainerEl = $$value;
-      $$invalidate(7, previewContainerEl);
+      $$invalidate(9, previewContainerEl);
     });
   }
-  const click_handler_2 = () => taskActions.viewFile(task.id);
-  const keydown_handler_2 = (e) => {
+  const click_handler = () => taskActions.viewFile(task.id);
+  const keydown_handler_1 = (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       taskActions.viewFile(task.id);
     }
   };
   $$self.$$set = ($$props2) => {
-    if ("app" in $$props2) $$invalidate(17, app = $$props2.app);
+    if ("app" in $$props2) $$invalidate(18, app = $$props2.app);
     if ("task" in $$props2) $$invalidate(0, task = $$props2.task);
     if ("taskActions" in $$props2) $$invalidate(1, taskActions = $$props2.taskActions);
     if ("columnTagTableStore" in $$props2) $$invalidate(2, columnTagTableStore = $$props2.columnTagTableStore);
     if ("showFilepath" in $$props2) $$invalidate(3, showFilepath = $$props2.showFilepath);
-    if ("consolidateTags" in $$props2) $$invalidate(18, consolidateTags = $$props2.consolidateTags);
-    if ("displayColumn" in $$props2) $$invalidate(19, displayColumn = $$props2.displayColumn);
-    if ("isInSelectionMode" in $$props2) $$invalidate(4, isInSelectionMode = $$props2.isInSelectionMode);
+    if ("consolidateTags" in $$props2) $$invalidate(19, consolidateTags = $$props2.consolidateTags);
+    if ("displayColumn" in $$props2) $$invalidate(20, displayColumn = $$props2.displayColumn);
+    if ("isSelectionMode" in $$props2) $$invalidate(4, isSelectionMode = $$props2.isSelectionMode);
+    if ("isSelected" in $$props2) $$invalidate(5, isSelected = $$props2.isSelected);
+    if ("onToggleSelection" in $$props2) $$invalidate(6, onToggleSelection = $$props2.onToggleSelection);
+    if ("selectedTaskIds" in $$props2) $$invalidate(21, selectedTaskIds = $$props2.selectedTaskIds);
   };
   $$self.$$.update = () => {
-    if ($$self.$$.dirty[0] & /*task, isEditing, previewContainerEl*/
-    161) {
+    if ($$self.$$.dirty[0] & /*task, isEditing, previewContainerEl, isSelectionMode*/
+    657) {
       $: if (task && !isEditing && previewContainerEl) {
-        renderMarkdown();
+        void renderMarkdown(isSelectionMode);
       }
     }
     if ($$self.$$.dirty[0] & /*textAreaEl*/
-    64) {
+    256) {
       $: {
         if (textAreaEl) {
-          $$invalidate(6, textAreaEl.style.height = `0px`, textAreaEl);
-          $$invalidate(6, textAreaEl.style.height = `${textAreaEl.scrollHeight}px`, textAreaEl);
+          $$invalidate(8, textAreaEl.style.height = `0px`, textAreaEl);
+          $$invalidate(8, textAreaEl.style.height = `${textAreaEl.scrollHeight}px`, textAreaEl);
         }
       }
     }
     if ($$self.$$.dirty[0] & /*consolidateTags, task*/
-    262145) {
-      $: $$invalidate(10, shouldconsolidateTags = consolidateTags && task.tags.size > 0);
-    }
-    if ($$self.$$.dirty[0] & /*task, $taskSelectionStore*/
-    1048577) {
-      $: $$invalidate(9, isSelected = isTaskSelected(task.id, $taskSelectionStore));
+    524289) {
+      $: $$invalidate(11, shouldconsolidateTags = consolidateTags && task.tags.size > 0);
     }
   };
   return [
@@ -6118,12 +6138,13 @@ function instance4($$self, $$props, $$invalidate) {
     taskActions,
     columnTagTableStore,
     showFilepath,
-    isInSelectionMode,
+    isSelectionMode,
+    isSelected,
+    onToggleSelection,
     isEditing,
     textAreaEl,
     previewContainerEl,
     isDragging,
-    isSelected,
     shouldconsolidateTags,
     handleContentBlur,
     handleKeypress,
@@ -6134,15 +6155,12 @@ function instance4($$self, $$props, $$invalidate) {
     app,
     consolidateTags,
     displayColumn,
-    $taskSelectionStore,
-    click_handler,
+    selectedTaskIds,
     keydown_handler,
-    click_handler_1,
-    keydown_handler_1,
     textarea_binding,
     div_binding,
-    click_handler_2,
-    keydown_handler_2
+    click_handler,
+    keydown_handler_1
   ];
 }
 var Task = class extends SvelteComponent {
@@ -6155,14 +6173,17 @@ var Task = class extends SvelteComponent {
       create_fragment4,
       safe_not_equal,
       {
-        app: 17,
+        app: 18,
         task: 0,
         taskActions: 1,
         columnTagTableStore: 2,
         showFilepath: 3,
-        consolidateTags: 18,
-        displayColumn: 19,
-        isInSelectionMode: 4
+        consolidateTags: 19,
+        displayColumn: 20,
+        isSelectionMode: 4,
+        isSelected: 5,
+        onToggleSelection: 6,
+        selectedTaskIds: 21
       },
       add_css3,
       [-1, -1]
@@ -6170,6 +6191,30 @@ var Task = class extends SvelteComponent {
   }
 };
 var task_default = Task;
+
+// src/ui/selection/task_selection_store.ts
+var taskSelectionStore = writable(/* @__PURE__ */ new Map());
+function toggleTaskSelection(taskId) {
+  taskSelectionStore.update((map) => {
+    const current = map.get(taskId) || false;
+    map.set(taskId, !current);
+    return new Map(map);
+  });
+}
+function isTaskSelected(taskId, selectionMap) {
+  return selectionMap.get(taskId) || false;
+}
+function getSelectedTaskCount(taskIds, selectionMap) {
+  return taskIds.filter((id) => selectionMap.get(id) || false).length;
+}
+function clearColumnSelections(columnTaskIds) {
+  taskSelectionStore.update((map) => {
+    for (const id of columnTaskIds) {
+      map.delete(id);
+    }
+    return new Map(map);
+  });
+}
 
 // src/ui/selection/selection_mode_store.ts
 var selectionModeStore = writable(/* @__PURE__ */ new Map());
@@ -6184,80 +6229,77 @@ function toggleSelectionMode(column) {
     return new Map(map);
   });
 }
+function isInSelectionMode(column, modeMap) {
+  return modeMap.get(column) || false;
+}
 
 // src/ui/components/column.svelte
+var { Boolean: Boolean_1 } = globals;
 function add_css4(target) {
-  append_styles(target, "svelte-19ymbna", ".column.svelte-19ymbna.svelte-19ymbna{display:flex;flex-direction:column;align-self:flex-start;width:300px;flex-shrink:0;padding:var(--size-4-3);border-radius:var(--radius-m);border:var(--border-width) solid var(--background-modifier-border);background-color:var(--background-secondary)}.column.drop-active.svelte-19ymbna .tasks-wrapper .tasks.svelte-19ymbna{opacity:0.4}.column.drop-active.drop-hover.svelte-19ymbna .tasks-wrapper.svelte-19ymbna{border-color:var(--color-base-70)}.column.svelte-19ymbna .header.svelte-19ymbna{display:flex;justify-content:space-between;align-items:center;height:24px;flex-shrink:0}.column.svelte-19ymbna .header h2.svelte-19ymbna{font-size:var(--font-ui-larger);font-weight:var(--font-bold);margin:0}.column.svelte-19ymbna .mode-toggle-container.svelte-19ymbna{display:flex;align-items:center;margin-top:var(--size-4-3);margin-bottom:var(--size-4-2);gap:var(--size-4-2)}.column.svelte-19ymbna .mode-toggle-container .segmented-control.svelte-19ymbna{display:inline-flex;background:var(--background-primary);border:none;border-radius:var(--radius-s);padding:2px;gap:0}.column.svelte-19ymbna .mode-toggle-container .segmented-control.has-color.svelte-19ymbna{background:var(--toggle-bg-color)}.column.svelte-19ymbna .mode-toggle-container .segmented-control .segment.svelte-19ymbna{padding:2px var(--size-4-2);border:none;background:transparent;border-radius:calc(var(--radius-s) - 2px);cursor:pointer;font-size:var(--font-ui-smaller);color:var(--text-muted);transition:all 0.2s ease;box-shadow:none;position:relative;z-index:1;white-space:nowrap}.column.svelte-19ymbna .mode-toggle-container .segmented-control .segment.active.svelte-19ymbna{background:var(--background-secondary);border:none;color:var(--text-normal)}.column.svelte-19ymbna .mode-toggle-container .segmented-control .segment.svelte-19ymbna:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.column.svelte-19ymbna .mode-toggle-container .segmented-control.has-color .segment.active.svelte-19ymbna{background:var(--toggle-active-color);border:none;color:var(--text-normal)}.column.svelte-19ymbna .mode-toggle-container .selection-count.svelte-19ymbna{font-size:var(--font-ui-smaller);color:var(--text-muted);flex:1}.column.svelte-19ymbna .mode-toggle-container .bulk-actions-button.svelte-19ymbna{opacity:0;pointer-events:none;transition:opacity 0.2s ease}.column.svelte-19ymbna .mode-toggle-container .bulk-actions-button.visible.svelte-19ymbna{opacity:1;pointer-events:auto}.column.svelte-19ymbna .divide.svelte-19ymbna{width:calc(100% + 2 * var(--size-4-3));border-bottom:var(--border-width) solid var(--column-color, var(--background-modifier-border));margin:var(--size-4-3) calc(-1 * var(--size-4-3))}.column.svelte-19ymbna .tasks-wrapper.svelte-19ymbna{height:100%;min-height:50px;border:var(--border-width) dashed transparent;border-radius:var(--radius-m)}.column.svelte-19ymbna .tasks-wrapper .tasks.svelte-19ymbna{display:flex;flex-direction:column;gap:var(--size-4-2)}.column.svelte-19ymbna .tasks-wrapper .tasks button.svelte-19ymbna{display:flex;align-items:center;cursor:pointer}.column.svelte-19ymbna .tasks-wrapper .tasks button span.svelte-19ymbna{height:18px}");
+  append_styles(target, "svelte-1j3krz", ".column.svelte-1j3krz.svelte-1j3krz{display:flex;flex-direction:column;align-self:flex-start;width:var(--column-width, 300px);flex-shrink:0;padding:var(--size-4-3);border-radius:var(--radius-m);border:var(--border-width) solid var(--background-modifier-border);background-color:var(--background-secondary);transition:width 250ms ease;overflow:hidden}.column.collapsed.svelte-1j3krz.svelte-1j3krz{width:48px;cursor:pointer}.column.collapsed.drop-hover.svelte-1j3krz.svelte-1j3krz{border-color:var(--color-base-70)}.column.collapsed.svelte-1j3krz .divide.svelte-1j3krz,.column.collapsed.svelte-1j3krz .tasks-wrapper.svelte-1j3krz{display:none}.column.collapsed.svelte-1j3krz .column-header .header.svelte-1j3krz{flex-direction:column;align-items:center;min-height:unset;gap:var(--size-4-2)}.column.collapsed.svelte-1j3krz .column-header .header h2.svelte-1j3krz{writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap;overflow:visible;text-overflow:unset;order:2;flex:0 0 auto}.column.collapsed.svelte-1j3krz .column-header .header .task-count.svelte-1j3krz{order:3;writing-mode:horizontal-tb}.column.collapsed.svelte-1j3krz .column-header .header .header-menu.svelte-1j3krz{display:none}.column.collapsed.svelte-1j3krz .column-header .header .collapse-btn.svelte-1j3krz{order:1}.column.vertical-flow.vertical-collapsed.drop-hover.svelte-1j3krz.svelte-1j3krz{border-color:var(--color-base-70)}.column.vertical-flow.vertical-collapsed.svelte-1j3krz .divide.svelte-1j3krz,.column.vertical-flow.vertical-collapsed.svelte-1j3krz .tasks-wrapper.svelte-1j3krz{display:none}.column.vertical-flow.vertical-collapsed.svelte-1j3krz .column-header.row-header.svelte-1j3krz{margin-bottom:0}.column.vertical-flow.vertical-collapsed.svelte-1j3krz .column-header.row-header .header-menu.svelte-1j3krz{display:none}.column.vertical-flow.svelte-1j3krz.svelte-1j3krz{width:100%}.column.vertical-flow.svelte-1j3krz .tasks-wrapper.svelte-1j3krz{width:100%;display:flex;flex-direction:column;gap:var(--size-4-2)}.column.vertical-flow.svelte-1j3krz .tasks-wrapper .tasks.svelte-1j3krz{flex-direction:row;flex-wrap:wrap;align-items:flex-start}.column.vertical-flow.svelte-1j3krz .tasks-wrapper .tasks.svelte-1j3krz .task{width:min(var(--column-width, 300px), 100%);flex-shrink:0}.column.svelte-1j3krz .column-header.row-header.svelte-1j3krz{display:flex;align-items:center;gap:var(--size-4-2);margin-bottom:var(--size-4-2)}.column.svelte-1j3krz .column-header.row-header .header.svelte-1j3krz{margin-right:0}.column.drop-active.svelte-1j3krz .tasks-wrapper .tasks.svelte-1j3krz{opacity:0.4}.column.drop-active.drop-hover.svelte-1j3krz .tasks-wrapper.svelte-1j3krz{border-color:var(--color-base-70)}.column.svelte-1j3krz .header.svelte-1j3krz{display:flex;align-items:center;min-height:24px;flex-shrink:0;gap:var(--size-2-2)}.column.svelte-1j3krz .header h2.svelte-1j3krz{font-size:var(--font-ui-larger);font-weight:var(--font-bold);margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.column.svelte-1j3krz .header .task-count.svelte-1j3krz{font-size:var(--font-ui-smaller);color:var(--text-muted);white-space:nowrap}.column.svelte-1j3krz .header .header-menu.svelte-1j3krz{margin-left:auto;flex-shrink:0;display:flex;align-items:center;gap:var(--size-2-1)}.column.svelte-1j3krz .header .collapse-btn.svelte-1j3krz{background:transparent;border:none;cursor:pointer;color:var(--text-muted);padding:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-s);font-size:var(--font-ui-smaller);line-height:1;flex-shrink:0;transition:color 0.15s ease, background 0.15s ease}.column.svelte-1j3krz .header .collapse-btn.svelte-1j3krz:hover{color:var(--text-normal);background:var(--background-modifier-hover)}.column.svelte-1j3krz .header .collapse-btn.svelte-1j3krz:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:2px}.column.svelte-1j3krz .mode-toggle.svelte-1j3krz{display:flex;align-items:center;background:color-mix(in srgb, var(--column-color, var(--background-modifier-border)) 20%, var(--background-secondary));border-radius:var(--radius-s);padding:2px;gap:0}.column.svelte-1j3krz .mode-toggle .mode-btn.svelte-1j3krz{font-size:var(--font-ui-smaller);padding:2px 7px;border:none;background:transparent;color:var(--text-muted);border-radius:calc(var(--radius-s) - 2px);cursor:pointer;transition:background 0.15s ease, color 0.15s ease;white-space:nowrap;box-shadow:none;line-height:1.4}.column.svelte-1j3krz .mode-toggle .mode-btn.svelte-1j3krz:hover{background:transparent;color:var(--text-normal);box-shadow:none}.column.svelte-1j3krz .mode-toggle .mode-btn.active.svelte-1j3krz{background:color-mix(in srgb, var(--column-color, var(--background-modifier-border)) 60%, var(--background-secondary));color:var(--text-normal);font-weight:var(--font-medium)}.column.svelte-1j3krz .mode-toggle .mode-btn.svelte-1j3krz:focus-visible{outline:2px solid var(--background-modifier-border-focus);outline-offset:1px}.column.svelte-1j3krz .selection-info.svelte-1j3krz{font-size:var(--font-ui-smaller);color:var(--text-muted);margin-top:var(--size-2-1)}.column.svelte-1j3krz .divide.svelte-1j3krz{width:calc(100% + 2 * var(--size-4-3));border-bottom:var(--border-width) solid var(--column-color, var(--background-modifier-border));margin:var(--size-4-3) calc(-1 * var(--size-4-3))}.column.svelte-1j3krz .tasks-wrapper.svelte-1j3krz{min-height:50px;border:var(--border-width) dashed transparent;border-radius:var(--radius-m)}.column.svelte-1j3krz .tasks-wrapper .tasks.svelte-1j3krz{display:flex;flex-direction:column;gap:var(--size-4-2)}.column.svelte-1j3krz .tasks-wrapper .add-new-btn.svelte-1j3krz{display:flex;align-items:center;align-self:flex-start;cursor:pointer;margin-top:var(--size-4-2)}.column.svelte-1j3krz .tasks-wrapper .add-new-btn span.svelte-1j3krz{height:18px}");
 }
 function get_each_context2(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[34] = list[i];
+  child_ctx[43] = list[i];
   return child_ctx;
 }
 function create_if_block2(ctx) {
-  let div8;
-  let div0;
-  let h2;
-  let t0;
-  let t1;
-  let t2;
-  let div4;
-  let div1;
-  let button0;
-  let t3;
-  let button0_aria_pressed_value;
-  let t4;
-  let button1;
-  let t5;
-  let t6;
-  let div2;
-  let t7;
-  let div3;
-  let iconbutton;
-  let t8;
-  let div5;
-  let t9;
-  let div7;
   let div6;
+  let div3;
+  let div2;
+  let button0;
+  let t0;
+  let button0_aria_expanded_value;
+  let button0_aria_label_value;
+  let t1;
+  let h2;
+  let t2;
+  let h2_id_value;
+  let t3;
+  let span;
+  let t4;
+  let t5;
+  let div1;
+  let div0;
+  let button1;
+  let t6;
+  let button1_aria_pressed_value;
+  let t7;
+  let button2;
+  let t8;
+  let t9;
   let t10;
+  let t11;
+  let t12;
+  let div5;
+  let div4;
+  let t13;
   let show_if = isColumnTag(
     /*column*/
     ctx[1],
     /*columnTagTableStore*/
     ctx[5]
   );
-  let div8_style_value;
+  let div6_aria_labelledby_value;
+  let div6_aria_label_value;
+  let div6_style_value;
   let current;
   let mounted;
   let dispose;
   let if_block0 = (
-    /*column*/
-    ctx[1] === "done" && create_if_block_32(ctx)
+    /*showContextMenu*/
+    ctx[20] && create_if_block_4(ctx)
   );
-  function select_block_type(ctx2, dirty) {
-    if (
-      /*isInSelectionMode*/
-      ctx2[14] && /*selectedCount*/
-      ctx2[13] > 0
-    ) return create_if_block_22;
-    return create_else_block2;
-  }
-  let current_block_type = select_block_type(ctx, [-1, -1]);
-  let if_block1 = current_block_type(ctx);
-  iconbutton = new icon_button_default({
-    props: {
-      icon: "lucide-more-vertical",
-      "aria-label": "Bulk actions"
-    }
-  });
-  iconbutton.$on(
-    "click",
-    /*showBulkActionsMenu*/
-    ctx[18]
+  let if_block1 = (
+    /*isSelectMode*/
+    ctx[14] && /*selectedCount*/
+    ctx[13] > 0 && create_if_block_32(ctx)
   );
+  let if_block2 = !/*isVerticalFlow*/
+  ctx[9] && create_if_block_22(ctx);
   let each_value = ensure_array_like(
     /*sortedTasks*/
-    ctx[12]
+    ctx[16]
   );
   let each_blocks = [];
   for (let i = 0; i < each_value.length; i += 1) {
@@ -6266,222 +6308,314 @@ function create_if_block2(ctx) {
   const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
     each_blocks[i] = null;
   });
-  let if_block2 = show_if && create_if_block_12(ctx);
+  let if_block3 = show_if && create_if_block_12(ctx);
   return {
     c() {
-      div8 = element("div");
-      div0 = element("div");
-      h2 = element("h2");
+      div6 = element("div");
+      div3 = element("div");
+      div2 = element("div");
+      button0 = element("button");
       t0 = text(
-        /*columnTitle*/
-        ctx[16]
+        /*collapseIcon*/
+        ctx[25]
       );
       t1 = space();
-      if (if_block0) if_block0.c();
-      t2 = space();
-      div4 = element("div");
+      h2 = element("h2");
+      t2 = text(
+        /*columnTitle*/
+        ctx[27]
+      );
+      t3 = space();
+      span = element("span");
+      t4 = text(
+        /*displayTaskCount*/
+        ctx[22]
+      );
+      t5 = space();
       div1 = element("div");
-      button0 = element("button");
-      t3 = text("Done");
-      t4 = space();
+      div0 = element("div");
       button1 = element("button");
-      t5 = text("Select");
-      t6 = space();
-      div2 = element("div");
-      if_block1.c();
+      t6 = text("Done");
       t7 = space();
-      div3 = element("div");
-      create_component(iconbutton.$$.fragment);
-      t8 = space();
-      div5 = element("div");
+      button2 = element("button");
+      t8 = text("Select");
       t9 = space();
-      div7 = element("div");
-      div6 = element("div");
+      if (if_block0) if_block0.c();
+      t10 = space();
+      if (if_block1) if_block1.c();
+      t11 = space();
+      if (if_block2) if_block2.c();
+      t12 = space();
+      div5 = element("div");
+      div4 = element("div");
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
-      t10 = space();
-      if (if_block2) if_block2.c();
-      attr(h2, "class", "svelte-19ymbna");
-      attr(div0, "class", "header svelte-19ymbna");
-      attr(button0, "class", "segment svelte-19ymbna");
-      attr(button0, "aria-label", "Mark as done mode");
-      attr(button0, "aria-pressed", button0_aria_pressed_value = !/*isInSelectionMode*/
-      ctx[14]);
-      attr(button0, "tabindex", "0");
-      toggle_class(button0, "active", !/*isInSelectionMode*/
-      ctx[14]);
-      attr(button1, "class", "segment svelte-19ymbna");
-      attr(button1, "aria-label", "Selection mode");
+      t13 = space();
+      if (if_block3) if_block3.c();
+      attr(button0, "class", "collapse-btn svelte-1j3krz");
+      attr(button0, "aria-expanded", button0_aria_expanded_value = !/*isCollapsed*/
+      ctx[10]);
+      attr(button0, "aria-label", button0_aria_label_value = /*isCollapsed*/
+      (ctx[10] ? "Expand" : "Collapse") + " " + /*columnTitle*/
+      ctx[27] + " column");
+      attr(h2, "id", h2_id_value = "column-title-" + /*column*/
+      ctx[1]);
+      attr(h2, "class", "svelte-1j3krz");
+      attr(span, "class", "task-count svelte-1j3krz");
+      attr(span, "aria-live", "polite");
       attr(
-        button1,
+        span,
+        "aria-label",
+        /*taskCountLabel*/
+        ctx[17]
+      );
+      attr(button1, "class", "mode-btn svelte-1j3krz");
+      attr(button1, "aria-pressed", button1_aria_pressed_value = !/*isSelectMode*/
+      ctx[14]);
+      attr(button1, "aria-label", "Done mode: click tasks to mark complete");
+      toggle_class(button1, "active", !/*isSelectMode*/
+      ctx[14]);
+      attr(button2, "class", "mode-btn svelte-1j3krz");
+      attr(
+        button2,
         "aria-pressed",
-        /*isInSelectionMode*/
+        /*isSelectMode*/
         ctx[14]
       );
-      attr(button1, "tabindex", "0");
+      attr(button2, "aria-label", "Select mode: click tasks to select for bulk actions");
       toggle_class(
-        button1,
+        button2,
         "active",
-        /*isInSelectionMode*/
+        /*isSelectMode*/
         ctx[14]
       );
-      attr(div1, "class", "segmented-control svelte-19ymbna");
-      attr(div1, "role", "toolbar");
-      attr(div1, "aria-label", "Task interaction mode");
-      toggle_class(div1, "has-color", !!/*columnColor*/
-      ctx[15]);
-      set_style(
-        div1,
-        "--toggle-bg-color",
-        /*columnColor*/
-        ctx[15] ? `color-mix(in srgb, ${/*columnColor*/
-        ctx[15]} 25%, white)` : void 0
-      );
-      set_style(
-        div1,
-        "--toggle-active-color",
-        /*columnColor*/
-        ctx[15] || void 0
-      );
-      attr(div2, "class", "selection-count svelte-19ymbna");
-      attr(div2, "aria-live", "polite");
-      attr(div3, "class", "bulk-actions-button svelte-19ymbna");
+      attr(div0, "class", "mode-toggle svelte-1j3krz");
+      attr(div0, "role", "toolbar");
+      attr(div0, "aria-label", "Column interaction mode");
+      attr(div1, "class", "header-menu svelte-1j3krz");
+      attr(div2, "class", "header svelte-1j3krz");
+      attr(div3, "class", "column-header svelte-1j3krz");
       toggle_class(
         div3,
-        "visible",
-        /*isInSelectionMode*/
-        ctx[14] && /*selectedCount*/
-        ctx[13] > 0
+        "row-header",
+        /*isVerticalFlow*/
+        ctx[9]
       );
-      attr(div4, "class", "mode-toggle-container svelte-19ymbna");
-      attr(div5, "class", "divide svelte-19ymbna");
-      attr(div6, "class", "tasks svelte-19ymbna");
-      attr(div7, "class", "tasks-wrapper svelte-19ymbna");
-      attr(div8, "role", "group");
-      attr(div8, "class", "column svelte-19ymbna");
-      attr(div8, "style", div8_style_value = /*columnColor*/
-      ctx[15] ? `background-color: ${/*columnColor*/
-      ctx[15]};` : "");
-      toggle_class(div8, "drop-active", !!/*draggingData*/
-      ctx[10]);
+      attr(div4, "class", "tasks svelte-1j3krz");
+      attr(div5, "class", "tasks-wrapper svelte-1j3krz");
+      attr(div6, "role", "group");
+      attr(div6, "aria-labelledby", div6_aria_labelledby_value = "column-title-" + /*column*/
+      ctx[1]);
+      attr(div6, "aria-label", div6_aria_label_value = /*isCollapsed*/
+      ctx[10] ? `${/*columnTitle*/
+      ctx[27]} column, collapsed, ${/*tasks*/
+      ctx[3].length} ${/*tasks*/
+      ctx[3].length === 1 ? "task" : "tasks"}` : void 0);
+      attr(div6, "class", "column svelte-1j3krz");
+      attr(div6, "style", div6_style_value = /*columnColor*/
+      ctx[26] ? `background-color: ${/*columnColor*/
+      ctx[26]};` : "");
+      toggle_class(div6, "drop-active", !!/*draggingData*/
+      ctx[15]);
       toggle_class(
-        div8,
+        div6,
         "drop-hover",
         /*isDraggedOver*/
-        ctx[11]
+        ctx[19]
+      );
+      toggle_class(
+        div6,
+        "vertical-flow",
+        /*isVerticalFlow*/
+        ctx[9]
+      );
+      toggle_class(
+        div6,
+        "collapsed",
+        /*isHorizontalCollapsed*/
+        ctx[24]
+      );
+      toggle_class(
+        div6,
+        "vertical-collapsed",
+        /*isVerticalCollapsed*/
+        ctx[23]
       );
       set_style(
-        div8,
+        div6,
         "--column-color",
         /*columnColor*/
-        ctx[15]
+        ctx[26]
       );
     },
     m(target, anchor) {
-      insert(target, div8, anchor);
-      append(div8, div0);
-      append(div0, h2);
-      append(h2, t0);
-      append(div0, t1);
-      if (if_block0) if_block0.m(div0, null);
-      append(div8, t2);
-      append(div8, div4);
-      append(div4, div1);
-      append(div1, button0);
-      append(button0, t3);
-      append(div1, t4);
-      append(div1, button1);
-      append(button1, t5);
-      append(div4, t6);
-      append(div4, div2);
-      if_block1.m(div2, null);
-      append(div4, t7);
-      append(div4, div3);
-      mount_component(iconbutton, div3, null);
-      append(div8, t8);
-      append(div8, div5);
-      append(div8, t9);
-      append(div8, div7);
-      append(div7, div6);
+      insert(target, div6, anchor);
+      append(div6, div3);
+      append(div3, div2);
+      append(div2, button0);
+      append(button0, t0);
+      append(div2, t1);
+      append(div2, h2);
+      append(h2, t2);
+      append(div2, t3);
+      append(div2, span);
+      append(span, t4);
+      append(div2, t5);
+      append(div2, div1);
+      append(div1, div0);
+      append(div0, button1);
+      append(button1, t6);
+      append(div0, t7);
+      append(div0, button2);
+      append(button2, t8);
+      append(div1, t9);
+      if (if_block0) if_block0.m(div1, null);
+      append(div3, t10);
+      if (if_block1) if_block1.m(div3, null);
+      append(div6, t11);
+      if (if_block2) if_block2.m(div6, null);
+      append(div6, t12);
+      append(div6, div5);
+      append(div5, div4);
       for (let i = 0; i < each_blocks.length; i += 1) {
         if (each_blocks[i]) {
-          each_blocks[i].m(div6, null);
+          each_blocks[i].m(div4, null);
         }
       }
-      append(div6, t10);
-      if (if_block2) if_block2.m(div6, null);
+      append(div5, t13);
+      if (if_block3) if_block3.m(div5, null);
       current = true;
       if (!mounted) {
         dispose = [
-          listen(
-            button0,
-            "click",
-            /*click_handler*/
-            ctx[27]
-          ),
-          listen(
-            button0,
-            "keydown",
-            /*keydown_handler*/
-            ctx[28]
-          ),
+          listen(button0, "click", function() {
+            if (is_function(
+              /*onToggleCollapse*/
+              ctx[11]
+            )) ctx[11].apply(this, arguments);
+          }),
           listen(
             button1,
             "click",
+            /*click_handler*/
+            ctx[37]
+          ),
+          listen(
+            button2,
+            "click",
             /*click_handler_1*/
+            ctx[38]
+          ),
+          listen(
+            div6,
+            "dragover",
+            /*handleDragOver*/
             ctx[29]
           ),
           listen(
-            button1,
-            "keydown",
-            /*keydown_handler_1*/
+            div6,
+            "dragleave",
+            /*handleDragLeave*/
             ctx[30]
           ),
           listen(
-            div8,
-            "dragover",
-            /*handleDragOver*/
-            ctx[19]
-          ),
-          listen(
-            div8,
-            "dragleave",
-            /*handleDragLeave*/
-            ctx[20]
-          ),
-          listen(
-            div8,
+            div6,
             "drop",
             /*handleDrop*/
-            ctx[21]
+            ctx[31]
           )
         ];
         mounted = true;
       }
     },
-    p(ctx2, dirty) {
-      if (!current || dirty[0] & /*columnTitle*/
-      65536) set_data(
+    p(new_ctx, dirty) {
+      ctx = new_ctx;
+      if (!current || dirty[0] & /*collapseIcon*/
+      33554432) set_data(
         t0,
-        /*columnTitle*/
-        ctx2[16]
+        /*collapseIcon*/
+        ctx[25]
       );
+      if (!current || dirty[0] & /*isCollapsed*/
+      1024 && button0_aria_expanded_value !== (button0_aria_expanded_value = !/*isCollapsed*/
+      ctx[10])) {
+        attr(button0, "aria-expanded", button0_aria_expanded_value);
+      }
+      if (!current || dirty[0] & /*isCollapsed, columnTitle*/
+      134218752 && button0_aria_label_value !== (button0_aria_label_value = /*isCollapsed*/
+      (ctx[10] ? "Expand" : "Collapse") + " " + /*columnTitle*/
+      ctx[27] + " column")) {
+        attr(button0, "aria-label", button0_aria_label_value);
+      }
+      if (!current || dirty[0] & /*columnTitle*/
+      134217728) set_data(
+        t2,
+        /*columnTitle*/
+        ctx[27]
+      );
+      if (!current || dirty[0] & /*column*/
+      2 && h2_id_value !== (h2_id_value = "column-title-" + /*column*/
+      ctx[1])) {
+        attr(h2, "id", h2_id_value);
+      }
+      if (!current || dirty[0] & /*displayTaskCount*/
+      4194304) set_data(
+        t4,
+        /*displayTaskCount*/
+        ctx[22]
+      );
+      if (!current || dirty[0] & /*taskCountLabel*/
+      131072) {
+        attr(
+          span,
+          "aria-label",
+          /*taskCountLabel*/
+          ctx[17]
+        );
+      }
+      if (!current || dirty[0] & /*isSelectMode*/
+      16384 && button1_aria_pressed_value !== (button1_aria_pressed_value = !/*isSelectMode*/
+      ctx[14])) {
+        attr(button1, "aria-pressed", button1_aria_pressed_value);
+      }
+      if (!current || dirty[0] & /*isSelectMode*/
+      16384) {
+        toggle_class(button1, "active", !/*isSelectMode*/
+        ctx[14]);
+      }
+      if (!current || dirty[0] & /*isSelectMode*/
+      16384) {
+        attr(
+          button2,
+          "aria-pressed",
+          /*isSelectMode*/
+          ctx[14]
+        );
+      }
+      if (!current || dirty[0] & /*isSelectMode*/
+      16384) {
+        toggle_class(
+          button2,
+          "active",
+          /*isSelectMode*/
+          ctx[14]
+        );
+      }
       if (
-        /*column*/
-        ctx2[1] === "done"
+        /*showContextMenu*/
+        ctx[20]
       ) {
         if (if_block0) {
-          if_block0.p(ctx2, dirty);
-          if (dirty[0] & /*column*/
-          2) {
+          if_block0.p(ctx, dirty);
+          if (dirty[0] & /*showContextMenu*/
+          1048576) {
             transition_in(if_block0, 1);
           }
         } else {
-          if_block0 = create_if_block_32(ctx2);
+          if_block0 = create_if_block_4(ctx);
           if_block0.c();
           transition_in(if_block0, 1);
-          if_block0.m(div0, null);
+          if_block0.m(div1, null);
         }
       } else if (if_block0) {
         group_outros();
@@ -6490,87 +6624,52 @@ function create_if_block2(ctx) {
         });
         check_outros();
       }
-      if (!current || dirty[0] & /*isInSelectionMode*/
-      16384 && button0_aria_pressed_value !== (button0_aria_pressed_value = !/*isInSelectionMode*/
-      ctx2[14])) {
-        attr(button0, "aria-pressed", button0_aria_pressed_value);
-      }
-      if (!current || dirty[0] & /*isInSelectionMode*/
-      16384) {
-        toggle_class(button0, "active", !/*isInSelectionMode*/
-        ctx2[14]);
-      }
-      if (!current || dirty[0] & /*isInSelectionMode*/
-      16384) {
-        attr(
-          button1,
-          "aria-pressed",
-          /*isInSelectionMode*/
-          ctx2[14]
-        );
-      }
-      if (!current || dirty[0] & /*isInSelectionMode*/
-      16384) {
-        toggle_class(
-          button1,
-          "active",
-          /*isInSelectionMode*/
-          ctx2[14]
-        );
-      }
-      if (!current || dirty[0] & /*columnColor*/
-      32768) {
-        toggle_class(div1, "has-color", !!/*columnColor*/
-        ctx2[15]);
-      }
-      if (dirty[0] & /*columnColor*/
-      32768) {
-        set_style(
-          div1,
-          "--toggle-bg-color",
-          /*columnColor*/
-          ctx2[15] ? `color-mix(in srgb, ${/*columnColor*/
-          ctx2[15]} 25%, white)` : void 0
-        );
-      }
-      if (dirty[0] & /*columnColor*/
-      32768) {
-        set_style(
-          div1,
-          "--toggle-active-color",
-          /*columnColor*/
-          ctx2[15] || void 0
-        );
-      }
-      if (current_block_type === (current_block_type = select_block_type(ctx2, dirty)) && if_block1) {
-        if_block1.p(ctx2, dirty);
-      } else {
-        if_block1.d(1);
-        if_block1 = current_block_type(ctx2);
+      if (
+        /*isSelectMode*/
+        ctx[14] && /*selectedCount*/
+        ctx[13] > 0
+      ) {
         if (if_block1) {
+          if_block1.p(ctx, dirty);
+        } else {
+          if_block1 = create_if_block_32(ctx);
           if_block1.c();
-          if_block1.m(div2, null);
+          if_block1.m(div3, null);
         }
+      } else if (if_block1) {
+        if_block1.d(1);
+        if_block1 = null;
       }
-      if (!current || dirty[0] & /*isInSelectionMode, selectedCount*/
-      24576) {
+      if (!current || dirty[0] & /*isVerticalFlow*/
+      512) {
         toggle_class(
           div3,
-          "visible",
-          /*isInSelectionMode*/
-          ctx2[14] && /*selectedCount*/
-          ctx2[13] > 0
+          "row-header",
+          /*isVerticalFlow*/
+          ctx[9]
         );
       }
-      if (dirty[0] & /*app, sortedTasks, taskActions, columnTagTableStore, showFilepath, consolidateTags, column, isInSelectionMode*/
-      20915) {
+      if (!/*isVerticalFlow*/
+      ctx[9]) {
+        if (if_block2) {
+        } else {
+          if_block2 = create_if_block_22(ctx);
+          if_block2.c();
+          if_block2.m(div6, t12);
+        }
+      } else if (if_block2) {
+        if_block2.d(1);
+        if_block2 = null;
+      }
+      if (dirty[0] & /*app, sortedTasks, taskActions, columnTagTableStore, showFilepath, consolidateTags, column, isSelectMode, $taskSelectionStore, selectedIds*/
+      2441651) {
         each_value = ensure_array_like(
           /*sortedTasks*/
-          ctx2[12]
+          ctx[16]
         );
         let i;
         for (i = 0; i < each_value.length; i += 1) {
-          const child_ctx = get_each_context2(ctx2, each_value, i);
+          const child_ctx = get_each_context2(ctx, each_value, i);
           if (each_blocks[i]) {
             each_blocks[i].p(child_ctx, dirty);
             transition_in(each_blocks[i], 1);
@@ -6578,7 +6677,7 @@ function create_if_block2(ctx) {
             each_blocks[i] = create_each_block2(child_ctx);
             each_blocks[i].c();
             transition_in(each_blocks[i], 1);
-            each_blocks[i].m(div6, t10);
+            each_blocks[i].m(div4, null);
           }
         }
         group_outros();
@@ -6590,58 +6689,97 @@ function create_if_block2(ctx) {
       if (dirty[0] & /*column, columnTagTableStore*/
       34) show_if = isColumnTag(
         /*column*/
-        ctx2[1],
+        ctx[1],
         /*columnTagTableStore*/
-        ctx2[5]
+        ctx[5]
       );
       if (show_if) {
-        if (if_block2) {
-          if_block2.p(ctx2, dirty);
+        if (if_block3) {
+          if_block3.p(ctx, dirty);
         } else {
-          if_block2 = create_if_block_12(ctx2);
-          if_block2.c();
-          if_block2.m(div6, null);
+          if_block3 = create_if_block_12(ctx);
+          if_block3.c();
+          if_block3.m(div5, null);
         }
-      } else if (if_block2) {
-        if_block2.d(1);
-        if_block2 = null;
+      } else if (if_block3) {
+        if_block3.d(1);
+        if_block3 = null;
+      }
+      if (!current || dirty[0] & /*column*/
+      2 && div6_aria_labelledby_value !== (div6_aria_labelledby_value = "column-title-" + /*column*/
+      ctx[1])) {
+        attr(div6, "aria-labelledby", div6_aria_labelledby_value);
+      }
+      if (!current || dirty[0] & /*isCollapsed, columnTitle, tasks*/
+      134218760 && div6_aria_label_value !== (div6_aria_label_value = /*isCollapsed*/
+      ctx[10] ? `${/*columnTitle*/
+      ctx[27]} column, collapsed, ${/*tasks*/
+      ctx[3].length} ${/*tasks*/
+      ctx[3].length === 1 ? "task" : "tasks"}` : void 0)) {
+        attr(div6, "aria-label", div6_aria_label_value);
       }
       if (!current || dirty[0] & /*columnColor*/
-      32768 && div8_style_value !== (div8_style_value = /*columnColor*/
-      ctx2[15] ? `background-color: ${/*columnColor*/
-      ctx2[15]};` : "")) {
-        attr(div8, "style", div8_style_value);
+      67108864 && div6_style_value !== (div6_style_value = /*columnColor*/
+      ctx[26] ? `background-color: ${/*columnColor*/
+      ctx[26]};` : "")) {
+        attr(div6, "style", div6_style_value);
       }
       if (!current || dirty[0] & /*draggingData*/
-      1024) {
-        toggle_class(div8, "drop-active", !!/*draggingData*/
-        ctx2[10]);
+      32768) {
+        toggle_class(div6, "drop-active", !!/*draggingData*/
+        ctx[15]);
       }
       if (!current || dirty[0] & /*isDraggedOver*/
-      2048) {
+      524288) {
         toggle_class(
-          div8,
+          div6,
           "drop-hover",
           /*isDraggedOver*/
-          ctx2[11]
+          ctx[19]
+        );
+      }
+      if (!current || dirty[0] & /*isVerticalFlow*/
+      512) {
+        toggle_class(
+          div6,
+          "vertical-flow",
+          /*isVerticalFlow*/
+          ctx[9]
+        );
+      }
+      if (!current || dirty[0] & /*isHorizontalCollapsed*/
+      16777216) {
+        toggle_class(
+          div6,
+          "collapsed",
+          /*isHorizontalCollapsed*/
+          ctx[24]
+        );
+      }
+      if (!current || dirty[0] & /*isVerticalCollapsed*/
+      8388608) {
+        toggle_class(
+          div6,
+          "vertical-collapsed",
+          /*isVerticalCollapsed*/
+          ctx[23]
         );
       }
       const style_changed = dirty[0] & /*columnColor*/
-      32768;
+      67108864;
       if (dirty[0] & /*columnColor*/
-      32768 || style_changed) {
+      67108864 || style_changed) {
         set_style(
-          div8,
+          div6,
           "--column-color",
           /*columnColor*/
-          ctx2[15]
+          ctx[26]
         );
       }
     },
     i(local) {
       if (current) return;
       transition_in(if_block0);
-      transition_in(iconbutton.$$.fragment, local);
       for (let i = 0; i < each_value.length; i += 1) {
         transition_in(each_blocks[i]);
       }
@@ -6649,8 +6787,7 @@ function create_if_block2(ctx) {
     },
     o(local) {
       transition_out(if_block0);
-      transition_out(iconbutton.$$.fragment, local);
-      each_blocks = each_blocks.filter(Boolean);
+      each_blocks = each_blocks.filter(Boolean_1);
       for (let i = 0; i < each_blocks.length; i += 1) {
         transition_out(each_blocks[i]);
       }
@@ -6658,26 +6795,32 @@ function create_if_block2(ctx) {
     },
     d(detaching) {
       if (detaching) {
-        detach(div8);
+        detach(div6);
       }
       if (if_block0) if_block0.d();
-      if_block1.d();
-      destroy_component(iconbutton);
-      destroy_each(each_blocks, detaching);
+      if (if_block1) if_block1.d();
       if (if_block2) if_block2.d();
+      destroy_each(each_blocks, detaching);
+      if (if_block3) if_block3.d();
       mounted = false;
       run_all(dispose);
     }
   };
 }
-function create_if_block_32(ctx) {
+function create_if_block_4(ctx) {
   let iconbutton;
   let current;
-  iconbutton = new icon_button_default({ props: { icon: "lucide-more-vertical" } });
+  iconbutton = new icon_button_default({
+    props: {
+      icon: "lucide-more-vertical",
+      "aria-label": "Column options for " + /*columnTitle*/
+      ctx[27]
+    }
+  });
   iconbutton.$on(
     "click",
     /*showMenu*/
-    ctx[17]
+    ctx[28]
   );
   return {
     c() {
@@ -6687,7 +6830,13 @@ function create_if_block_32(ctx) {
       mount_component(iconbutton, target, anchor);
       current = true;
     },
-    p: noop,
+    p(ctx2, dirty) {
+      const iconbutton_changes = {};
+      if (dirty[0] & /*columnTitle*/
+      134217728) iconbutton_changes["aria-label"] = "Column options for " + /*columnTitle*/
+      ctx2[27];
+      iconbutton.$set(iconbutton_changes);
+    },
     i(local) {
       if (current) return;
       transition_in(iconbutton.$$.fragment, local);
@@ -6702,37 +6851,25 @@ function create_if_block_32(ctx) {
     }
   };
 }
-function create_else_block2(ctx) {
-  let t;
-  return {
-    c() {
-      t = text("\xA0");
-    },
-    m(target, anchor) {
-      insert(target, t, anchor);
-    },
-    p: noop,
-    d(detaching) {
-      if (detaching) {
-        detach(t);
-      }
-    }
-  };
-}
-function create_if_block_22(ctx) {
+function create_if_block_32(ctx) {
+  let div;
   let t0;
   let t1;
   return {
     c() {
+      div = element("div");
       t0 = text(
         /*selectedCount*/
         ctx[13]
       );
       t1 = text(" selected");
+      attr(div, "class", "selection-info svelte-1j3krz");
+      attr(div, "aria-live", "polite");
     },
     m(target, anchor) {
-      insert(target, t0, anchor);
-      insert(target, t1, anchor);
+      insert(target, div, anchor);
+      append(div, t0);
+      append(div, t1);
     },
     p(ctx2, dirty) {
       if (dirty[0] & /*selectedCount*/
@@ -6744,8 +6881,24 @@ function create_if_block_22(ctx) {
     },
     d(detaching) {
       if (detaching) {
-        detach(t0);
-        detach(t1);
+        detach(div);
+      }
+    }
+  };
+}
+function create_if_block_22(ctx) {
+  let div;
+  return {
+    c() {
+      div = element("div");
+      attr(div, "class", "divide svelte-1j3krz");
+    },
+    m(target, anchor) {
+      insert(target, div, anchor);
+    },
+    d(detaching) {
+      if (detaching) {
+        detach(div);
       }
     }
   };
@@ -6753,6 +6906,15 @@ function create_if_block_22(ctx) {
 function create_each_block2(ctx) {
   let taskcomponent;
   let current;
+  function func2() {
+    return (
+      /*func*/
+      ctx[39](
+        /*task*/
+        ctx[43]
+      )
+    );
+  }
   taskcomponent = new task_default({
     props: {
       app: (
@@ -6761,7 +6923,7 @@ function create_each_block2(ctx) {
       ),
       task: (
         /*task*/
-        ctx[34]
+        ctx[43]
       ),
       taskActions: (
         /*taskActions*/
@@ -6783,9 +6945,20 @@ function create_each_block2(ctx) {
         /*column*/
         ctx[1]
       ),
-      isInSelectionMode: (
-        /*isInSelectionMode*/
+      isSelectionMode: (
+        /*isSelectMode*/
         ctx[14]
+      ),
+      isSelected: isTaskSelected(
+        /*task*/
+        ctx[43].id,
+        /*$taskSelectionStore*/
+        ctx[18]
+      ),
+      onToggleSelection: func2,
+      selectedTaskIds: (
+        /*selectedIds*/
+        ctx[21]
       )
     }
   });
@@ -6797,32 +6970,45 @@ function create_each_block2(ctx) {
       mount_component(taskcomponent, target, anchor);
       current = true;
     },
-    p(ctx2, dirty) {
+    p(new_ctx, dirty) {
+      ctx = new_ctx;
       const taskcomponent_changes = {};
       if (dirty[0] & /*app*/
       1) taskcomponent_changes.app = /*app*/
-      ctx2[0];
+      ctx[0];
       if (dirty[0] & /*sortedTasks*/
-      4096) taskcomponent_changes.task = /*task*/
-      ctx2[34];
+      65536) taskcomponent_changes.task = /*task*/
+      ctx[43];
       if (dirty[0] & /*taskActions*/
       16) taskcomponent_changes.taskActions = /*taskActions*/
-      ctx2[4];
+      ctx[4];
       if (dirty[0] & /*columnTagTableStore*/
       32) taskcomponent_changes.columnTagTableStore = /*columnTagTableStore*/
-      ctx2[5];
+      ctx[5];
       if (dirty[0] & /*showFilepath*/
       128) taskcomponent_changes.showFilepath = /*showFilepath*/
-      ctx2[7];
+      ctx[7];
       if (dirty[0] & /*consolidateTags*/
       256) taskcomponent_changes.consolidateTags = /*consolidateTags*/
-      ctx2[8];
+      ctx[8];
       if (dirty[0] & /*column*/
       2) taskcomponent_changes.displayColumn = /*column*/
-      ctx2[1];
-      if (dirty[0] & /*isInSelectionMode*/
-      16384) taskcomponent_changes.isInSelectionMode = /*isInSelectionMode*/
-      ctx2[14];
+      ctx[1];
+      if (dirty[0] & /*isSelectMode*/
+      16384) taskcomponent_changes.isSelectionMode = /*isSelectMode*/
+      ctx[14];
+      if (dirty[0] & /*sortedTasks, $taskSelectionStore*/
+      327680) taskcomponent_changes.isSelected = isTaskSelected(
+        /*task*/
+        ctx[43].id,
+        /*$taskSelectionStore*/
+        ctx[18]
+      );
+      if (dirty[0] & /*sortedTasks*/
+      65536) taskcomponent_changes.onToggleSelection = func2;
+      if (dirty[0] & /*selectedIds*/
+      2097152) taskcomponent_changes.selectedTaskIds = /*selectedIds*/
+      ctx[21];
       taskcomponent.$set(taskcomponent_changes);
     },
     i(local) {
@@ -6843,37 +7029,46 @@ function create_if_block_12(ctx) {
   let button;
   let span;
   let t;
+  let button_aria_label_value;
   let mounted;
   let dispose;
   return {
     c() {
       button = element("button");
       span = element("span");
-      t = text("\n						Add new");
-      attr(span, "class", "svelte-19ymbna");
-      attr(button, "class", "svelte-19ymbna");
+      t = text("\n					Add new");
+      attr(span, "class", "svelte-1j3krz");
+      attr(button, "class", "add-new-btn svelte-1j3krz");
+      attr(button, "aria-label", button_aria_label_value = "Add new task to " + /*columnTitle*/
+      ctx[27]);
     },
     m(target, anchor) {
       insert(target, button, anchor);
       append(button, span);
-      ctx[31](span);
+      ctx[40](span);
       append(button, t);
       if (!mounted) {
         dispose = listen(
           button,
           "click",
           /*click_handler_2*/
-          ctx[32]
+          ctx[41]
         );
         mounted = true;
       }
     },
-    p: noop,
+    p(ctx2, dirty) {
+      if (dirty[0] & /*columnTitle*/
+      134217728 && button_aria_label_value !== (button_aria_label_value = "Add new task to " + /*columnTitle*/
+      ctx2[27])) {
+        attr(button, "aria-label", button_aria_label_value);
+      }
+    },
     d(detaching) {
       if (detaching) {
         detach(button);
       }
-      ctx[31](null);
+      ctx[40](null);
       mounted = false;
       dispose();
     }
@@ -6949,19 +7144,27 @@ function getColumnTitle(column, columnTagTable) {
 function instance5($$self, $$props, $$invalidate) {
   let columnTitle;
   let columnColor;
-  let isInSelectionMode;
-  let selectedCount;
+  let taskCountLabel;
+  let collapseIcon;
+  let isHorizontalCollapsed;
+  let isVerticalCollapsed;
+  let displayTaskCount;
   let sortedTasks;
+  let isSelectMode;
+  let columnTaskIds;
+  let selectedCount;
+  let selectedIds;
   let draggingData;
   let canDrop;
+  let showContextMenu;
   let $isDraggingStore;
-  let $columnTagTableStore, $$unsubscribe_columnTagTableStore = noop, $$subscribe_columnTagTableStore = () => ($$unsubscribe_columnTagTableStore(), $$unsubscribe_columnTagTableStore = subscribe(columnTagTableStore, ($$value) => $$invalidate(23, $columnTagTableStore = $$value)), columnTagTableStore);
+  let $columnTagTableStore, $$unsubscribe_columnTagTableStore = noop, $$subscribe_columnTagTableStore = () => ($$unsubscribe_columnTagTableStore(), $$unsubscribe_columnTagTableStore = subscribe(columnTagTableStore, ($$value) => $$invalidate(34, $columnTagTableStore = $$value)), columnTagTableStore);
   let $taskSelectionStore;
   let $selectionModeStore;
-  let $columnColourTableStore, $$unsubscribe_columnColourTableStore = noop, $$subscribe_columnColourTableStore = () => ($$unsubscribe_columnColourTableStore(), $$unsubscribe_columnColourTableStore = subscribe(columnColourTableStore, ($$value) => $$invalidate(26, $columnColourTableStore = $$value)), columnColourTableStore);
-  component_subscribe($$self, isDraggingStore, ($$value) => $$invalidate(22, $isDraggingStore = $$value));
-  component_subscribe($$self, taskSelectionStore, ($$value) => $$invalidate(24, $taskSelectionStore = $$value));
-  component_subscribe($$self, selectionModeStore, ($$value) => $$invalidate(25, $selectionModeStore = $$value));
+  let $columnColourTableStore, $$unsubscribe_columnColourTableStore = noop, $$subscribe_columnColourTableStore = () => ($$unsubscribe_columnColourTableStore(), $$unsubscribe_columnColourTableStore = subscribe(columnColourTableStore, ($$value) => $$invalidate(36, $columnColourTableStore = $$value)), columnColourTableStore);
+  component_subscribe($$self, isDraggingStore, ($$value) => $$invalidate(33, $isDraggingStore = $$value));
+  component_subscribe($$self, taskSelectionStore, ($$value) => $$invalidate(18, $taskSelectionStore = $$value));
+  component_subscribe($$self, selectionModeStore, ($$value) => $$invalidate(35, $selectionModeStore = $$value));
   $$self.$$.on_destroy.push(() => $$unsubscribe_columnTagTableStore());
   $$self.$$.on_destroy.push(() => $$unsubscribe_columnColourTableStore());
   let { app } = $$props;
@@ -6975,66 +7178,66 @@ function instance5($$self, $$props, $$invalidate) {
   $$subscribe_columnColourTableStore();
   let { showFilepath } = $$props;
   let { consolidateTags } = $$props;
+  let { isVerticalFlow = false } = $$props;
+  let { isCollapsed = false } = $$props;
+  let { onToggleCollapse } = $$props;
   function showMenu(e) {
     const menu = new import_obsidian5.Menu();
-    menu.addItem((i) => {
-      i.setTitle(`Archive all`).onClick(() => taskActions.archiveTasks(tasks.map(({ id }) => id)));
-    });
-    menu.showAtMouseEvent(e);
-  }
-  function showBulkActionsMenu(e) {
-    const menu = new import_obsidian5.Menu();
-    const selectedTaskIds = tasks.filter((task) => $taskSelectionStore.get(task.id)).map((task) => task.id);
-    if (selectedTaskIds.length === 0) {
-      return;
-    }
-    const target = e.target;
-    if (!target) {
-      return;
-    }
-    const boundingRect = target.getBoundingClientRect();
-    const y = boundingRect.top + boundingRect.height / 2;
-    const x = boundingRect.left + boundingRect.width / 2;
-    for (const [tag, label] of Object.entries($columnTagTableStore)) {
-      menu.addItem((i) => {
-        i.setTitle(`Move to ${label}`).onClick(() => {
-          selectedTaskIds.forEach((taskId) => {
-            taskActions.changeColumn(taskId, tag);
+    if (isSelectMode && selectedCount > 0) {
+      if (column !== "done") {
+        menu.addItem((i) => {
+          i.setTitle(`Move ${selectedCount} selected to Done`).onClick(async () => {
+            for (const id of selectedIds) {
+              await taskActions.markDone(id);
+            }
+            clearColumnSelections(columnTaskIds);
           });
-          clearTaskSelections();
         });
-        if (isColumnTag(column, columnTagTableStore) && column === tag) {
-          i.setDisabled(true);
-        }
+      }
+      for (const [tag, label] of Object.entries($columnTagTableStore)) {
+        const tagAsColumn = tag;
+        if (tagAsColumn === column) continue;
+        menu.addItem((i) => {
+          i.setTitle(`Move ${selectedCount} selected to ${label}`).onClick(async () => {
+            for (const id of selectedIds) {
+              await taskActions.changeColumn(id, tagAsColumn);
+            }
+            clearColumnSelections(columnTaskIds);
+          });
+        });
+      }
+      menu.addSeparator();
+      const selectedTasks = selectedIds.map((id) => sortedTasks.find((t) => t.id === id)).filter(Boolean);
+      const allCancelled = selectedTasks.length > 0 && selectedTasks.every((t) => t.isCancelled);
+      if (allCancelled) {
+        menu.addItem((i) => {
+          i.setTitle(`Restore ${selectedCount} selected`).onClick(async () => {
+            await taskActions.restoreTasks(selectedIds);
+            clearColumnSelections(columnTaskIds);
+          });
+        });
+      } else {
+        menu.addItem((i) => {
+          i.setTitle(`Cancel ${selectedCount} selected`).onClick(async () => {
+            await taskActions.cancelTasks(selectedIds);
+            clearColumnSelections(columnTaskIds);
+          });
+        });
+      }
+      menu.addSeparator();
+      menu.addItem((i) => {
+        i.setTitle(`Archive ${selectedCount} selected`).onClick(async () => {
+          await taskActions.archiveTasks(selectedIds);
+          clearColumnSelections(columnTaskIds);
+        });
       });
     }
-    menu.addItem((i) => {
-      i.setTitle(`Move to Done`).onClick(() => {
-        selectedTaskIds.forEach((taskId) => {
-          taskActions.markDone(taskId);
-        });
-        clearTaskSelections();
+    if (column === "done") {
+      menu.addItem((i) => {
+        i.setTitle(`Archive all`).onClick(() => taskActions.archiveTasks(tasks.map(({ id }) => id)));
       });
-      if (column === "done") {
-        i.setDisabled(true);
-      }
-    });
-    menu.addSeparator();
-    menu.addItem((i) => {
-      i.setTitle(`Archive task`).onClick(() => {
-        taskActions.archiveTasks(selectedTaskIds);
-        clearTaskSelections();
-      });
-    });
-    menu.addItem((i) => {
-      i.setTitle(`Delete task`).onClick(() => {
-        selectedTaskIds.forEach((taskId) => {
-          taskActions.deleteTask(taskId);
-        });
-        clearTaskSelections();
-      });
-    });
-    menu.showAtPosition({ x, y });
+    }
+    menu.showAtMouseEvent(e);
   }
   let isDraggedOver = false;
   function handleDragOver(e) {
@@ -7045,57 +7248,52 @@ function instance5($$self, $$props, $$invalidate) {
       }
       return;
     }
-    $$invalidate(11, isDraggedOver = true);
+    $$invalidate(19, isDraggedOver = true);
     if (e.dataTransfer) {
       e.dataTransfer.dropEffect = "move";
     }
   }
   function handleDragLeave(e) {
-    $$invalidate(11, isDraggedOver = false);
+    $$invalidate(19, isDraggedOver = false);
   }
-  function handleDrop(e) {
-    var _a;
+  async function handleDrop(e) {
     e.preventDefault();
-    if (!canDrop) {
+    $$invalidate(19, isDraggedOver = false);
+    if (!canDrop || !draggingData) {
       return;
     }
-    const droppedId = (_a = e.dataTransfer) == null ? void 0 : _a.getData("text/plain");
-    if (droppedId) {
+    const droppedIds = draggingData.draggedTaskIds.length > 0 ? draggingData.draggedTaskIds : (() => {
+      var _a;
+      const id = (_a = e.dataTransfer) == null ? void 0 : _a.getData("text/plain");
+      return id ? [id] : [];
+    })();
+    if (droppedIds.length === 0) return;
+    for (const id of droppedIds) {
       switch (column) {
         case "uncategorised":
           break;
         case "done":
-          taskActions.markDone(droppedId);
+          await taskActions.markDone(id);
           break;
         default:
-          taskActions.changeColumn(droppedId, column);
+          await taskActions.changeColumn(id, column);
           break;
       }
     }
+    clearColumnSelections(droppedIds);
   }
   let buttonEl;
-  const click_handler = () => toggleSelectionMode(column);
-  const keydown_handler = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      if (isInSelectionMode) {
-        toggleSelectionMode(column);
-      }
-    }
+  const click_handler = () => {
+    if (isSelectMode) toggleSelectionMode(column);
   };
-  const click_handler_1 = () => toggleSelectionMode(column);
-  const keydown_handler_1 = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      if (!isInSelectionMode) {
-        toggleSelectionMode(column);
-      }
-    }
+  const click_handler_1 = () => {
+    if (!isSelectMode) toggleSelectionMode(column);
   };
+  const func2 = (task) => toggleTaskSelection(task.id);
   function span_binding($$value) {
     binding_callbacks[$$value ? "unshift" : "push"](() => {
       buttonEl = $$value;
-      $$invalidate(9, buttonEl);
+      $$invalidate(12, buttonEl);
     });
   }
   const click_handler_2 = async (e) => {
@@ -7113,27 +7311,44 @@ function instance5($$self, $$props, $$invalidate) {
     if ("columnColourTableStore" in $$props2) $$subscribe_columnColourTableStore($$invalidate(6, columnColourTableStore = $$props2.columnColourTableStore));
     if ("showFilepath" in $$props2) $$invalidate(7, showFilepath = $$props2.showFilepath);
     if ("consolidateTags" in $$props2) $$invalidate(8, consolidateTags = $$props2.consolidateTags);
+    if ("isVerticalFlow" in $$props2) $$invalidate(9, isVerticalFlow = $$props2.isVerticalFlow);
+    if ("isCollapsed" in $$props2) $$invalidate(10, isCollapsed = $$props2.isCollapsed);
+    if ("onToggleCollapse" in $$props2) $$invalidate(11, onToggleCollapse = $$props2.onToggleCollapse);
   };
   $$self.$$.update = () => {
-    if ($$self.$$.dirty[0] & /*column, $columnTagTableStore*/
-    8388610) {
-      $: $$invalidate(16, columnTitle = getColumnTitle(column, $columnTagTableStore));
+    if ($$self.$$.dirty[0] & /*column*/
+    2 | $$self.$$.dirty[1] & /*$columnTagTableStore*/
+    8) {
+      $: $$invalidate(27, columnTitle = getColumnTitle(column, $columnTagTableStore));
     }
-    if ($$self.$$.dirty[0] & /*column, columnTagTableStore, $columnColourTableStore*/
-    67108898) {
-      $: $$invalidate(15, columnColor = isColumnTag(column, columnTagTableStore) ? $columnColourTableStore[column] : void 0);
-    }
-    if ($$self.$$.dirty[0] & /*$selectionModeStore, column*/
-    33554434) {
-      $: $$invalidate(14, isInSelectionMode = $selectionModeStore.get(column) || false);
-    }
-    if ($$self.$$.dirty[0] & /*tasks, $taskSelectionStore*/
-    16777224) {
-      $: $$invalidate(13, selectedCount = getSelectedTaskCount(tasks.map((t) => t.id), $taskSelectionStore));
+    if ($$self.$$.dirty[0] & /*column, columnTagTableStore*/
+    34 | $$self.$$.dirty[1] & /*$columnColourTableStore*/
+    32) {
+      $: $$invalidate(26, columnColor = isColumnTag(column, columnTagTableStore) ? $columnColourTableStore[column] : void 0);
     }
     if ($$self.$$.dirty[0] & /*tasks*/
     8) {
-      $: $$invalidate(12, sortedTasks = tasks.sort((a, b) => {
+      $: $$invalidate(17, taskCountLabel = tasks.length === 1 ? "1 task" : `${tasks.length} tasks`);
+    }
+    if ($$self.$$.dirty[0] & /*isCollapsed*/
+    1024) {
+      $: $$invalidate(25, collapseIcon = isCollapsed ? "\u25B6" : "\u25BC");
+    }
+    if ($$self.$$.dirty[0] & /*isCollapsed, isVerticalFlow*/
+    1536) {
+      $: $$invalidate(24, isHorizontalCollapsed = isCollapsed && !isVerticalFlow);
+    }
+    if ($$self.$$.dirty[0] & /*isCollapsed, isVerticalFlow*/
+    1536) {
+      $: $$invalidate(23, isVerticalCollapsed = isCollapsed && isVerticalFlow);
+    }
+    if ($$self.$$.dirty[0] & /*isCollapsed, tasks, taskCountLabel*/
+    132104) {
+      $: $$invalidate(22, displayTaskCount = isCollapsed ? `${tasks.length}` : taskCountLabel);
+    }
+    if ($$self.$$.dirty[0] & /*tasks*/
+    8) {
+      $: $$invalidate(16, sortedTasks = [...tasks].sort((a, b) => {
         if (a.path === b.path) {
           return a.rowIndex - b.rowIndex;
         } else {
@@ -7141,21 +7356,44 @@ function instance5($$self, $$props, $$invalidate) {
         }
       }));
     }
-    if ($$self.$$.dirty[0] & /*$isDraggingStore*/
-    4194304) {
-      $: $$invalidate(10, draggingData = $isDraggingStore);
+    if ($$self.$$.dirty[0] & /*column*/
+    2 | $$self.$$.dirty[1] & /*$selectionModeStore*/
+    16) {
+      $: $$invalidate(14, isSelectMode = isInSelectionMode(column, $selectionModeStore));
+    }
+    if ($$self.$$.dirty[0] & /*sortedTasks*/
+    65536) {
+      $: $$invalidate(32, columnTaskIds = sortedTasks.map((t) => t.id));
+    }
+    if ($$self.$$.dirty[0] & /*$taskSelectionStore*/
+    262144 | $$self.$$.dirty[1] & /*columnTaskIds*/
+    2) {
+      $: $$invalidate(13, selectedCount = getSelectedTaskCount(columnTaskIds, $taskSelectionStore));
+    }
+    if ($$self.$$.dirty[0] & /*$taskSelectionStore*/
+    262144 | $$self.$$.dirty[1] & /*columnTaskIds*/
+    2) {
+      $: $$invalidate(21, selectedIds = columnTaskIds.filter((id) => isTaskSelected(id, $taskSelectionStore)));
+    }
+    if ($$self.$$.dirty[1] & /*$isDraggingStore*/
+    4) {
+      $: $$invalidate(15, draggingData = $isDraggingStore);
     }
     if ($$self.$$.dirty[0] & /*draggingData, column*/
-    1026) {
-      $: canDrop = draggingData && draggingData.fromColumn !== column;
+    32770) {
+      $: canDrop = !!draggingData && draggingData.fromColumn !== column;
     }
     if ($$self.$$.dirty[0] & /*buttonEl*/
-    512) {
+    4096) {
       $: {
         if (buttonEl) {
           (0, import_obsidian5.setIcon)(buttonEl, "lucide-plus");
         }
       }
+    }
+    if ($$self.$$.dirty[0] & /*column, isSelectMode, selectedCount*/
+    24578) {
+      $: $$invalidate(20, showContextMenu = column === "done" || isSelectMode && selectedCount > 0);
     }
   };
   return [
@@ -7168,28 +7406,37 @@ function instance5($$self, $$props, $$invalidate) {
     columnColourTableStore,
     showFilepath,
     consolidateTags,
+    isVerticalFlow,
+    isCollapsed,
+    onToggleCollapse,
     buttonEl,
-    draggingData,
-    isDraggedOver,
-    sortedTasks,
     selectedCount,
-    isInSelectionMode,
+    isSelectMode,
+    draggingData,
+    sortedTasks,
+    taskCountLabel,
+    $taskSelectionStore,
+    isDraggedOver,
+    showContextMenu,
+    selectedIds,
+    displayTaskCount,
+    isVerticalCollapsed,
+    isHorizontalCollapsed,
+    collapseIcon,
     columnColor,
     columnTitle,
     showMenu,
-    showBulkActionsMenu,
     handleDragOver,
     handleDragLeave,
     handleDrop,
+    columnTaskIds,
     $isDraggingStore,
     $columnTagTableStore,
-    $taskSelectionStore,
     $selectionModeStore,
     $columnColourTableStore,
     click_handler,
-    keydown_handler,
     click_handler_1,
-    keydown_handler_1,
+    func2,
     span_binding,
     click_handler_2
   ];
@@ -7212,7 +7459,10 @@ var Column = class extends SvelteComponent {
         columnTagTableStore: 5,
         columnColourTableStore: 6,
         showFilepath: 7,
-        consolidateTags: 8
+        consolidateTags: 8,
+        isVerticalFlow: 9,
+        isCollapsed: 10,
+        onToggleCollapse: 11
       },
       add_css4,
       [-1, -1]
@@ -9743,12 +9993,12 @@ function create_if_block_7(ctx) {
     }
   };
 }
-function create_if_block_4(ctx) {
+function create_if_block_42(ctx) {
   let current_block_type_index;
   let if_block;
   let if_block_anchor;
   let current;
-  const if_block_creators = [create_if_block_5, create_else_block3];
+  const if_block_creators = [create_if_block_5, create_else_block2];
   const if_blocks = [];
   function select_block_type_1(ctx2, dirty) {
     if (
@@ -9808,7 +10058,7 @@ function create_if_block_4(ctx) {
     }
   };
 }
-function create_else_block3(ctx) {
+function create_else_block2(ctx) {
   let div;
   let current;
   const selection_slot_template = (
@@ -10811,7 +11061,7 @@ function create_fragment9(ctx) {
   );
   let if_block2 = (
     /*hasValue*/
-    ctx[25] && create_if_block_4(ctx)
+    ctx[25] && create_if_block_42(ctx)
   );
   let input_1_levels = [
     {
@@ -11107,7 +11357,7 @@ function create_fragment9(ctx) {
             transition_in(if_block2, 1);
           }
         } else {
-          if_block2 = create_if_block_4(ctx2);
+          if_block2 = create_if_block_42(ctx2);
           if_block2.c();
           transition_in(if_block2, 1);
           if_block2.m(div1, t3);
@@ -17197,6 +17447,7 @@ var tagNonNumericTest = /\p{L}/u;
 // src/ui/tasks/task.ts
 var DEFAULT_DONE_STATUS_MARKERS = "xX";
 var DEFAULT_IGNORED_STATUS_MARKERS = "";
+var DEFAULT_CANCELLED_STATUS_MARKERS = "-";
 function validateStatusMarkers(markers) {
   const errors = [];
   const chars = Array.from(markers);
@@ -17230,6 +17481,12 @@ function validateIgnoredStatusMarkers(markers) {
   }
   return validateStatusMarkers(markers);
 }
+function validateCancelledStatusMarkers(markers) {
+  if (!markers || markers.length === 0) {
+    return ["Cancelled status markers cannot be empty"];
+  }
+  return validateStatusMarkers(markers);
+}
 function isStatusMatch(statusContent, markers) {
   if (!statusContent || !markers) return false;
   const contentChars = Array.from(statusContent);
@@ -17247,12 +17504,16 @@ function isDoneStatus(statusContent, doneStatusMarkers) {
 function isIgnoredStatus(statusContent, ignoredStatusMarkers) {
   return isStatusMatch(statusContent, ignoredStatusMarkers);
 }
+function isCancelledStatus(statusContent, cancelledStatusMarkers) {
+  return isStatusMatch(statusContent, cancelledStatusMarkers);
+}
 var Task2 = class {
-  constructor(rawContent, fileHandle, rowIndex, columnTagTable, consolidateTags, doneStatusMarkers = DEFAULT_DONE_STATUS_MARKERS, ignoredStatusMarkers = DEFAULT_IGNORED_STATUS_MARKERS) {
+  constructor(rawContent, fileHandle, rowIndex, columnTagTable, consolidateTags, doneStatusMarkers = DEFAULT_DONE_STATUS_MARKERS, cancelledStatusMarkers = DEFAULT_CANCELLED_STATUS_MARKERS, ignoredStatusMarkers = DEFAULT_IGNORED_STATUS_MARKERS) {
     this.rowIndex = rowIndex;
     this.columnTagTable = columnTagTable;
     this.consolidateTags = consolidateTags;
     this.doneStatusMarkers = doneStatusMarkers;
+    this.cancelledStatusMarkers = cancelledStatusMarkers;
     this.ignoredStatusMarkers = ignoredStatusMarkers;
     this._deleted = false;
     var _a;
@@ -17308,9 +17569,15 @@ var Task2 = class {
     this._column = void 0;
     this._displayStatus = (_a = Array.from(this.doneStatusMarkers)[0]) != null ? _a : "x";
   }
+  get isCancelled() {
+    return isCancelledStatus(this._displayStatus, this.cancelledStatusMarkers);
+  }
   undone() {
     this._done = false;
     this._displayStatus = " ";
+  }
+  get displayStatus() {
+    return this._displayStatus;
   }
   get path() {
     return this._path;
@@ -17349,6 +17616,13 @@ var Task2 = class {
     this._done = true;
     this._column = "archived";
   }
+  cancel() {
+    var _a;
+    this._displayStatus = (_a = Array.from(this.cancelledStatusMarkers)[0]) != null ? _a : "-";
+  }
+  restore() {
+    this._displayStatus = " ";
+  }
   delete() {
     this._deleted = true;
   }
@@ -17384,6 +17658,13 @@ var ScopeOption = /* @__PURE__ */ ((ScopeOption2) => {
   ScopeOption2["Everywhere"] = "everywhere";
   return ScopeOption2;
 })(ScopeOption || {});
+var FlowDirection = /* @__PURE__ */ ((FlowDirection2) => {
+  FlowDirection2["LeftToRight"] = "ltr";
+  FlowDirection2["RightToLeft"] = "rtl";
+  FlowDirection2["TopToBottom"] = "ttb";
+  FlowDirection2["BottomToTop"] = "btt";
+  return FlowDirection2;
+})(FlowDirection || {});
 var contentValueSchema = z.object({
   text: z.string()
 });
@@ -17407,6 +17688,7 @@ var settingsObject = z.object({
   uncategorizedVisibility: z.nativeEnum(VisibilityOption).default("auto" /* Auto */).optional(),
   doneVisibility: z.nativeEnum(VisibilityOption).default("always" /* AlwaysShow */).optional(),
   doneStatusMarkers: z.string().default(DEFAULT_DONE_STATUS_MARKERS).optional(),
+  cancelledStatusMarkers: z.string().default(DEFAULT_CANCELLED_STATUS_MARKERS).optional(),
   ignoredStatusMarkers: z.string().default(DEFAULT_IGNORED_STATUS_MARKERS).optional(),
   savedFilters: z.array(savedFilterSchema).default([]).optional(),
   lastContentFilter: z.string().optional(),
@@ -17414,7 +17696,10 @@ var settingsObject = z.object({
   lastFileFilter: z.array(z.string()).optional(),
   filtersExpanded: z.boolean().default(true).optional(),
   filtersSidebarExpanded: z.boolean().default(true).optional(),
-  filtersSidebarWidth: z.number().default(280).optional()
+  filtersSidebarWidth: z.number().default(280).optional(),
+  columnWidth: z.number().min(200).max(600).default(300).optional(),
+  flowDirection: z.nativeEnum(FlowDirection).default("ltr" /* LeftToRight */).optional(),
+  collapsedColumns: z.array(z.string()).default([]).optional()
 });
 var defaultSettings = {
   columns: ["Later", "Soonish", "Next week", "This week", "Today", "Pending"],
@@ -17424,11 +17709,15 @@ var defaultSettings = {
   uncategorizedVisibility: "auto" /* Auto */,
   doneVisibility: "always" /* AlwaysShow */,
   doneStatusMarkers: DEFAULT_DONE_STATUS_MARKERS,
+  cancelledStatusMarkers: DEFAULT_CANCELLED_STATUS_MARKERS,
   ignoredStatusMarkers: DEFAULT_IGNORED_STATUS_MARKERS,
   savedFilters: [],
   lastContentFilter: "",
   lastTagFilter: [],
-  lastFileFilter: []
+  lastFileFilter: [],
+  columnWidth: 300,
+  flowDirection: "ltr" /* LeftToRight */,
+  collapsedColumns: []
 };
 var createSettingsStore = () => writable(defaultSettings);
 function parseSettingsString(str) {
@@ -17446,34 +17735,34 @@ function toSettingsString(settings) {
 
 // src/ui/main.svelte
 function add_css11(target) {
-  append_styles(target, "svelte-9s8fa9", ".main.svelte-9s8fa9.svelte-9s8fa9.svelte-9s8fa9{height:100%;display:flex;flex-direction:column}.main.svelte-9s8fa9 .sidebar-toggle-btn.svelte-9s8fa9.svelte-9s8fa9{position:fixed;top:50px;left:8px;padding:var(--size-2-1) var(--size-2-2);background:var(--background-primary);border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);cursor:pointer;color:var(--text-muted);font-size:var(--font-ui-small);display:flex;align-items:center;gap:var(--size-2-1);z-index:100;transition:color 0.15s ease}.main.svelte-9s8fa9 .sidebar-toggle-btn.svelte-9s8fa9.svelte-9s8fa9:hover{background:var(--background-modifier-hover);color:var(--text-normal)}.main.svelte-9s8fa9 .sidebar-toggle-btn .toggle-icon.svelte-9s8fa9.svelte-9s8fa9{font-size:16px}.main.svelte-9s8fa9 .sidebar-toggle-btn .toggle-label.svelte-9s8fa9.svelte-9s8fa9{font-weight:500}.main.svelte-9s8fa9 .board-container.svelte-9s8fa9.svelte-9s8fa9{display:grid;grid-template-columns:1fr;height:100%}.main.svelte-9s8fa9 .board-container.sidebar-expanded.svelte-9s8fa9.svelte-9s8fa9{grid-template-columns:var(--sidebar-width, 280px) 1fr}.main.svelte-9s8fa9 .filters-sidebar.svelte-9s8fa9.svelte-9s8fa9{background:var(--background-primary);border-right:1px solid var(--background-modifier-border);overflow-y:auto;display:flex;flex-direction:column;position:relative}.main.svelte-9s8fa9 .filters-sidebar .resize-handle.svelte-9s8fa9.svelte-9s8fa9{position:absolute;top:0;right:0;width:4px;height:100%;cursor:col-resize;background:transparent;border:none;padding:0;z-index:10}.main.svelte-9s8fa9 .filters-sidebar .resize-handle.svelte-9s8fa9.svelte-9s8fa9:hover{background:var(--interactive-accent);opacity:0.5}.main.svelte-9s8fa9 .board-content.svelte-9s8fa9.svelte-9s8fa9{display:flex;flex-direction:column;height:100%;overflow:hidden;padding-left:var(--size-4-4)}.main.svelte-9s8fa9 .settings.svelte-9s8fa9.svelte-9s8fa9{display:flex;justify-content:flex-end;padding:var(--size-4-2) var(--size-4-4) var(--size-4-2) 0}.main.svelte-9s8fa9 .controls.svelte-9s8fa9.svelte-9s8fa9{display:flex;flex-direction:column;gap:var(--size-4-5);padding:var(--size-4-4);padding-top:50px}.main.svelte-9s8fa9 .controls .saved-filters.svelte-9s8fa9.svelte-9s8fa9{margin-top:0;margin-bottom:var(--size-4-2);font-size:var(--font-ui-small);align-self:flex-start}.main.svelte-9s8fa9 .controls .saved-filters details summary.svelte-9s8fa9.svelte-9s8fa9{cursor:pointer;color:var(--text-muted);padding:var(--size-2-1) 0;user-select:none;transition:color 0.15s ease}.main.svelte-9s8fa9 .controls .saved-filters details summary.svelte-9s8fa9.svelte-9s8fa9:hover{color:var(--text-normal)}.main.svelte-9s8fa9 .controls .saved-filters details ul.svelte-9s8fa9.svelte-9s8fa9{margin:0;padding:0;list-style:none}.main.svelte-9s8fa9 .controls .saved-filters details ul li.svelte-9s8fa9.svelte-9s8fa9{margin:0;display:flex;align-items:center;gap:var(--size-4-2)}.main.svelte-9s8fa9 .controls .saved-filters details ul li button.svelte-9s8fa9.svelte-9s8fa9{text-align:left;padding:var(--size-2-1) var(--size-2-2);background:transparent;border:none;cursor:pointer;color:var(--text-normal);border-radius:var(--radius-s);white-space:nowrap;transition:background 0.15s ease, color 0.15s ease}.main.svelte-9s8fa9 .controls .saved-filters details ul li button.svelte-9s8fa9.svelte-9s8fa9:hover{background:var(--background-modifier-hover)}.main.svelte-9s8fa9 .controls .saved-filters details ul li button.active.svelte-9s8fa9.svelte-9s8fa9{font-weight:700;color:var(--interactive-accent)}.main.svelte-9s8fa9 .controls .saved-filters details ul li button.delete-btn.svelte-9s8fa9.svelte-9s8fa9{padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;color:var(--text-muted)}.main.svelte-9s8fa9 .controls .saved-filters details ul li button.delete-btn.svelte-9s8fa9.svelte-9s8fa9:hover{color:var(--color-red);background:var(--background-modifier-error-hover)}.main.svelte-9s8fa9 .controls .text-filter.svelte-9s8fa9.svelte-9s8fa9{display:flex;flex-direction:column}.main.svelte-9s8fa9 .controls .text-filter label.svelte-9s8fa9.svelte-9s8fa9{display:inline-block;margin-bottom:var(--size-2-3);font-weight:600}.main.svelte-9s8fa9 .controls .text-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9{display:block;width:100%;background:var(--background-primary);padding:var(--size-4-2);box-sizing:border-box;transition:box-shadow 150ms ease}.main.svelte-9s8fa9 .controls .text-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9:focus-visible{box-shadow:0 0 0 2px var(--background-modifier-border-focus)}.main.svelte-9s8fa9 .controls .text-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9::-webkit-calendar-picker-indicator,.main.svelte-9s8fa9 .controls .text-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9::-webkit-list-button{display:none !important;opacity:0 !important;pointer-events:none !important}.main.svelte-9s8fa9 .controls .text-filter .filter-actions.svelte-9s8fa9.svelte-9s8fa9{display:flex;gap:var(--size-4-2);margin-top:var(--size-4-2)}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.svelte-9s8fa9.svelte-9s8fa9{padding:var(--size-2-2) var(--size-4-3);border-radius:var(--radius-s);cursor:pointer;font-size:var(--font-ui-small);transition:background 150ms ease, opacity 150ms ease}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.save-btn.svelte-9s8fa9.svelte-9s8fa9{background:var(--interactive-accent);color:var(--text-on-accent);border:none}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.save-btn.svelte-9s8fa9.svelte-9s8fa9:hover:not(:disabled){background:var(--interactive-accent-hover)}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.clear-btn.svelte-9s8fa9.svelte-9s8fa9{background:transparent;color:var(--text-muted);border:1px solid var(--background-modifier-border)}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.clear-btn.svelte-9s8fa9.svelte-9s8fa9:hover:not(:disabled){background:var(--background-modifier-hover)}.main.svelte-9s8fa9 .controls .text-filter .filter-action-btn.svelte-9s8fa9.svelte-9s8fa9:disabled{opacity:0.5;cursor:not-allowed}.main.svelte-9s8fa9 .controls .tag-filter.svelte-9s8fa9.svelte-9s8fa9{display:flex;flex-direction:column}.main.svelte-9s8fa9 .controls .file-filter.svelte-9s8fa9.svelte-9s8fa9{display:flex;flex-direction:column}.main.svelte-9s8fa9 .controls .file-filter label.svelte-9s8fa9.svelte-9s8fa9{display:inline-block;margin-bottom:var(--size-2-3);font-weight:600}.main.svelte-9s8fa9 .controls .file-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9{display:block;width:100%;background:var(--background-primary);padding:var(--size-4-2);box-sizing:border-box;transition:box-shadow 150ms ease}.main.svelte-9s8fa9 .controls .file-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9:focus-visible{box-shadow:0 0 0 2px var(--background-modifier-border-focus)}.main.svelte-9s8fa9 .controls .file-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9::-webkit-calendar-picker-indicator,.main.svelte-9s8fa9 .controls .file-filter .filter-input-container input[type=search].svelte-9s8fa9.svelte-9s8fa9::-webkit-list-button{display:none !important;opacity:0 !important;pointer-events:none !important}.main.svelte-9s8fa9 .controls .file-filter .filter-actions.svelte-9s8fa9.svelte-9s8fa9{display:flex;gap:var(--size-4-2);margin-top:var(--size-4-2)}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.svelte-9s8fa9.svelte-9s8fa9{padding:var(--size-2-2) var(--size-4-3);border-radius:var(--radius-s);cursor:pointer;font-size:var(--font-ui-small);transition:background 150ms ease, opacity 150ms ease}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.save-btn.svelte-9s8fa9.svelte-9s8fa9{background:var(--interactive-accent);color:var(--text-on-accent);border:none}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.save-btn.svelte-9s8fa9.svelte-9s8fa9:hover:not(:disabled){background:var(--interactive-accent-hover)}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.clear-btn.svelte-9s8fa9.svelte-9s8fa9{background:transparent;color:var(--text-muted);border:1px solid var(--background-modifier-border)}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.clear-btn.svelte-9s8fa9.svelte-9s8fa9:hover:not(:disabled){background:var(--background-modifier-hover)}.main.svelte-9s8fa9 .controls .file-filter .filter-action-btn.svelte-9s8fa9.svelte-9s8fa9:disabled{opacity:0.5;cursor:not-allowed}.main.svelte-9s8fa9 .columns.svelte-9s8fa9.svelte-9s8fa9{height:100%;flex-grow:1;max-width:100vw;overflow-x:scroll;padding-bottom:var(--size-4-3)}.main.svelte-9s8fa9 .columns.svelte-9s8fa9>div.svelte-9s8fa9{display:flex;gap:var(--size-4-3)}");
+  append_styles(target, "svelte-75cfcw", ".main.svelte-75cfcw.svelte-75cfcw.svelte-75cfcw{height:100%;display:flex;flex-direction:column}.main.svelte-75cfcw .sidebar-toggle-btn.svelte-75cfcw.svelte-75cfcw{position:fixed;top:50px;left:8px;padding:var(--size-2-1) var(--size-2-2);background:var(--background-primary);border:1px solid var(--background-modifier-border);border-radius:var(--radius-s);cursor:pointer;color:var(--text-muted);font-size:var(--font-ui-small);display:flex;align-items:center;gap:var(--size-2-1);z-index:100;transition:color 0.15s ease}.main.svelte-75cfcw .sidebar-toggle-btn.svelte-75cfcw.svelte-75cfcw:hover{background:var(--background-modifier-hover);color:var(--text-normal)}.main.svelte-75cfcw .sidebar-toggle-btn .toggle-icon.svelte-75cfcw.svelte-75cfcw{font-size:16px}.main.svelte-75cfcw .sidebar-toggle-btn .toggle-label.svelte-75cfcw.svelte-75cfcw{font-weight:500}.main.svelte-75cfcw .board-container.svelte-75cfcw.svelte-75cfcw{display:grid;grid-template-columns:1fr;height:100%}.main.svelte-75cfcw .board-container.sidebar-expanded.svelte-75cfcw.svelte-75cfcw{grid-template-columns:var(--sidebar-width, 280px) 1fr}.main.svelte-75cfcw .filters-sidebar.svelte-75cfcw.svelte-75cfcw{background:var(--background-primary);border-right:1px solid var(--background-modifier-border);overflow-y:auto;display:flex;flex-direction:column;position:relative}.main.svelte-75cfcw .filters-sidebar .resize-handle.svelte-75cfcw.svelte-75cfcw{position:absolute;top:0;right:0;width:4px;height:100%;cursor:col-resize;background:transparent;border:none;padding:0;z-index:10}.main.svelte-75cfcw .filters-sidebar .resize-handle.svelte-75cfcw.svelte-75cfcw:hover{background:var(--interactive-accent);opacity:0.5}.main.svelte-75cfcw .board-content.svelte-75cfcw.svelte-75cfcw{display:flex;flex-direction:column;height:100%;overflow:hidden;padding-left:var(--size-4-4)}.main.svelte-75cfcw .settings.svelte-75cfcw.svelte-75cfcw{display:flex;justify-content:flex-end;align-items:center;padding:var(--size-4-2) var(--size-4-4) var(--size-4-2) 0;gap:var(--size-4-3)}.main.svelte-75cfcw .settings .board-task-count.svelte-75cfcw.svelte-75cfcw{font-size:var(--font-ui-medium);color:var(--text-muted)}.main.svelte-75cfcw .controls.svelte-75cfcw.svelte-75cfcw{display:flex;flex-direction:column;gap:var(--size-4-5);padding:var(--size-4-4);padding-top:50px}.main.svelte-75cfcw .controls .saved-filters.svelte-75cfcw.svelte-75cfcw{margin-top:0;margin-bottom:var(--size-4-2);font-size:var(--font-ui-small);align-self:flex-start}.main.svelte-75cfcw .controls .saved-filters details summary.svelte-75cfcw.svelte-75cfcw{cursor:pointer;color:var(--text-muted);padding:var(--size-2-1) 0;user-select:none;transition:color 0.15s ease}.main.svelte-75cfcw .controls .saved-filters details summary.svelte-75cfcw.svelte-75cfcw:hover{color:var(--text-normal)}.main.svelte-75cfcw .controls .saved-filters details ul.svelte-75cfcw.svelte-75cfcw{margin:0;padding:0;list-style:none}.main.svelte-75cfcw .controls .saved-filters details ul li.svelte-75cfcw.svelte-75cfcw{margin:0;display:flex;align-items:center;gap:var(--size-4-2)}.main.svelte-75cfcw .controls .saved-filters details ul li button.svelte-75cfcw.svelte-75cfcw{text-align:left;padding:var(--size-2-1) var(--size-2-2);background:transparent;border:none;cursor:pointer;color:var(--text-normal);border-radius:var(--radius-s);white-space:nowrap;transition:background 0.15s ease, color 0.15s ease}.main.svelte-75cfcw .controls .saved-filters details ul li button.svelte-75cfcw.svelte-75cfcw:hover{background:var(--background-modifier-hover)}.main.svelte-75cfcw .controls .saved-filters details ul li button.active.svelte-75cfcw.svelte-75cfcw{font-weight:700;color:var(--interactive-accent)}.main.svelte-75cfcw .controls .saved-filters details ul li button.delete-btn.svelte-75cfcw.svelte-75cfcw{padding:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;color:var(--text-muted)}.main.svelte-75cfcw .controls .saved-filters details ul li button.delete-btn.svelte-75cfcw.svelte-75cfcw:hover{color:var(--color-red);background:var(--background-modifier-error-hover)}.main.svelte-75cfcw .controls .text-filter.svelte-75cfcw.svelte-75cfcw{display:flex;flex-direction:column}.main.svelte-75cfcw .controls .text-filter label.svelte-75cfcw.svelte-75cfcw{display:inline-block;margin-bottom:var(--size-2-3);font-weight:600}.main.svelte-75cfcw .controls .text-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw{display:block;width:100%;background:var(--background-primary);padding:var(--size-4-2);box-sizing:border-box;transition:box-shadow 150ms ease}.main.svelte-75cfcw .controls .text-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw:focus-visible{box-shadow:0 0 0 2px var(--background-modifier-border-focus)}.main.svelte-75cfcw .controls .text-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw::-webkit-calendar-picker-indicator,.main.svelte-75cfcw .controls .text-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw::-webkit-list-button{display:none !important;opacity:0 !important;pointer-events:none !important}.main.svelte-75cfcw .controls .text-filter .filter-actions.svelte-75cfcw.svelte-75cfcw{display:flex;gap:var(--size-4-2);margin-top:var(--size-4-2)}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.svelte-75cfcw.svelte-75cfcw{padding:var(--size-2-2) var(--size-4-3);border-radius:var(--radius-s);cursor:pointer;font-size:var(--font-ui-small);transition:background 150ms ease, opacity 150ms ease}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.save-btn.svelte-75cfcw.svelte-75cfcw{background:var(--interactive-accent);color:var(--text-on-accent);border:none}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.save-btn.svelte-75cfcw.svelte-75cfcw:hover:not(:disabled){background:var(--interactive-accent-hover)}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.clear-btn.svelte-75cfcw.svelte-75cfcw{background:transparent;color:var(--text-muted);border:1px solid var(--background-modifier-border)}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.clear-btn.svelte-75cfcw.svelte-75cfcw:hover:not(:disabled){background:var(--background-modifier-hover)}.main.svelte-75cfcw .controls .text-filter .filter-action-btn.svelte-75cfcw.svelte-75cfcw:disabled{opacity:0.5;cursor:not-allowed}.main.svelte-75cfcw .controls .tag-filter.svelte-75cfcw.svelte-75cfcw{display:flex;flex-direction:column}.main.svelte-75cfcw .controls .file-filter.svelte-75cfcw.svelte-75cfcw{display:flex;flex-direction:column}.main.svelte-75cfcw .controls .file-filter label.svelte-75cfcw.svelte-75cfcw{display:inline-block;margin-bottom:var(--size-2-3);font-weight:600}.main.svelte-75cfcw .controls .file-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw{display:block;width:100%;background:var(--background-primary);padding:var(--size-4-2);box-sizing:border-box;transition:box-shadow 150ms ease}.main.svelte-75cfcw .controls .file-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw:focus-visible{box-shadow:0 0 0 2px var(--background-modifier-border-focus)}.main.svelte-75cfcw .controls .file-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw::-webkit-calendar-picker-indicator,.main.svelte-75cfcw .controls .file-filter .filter-input-container input[type=search].svelte-75cfcw.svelte-75cfcw::-webkit-list-button{display:none !important;opacity:0 !important;pointer-events:none !important}.main.svelte-75cfcw .controls .file-filter .filter-actions.svelte-75cfcw.svelte-75cfcw{display:flex;gap:var(--size-4-2);margin-top:var(--size-4-2)}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.svelte-75cfcw.svelte-75cfcw{padding:var(--size-2-2) var(--size-4-3);border-radius:var(--radius-s);cursor:pointer;font-size:var(--font-ui-small);transition:background 150ms ease, opacity 150ms ease}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.save-btn.svelte-75cfcw.svelte-75cfcw{background:var(--interactive-accent);color:var(--text-on-accent);border:none}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.save-btn.svelte-75cfcw.svelte-75cfcw:hover:not(:disabled){background:var(--interactive-accent-hover)}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.clear-btn.svelte-75cfcw.svelte-75cfcw{background:transparent;color:var(--text-muted);border:1px solid var(--background-modifier-border)}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.clear-btn.svelte-75cfcw.svelte-75cfcw:hover:not(:disabled){background:var(--background-modifier-hover)}.main.svelte-75cfcw .controls .file-filter .filter-action-btn.svelte-75cfcw.svelte-75cfcw:disabled{opacity:0.5;cursor:not-allowed}.main.svelte-75cfcw .columns.svelte-75cfcw.svelte-75cfcw{height:100%;flex-grow:1;max-width:100vw;overflow-x:scroll;padding-bottom:var(--size-4-3)}.main.svelte-75cfcw .columns.svelte-75cfcw>div.svelte-75cfcw{display:flex;gap:var(--size-4-3)}.main.svelte-75cfcw .columns.vertical-flow.svelte-75cfcw.svelte-75cfcw{overflow-x:hidden;overflow-y:scroll}.main.svelte-75cfcw .columns.vertical-flow.svelte-75cfcw>div.svelte-75cfcw{flex-direction:column}");
 }
 function get_each_context5(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[73] = list[i];
+  child_ctx[84] = list[i];
   return child_ctx;
 }
 function get_each_context_12(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[76] = list[i];
+  child_ctx[87] = list[i];
   return child_ctx;
 }
 function get_each_context_2(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[79] = list[i];
+  child_ctx[90] = list[i];
   return child_ctx;
 }
 function get_each_context_3(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[79] = list[i];
+  child_ctx[90] = list[i];
   return child_ctx;
 }
 function get_each_context_4(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[79] = list[i];
+  child_ctx[90] = list[i];
   return child_ctx;
 }
-function create_if_block_34(ctx) {
+function create_if_block_24(ctx) {
   let aside;
   let button0;
   let t0;
@@ -17539,30 +17828,30 @@ function create_if_block_34(ctx) {
   }
   let if_block0 = (
     /*contentFilters*/
-    ctx[10].length > 0 && create_if_block_52(ctx)
+    ctx[10].length > 0 && create_if_block_43(ctx)
   );
   function selecttag_value_binding(value) {
-    ctx[64](value);
+    ctx[74](value);
   }
   let selecttag_props = {
     tags: [.../*tags*/
-    ctx[23]],
+    ctx[27]],
     savedFilters: (
       /*tagFilters*/
-      ctx[28]
+      ctx[32]
     ),
     onLoadFilter: (
       /*func*/
-      ctx[62]
+      ctx[72]
     ),
     addButtonDisabled: (
       /*selectedTags*/
       ctx[6].length === 0 || /*tagFilterExists*/
-      ctx[25]
+      ctx[29]
     ),
     onAddClick: (
       /*addTagFilter*/
-      ctx[36]
+      ctx[42]
     ),
     clearButtonDisabled: (
       /*selectedTags*/
@@ -17570,15 +17859,15 @@ function create_if_block_34(ctx) {
     ),
     onClearClick: (
       /*clearTagFilter*/
-      ctx[37]
+      ctx[43]
     ),
     activeFilterId: (
       /*activeTagFilterId*/
-      ctx[12]
+      ctx[13]
     ),
     onDeleteClick: (
       /*func_1*/
-      ctx[63]
+      ctx[73]
     )
   };
   if (
@@ -17592,7 +17881,7 @@ function create_if_block_34(ctx) {
   binding_callbacks.push(() => bind(selecttag, "value", selecttag_value_binding));
   let each_value_2 = ensure_array_like(
     /*fileFilters*/
-    ctx[27]
+    ctx[31]
   );
   let each_blocks = [];
   for (let i = 0; i < each_value_2.length; i += 1) {
@@ -17600,7 +17889,7 @@ function create_if_block_34(ctx) {
   }
   let if_block1 = (
     /*availableFiles*/
-    ctx[29].length > 0 && create_if_block_42(ctx)
+    ctx[33].length > 0 && create_if_block_34(ctx)
   );
   return {
     c() {
@@ -17662,14 +17951,14 @@ function create_if_block_34(ctx) {
       t21 = space();
       button4 = element("button");
       t22 = text("Clear");
-      attr(button0, "class", "resize-handle svelte-9s8fa9");
+      attr(button0, "class", "resize-handle svelte-75cfcw");
       attr(button0, "aria-label", "Resize sidebar");
       attr(label0, "for", "filter");
-      attr(label0, "class", "svelte-9s8fa9");
-      attr(summary0, "class", "svelte-9s8fa9");
+      attr(label0, "class", "svelte-75cfcw");
+      attr(summary0, "class", "svelte-75cfcw");
       attr(ul0, "role", "list");
-      attr(ul0, "class", "svelte-9s8fa9");
-      attr(div0, "class", "saved-filters svelte-9s8fa9");
+      attr(ul0, "class", "svelte-75cfcw");
+      attr(div0, "class", "saved-filters svelte-75cfcw");
       attr(input0, "id", "filter");
       attr(input0, "name", "filter");
       attr(input0, "type", "search");
@@ -17677,47 +17966,47 @@ function create_if_block_34(ctx) {
       attr(input0, "list", "content-filters");
       attr(input0, "aria-describedby", input0_aria_describedby_value = /*contentFilters*/
       ctx[10].length > 0 ? "content-filters" : void 0);
-      attr(input0, "class", "svelte-9s8fa9");
+      attr(input0, "class", "svelte-75cfcw");
       attr(div1, "class", "filter-input-container");
-      attr(button1, "class", "filter-action-btn save-btn svelte-9s8fa9");
+      attr(button1, "class", "filter-action-btn save-btn svelte-75cfcw");
       button1.disabled = button1_disabled_value = /*filterText*/
       ctx[7].trim() === "" || /*contentFilterExists*/
-      ctx[26];
+      ctx[30];
       attr(button1, "aria-label", "Save filter");
-      attr(button2, "class", "filter-action-btn clear-btn svelte-9s8fa9");
+      attr(button2, "class", "filter-action-btn clear-btn svelte-75cfcw");
       button2.disabled = button2_disabled_value = /*filterText*/
       ctx[7].trim() === "";
       attr(button2, "aria-label", "Clear filter");
-      attr(div2, "class", "filter-actions svelte-9s8fa9");
-      attr(div3, "class", "text-filter svelte-9s8fa9");
-      attr(div4, "class", "tag-filter svelte-9s8fa9");
+      attr(div2, "class", "filter-actions svelte-75cfcw");
+      attr(div3, "class", "text-filter svelte-75cfcw");
+      attr(div4, "class", "tag-filter svelte-75cfcw");
       attr(label1, "for", "file-filter");
-      attr(label1, "class", "svelte-9s8fa9");
-      attr(summary1, "class", "svelte-9s8fa9");
+      attr(label1, "class", "svelte-75cfcw");
+      attr(summary1, "class", "svelte-75cfcw");
       attr(ul1, "role", "list");
-      attr(ul1, "class", "svelte-9s8fa9");
-      attr(div5, "class", "saved-filters svelte-9s8fa9");
+      attr(ul1, "class", "svelte-75cfcw");
+      attr(div5, "class", "saved-filters svelte-75cfcw");
       attr(input1, "id", "file-filter");
       attr(input1, "name", "file-filter");
       attr(input1, "type", "search");
       attr(input1, "placeholder", "Type to search files...");
       attr(input1, "list", "file-paths");
       attr(input1, "aria-label", "Filter by file path");
-      attr(input1, "class", "svelte-9s8fa9");
+      attr(input1, "class", "svelte-75cfcw");
       attr(div6, "class", "filter-input-container");
-      attr(button3, "class", "filter-action-btn save-btn svelte-9s8fa9");
+      attr(button3, "class", "filter-action-btn save-btn svelte-75cfcw");
       button3.disabled = button3_disabled_value = /*fileFilter*/
       ctx[8].trim() === "" || /*fileFilterExists*/
-      ctx[24];
+      ctx[28];
       attr(button3, "aria-label", "Save filter");
-      attr(button4, "class", "filter-action-btn clear-btn svelte-9s8fa9");
+      attr(button4, "class", "filter-action-btn clear-btn svelte-75cfcw");
       button4.disabled = button4_disabled_value = /*fileFilter*/
       ctx[8].trim() === "";
       attr(button4, "aria-label", "Clear file filter");
-      attr(div7, "class", "filter-actions svelte-9s8fa9");
-      attr(div8, "class", "file-filter svelte-9s8fa9");
-      attr(div9, "class", "controls svelte-9s8fa9");
-      attr(aside, "class", "filters-sidebar svelte-9s8fa9");
+      attr(div7, "class", "filter-actions svelte-75cfcw");
+      attr(div8, "class", "file-filter svelte-75cfcw");
+      attr(div9, "class", "controls svelte-75cfcw");
+      attr(aside, "class", "filters-sidebar svelte-75cfcw");
     },
     m(target, anchor) {
       insert(target, aside, anchor);
@@ -17795,43 +18084,43 @@ function create_if_block_34(ctx) {
             button0,
             "mousedown",
             /*startResize*/
-            ctx[42]
+            ctx[48]
           ),
           listen(
             input0,
             "input",
             /*input0_input_handler*/
-            ctx[61]
+            ctx[71]
           ),
           listen(
             button1,
             "click",
             /*addContentFilter*/
-            ctx[30]
+            ctx[36]
           ),
           listen(
             button2,
             "click",
             /*clearContentFilter*/
-            ctx[32]
+            ctx[38]
           ),
           listen(
             input1,
             "input",
             /*input1_input_handler*/
-            ctx[67]
+            ctx[77]
           ),
           listen(
             button3,
             "click",
             /*addFileFilter*/
-            ctx[34]
+            ctx[40]
           ),
           listen(
             button4,
             "click",
             /*clearFileFilter*/
-            ctx[33]
+            ctx[39]
           )
         ];
         mounted = true;
@@ -17839,8 +18128,8 @@ function create_if_block_34(ctx) {
     },
     p(ctx2, dirty) {
       if (dirty[0] & /*contentFilters, activeContentFilterId*/
-      3072 | dirty[1] & /*loadContentFilter, openDeleteModal*/
-      129) {
+      5120 | dirty[1] & /*loadContentFilter, openDeleteModal*/
+      8256) {
         each_value_4 = ensure_array_like(
           /*contentFilters*/
           ctx2[10]
@@ -17882,7 +18171,7 @@ function create_if_block_34(ctx) {
         if (if_block0) {
           if_block0.p(ctx2, dirty);
         } else {
-          if_block0 = create_if_block_52(ctx2);
+          if_block0 = create_if_block_43(ctx2);
           if_block0.c();
           if_block0.m(div1, null);
         }
@@ -17891,9 +18180,9 @@ function create_if_block_34(ctx) {
         if_block0 = null;
       }
       if (!current || dirty[0] & /*filterText, contentFilterExists*/
-      67108992 && button1_disabled_value !== (button1_disabled_value = /*filterText*/
+      1073741952 && button1_disabled_value !== (button1_disabled_value = /*filterText*/
       ctx2[7].trim() === "" || /*contentFilterExists*/
-      ctx2[26])) {
+      ctx2[30])) {
         button1.disabled = button1_disabled_value;
       }
       if (!current || dirty[0] & /*filterText*/
@@ -17903,24 +18192,24 @@ function create_if_block_34(ctx) {
       }
       const selecttag_changes = {};
       if (dirty[0] & /*tags*/
-      8388608) selecttag_changes.tags = [.../*tags*/
-      ctx2[23]];
-      if (dirty[0] & /*tagFilters*/
-      268435456) selecttag_changes.savedFilters = /*tagFilters*/
-      ctx2[28];
+      134217728) selecttag_changes.tags = [.../*tags*/
+      ctx2[27]];
+      if (dirty[1] & /*tagFilters*/
+      2) selecttag_changes.savedFilters = /*tagFilters*/
+      ctx2[32];
       if (dirty[0] & /*activeTagFilterId*/
-      4096) selecttag_changes.onLoadFilter = /*func*/
-      ctx2[62];
+      8192) selecttag_changes.onLoadFilter = /*func*/
+      ctx2[72];
       if (dirty[0] & /*selectedTags, tagFilterExists*/
-      33554496) selecttag_changes.addButtonDisabled = /*selectedTags*/
+      536870976) selecttag_changes.addButtonDisabled = /*selectedTags*/
       ctx2[6].length === 0 || /*tagFilterExists*/
-      ctx2[25];
+      ctx2[29];
       if (dirty[0] & /*selectedTags*/
       64) selecttag_changes.clearButtonDisabled = /*selectedTags*/
       ctx2[6].length === 0;
       if (dirty[0] & /*activeTagFilterId*/
-      4096) selecttag_changes.activeFilterId = /*activeTagFilterId*/
-      ctx2[12];
+      8192) selecttag_changes.activeFilterId = /*activeTagFilterId*/
+      ctx2[13];
       if (!updating_value && dirty[0] & /*selectedTags*/
       64) {
         updating_value = true;
@@ -17929,12 +18218,12 @@ function create_if_block_34(ctx) {
         add_flush_callback(() => updating_value = false);
       }
       selecttag.$set(selecttag_changes);
-      if (dirty[0] & /*fileFilters, activeFileFilterId*/
-      134225920 | dirty[1] & /*loadFileFilter, openDeleteModal*/
-      144) {
+      if (dirty[0] & /*activeFileFilterId*/
+      16384 | dirty[1] & /*fileFilters, loadFileFilter, openDeleteModal*/
+      9217) {
         each_value_2 = ensure_array_like(
           /*fileFilters*/
-          ctx2[27]
+          ctx2[31]
         );
         let i;
         for (i = 0; i < each_value_2.length; i += 1) {
@@ -17963,12 +18252,12 @@ function create_if_block_34(ctx) {
       }
       if (
         /*availableFiles*/
-        ctx2[29].length > 0
+        ctx2[33].length > 0
       ) {
         if (if_block1) {
           if_block1.p(ctx2, dirty);
         } else {
-          if_block1 = create_if_block_42(ctx2);
+          if_block1 = create_if_block_34(ctx2);
           if_block1.c();
           if_block1.m(div6, null);
         }
@@ -17977,9 +18266,9 @@ function create_if_block_34(ctx) {
         if_block1 = null;
       }
       if (!current || dirty[0] & /*fileFilter, fileFilterExists*/
-      16777472 && button3_disabled_value !== (button3_disabled_value = /*fileFilter*/
+      268435712 && button3_disabled_value !== (button3_disabled_value = /*fileFilter*/
       ctx2[8].trim() === "" || /*fileFilterExists*/
-      ctx2[24])) {
+      ctx2[28])) {
         button3.disabled = button3_disabled_value;
       }
       if (!current || dirty[0] & /*fileFilter*/
@@ -18021,7 +18310,7 @@ function create_each_block_4(ctx) {
   let button1;
   let t2_value = (
     /*filter*/
-    ((_a = ctx[79].content) == null ? void 0 : _a.text) + ""
+    ((_a = ctx[90].content) == null ? void 0 : _a.text) + ""
   );
   let t2;
   let button1_aria_label_value;
@@ -18032,18 +18321,18 @@ function create_each_block_4(ctx) {
   function click_handler() {
     return (
       /*click_handler*/
-      ctx[59](
+      ctx[69](
         /*filter*/
-        ctx[79]
+        ctx[90]
       )
     );
   }
   function click_handler_1() {
     return (
       /*click_handler_1*/
-      ctx[60](
+      ctx[70](
         /*filter*/
-        ctx[79]
+        ctx[90]
       )
     );
   }
@@ -18057,23 +18346,23 @@ function create_each_block_4(ctx) {
       button1 = element("button");
       t2 = text(t2_value);
       t3 = space();
-      attr(button0, "class", "delete-btn svelte-9s8fa9");
+      attr(button0, "class", "delete-btn svelte-75cfcw");
       attr(button0, "aria-label", button0_aria_label_value = "Delete filter: " + /*filter*/
-      ((_a2 = ctx[79].content) == null ? void 0 : _a2.text));
+      ((_a2 = ctx[90].content) == null ? void 0 : _a2.text));
       attr(button1, "aria-label", button1_aria_label_value = "Load saved filter: " + /*filter*/
-      ((_b = ctx[79].content) == null ? void 0 : _b.text));
+      ((_b = ctx[90].content) == null ? void 0 : _b.text));
       attr(button1, "aria-pressed", button1_aria_pressed_value = /*filter*/
-      ctx[79].id === /*activeContentFilterId*/
-      ctx[11]);
-      attr(button1, "class", "svelte-9s8fa9");
+      ctx[90].id === /*activeContentFilterId*/
+      ctx[12]);
+      attr(button1, "class", "svelte-75cfcw");
       toggle_class(
         button1,
         "active",
         /*filter*/
-        ctx[79].id === /*activeContentFilterId*/
-        ctx[11]
+        ctx[90].id === /*activeContentFilterId*/
+        ctx[12]
       );
-      attr(li, "class", "svelte-9s8fa9");
+      attr(li, "class", "svelte-75cfcw");
     },
     m(target, anchor) {
       insert(target, li, anchor);
@@ -18096,31 +18385,31 @@ function create_each_block_4(ctx) {
       ctx = new_ctx;
       if (dirty[0] & /*contentFilters*/
       1024 && button0_aria_label_value !== (button0_aria_label_value = "Delete filter: " + /*filter*/
-      ((_a2 = ctx[79].content) == null ? void 0 : _a2.text))) {
+      ((_a2 = ctx[90].content) == null ? void 0 : _a2.text))) {
         attr(button0, "aria-label", button0_aria_label_value);
       }
       if (dirty[0] & /*contentFilters*/
       1024 && t2_value !== (t2_value = /*filter*/
-      ((_b = ctx[79].content) == null ? void 0 : _b.text) + "")) set_data(t2, t2_value);
+      ((_b = ctx[90].content) == null ? void 0 : _b.text) + "")) set_data(t2, t2_value);
       if (dirty[0] & /*contentFilters*/
       1024 && button1_aria_label_value !== (button1_aria_label_value = "Load saved filter: " + /*filter*/
-      ((_c = ctx[79].content) == null ? void 0 : _c.text))) {
+      ((_c = ctx[90].content) == null ? void 0 : _c.text))) {
         attr(button1, "aria-label", button1_aria_label_value);
       }
       if (dirty[0] & /*contentFilters, activeContentFilterId*/
-      3072 && button1_aria_pressed_value !== (button1_aria_pressed_value = /*filter*/
-      ctx[79].id === /*activeContentFilterId*/
-      ctx[11])) {
+      5120 && button1_aria_pressed_value !== (button1_aria_pressed_value = /*filter*/
+      ctx[90].id === /*activeContentFilterId*/
+      ctx[12])) {
         attr(button1, "aria-pressed", button1_aria_pressed_value);
       }
       if (dirty[0] & /*contentFilters, activeContentFilterId*/
-      3072) {
+      5120) {
         toggle_class(
           button1,
           "active",
           /*filter*/
-          ctx[79].id === /*activeContentFilterId*/
-          ctx[11]
+          ctx[90].id === /*activeContentFilterId*/
+          ctx[12]
         );
       }
     },
@@ -18133,7 +18422,7 @@ function create_each_block_4(ctx) {
     }
   };
 }
-function create_if_block_52(ctx) {
+function create_if_block_43(ctx) {
   let datalist;
   let each_value_3 = ensure_array_like(
     /*contentFilters*/
@@ -18196,7 +18485,7 @@ function create_each_block_3(ctx) {
   let option;
   let t_value = (
     /*filter*/
-    ((_a = ctx[79].content) == null ? void 0 : _a.text) + ""
+    ((_a = ctx[90].content) == null ? void 0 : _a.text) + ""
   );
   let t;
   let option_value_value;
@@ -18206,7 +18495,7 @@ function create_each_block_3(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*filter*/
-      (_a2 = ctx[79].content) == null ? void 0 : _a2.text;
+      (_a2 = ctx[90].content) == null ? void 0 : _a2.text;
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -18217,10 +18506,10 @@ function create_each_block_3(ctx) {
       var _a2, _b;
       if (dirty[0] & /*contentFilters*/
       1024 && t_value !== (t_value = /*filter*/
-      ((_a2 = ctx2[79].content) == null ? void 0 : _a2.text) + "")) set_data(t, t_value);
+      ((_a2 = ctx2[90].content) == null ? void 0 : _a2.text) + "")) set_data(t, t_value);
       if (dirty[0] & /*contentFilters*/
       1024 && option_value_value !== (option_value_value = /*filter*/
-      (_b = ctx2[79].content) == null ? void 0 : _b.text)) {
+      (_b = ctx2[90].content) == null ? void 0 : _b.text)) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -18242,7 +18531,7 @@ function create_each_block_2(ctx) {
   let button1;
   let t2_value = (
     /*filter*/
-    ((_a = ctx[79].file) == null ? void 0 : _a.filepaths[0]) + ""
+    ((_a = ctx[90].file) == null ? void 0 : _a.filepaths[0]) + ""
   );
   let t2;
   let button1_aria_label_value;
@@ -18253,18 +18542,18 @@ function create_each_block_2(ctx) {
   function click_handler_2() {
     return (
       /*click_handler_2*/
-      ctx[65](
+      ctx[75](
         /*filter*/
-        ctx[79]
+        ctx[90]
       )
     );
   }
   function click_handler_3() {
     return (
       /*click_handler_3*/
-      ctx[66](
+      ctx[76](
         /*filter*/
-        ctx[79]
+        ctx[90]
       )
     );
   }
@@ -18278,23 +18567,23 @@ function create_each_block_2(ctx) {
       button1 = element("button");
       t2 = text(t2_value);
       t3 = space();
-      attr(button0, "class", "delete-btn svelte-9s8fa9");
+      attr(button0, "class", "delete-btn svelte-75cfcw");
       attr(button0, "aria-label", button0_aria_label_value = "Delete filter: " + /*filter*/
-      ((_a2 = ctx[79].file) == null ? void 0 : _a2.filepaths[0]));
+      ((_a2 = ctx[90].file) == null ? void 0 : _a2.filepaths[0]));
       attr(button1, "aria-label", button1_aria_label_value = "Load saved filter: " + /*filter*/
-      ((_b = ctx[79].file) == null ? void 0 : _b.filepaths[0]));
+      ((_b = ctx[90].file) == null ? void 0 : _b.filepaths[0]));
       attr(button1, "aria-pressed", button1_aria_pressed_value = /*filter*/
-      ctx[79].id === /*activeFileFilterId*/
-      ctx[13]);
-      attr(button1, "class", "svelte-9s8fa9");
+      ctx[90].id === /*activeFileFilterId*/
+      ctx[14]);
+      attr(button1, "class", "svelte-75cfcw");
       toggle_class(
         button1,
         "active",
         /*filter*/
-        ctx[79].id === /*activeFileFilterId*/
-        ctx[13]
+        ctx[90].id === /*activeFileFilterId*/
+        ctx[14]
       );
-      attr(li, "class", "svelte-9s8fa9");
+      attr(li, "class", "svelte-75cfcw");
     },
     m(target, anchor) {
       insert(target, li, anchor);
@@ -18315,33 +18604,35 @@ function create_each_block_2(ctx) {
     p(new_ctx, dirty) {
       var _a2, _b, _c;
       ctx = new_ctx;
-      if (dirty[0] & /*fileFilters*/
-      134217728 && button0_aria_label_value !== (button0_aria_label_value = "Delete filter: " + /*filter*/
-      ((_a2 = ctx[79].file) == null ? void 0 : _a2.filepaths[0]))) {
+      if (dirty[1] & /*fileFilters*/
+      1 && button0_aria_label_value !== (button0_aria_label_value = "Delete filter: " + /*filter*/
+      ((_a2 = ctx[90].file) == null ? void 0 : _a2.filepaths[0]))) {
         attr(button0, "aria-label", button0_aria_label_value);
       }
-      if (dirty[0] & /*fileFilters*/
-      134217728 && t2_value !== (t2_value = /*filter*/
-      ((_b = ctx[79].file) == null ? void 0 : _b.filepaths[0]) + "")) set_data(t2, t2_value);
-      if (dirty[0] & /*fileFilters*/
-      134217728 && button1_aria_label_value !== (button1_aria_label_value = "Load saved filter: " + /*filter*/
-      ((_c = ctx[79].file) == null ? void 0 : _c.filepaths[0]))) {
+      if (dirty[1] & /*fileFilters*/
+      1 && t2_value !== (t2_value = /*filter*/
+      ((_b = ctx[90].file) == null ? void 0 : _b.filepaths[0]) + "")) set_data(t2, t2_value);
+      if (dirty[1] & /*fileFilters*/
+      1 && button1_aria_label_value !== (button1_aria_label_value = "Load saved filter: " + /*filter*/
+      ((_c = ctx[90].file) == null ? void 0 : _c.filepaths[0]))) {
         attr(button1, "aria-label", button1_aria_label_value);
       }
-      if (dirty[0] & /*fileFilters, activeFileFilterId*/
-      134225920 && button1_aria_pressed_value !== (button1_aria_pressed_value = /*filter*/
-      ctx[79].id === /*activeFileFilterId*/
-      ctx[13])) {
+      if (dirty[0] & /*activeFileFilterId*/
+      16384 | dirty[1] & /*fileFilters*/
+      1 && button1_aria_pressed_value !== (button1_aria_pressed_value = /*filter*/
+      ctx[90].id === /*activeFileFilterId*/
+      ctx[14])) {
         attr(button1, "aria-pressed", button1_aria_pressed_value);
       }
-      if (dirty[0] & /*fileFilters, activeFileFilterId*/
-      134225920) {
+      if (dirty[0] & /*activeFileFilterId*/
+      16384 | dirty[1] & /*fileFilters*/
+      1) {
         toggle_class(
           button1,
           "active",
           /*filter*/
-          ctx[79].id === /*activeFileFilterId*/
-          ctx[13]
+          ctx[90].id === /*activeFileFilterId*/
+          ctx[14]
         );
       }
     },
@@ -18354,11 +18645,11 @@ function create_each_block_2(ctx) {
     }
   };
 }
-function create_if_block_42(ctx) {
+function create_if_block_34(ctx) {
   let datalist;
   let each_value_1 = ensure_array_like(
     /*availableFiles*/
-    ctx[29]
+    ctx[33]
   );
   let each_blocks = [];
   for (let i = 0; i < each_value_1.length; i += 1) {
@@ -18381,11 +18672,11 @@ function create_if_block_42(ctx) {
       }
     },
     p(ctx2, dirty) {
-      if (dirty[0] & /*availableFiles*/
-      536870912) {
+      if (dirty[1] & /*availableFiles*/
+      4) {
         each_value_1 = ensure_array_like(
           /*availableFiles*/
-          ctx2[29]
+          ctx2[33]
         );
         let i;
         for (i = 0; i < each_value_1.length; i += 1) {
@@ -18416,7 +18707,7 @@ function create_each_block_12(ctx) {
   let option;
   let t_value = (
     /*filePath*/
-    ctx[76] + ""
+    ctx[87] + ""
   );
   let t;
   let option_value_value;
@@ -18425,7 +18716,7 @@ function create_each_block_12(ctx) {
       option = element("option");
       t = text(t_value);
       option.__value = option_value_value = /*filePath*/
-      ctx[76];
+      ctx[87];
       set_input_value(option, option.__value);
     },
     m(target, anchor) {
@@ -18433,12 +18724,12 @@ function create_each_block_12(ctx) {
       append(option, t);
     },
     p(ctx2, dirty) {
-      if (dirty[0] & /*availableFiles*/
-      536870912 && t_value !== (t_value = /*filePath*/
-      ctx2[76] + "")) set_data(t, t_value);
-      if (dirty[0] & /*availableFiles*/
-      536870912 && option_value_value !== (option_value_value = /*filePath*/
-      ctx2[76])) {
+      if (dirty[1] & /*availableFiles*/
+      4 && t_value !== (t_value = /*filePath*/
+      ctx2[87] + "")) set_data(t, t_value);
+      if (dirty[1] & /*availableFiles*/
+      4 && option_value_value !== (option_value_value = /*filePath*/
+      ctx2[87])) {
         option.__value = option_value_value;
         set_input_value(option, option.__value);
       }
@@ -18450,94 +18741,103 @@ function create_each_block_12(ctx) {
     }
   };
 }
-function create_if_block_24(ctx) {
-  let column_1;
-  let current;
-  column_1 = new column_default({
-    props: {
-      app: (
-        /*app*/
-        ctx[0]
-      ),
-      column: "uncategorised",
-      hideOnEmpty: false,
-      tasks: (
-        /*tasksByColumn*/
-        ctx[9]["uncategorised"]
-      ),
-      taskActions: (
-        /*taskActions*/
-        ctx[2]
-      ),
-      columnTagTableStore: (
-        /*columnTagTableStore*/
-        ctx[3]
-      ),
-      columnColourTableStore: (
-        /*columnColourTableStore*/
-        ctx[4]
-      ),
-      showFilepath: (
-        /*showFilepath*/
-        ctx[22]
-      ),
-      consolidateTags: (
-        /*consolidateTags*/
-        ctx[21]
-      )
-    }
-  });
+function create_else_block3(ctx) {
+  let t0;
+  let t1;
+  let t2;
   return {
     c() {
-      create_component(column_1.$$.fragment);
+      t0 = text("Total: ");
+      t1 = text(
+        /*totalTaskCount*/
+        ctx[26]
+      );
+      t2 = text(" tasks");
     },
     m(target, anchor) {
-      mount_component(column_1, target, anchor);
-      current = true;
+      insert(target, t0, anchor);
+      insert(target, t1, anchor);
+      insert(target, t2, anchor);
     },
     p(ctx2, dirty) {
-      const column_1_changes = {};
-      if (dirty[0] & /*app*/
-      1) column_1_changes.app = /*app*/
-      ctx2[0];
-      if (dirty[0] & /*tasksByColumn*/
-      512) column_1_changes.tasks = /*tasksByColumn*/
-      ctx2[9]["uncategorised"];
-      if (dirty[0] & /*taskActions*/
-      4) column_1_changes.taskActions = /*taskActions*/
-      ctx2[2];
-      if (dirty[0] & /*columnTagTableStore*/
-      8) column_1_changes.columnTagTableStore = /*columnTagTableStore*/
-      ctx2[3];
-      if (dirty[0] & /*columnColourTableStore*/
-      16) column_1_changes.columnColourTableStore = /*columnColourTableStore*/
-      ctx2[4];
-      if (dirty[0] & /*showFilepath*/
-      4194304) column_1_changes.showFilepath = /*showFilepath*/
-      ctx2[22];
-      if (dirty[0] & /*consolidateTags*/
-      2097152) column_1_changes.consolidateTags = /*consolidateTags*/
-      ctx2[21];
-      column_1.$set(column_1_changes);
-    },
-    i(local) {
-      if (current) return;
-      transition_in(column_1.$$.fragment, local);
-      current = true;
-    },
-    o(local) {
-      transition_out(column_1.$$.fragment, local);
-      current = false;
+      if (dirty[0] & /*totalTaskCount*/
+      67108864) set_data(
+        t1,
+        /*totalTaskCount*/
+        ctx2[26]
+      );
     },
     d(detaching) {
-      destroy_component(column_1, detaching);
+      if (detaching) {
+        detach(t0);
+        detach(t1);
+        detach(t2);
+      }
     }
   };
 }
-function create_each_block5(ctx) {
+function create_if_block_15(ctx) {
+  let t0;
+  let t1;
+  let t2;
+  let t3;
+  return {
+    c() {
+      t0 = text(
+        /*filteredTaskCount*/
+        ctx[25]
+      );
+      t1 = text(" of ");
+      t2 = text(
+        /*totalTaskCount*/
+        ctx[26]
+      );
+      t3 = text(" tasks");
+    },
+    m(target, anchor) {
+      insert(target, t0, anchor);
+      insert(target, t1, anchor);
+      insert(target, t2, anchor);
+      insert(target, t3, anchor);
+    },
+    p(ctx2, dirty) {
+      if (dirty[0] & /*filteredTaskCount*/
+      33554432) set_data(
+        t0,
+        /*filteredTaskCount*/
+        ctx2[25]
+      );
+      if (dirty[0] & /*totalTaskCount*/
+      67108864) set_data(
+        t2,
+        /*totalTaskCount*/
+        ctx2[26]
+      );
+    },
+    d(detaching) {
+      if (detaching) {
+        detach(t0);
+        detach(t1);
+        detach(t2);
+        detach(t3);
+      }
+    }
+  };
+}
+function create_each_block5(key_1, ctx) {
   var _a;
+  let first;
   let column_1;
   let current;
+  function func_2() {
+    return (
+      /*func_2*/
+      ctx[78](
+        /*column*/
+        ctx[84]
+      )
+    );
+  }
   column_1 = new column_default({
     props: {
       app: (
@@ -18546,13 +18846,14 @@ function create_each_block5(ctx) {
       ),
       column: (
         /*column*/
-        ctx[73]
+        ctx[84]
       ),
+      hideOnEmpty: false,
       tasks: (
         /*tasksByColumn*/
         (_a = ctx[9][
           /*column*/
-          ctx[73]
+          ctx[84]
         ]) != null ? _a : []
       ),
       taskActions: (
@@ -18569,52 +18870,81 @@ function create_each_block5(ctx) {
       ),
       showFilepath: (
         /*showFilepath*/
-        ctx[22]
+        ctx[23]
       ),
       consolidateTags: (
         /*consolidateTags*/
-        ctx[21]
-      )
+        ctx[22]
+      ),
+      isVerticalFlow: (
+        /*isVerticalFlow*/
+        ctx[19]
+      ),
+      isCollapsed: (
+        /*$collapsedColumnsStore*/
+        ctx[11].has(
+          /*column*/
+          ctx[84]
+        )
+      ),
+      onToggleCollapse: func_2
     }
   });
   return {
+    key: key_1,
+    first: null,
     c() {
+      first = empty();
       create_component(column_1.$$.fragment);
+      this.first = first;
     },
     m(target, anchor) {
+      insert(target, first, anchor);
       mount_component(column_1, target, anchor);
       current = true;
     },
-    p(ctx2, dirty) {
+    p(new_ctx, dirty) {
       var _a2;
+      ctx = new_ctx;
       const column_1_changes = {};
       if (dirty[0] & /*app*/
       1) column_1_changes.app = /*app*/
-      ctx2[0];
-      if (dirty[0] & /*columns*/
-      65536) column_1_changes.column = /*column*/
-      ctx2[73];
-      if (dirty[0] & /*tasksByColumn, columns*/
-      66048) column_1_changes.tasks = /*tasksByColumn*/
-      (_a2 = ctx2[9][
+      ctx[0];
+      if (dirty[0] & /*orderedColumns*/
+      1048576) column_1_changes.column = /*column*/
+      ctx[84];
+      if (dirty[0] & /*tasksByColumn, orderedColumns*/
+      1049088) column_1_changes.tasks = /*tasksByColumn*/
+      (_a2 = ctx[9][
         /*column*/
-        ctx2[73]
+        ctx[84]
       ]) != null ? _a2 : [];
       if (dirty[0] & /*taskActions*/
       4) column_1_changes.taskActions = /*taskActions*/
-      ctx2[2];
+      ctx[2];
       if (dirty[0] & /*columnTagTableStore*/
       8) column_1_changes.columnTagTableStore = /*columnTagTableStore*/
-      ctx2[3];
+      ctx[3];
       if (dirty[0] & /*columnColourTableStore*/
       16) column_1_changes.columnColourTableStore = /*columnColourTableStore*/
-      ctx2[4];
+      ctx[4];
       if (dirty[0] & /*showFilepath*/
-      4194304) column_1_changes.showFilepath = /*showFilepath*/
-      ctx2[22];
+      8388608) column_1_changes.showFilepath = /*showFilepath*/
+      ctx[23];
       if (dirty[0] & /*consolidateTags*/
-      2097152) column_1_changes.consolidateTags = /*consolidateTags*/
-      ctx2[21];
+      4194304) column_1_changes.consolidateTags = /*consolidateTags*/
+      ctx[22];
+      if (dirty[0] & /*isVerticalFlow*/
+      524288) column_1_changes.isVerticalFlow = /*isVerticalFlow*/
+      ctx[19];
+      if (dirty[0] & /*$collapsedColumnsStore, orderedColumns*/
+      1050624) column_1_changes.isCollapsed = /*$collapsedColumnsStore*/
+      ctx[11].has(
+        /*column*/
+        ctx[84]
+      );
+      if (dirty[0] & /*orderedColumns*/
+      1048576) column_1_changes.onToggleCollapse = func_2;
       column_1.$set(column_1_changes);
     },
     i(local) {
@@ -18627,92 +18957,9 @@ function create_each_block5(ctx) {
       current = false;
     },
     d(detaching) {
-      destroy_component(column_1, detaching);
-    }
-  };
-}
-function create_if_block_15(ctx) {
-  var _a;
-  let column_1;
-  let current;
-  column_1 = new column_default({
-    props: {
-      app: (
-        /*app*/
-        ctx[0]
-      ),
-      column: "done",
-      hideOnEmpty: false,
-      tasks: (
-        /*tasksByColumn*/
-        (_a = ctx[9]["done"]) != null ? _a : []
-      ),
-      taskActions: (
-        /*taskActions*/
-        ctx[2]
-      ),
-      columnTagTableStore: (
-        /*columnTagTableStore*/
-        ctx[3]
-      ),
-      columnColourTableStore: (
-        /*columnColourTableStore*/
-        ctx[4]
-      ),
-      showFilepath: (
-        /*showFilepath*/
-        ctx[22]
-      ),
-      consolidateTags: (
-        /*consolidateTags*/
-        ctx[21]
-      )
-    }
-  });
-  return {
-    c() {
-      create_component(column_1.$$.fragment);
-    },
-    m(target, anchor) {
-      mount_component(column_1, target, anchor);
-      current = true;
-    },
-    p(ctx2, dirty) {
-      var _a2;
-      const column_1_changes = {};
-      if (dirty[0] & /*app*/
-      1) column_1_changes.app = /*app*/
-      ctx2[0];
-      if (dirty[0] & /*tasksByColumn*/
-      512) column_1_changes.tasks = /*tasksByColumn*/
-      (_a2 = ctx2[9]["done"]) != null ? _a2 : [];
-      if (dirty[0] & /*taskActions*/
-      4) column_1_changes.taskActions = /*taskActions*/
-      ctx2[2];
-      if (dirty[0] & /*columnTagTableStore*/
-      8) column_1_changes.columnTagTableStore = /*columnTagTableStore*/
-      ctx2[3];
-      if (dirty[0] & /*columnColourTableStore*/
-      16) column_1_changes.columnColourTableStore = /*columnColourTableStore*/
-      ctx2[4];
-      if (dirty[0] & /*showFilepath*/
-      4194304) column_1_changes.showFilepath = /*showFilepath*/
-      ctx2[22];
-      if (dirty[0] & /*consolidateTags*/
-      2097152) column_1_changes.consolidateTags = /*consolidateTags*/
-      ctx2[21];
-      column_1.$set(column_1_changes);
-    },
-    i(local) {
-      if (current) return;
-      transition_in(column_1.$$.fragment, local);
-      current = true;
-    },
-    o(local) {
-      transition_out(column_1.$$.fragment, local);
-      current = false;
-    },
-    d(detaching) {
+      if (detaching) {
+        detach(first);
+      }
       destroy_component(column_1, detaching);
     }
   };
@@ -18724,15 +18971,15 @@ function create_if_block5(ctx) {
     props: {
       filterText: (
         /*filterToDelete*/
-        ctx[15].text
+        ctx[16].text
       ),
       onConfirm: (
         /*confirmDelete*/
-        ctx[40]
+        ctx[46]
       ),
       onCancel: (
         /*closeDeleteModal*/
-        ctx[39]
+        ctx[45]
       )
     }
   });
@@ -18747,8 +18994,8 @@ function create_if_block5(ctx) {
     p(ctx2, dirty) {
       const deletefiltermodal_changes = {};
       if (dirty[0] & /*filterToDelete*/
-      32768) deletefiltermodal_changes.filterText = /*filterToDelete*/
-      ctx2[15].text;
+      65536) deletefiltermodal_changes.filterText = /*filterToDelete*/
+      ctx2[16].text;
       deletefiltermodal.$set(deletefiltermodal_changes);
     },
     i(local) {
@@ -18782,50 +19029,55 @@ function create_fragment13(ctx) {
   let t4;
   let div3;
   let div0;
-  let iconbutton;
+  let span2;
   let t5;
+  let iconbutton;
+  let t6;
   let div2;
   let div1;
-  let t6;
+  let each_blocks = [];
+  let each_1_lookup = /* @__PURE__ */ new Map();
   let t7;
-  let t8;
-  let if_block3_anchor;
+  let if_block2_anchor;
   let current;
   let mounted;
   let dispose;
   let if_block0 = (
     /*filtersSidebarExpanded*/
-    ctx[18] && create_if_block_34(ctx)
+    ctx[18] && create_if_block_24(ctx)
   );
+  function select_block_type(ctx2, dirty) {
+    if (
+      /*isFiltered*/
+      ctx2[24]
+    ) return create_if_block_15;
+    return create_else_block3;
+  }
+  let current_block_type = select_block_type(ctx, [-1, -1, -1, -1]);
+  let if_block1 = current_block_type(ctx);
   iconbutton = new icon_button_default({ props: { icon: "lucide-settings" } });
   iconbutton.$on(
     "click",
     /*handleOpenSettings*/
-    ctx[45]
-  );
-  let if_block1 = (
-    /*showUncategorizedColumn*/
-    ctx[20] && create_if_block_24(ctx)
+    ctx[51]
   );
   let each_value = ensure_array_like(
-    /*columns*/
-    ctx[16]
+    /*orderedColumns*/
+    ctx[20]
   );
-  let each_blocks = [];
+  const get_key = (ctx2) => (
+    /*column*/
+    ctx2[84]
+  );
   for (let i = 0; i < each_value.length; i += 1) {
-    each_blocks[i] = create_each_block5(get_each_context5(ctx, each_value, i));
+    let child_ctx = get_each_context5(ctx, each_value, i);
+    let key = get_key(child_ctx);
+    each_1_lookup.set(key, each_blocks[i] = create_each_block5(key, child_ctx));
   }
-  const out = (i) => transition_out(each_blocks[i], 1, 1, () => {
-    each_blocks[i] = null;
-  });
   let if_block2 = (
-    /*showDoneColumn*/
-    ctx[19] && create_if_block_15(ctx)
-  );
-  let if_block3 = (
     /*deleteModalOpen*/
-    ctx[14] && /*filterToDelete*/
-    ctx[15] && create_if_block5(ctx)
+    ctx[15] && /*filterToDelete*/
+    ctx[16] && create_if_block5(ctx)
   );
   return {
     c() {
@@ -18842,30 +19094,43 @@ function create_fragment13(ctx) {
       t4 = space();
       div3 = element("div");
       div0 = element("div");
-      create_component(iconbutton.$$.fragment);
+      span2 = element("span");
+      if_block1.c();
       t5 = space();
+      create_component(iconbutton.$$.fragment);
+      t6 = space();
       div2 = element("div");
       div1 = element("div");
-      if (if_block1) if_block1.c();
-      t6 = space();
       for (let i = 0; i < each_blocks.length; i += 1) {
         each_blocks[i].c();
       }
       t7 = space();
       if (if_block2) if_block2.c();
-      t8 = space();
-      if (if_block3) if_block3.c();
-      if_block3_anchor = empty();
-      attr(span0, "class", "toggle-icon svelte-9s8fa9");
-      attr(span1, "class", "toggle-label svelte-9s8fa9");
-      attr(button, "class", "sidebar-toggle-btn svelte-9s8fa9");
+      if_block2_anchor = empty();
+      attr(span0, "class", "toggle-icon svelte-75cfcw");
+      attr(span1, "class", "toggle-label svelte-75cfcw");
+      attr(button, "class", "sidebar-toggle-btn svelte-75cfcw");
       attr(button, "aria-label", button_aria_label_value = /*filtersSidebarExpanded*/
       ctx[18] ? "Hide filters" : "Show filters");
-      attr(div0, "class", "settings svelte-9s8fa9");
-      attr(div1, "class", "svelte-9s8fa9");
-      attr(div2, "class", "columns svelte-9s8fa9");
-      attr(div3, "class", "board-content svelte-9s8fa9");
-      attr(div4, "class", "board-container svelte-9s8fa9");
+      attr(span2, "class", "board-task-count svelte-75cfcw");
+      attr(span2, "aria-live", "polite");
+      attr(div0, "class", "settings svelte-75cfcw");
+      attr(div1, "class", "svelte-75cfcw");
+      attr(div2, "class", "columns svelte-75cfcw");
+      set_style(
+        div2,
+        "--column-width",
+        /*columnWidth*/
+        ctx[21] + "px"
+      );
+      toggle_class(
+        div2,
+        "vertical-flow",
+        /*isVerticalFlow*/
+        ctx[19]
+      );
+      attr(div3, "class", "board-content svelte-75cfcw");
+      attr(div4, "class", "board-container svelte-75cfcw");
       set_style(
         div4,
         "--sidebar-width",
@@ -18878,7 +19143,7 @@ function create_fragment13(ctx) {
         /*filtersSidebarExpanded*/
         ctx[18]
       );
-      attr(div5, "class", "main svelte-9s8fa9");
+      attr(div5, "class", "main svelte-75cfcw");
     },
     m(target, anchor) {
       insert(target, div5, anchor);
@@ -18893,22 +19158,21 @@ function create_fragment13(ctx) {
       append(div4, t4);
       append(div4, div3);
       append(div3, div0);
+      append(div0, span2);
+      if_block1.m(span2, null);
+      append(div0, t5);
       mount_component(iconbutton, div0, null);
-      append(div3, t5);
+      append(div3, t6);
       append(div3, div2);
       append(div2, div1);
-      if (if_block1) if_block1.m(div1, null);
-      append(div1, t6);
       for (let i = 0; i < each_blocks.length; i += 1) {
         if (each_blocks[i]) {
           each_blocks[i].m(div1, null);
         }
       }
-      append(div1, t7);
-      if (if_block2) if_block2.m(div1, null);
-      insert(target, t8, anchor);
-      if (if_block3) if_block3.m(target, anchor);
-      insert(target, if_block3_anchor, anchor);
+      insert(target, t7, anchor);
+      if (if_block2) if_block2.m(target, anchor);
+      insert(target, if_block2_anchor, anchor);
       current = true;
       if (!mounted) {
         dispose = [
@@ -18916,19 +19180,19 @@ function create_fragment13(ctx) {
             window,
             "mousemove",
             /*handleMouseMove*/
-            ctx[43]
+            ctx[49]
           ),
           listen(
             window,
             "mouseup",
             /*stopResize*/
-            ctx[44]
+            ctx[50]
           ),
           listen(
             button,
             "click",
             /*toggleSidebar*/
-            ctx[41]
+            ctx[47]
           )
         ];
         mounted = true;
@@ -18954,7 +19218,7 @@ function create_fragment13(ctx) {
             transition_in(if_block0, 1);
           }
         } else {
-          if_block0 = create_if_block_34(ctx2);
+          if_block0 = create_if_block_24(ctx2);
           if_block0.c();
           transition_in(if_block0, 1);
           if_block0.m(div4, t4);
@@ -18966,76 +19230,44 @@ function create_fragment13(ctx) {
         });
         check_outros();
       }
-      if (
-        /*showUncategorizedColumn*/
-        ctx2[20]
-      ) {
+      if (current_block_type === (current_block_type = select_block_type(ctx2, dirty)) && if_block1) {
+        if_block1.p(ctx2, dirty);
+      } else {
+        if_block1.d(1);
+        if_block1 = current_block_type(ctx2);
         if (if_block1) {
-          if_block1.p(ctx2, dirty);
-          if (dirty[0] & /*showUncategorizedColumn*/
-          1048576) {
-            transition_in(if_block1, 1);
-          }
-        } else {
-          if_block1 = create_if_block_24(ctx2);
           if_block1.c();
-          transition_in(if_block1, 1);
-          if_block1.m(div1, t6);
+          if_block1.m(span2, null);
         }
-      } else if (if_block1) {
-        group_outros();
-        transition_out(if_block1, 1, 1, () => {
-          if_block1 = null;
-        });
-        check_outros();
       }
-      if (dirty[0] & /*app, columns, tasksByColumn, taskActions, columnTagTableStore, columnColourTableStore, showFilepath, consolidateTags*/
-      6357533) {
+      if (dirty[0] & /*app, orderedColumns, tasksByColumn, taskActions, columnTagTableStore, columnColourTableStore, showFilepath, consolidateTags, isVerticalFlow, $collapsedColumnsStore*/
+      14158365 | dirty[1] & /*toggleColumnCollapse*/
+      16) {
         each_value = ensure_array_like(
-          /*columns*/
-          ctx2[16]
+          /*orderedColumns*/
+          ctx2[20]
         );
-        let i;
-        for (i = 0; i < each_value.length; i += 1) {
-          const child_ctx = get_each_context5(ctx2, each_value, i);
-          if (each_blocks[i]) {
-            each_blocks[i].p(child_ctx, dirty);
-            transition_in(each_blocks[i], 1);
-          } else {
-            each_blocks[i] = create_each_block5(child_ctx);
-            each_blocks[i].c();
-            transition_in(each_blocks[i], 1);
-            each_blocks[i].m(div1, t7);
-          }
-        }
         group_outros();
-        for (i = each_value.length; i < each_blocks.length; i += 1) {
-          out(i);
-        }
+        each_blocks = update_keyed_each(each_blocks, dirty, get_key, 1, ctx2, each_value, each_1_lookup, div1, outro_and_destroy_block, create_each_block5, null, get_each_context5);
         check_outros();
       }
-      if (
-        /*showDoneColumn*/
-        ctx2[19]
-      ) {
-        if (if_block2) {
-          if_block2.p(ctx2, dirty);
-          if (dirty[0] & /*showDoneColumn*/
-          524288) {
-            transition_in(if_block2, 1);
-          }
-        } else {
-          if_block2 = create_if_block_15(ctx2);
-          if_block2.c();
-          transition_in(if_block2, 1);
-          if_block2.m(div1, null);
-        }
-      } else if (if_block2) {
-        group_outros();
-        transition_out(if_block2, 1, 1, () => {
-          if_block2 = null;
-        });
-        check_outros();
+      if (!current || dirty[0] & /*columnWidth*/
+      2097152) {
+        set_style(
+          div2,
+          "--column-width",
+          /*columnWidth*/
+          ctx2[21] + "px"
+        );
+      }
+      if (!current || dirty[0] & /*isVerticalFlow*/
+      524288) {
+        toggle_class(
+          div2,
+          "vertical-flow",
+          /*isVerticalFlow*/
+          ctx2[19]
+        );
       }
       if (!current || dirty[0] & /*filtersSidebarWidth*/
       131072) {
@@ -19057,25 +19289,25 @@ function create_fragment13(ctx) {
       }
       if (
         /*deleteModalOpen*/
-        ctx2[14] && /*filterToDelete*/
-        ctx2[15]
+        ctx2[15] && /*filterToDelete*/
+        ctx2[16]
       ) {
-        if (if_block3) {
-          if_block3.p(ctx2, dirty);
+        if (if_block2) {
+          if_block2.p(ctx2, dirty);
           if (dirty[0] & /*deleteModalOpen, filterToDelete*/
-          49152) {
-            transition_in(if_block3, 1);
+          98304) {
+            transition_in(if_block2, 1);
           }
         } else {
-          if_block3 = create_if_block5(ctx2);
-          if_block3.c();
-          transition_in(if_block3, 1);
-          if_block3.m(if_block3_anchor.parentNode, if_block3_anchor);
+          if_block2 = create_if_block5(ctx2);
+          if_block2.c();
+          transition_in(if_block2, 1);
+          if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
         }
-      } else if (if_block3) {
+      } else if (if_block2) {
         group_outros();
-        transition_out(if_block3, 1, 1, () => {
-          if_block3 = null;
+        transition_out(if_block2, 1, 1, () => {
+          if_block2 = null;
         });
         check_outros();
       }
@@ -19084,38 +19316,34 @@ function create_fragment13(ctx) {
       if (current) return;
       transition_in(if_block0);
       transition_in(iconbutton.$$.fragment, local);
-      transition_in(if_block1);
       for (let i = 0; i < each_value.length; i += 1) {
         transition_in(each_blocks[i]);
       }
       transition_in(if_block2);
-      transition_in(if_block3);
       current = true;
     },
     o(local) {
       transition_out(if_block0);
       transition_out(iconbutton.$$.fragment, local);
-      transition_out(if_block1);
-      each_blocks = each_blocks.filter(Boolean);
       for (let i = 0; i < each_blocks.length; i += 1) {
         transition_out(each_blocks[i]);
       }
       transition_out(if_block2);
-      transition_out(if_block3);
       current = false;
     },
     d(detaching) {
       if (detaching) {
         detach(div5);
-        detach(t8);
-        detach(if_block3_anchor);
+        detach(t7);
+        detach(if_block2_anchor);
       }
       if (if_block0) if_block0.d();
+      if_block1.d();
       destroy_component(iconbutton);
-      if (if_block1) if_block1.d();
-      destroy_each(each_blocks, detaching);
-      if (if_block2) if_block2.d();
-      if (if_block3) if_block3.d(detaching);
+      for (let i = 0; i < each_blocks.length; i += 1) {
+        each_blocks[i].d();
+      }
+      if (if_block2) if_block2.d(detaching);
       mounted = false;
       run_all(dispose);
     }
@@ -19155,17 +19383,25 @@ function instance10($$self, $$props, $$invalidate) {
   let filteredByTag;
   let filteredByFile;
   let tasksByColumn;
+  let totalTaskCount;
+  let filteredTaskCount;
+  let isFiltered;
   let showFilepath;
   let consolidateTags;
   let uncategorizedVisibility;
   let doneVisibility;
   let filtersSidebarExpanded;
   let filtersSidebarWidth;
+  let columnWidth;
+  let flowDirection;
   let showUncategorizedColumn;
   let showDoneColumn;
-  let $settingsStore, $$unsubscribe_settingsStore = noop, $$subscribe_settingsStore = () => ($$unsubscribe_settingsStore(), $$unsubscribe_settingsStore = subscribe(settingsStore, ($$value) => $$invalidate(56, $settingsStore = $$value)), settingsStore);
-  let $tasksStore, $$unsubscribe_tasksStore = noop, $$subscribe_tasksStore = () => ($$unsubscribe_tasksStore(), $$unsubscribe_tasksStore = subscribe(tasksStore, ($$value) => $$invalidate(57, $tasksStore = $$value)), tasksStore);
-  let $columnTagTableStore, $$unsubscribe_columnTagTableStore = noop, $$subscribe_columnTagTableStore = () => ($$unsubscribe_columnTagTableStore(), $$unsubscribe_columnTagTableStore = subscribe(columnTagTableStore, ($$value) => $$invalidate(58, $columnTagTableStore = $$value)), columnTagTableStore);
+  let orderedColumns;
+  let isVerticalFlow;
+  let $settingsStore, $$unsubscribe_settingsStore = noop, $$subscribe_settingsStore = () => ($$unsubscribe_settingsStore(), $$unsubscribe_settingsStore = subscribe(settingsStore, ($$value) => $$invalidate(66, $settingsStore = $$value)), settingsStore);
+  let $collapsedColumnsStore;
+  let $tasksStore, $$unsubscribe_tasksStore = noop, $$subscribe_tasksStore = () => ($$unsubscribe_tasksStore(), $$unsubscribe_tasksStore = subscribe(tasksStore, ($$value) => $$invalidate(67, $tasksStore = $$value)), tasksStore);
+  let $columnTagTableStore, $$unsubscribe_columnTagTableStore = noop, $$subscribe_columnTagTableStore = () => ($$unsubscribe_columnTagTableStore(), $$unsubscribe_columnTagTableStore = subscribe(columnTagTableStore, ($$value) => $$invalidate(68, $columnTagTableStore = $$value)), columnTagTableStore);
   $$self.$$.on_destroy.push(() => $$unsubscribe_settingsStore());
   $$self.$$.on_destroy.push(() => $$unsubscribe_tasksStore());
   $$self.$$.on_destroy.push(() => $$unsubscribe_columnTagTableStore());
@@ -19180,6 +19416,21 @@ function instance10($$self, $$props, $$invalidate) {
   let { settingsStore } = $$props;
   $$subscribe_settingsStore();
   let { requestSave } = $$props;
+  const collapsedColumnsStore = createCollapsedColumnsStore(settingsStore);
+  component_subscribe($$self, collapsedColumnsStore, (value) => $$invalidate(11, $collapsedColumnsStore = value));
+  function toggleColumnCollapse(col) {
+    const isCurrentlyCollapsed = $collapsedColumnsStore.has(col);
+    settingsStore.update((s) => {
+      var _a;
+      const collapsed = (_a = s.collapsedColumns) != null ? _a : [];
+      const tag = col;
+      return {
+        ...s,
+        collapsedColumns: isCurrentlyCollapsed ? collapsed.filter((c) => c !== tag) : [...collapsed, tag]
+      };
+    });
+    requestSave();
+  }
   let selectedTags = [];
   let activeContentFilterId = void 0;
   let activeTagFilterId = void 0;
@@ -19207,16 +19458,16 @@ function instance10($$self, $$props, $$invalidate) {
       clearContentFilter();
     } else {
       $$invalidate(7, filterText = text2);
-      $$invalidate(11, activeContentFilterId = filterId);
+      $$invalidate(12, activeContentFilterId = filterId);
     }
   }
   function clearContentFilter() {
     $$invalidate(7, filterText = "");
-    $$invalidate(11, activeContentFilterId = void 0);
+    $$invalidate(12, activeContentFilterId = void 0);
   }
   function clearFileFilter() {
     $$invalidate(8, fileFilter = "");
-    $$invalidate(13, activeFileFilterId = void 0);
+    $$invalidate(14, activeFileFilterId = void 0);
   }
   function addFileFilter() {
     const normalized = fileFilter.trim();
@@ -19240,7 +19491,7 @@ function instance10($$self, $$props, $$invalidate) {
       clearFileFilter();
     } else {
       $$invalidate(8, fileFilter = filepath);
-      $$invalidate(13, activeFileFilterId = filterId);
+      $$invalidate(14, activeFileFilterId = filterId);
     }
   }
   function addTagFilter() {
@@ -19267,15 +19518,15 @@ function instance10($$self, $$props, $$invalidate) {
   }
   function clearTagFilter() {
     $$invalidate(6, selectedTags = []);
-    $$invalidate(12, activeTagFilterId = void 0);
+    $$invalidate(13, activeTagFilterId = void 0);
   }
   function openDeleteModal(filterId, filterText2, type) {
-    $$invalidate(15, filterToDelete = { id: filterId, text: filterText2, type });
-    $$invalidate(14, deleteModalOpen = true);
+    $$invalidate(16, filterToDelete = { id: filterId, text: filterText2, type });
+    $$invalidate(15, deleteModalOpen = true);
   }
   function closeDeleteModal() {
-    $$invalidate(14, deleteModalOpen = false);
-    $$invalidate(15, filterToDelete = null);
+    $$invalidate(15, deleteModalOpen = false);
+    $$invalidate(16, filterToDelete = null);
   }
   function confirmDelete() {
     if (!filterToDelete) return;
@@ -19285,11 +19536,11 @@ function instance10($$self, $$props, $$invalidate) {
     set_store_value(settingsStore, $settingsStore.savedFilters = savedFilters.filter((f) => f.id !== filterId), $settingsStore);
     if (wasActive) {
       if (filterType === "content") {
-        $$invalidate(11, activeContentFilterId = void 0);
+        $$invalidate(12, activeContentFilterId = void 0);
       } else if (filterType === "tag") {
-        $$invalidate(12, activeTagFilterId = void 0);
+        $$invalidate(13, activeTagFilterId = void 0);
       } else {
-        $$invalidate(13, activeFileFilterId = void 0);
+        $$invalidate(14, activeFileFilterId = void 0);
       }
     }
     requestSave();
@@ -19322,7 +19573,7 @@ function instance10($$self, $$props, $$invalidate) {
             100
           );
         }
-        $$invalidate(48, hydrated = true);
+        $$invalidate(55, hydrated = true);
       }
     });
     return unsubscribe;
@@ -19382,7 +19633,7 @@ function instance10($$self, $$props, $$invalidate) {
     if (activeTagFilterId === filterId) {
       clearTagFilter();
     } else {
-      $$invalidate(12, activeTagFilterId = filterId);
+      $$invalidate(13, activeTagFilterId = filterId);
     }
   };
   const func_1 = (filterId, filterText2) => openDeleteModal(filterId, filterText2, "tag");
@@ -19402,21 +19653,22 @@ function instance10($$self, $$props, $$invalidate) {
     fileFilter = this.value;
     $$invalidate(8, fileFilter);
   }
+  const func_2 = (column) => toggleColumnCollapse(column);
   $$self.$$set = ($$props2) => {
     if ("app" in $$props2) $$invalidate(0, app = $$props2.app);
     if ("tasksStore" in $$props2) $$subscribe_tasksStore($$invalidate(1, tasksStore = $$props2.tasksStore));
     if ("taskActions" in $$props2) $$invalidate(2, taskActions = $$props2.taskActions);
-    if ("openSettings" in $$props2) $$invalidate(46, openSettings = $$props2.openSettings);
+    if ("openSettings" in $$props2) $$invalidate(52, openSettings = $$props2.openSettings);
     if ("columnTagTableStore" in $$props2) $$subscribe_columnTagTableStore($$invalidate(3, columnTagTableStore = $$props2.columnTagTableStore));
     if ("columnColourTableStore" in $$props2) $$invalidate(4, columnColourTableStore = $$props2.columnColourTableStore);
     if ("settingsStore" in $$props2) $$subscribe_settingsStore($$invalidate(5, settingsStore = $$props2.settingsStore));
-    if ("requestSave" in $$props2) $$invalidate(47, requestSave = $$props2.requestSave);
+    if ("requestSave" in $$props2) $$invalidate(53, requestSave = $$props2.requestSave);
   };
   $$self.$$.update = () => {
     var _a, _b, _c;
-    if ($$self.$$.dirty[1] & /*$tasksStore*/
-    67108864) {
-      $: $$invalidate(23, tags = $tasksStore.reduce(
+    if ($$self.$$.dirty[2] & /*$tasksStore*/
+    32) {
+      $: $$invalidate(27, tags = $tasksStore.reduce(
         (acc, curr) => {
           for (const tag of curr.tags) {
             acc.add(tag);
@@ -19426,9 +19678,9 @@ function instance10($$self, $$props, $$invalidate) {
         /* @__PURE__ */ new Set()
       ));
     }
-    if ($$self.$$.dirty[1] & /*$tasksStore*/
-    67108864) {
-      $: $$invalidate(29, availableFiles = [...new Set($tasksStore.map((task) => task.path))].sort((a, b) => {
+    if ($$self.$$.dirty[2] & /*$tasksStore*/
+    32) {
+      $: $$invalidate(33, availableFiles = [...new Set($tasksStore.map((task) => task.path))].sort((a, b) => {
         const aParts = a.split("/");
         const bParts = b.split("/");
         const minLength = Math.min(aParts.length, bParts.length);
@@ -19448,24 +19700,15 @@ function instance10($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty[0] & /*selectedTags*/
     64) {
-      $: $$invalidate(54, selectedTagsSet = new Set(selectedTags));
+      $: $$invalidate(64, selectedTagsSet = new Set(selectedTags));
     }
-    if ($$self.$$.dirty[0] & /*filterText, selectedTags, fileFilter*/
-    448) {
-      $: {
-        void filterText;
-        void selectedTags;
-        void fileFilter;
-        clearTaskSelections();
-      }
-    }
-    if ($$self.$$.dirty[1] & /*$settingsStore*/
-    33554432) {
-      $: $$invalidate(55, savedFilters = (_a = $settingsStore.savedFilters) != null ? _a : []);
+    if ($$self.$$.dirty[2] & /*$settingsStore*/
+    16) {
+      $: $$invalidate(65, savedFilters = (_a = $settingsStore.savedFilters) != null ? _a : []);
     }
     if ($$self.$$.dirty[0] & /*filterText*/
-    128 | $$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
+    128 | $$self.$$.dirty[2] & /*savedFilters*/
+    8) {
       $: {
         const trimmedText = filterText.trim();
         if (trimmedText) {
@@ -19474,18 +19717,18 @@ function instance10($$self, $$props, $$invalidate) {
             return ((_a2 = f.content) == null ? void 0 : _a2.text) === trimmedText;
           });
           if (matchingFilter) {
-            $$invalidate(11, activeContentFilterId = matchingFilter.id);
+            $$invalidate(12, activeContentFilterId = matchingFilter.id);
           } else {
-            $$invalidate(11, activeContentFilterId = void 0);
+            $$invalidate(12, activeContentFilterId = void 0);
           }
         } else {
-          $$invalidate(11, activeContentFilterId = void 0);
+          $$invalidate(12, activeContentFilterId = void 0);
         }
       }
     }
     if ($$self.$$.dirty[0] & /*selectedTags*/
-    64 | $$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
+    64 | $$self.$$.dirty[2] & /*savedFilters*/
+    8) {
       $: {
         if (selectedTags.length > 0) {
           const sortedCurrent = [...selectedTags].sort();
@@ -19495,18 +19738,18 @@ function instance10($$self, $$props, $$invalidate) {
             return sortedCurrent.length === sortedSaved.length && sortedCurrent.every((tag, i) => tag === sortedSaved[i]);
           });
           if (matchingFilter) {
-            $$invalidate(12, activeTagFilterId = matchingFilter.id);
+            $$invalidate(13, activeTagFilterId = matchingFilter.id);
           } else {
-            $$invalidate(12, activeTagFilterId = void 0);
+            $$invalidate(13, activeTagFilterId = void 0);
           }
         } else {
-          $$invalidate(12, activeTagFilterId = void 0);
+          $$invalidate(13, activeTagFilterId = void 0);
         }
       }
     }
     if ($$self.$$.dirty[0] & /*fileFilter*/
-    256 | $$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
+    256 | $$self.$$.dirty[2] & /*savedFilters*/
+    8) {
       $: {
         const trimmedPath = fileFilter.trim();
         if (trimmedPath) {
@@ -19515,17 +19758,17 @@ function instance10($$self, $$props, $$invalidate) {
             return ((_a2 = f.file) == null ? void 0 : _a2.filepaths[0]) === trimmedPath;
           });
           if (matchingFilter) {
-            $$invalidate(13, activeFileFilterId = matchingFilter.id);
+            $$invalidate(14, activeFileFilterId = matchingFilter.id);
           } else {
-            $$invalidate(13, activeFileFilterId = void 0);
+            $$invalidate(14, activeFileFilterId = void 0);
           }
         } else {
-          $$invalidate(13, activeFileFilterId = void 0);
+          $$invalidate(14, activeFileFilterId = void 0);
         }
       }
     }
-    if ($$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
+    if ($$self.$$.dirty[2] & /*savedFilters*/
+    8) {
       $: $$invalidate(10, contentFilters = savedFilters.filter((f) => f.content !== void 0).sort((a, b) => {
         var _a2, _b2, _c2, _d;
         const textA = (_b2 = (_a2 = a.content) == null ? void 0 : _a2.text.toLowerCase()) != null ? _b2 : "";
@@ -19533,18 +19776,18 @@ function instance10($$self, $$props, $$invalidate) {
         return textA.localeCompare(textB);
       }));
     }
-    if ($$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
-      $: $$invalidate(28, tagFilters = savedFilters.filter((f) => f.tag !== void 0).sort((a, b) => {
+    if ($$self.$$.dirty[2] & /*savedFilters*/
+    8) {
+      $: $$invalidate(32, tagFilters = savedFilters.filter((f) => f.tag !== void 0).sort((a, b) => {
         var _a2, _b2, _c2, _d;
         const tagsA = ((_b2 = (_a2 = a.tag) == null ? void 0 : _a2.tags) != null ? _b2 : []).join(", ").toLowerCase();
         const tagsB = ((_d = (_c2 = b.tag) == null ? void 0 : _c2.tags) != null ? _d : []).join(", ").toLowerCase();
         return tagsA.localeCompare(tagsB);
       }));
     }
-    if ($$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
-      $: $$invalidate(27, fileFilters = savedFilters.filter((f) => f.file !== void 0).sort((a, b) => {
+    if ($$self.$$.dirty[2] & /*savedFilters*/
+    8) {
+      $: $$invalidate(31, fileFilters = savedFilters.filter((f) => f.file !== void 0).sort((a, b) => {
         var _a2, _b2, _c2, _d;
         const pathA = (_b2 = (_a2 = a.file) == null ? void 0 : _a2.filepaths[0]) != null ? _b2 : "";
         const pathB = (_d = (_c2 = b.file) == null ? void 0 : _c2.filepaths[0]) != null ? _d : "";
@@ -19553,15 +19796,15 @@ function instance10($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty[0] & /*contentFilters, filterText*/
     1152) {
-      $: $$invalidate(26, contentFilterExists = contentFilters.some((f) => {
+      $: $$invalidate(30, contentFilterExists = contentFilters.some((f) => {
         var _a2;
         return ((_a2 = f.content) == null ? void 0 : _a2.text) === filterText.trim();
       }));
     }
     if ($$self.$$.dirty[0] & /*selectedTags*/
-    64 | $$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
-      $: $$invalidate(25, tagFilterExists = (() => {
+    64 | $$self.$$.dirty[2] & /*savedFilters*/
+    8) {
+      $: $$invalidate(29, tagFilterExists = (() => {
         if (selectedTags.length === 0) return false;
         const sortedTags = [...selectedTags].sort();
         return savedFilters.some((f) => {
@@ -19574,20 +19817,20 @@ function instance10($$self, $$props, $$invalidate) {
       })());
     }
     if ($$self.$$.dirty[0] & /*fileFilter*/
-    256 | $$self.$$.dirty[1] & /*savedFilters*/
-    16777216) {
-      $: $$invalidate(24, fileFilterExists = savedFilters.some((f) => {
+    256 | $$self.$$.dirty[2] & /*savedFilters*/
+    8) {
+      $: $$invalidate(28, fileFilterExists = savedFilters.some((f) => {
         var _a2;
         return ((_a2 = f.file) == null ? void 0 : _a2.filepaths[0]) === fileFilter.trim();
       }));
     }
-    if ($$self.$$.dirty[1] & /*$columnTagTableStore*/
-    134217728) {
-      $: $$invalidate(16, columns = Object.keys($columnTagTableStore));
+    if ($$self.$$.dirty[2] & /*$columnTagTableStore*/
+    64) {
+      $: $$invalidate(54, columns = Object.keys($columnTagTableStore));
     }
     if ($$self.$$.dirty[0] & /*filterText, selectedTags, fileFilter*/
     448 | $$self.$$.dirty[1] & /*hydrated*/
-    131072) {
+    16777216) {
       $: if (hydrated) {
         filterText;
         selectedTags;
@@ -19596,13 +19839,13 @@ function instance10($$self, $$props, $$invalidate) {
       }
     }
     if ($$self.$$.dirty[0] & /*filterText*/
-    128 | $$self.$$.dirty[1] & /*$tasksStore*/
-    67108864) {
-      $: $$invalidate(53, filteredByText = filterText ? $tasksStore.filter((task) => task.content.toLowerCase().includes(filterText.toLowerCase())) : $tasksStore);
+    128 | $$self.$$.dirty[2] & /*$tasksStore*/
+    32) {
+      $: $$invalidate(63, filteredByText = filterText ? $tasksStore.filter((task) => task.content.toLowerCase().includes(filterText.toLowerCase())) : $tasksStore);
     }
-    if ($$self.$$.dirty[1] & /*selectedTagsSet, filteredByText*/
-    12582912) {
-      $: $$invalidate(52, filteredByTag = selectedTagsSet.size ? filteredByText.filter((task) => {
+    if ($$self.$$.dirty[2] & /*selectedTagsSet, filteredByText*/
+    6) {
+      $: $$invalidate(62, filteredByTag = selectedTagsSet.size ? filteredByText.filter((task) => {
         for (const tag of task.tags) {
           if (selectedTagsSet.has(tag)) {
             return true;
@@ -19612,27 +19855,54 @@ function instance10($$self, $$props, $$invalidate) {
       }) : filteredByText);
     }
     if ($$self.$$.dirty[0] & /*fileFilter*/
-    256 | $$self.$$.dirty[1] & /*filteredByTag*/
-    2097152) {
-      $: $$invalidate(51, filteredByFile = fileFilter ? filteredByTag.filter((task) => task.path.toLowerCase().includes(fileFilter.toLowerCase())) : filteredByTag);
+    256 | $$self.$$.dirty[2] & /*filteredByTag*/
+    1) {
+      $: $$invalidate(61, filteredByFile = fileFilter ? filteredByTag.filter((task) => task.path.toLowerCase().includes(fileFilter.toLowerCase())) : filteredByTag);
     }
     if ($$self.$$.dirty[1] & /*filteredByFile*/
-    1048576) {
+    1073741824) {
       $: $$invalidate(9, tasksByColumn = groupByColumnTag(filteredByFile));
     }
-    if ($$self.$$.dirty[1] & /*$settingsStore*/
+    if ($$self.$$.dirty[2] & /*$tasksStore*/
+    32) {
+      $: $$invalidate(26, totalTaskCount = $tasksStore.filter((t) => t.column !== "archived").length);
+    }
+    if ($$self.$$.dirty[1] & /*filteredByFile*/
+    1073741824) {
+      $: $$invalidate(25, filteredTaskCount = filteredByFile.filter((t) => t.column !== "archived").length);
+    }
+    if ($$self.$$.dirty[0] & /*filterText, selectedTags, fileFilter*/
+    448) {
+      $: $$invalidate(24, isFiltered = filterText.trim() !== "" || selectedTags.length > 0 || fileFilter.trim() !== "");
+    }
+    if ($$self.$$.dirty[2] & /*$settingsStore*/
+    16) {
+      $: $$invalidate(23, { showFilepath = true, consolidateTags = false, uncategorizedVisibility = "auto" /* Auto */, doneVisibility = "always" /* AlwaysShow */, filtersSidebarExpanded = true, filtersSidebarWidth = 280, columnWidth = 300, flowDirection = "ltr" /* LeftToRight */ } = $settingsStore, showFilepath, ($$invalidate(22, consolidateTags), $$invalidate(66, $settingsStore)), ($$invalidate(60, uncategorizedVisibility), $$invalidate(66, $settingsStore)), ($$invalidate(59, doneVisibility), $$invalidate(66, $settingsStore)), ($$invalidate(18, filtersSidebarExpanded), $$invalidate(66, $settingsStore)), ($$invalidate(17, filtersSidebarWidth), $$invalidate(66, $settingsStore)), ($$invalidate(21, columnWidth), $$invalidate(66, $settingsStore)), ($$invalidate(56, flowDirection), $$invalidate(66, $settingsStore)));
+    }
+    if ($$self.$$.dirty[0] & /*$collapsedColumnsStore, tasksByColumn*/
+    2560 | $$self.$$.dirty[1] & /*uncategorizedVisibility*/
+    536870912) {
+      $: $$invalidate(58, showUncategorizedColumn = uncategorizedVisibility === "always" /* AlwaysShow */ || $collapsedColumnsStore.has("uncategorised") || uncategorizedVisibility === "auto" /* Auto */ && ((_b = tasksByColumn["uncategorised"]) == null ? void 0 : _b.length) > 0);
+    }
+    if ($$self.$$.dirty[0] & /*$collapsedColumnsStore, tasksByColumn*/
+    2560 | $$self.$$.dirty[1] & /*doneVisibility*/
+    268435456) {
+      $: $$invalidate(57, showDoneColumn = doneVisibility === "always" /* AlwaysShow */ || $collapsedColumnsStore.has("done") || doneVisibility === "auto" /* Auto */ && ((_c = tasksByColumn["done"]) == null ? void 0 : _c.length) > 0);
+    }
+    if ($$self.$$.dirty[1] & /*showUncategorizedColumn, columns, showDoneColumn, flowDirection*/
+    243269632) {
+      $: $$invalidate(20, orderedColumns = (() => {
+        const allColumns = [];
+        if (showUncategorizedColumn) allColumns.push("uncategorised");
+        allColumns.push(...columns);
+        if (showDoneColumn) allColumns.push("done");
+        const shouldReverse = flowDirection === "rtl" /* RightToLeft */ || flowDirection === "btt" /* BottomToTop */;
+        return shouldReverse ? allColumns.reverse() : allColumns;
+      })());
+    }
+    if ($$self.$$.dirty[1] & /*flowDirection*/
     33554432) {
-      $: $$invalidate(22, { showFilepath = true, consolidateTags = false, uncategorizedVisibility = "auto" /* Auto */, doneVisibility = "always" /* AlwaysShow */, filtersSidebarExpanded = true, filtersSidebarWidth = 280 } = $settingsStore, showFilepath, ($$invalidate(21, consolidateTags), $$invalidate(56, $settingsStore)), ($$invalidate(50, uncategorizedVisibility), $$invalidate(56, $settingsStore)), ($$invalidate(49, doneVisibility), $$invalidate(56, $settingsStore)), ($$invalidate(18, filtersSidebarExpanded), $$invalidate(56, $settingsStore)), ($$invalidate(17, filtersSidebarWidth), $$invalidate(56, $settingsStore)));
-    }
-    if ($$self.$$.dirty[0] & /*tasksByColumn*/
-    512 | $$self.$$.dirty[1] & /*uncategorizedVisibility*/
-    524288) {
-      $: $$invalidate(20, showUncategorizedColumn = uncategorizedVisibility === "always" /* AlwaysShow */ || uncategorizedVisibility === "auto" /* Auto */ && ((_b = tasksByColumn["uncategorised"]) == null ? void 0 : _b.length) > 0);
-    }
-    if ($$self.$$.dirty[0] & /*tasksByColumn*/
-    512 | $$self.$$.dirty[1] & /*doneVisibility*/
-    262144) {
-      $: $$invalidate(19, showDoneColumn = doneVisibility === "always" /* AlwaysShow */ || doneVisibility === "auto" /* Auto */ && ((_c = tasksByColumn["done"]) == null ? void 0 : _c.length) > 0);
+      $: $$invalidate(19, isVerticalFlow = flowDirection === "ttb" /* TopToBottom */ || flowDirection === "btt" /* BottomToTop */);
     }
   };
   return [
@@ -19647,18 +19917,22 @@ function instance10($$self, $$props, $$invalidate) {
     fileFilter,
     tasksByColumn,
     contentFilters,
+    $collapsedColumnsStore,
     activeContentFilterId,
     activeTagFilterId,
     activeFileFilterId,
     deleteModalOpen,
     filterToDelete,
-    columns,
     filtersSidebarWidth,
     filtersSidebarExpanded,
-    showDoneColumn,
-    showUncategorizedColumn,
+    isVerticalFlow,
+    orderedColumns,
+    columnWidth,
     consolidateTags,
     showFilepath,
+    isFiltered,
+    filteredTaskCount,
+    totalTaskCount,
     tags,
     fileFilterExists,
     tagFilterExists,
@@ -19666,6 +19940,8 @@ function instance10($$self, $$props, $$invalidate) {
     fileFilters,
     tagFilters,
     availableFiles,
+    collapsedColumnsStore,
+    toggleColumnCollapse,
     addContentFilter,
     loadContentFilter,
     clearContentFilter,
@@ -19684,7 +19960,11 @@ function instance10($$self, $$props, $$invalidate) {
     handleOpenSettings,
     openSettings,
     requestSave,
+    columns,
     hydrated,
+    flowDirection,
+    showDoneColumn,
+    showUncategorizedColumn,
     doneVisibility,
     uncategorizedVisibility,
     filteredByFile,
@@ -19703,7 +19983,8 @@ function instance10($$self, $$props, $$invalidate) {
     selecttag_value_binding,
     click_handler_2,
     click_handler_3,
-    input1_input_handler
+    input1_input_handler,
+    func_2
   ];
 }
 var Main = class extends SvelteComponent {
@@ -19719,14 +20000,14 @@ var Main = class extends SvelteComponent {
         app: 0,
         tasksStore: 1,
         taskActions: 2,
-        openSettings: 46,
+        openSettings: 52,
         columnTagTableStore: 3,
         columnColourTableStore: 4,
         settingsStore: 5,
-        requestSave: 47
+        requestSave: 53
       },
       add_css11,
-      [-1, -1, -1]
+      [-1, -1, -1, -1]
     );
   }
 };
@@ -19736,6 +20017,7 @@ var main_default = Main;
 var import_obsidian6 = require("obsidian");
 var VisibilityOptionSchema = z.nativeEnum(VisibilityOption);
 var ScopeOptionSchema = z.nativeEnum(ScopeOption);
+var FlowDirectionSchema = z.nativeEnum(FlowDirection);
 var SettingsModal = class extends import_obsidian6.Modal {
   constructor(app, settings, onSubmit) {
     super(app);
@@ -19748,6 +20030,21 @@ var SettingsModal = class extends import_obsidian6.Modal {
       text2.setValue(this.settings.columns.join(", "));
       text2.onChange((value) => {
         this.settings.columns = value.split(",").map((column) => column.trim());
+      });
+    });
+    new import_obsidian6.Setting(this.contentEl).setName("Column width").setDesc("Width of task cards in pixels (200-600)").addSlider((slider) => {
+      var _a;
+      slider.setLimits(200, 600, 10).setValue((_a = this.settings.columnWidth) != null ? _a : 300).setDynamicTooltip().onChange((value) => {
+        this.settings.columnWidth = value;
+      });
+    });
+    new import_obsidian6.Setting(this.contentEl).setName("Flow direction").setDesc("Direction columns flow across the board").addDropdown((dropdown) => {
+      var _a;
+      dropdown.addOption("ltr" /* LeftToRight */, "Left to right").addOption("rtl" /* RightToLeft */, "Right to left").addOption("ttb" /* TopToBottom */, "Top to bottom").addOption("btt" /* BottomToTop */, "Bottom to top").setValue(
+        (_a = this.settings.flowDirection) != null ? _a : "ltr" /* LeftToRight */
+      ).onChange((value) => {
+        const validatedValue = FlowDirectionSchema.safeParse(value);
+        this.settings.flowDirection = validatedValue.success ? validatedValue.data : defaultSettings.flowDirection;
       });
     });
     new import_obsidian6.Setting(this.contentEl).setName("Folder scope").setDesc("Where should we try to find tasks for this Kanban?").addDropdown((dropdown) => {
@@ -19810,6 +20107,23 @@ var SettingsModal = class extends import_obsidian6.Modal {
         }
       });
     });
+    new import_obsidian6.Setting(this.contentEl).setName("Cancelled status markers").setDesc(
+      "Characters that mark a task as cancelled (e.g., '-' for [-]). Each character should be a single Unicode character without spaces."
+    ).addText((text2) => {
+      var _a;
+      text2.setValue((_a = this.settings.cancelledStatusMarkers) != null ? _a : DEFAULT_CANCELLED_STATUS_MARKERS);
+      text2.onChange((value) => {
+        const errors = validateCancelledStatusMarkers(value);
+        if (errors.length > 0) {
+          text2.inputEl.style.borderColor = "var(--text-error)";
+          text2.inputEl.title = `Invalid: ${errors.join(", ")}`;
+        } else {
+          text2.inputEl.style.borderColor = "";
+          text2.inputEl.title = "Valid cancelled status markers";
+          this.settings.cancelledStatusMarkers = value;
+        }
+      });
+    });
     new import_obsidian6.Setting(this.contentEl).setName("Ignored status markers").setDesc(
       "Characters that mark tasks to be completely ignored by the kanban (e.g., '-' for [-] cancelled tasks). Leave empty to process all task-like strings. Each character should be a single Unicode character without spaces."
     ).addText((text2) => {
@@ -19852,6 +20166,7 @@ async function updateMapsFromFile({
   columnTagTableStore,
   consolidateTags,
   doneStatusMarkers,
+  cancelledStatusMarkers,
   ignoredStatusMarkers
 }) {
   var _a;
@@ -19874,6 +20189,7 @@ async function updateMapsFromFile({
           columnTagTable,
           consolidateTags,
           doneStatusMarkers,
+          cancelledStatusMarkers,
           ignoredStatusMarkers
         );
         newTaskIds.add(task.id);
@@ -19936,6 +20252,16 @@ function createTaskActions({
     async archiveTasks(ids) {
       for (const id of ids) {
         await updateRowWithTask(id, (task) => task.archive());
+      }
+    },
+    async cancelTasks(ids) {
+      for (const id of ids) {
+        await updateRowWithTask(id, (task) => task.cancel());
+      }
+    },
+    async restoreTasks(ids) {
+      for (const id of ids) {
+        await updateRowWithTask(id, (task) => task.restore());
       }
     },
     async deleteTask(id) {
@@ -20056,14 +20382,15 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
     return !filenameFilter || file.path.startsWith(filenameFilter);
   }
   function initialise() {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     tasksByTaskId.clear();
     metadataByTaskId.clear();
     taskIdsByFileHandle.clear();
     const settings = get_store_value(settingsStore);
     const consolidateTags = (_a = settings.consolidateTags) != null ? _a : false;
     const doneStatusMarkers = (_b = settings.doneStatusMarkers) != null ? _b : DEFAULT_DONE_STATUS_MARKERS;
-    const ignoredStatusMarkers = (_c = settings.ignoredStatusMarkers) != null ? _c : DEFAULT_IGNORED_STATUS_MARKERS;
+    const cancelledStatusMarkers = (_c = settings.cancelledStatusMarkers) != null ? _c : DEFAULT_CANCELLED_STATUS_MARKERS;
+    const ignoredStatusMarkers = (_d = settings.ignoredStatusMarkers) != null ? _d : DEFAULT_IGNORED_STATUS_MARKERS;
     for (const fileHandle of fileHandles) {
       if (!shouldHandle(fileHandle)) {
         continue;
@@ -20077,6 +20404,7 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
         columnTagTableStore,
         consolidateTags,
         doneStatusMarkers,
+        cancelledStatusMarkers,
         ignoredStatusMarkers
       }).then(() => {
         debounceSetTasks();
@@ -20085,12 +20413,13 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
   }
   registerEvent(
     vault.on("modify", (fileHandle) => {
-      var _a, _b, _c;
+      var _a, _b, _c, _d;
       if (fileHandle instanceof import_obsidian8.TFile && shouldHandle(fileHandle)) {
         const settings = get_store_value(settingsStore);
         const consolidateTags = (_a = settings.consolidateTags) != null ? _a : false;
         const doneStatusMarkers = (_b = settings.doneStatusMarkers) != null ? _b : DEFAULT_DONE_STATUS_MARKERS;
-        const ignoredStatusMarkers = (_c = settings.ignoredStatusMarkers) != null ? _c : DEFAULT_IGNORED_STATUS_MARKERS;
+        const cancelledStatusMarkers = (_c = settings.cancelledStatusMarkers) != null ? _c : DEFAULT_CANCELLED_STATUS_MARKERS;
+        const ignoredStatusMarkers = (_d = settings.ignoredStatusMarkers) != null ? _d : DEFAULT_IGNORED_STATUS_MARKERS;
         updateMapsFromFile({
           fileHandle,
           tasksByTaskId,
@@ -20100,6 +20429,7 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
           columnTagTableStore,
           consolidateTags,
           doneStatusMarkers,
+          cancelledStatusMarkers,
           ignoredStatusMarkers
         }).then(() => {
           debounceSetTasks();
@@ -20109,12 +20439,13 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
   );
   registerEvent(
     vault.on("create", (fileHandle) => {
-      var _a, _b, _c;
+      var _a, _b, _c, _d;
       if (fileHandle instanceof import_obsidian8.TFile && shouldHandle(fileHandle)) {
         const settings = get_store_value(settingsStore);
         const consolidateTags = (_a = settings.consolidateTags) != null ? _a : false;
         const doneStatusMarkers = (_b = settings.doneStatusMarkers) != null ? _b : DEFAULT_DONE_STATUS_MARKERS;
-        const ignoredStatusMarkers = (_c = settings.ignoredStatusMarkers) != null ? _c : DEFAULT_IGNORED_STATUS_MARKERS;
+        const cancelledStatusMarkers = (_c = settings.cancelledStatusMarkers) != null ? _c : DEFAULT_CANCELLED_STATUS_MARKERS;
+        const ignoredStatusMarkers = (_d = settings.ignoredStatusMarkers) != null ? _d : DEFAULT_IGNORED_STATUS_MARKERS;
         updateMapsFromFile({
           fileHandle,
           tasksByTaskId,
@@ -20124,6 +20455,7 @@ function createTasksStore(vault, workspace, registerEvent, columnTagTableStore, 
           columnTagTableStore,
           consolidateTags,
           doneStatusMarkers,
+          cancelledStatusMarkers,
           ignoredStatusMarkers
         }).then(() => {
           debounceSetTasks();
